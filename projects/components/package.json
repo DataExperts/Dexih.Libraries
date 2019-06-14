@@ -1,6 +1,21 @@
 {
   "name": "dexih-ngx-components",
   "version": "0.3.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DataExperts/Dexih.Libaries/tree/master/projects/components"
+  },
+  "author": {
+    "name": "Gary Holland",
+    "email": "gholland@dataexpertsgroup.com"
+  },
+  "keywords": [
+    "angular"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/DataExperts/Dexih.Libaries/issues"
+  },
   "peerDependencies": {
     "@angular/common": "^8.0.1",
     "@angular/core": "^8.0.1",

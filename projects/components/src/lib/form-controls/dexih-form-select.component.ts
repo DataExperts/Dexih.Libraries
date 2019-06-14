@@ -1,9 +1,8 @@
 import { Component, OnInit, OnChanges, OnDestroy, forwardRef, Input, Output,
-    ViewChild, HostListener, ElementRef, EventEmitter, SimpleChanges } from '@angular/core';
+    ViewChild, HostListener, EventEmitter, SimpleChanges } from '@angular/core';
 import { FormControl, ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { BsDropdownDirective } from 'ngx-bootstrap';
-import { Subscription, pipe } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 import { SharedFunctions } from './shared-functions';
 
 @Component({
@@ -108,7 +107,7 @@ export class DexihFormSelectComponent implements ControlValueAccessor, OnInit, O
                                     this.updateValueFromItem(this.selectedItem);
 
                                     this.textValueChange.emit(this.textValue);
-                                    this.hasChanged(null);
+                                    this.hasChanged();
                                 }
                             } else if (this.enableTextEntry) {
                                 this.selectedItem = newValue;
@@ -123,7 +122,7 @@ export class DexihFormSelectComponent implements ControlValueAccessor, OnInit, O
                                 if (!this.enableTextEntry) {
                                     this.updateValueFromItem(this.selectedItem);
                                     this.textValueChange.emit(this.textValue);
-                                    this.hasChanged(null);
+                                    this.hasChanged();
                                 }
                             } else if (this.enableTextEntry) {
                                 this.selectedItem = newValue;
@@ -167,7 +166,7 @@ export class DexihFormSelectComponent implements ControlValueAccessor, OnInit, O
         if (this.manualSubscription) { this.manualSubscription.unsubscribe(); }
     }
 
-    hasChanged($event: any) {
+    hasChanged() {
         this.onChange(this.value);
         this.onTouched();
         this.isDirty = true;
@@ -308,7 +307,7 @@ export class DexihFormSelectComponent implements ControlValueAccessor, OnInit, O
         this.manualControl.setValue(this.selectedName);
         this.textValueChange.emit(this.textValue);
 
-        this.hasChanged(null);
+        this.hasChanged();
         if (hideDropdown) { this.dropdown.hide(); }
         // this.updateTextEntry(hideDropdown);
     }
@@ -340,7 +339,7 @@ export class DexihFormSelectComponent implements ControlValueAccessor, OnInit, O
         this.manualControl.setValue(this.selectedName);
     }
 
-    onTextEntryEnter($event: any) {
+    onTextEntryEnter() {
         this.updateTextEntry();
     }
 
@@ -399,7 +398,6 @@ export class DexihFormSelectComponent implements ControlValueAccessor, OnInit, O
     }
 
     up() {
-        let found = false;
         let previousItem: any = null;
         let foundItem: any = null;
         const filteredItems = this.getFilteredItems();

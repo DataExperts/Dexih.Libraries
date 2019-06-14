@@ -15,17 +15,17 @@ import { DexihWidgetGroupComponent } from './dexih-widget-group.component';
   ],
   declarations: [
     DexihWidgetComponent,
+    DexihWidgetGroupComponent,
     DexihWidgetColumnsComponent,
     DexihWidgetDeckComponent,
     DexihWidgetVerticalComponent,
-    DexihWidgetGroupComponent,
   ],
   exports: [
     DexihWidgetComponent,
+    DexihWidgetGroupComponent,
     DexihWidgetColumnsComponent,
     DexihWidgetDeckComponent,
     DexihWidgetVerticalComponent,
-    DexihWidgetGroupComponent,
   ],
 })
 export class DexihWidgetModule {

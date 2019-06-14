@@ -22,3 +22,5 @@ export { DexihButtonSplitDropDownComponent } from './dexih-button-splitdropdown.
 export { DexihButtonValidateComponent } from './dexih-button-validate.component';
 export { DexihButtonHistoryComponent } from './dexih-button-history.component';
 export { DexihButtonLinkComponent } from './dexih-button-link.component';
+export { DexihButtonChartComponent} from './dexih-button-chart.component';
+export { DexihButtonCollapsibleComponent } from './dexih-button-collapsible.component';

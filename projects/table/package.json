@@ -1,8 +1,27 @@
 {
-  "name": "table",
-  "version": "0.0.1",
+  "name": "dexih-ngx-table",
+  "version": "0.5.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DataExperts/Dexih.Libaries/tree/master/projects/table"
+  },
+  "author": {
+    "name": "Gary Holland",
+    "email": "gholland@dataexpertsgroup.com"
+  },
+  "keywords": [
+    "angular"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/DataExperts/Dexih.Libaries/issues"
+  },
   "peerDependencies": {
     "@angular/common": "^8.0.1",
-    "@angular/core": "^8.0.1"
+    "@angular/core": "^8.0.1",
+    "@angular/forms": "^8.0.1",
+    "@angular/cdk": "^8.0.1",
+    "rxjs": ">= ^6.1.0",
+    "ngx-md": "^7.0.0"
   }
 }
