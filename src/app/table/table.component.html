@@ -1,0 +1,113 @@
+<dexih-table [data]="null" heading="Table still loading">
+    <ng-template #actions let-items="items">
+        <button class="btn btn-danger">Cancel</button>
+    </ng-template>
+</dexih-table>
+<hr/>
+
+<dexih-table [data]="delayedData" heading="Table loading, then empty in 5 seconds, then populated in another 5 seconds.">
+</dexih-table>
+<hr/>
+
+<dexih-table [dataObservable]="arrayData" [columns]="arrayColumns" error="I messed up...." heading="Table with error">
+</dexih-table>
+<hr/>
+
+<dexih-table [data]="[]" [columns]="arrayColumns" heading="Table no data">
+    <ng-template #actions let-items="items">
+        <button class="btn btn-success">Ok</button>
+        <button class="btn btn-danger">Cancel</button>
+    </ng-template>
+</dexih-table>
+<hr/>
+
+<dexih-table [dataObservable]="tableData" heading="Table with auto generated column names"></dexih-table>
+<hr/>
+
+<dexih-table [dataObservable]="tableData" [columns]="columns" heading="Table with formatted column names"></dexih-table>
+<hr/>
+
+<dexih-table [dataObservable]="tableData" [columns]="columns" heading="Table hidden" [hideTable]="true"></dexih-table>
+<hr/>
+
+<dexih-table [dataObservable]="arrayData" heading="Table with populated from array"></dexih-table>
+
+<div style="width: 320px">
+    <dexih-table [dataObservable]="arrayData" [columns]="columns"  heading="Responsive table (horizontal across bar)">
+        <ng-template #actions let-items="items">
+            <button class="btn btn-primary" (click)="selectedItems(items)">Button</button>
+            <button class="btn btn-primary" (click)="selectedItems(items)">Button</button>
+            <button class="btn btn-primary" (click)="selectedItems(items)">Button</button>
+            <button class="btn btn-primary" (click)="selectedItems(items)">Button</button>
+            <button class="btn btn-primary" (click)="selectedItems(items)">Button</button>
+        </ng-template>
+    </dexih-table>
+</div>
+
+<hr/>
+        
+
+<dexih-table [dataObservable]="arrayData" [columns]="arrayColumns" heading="Table with populated from array with column formatting"></dexih-table>
+<hr/>
+
+<dexih-table [data]="oneRow" [enableSort]="true" [enableManualSort]="true" heading="Sortable table with one row"></dexih-table>
+<hr/>
+
+<dexih-table [data]="dataEmpty" heading="Table with auto generated column names (no rows)"></dexih-table>
+<hr/>
+
+<dexih-table [enableMultiSelect]="true" 
+    [enableSort]="true" [enableManualSort]="true" [enableSaveCsv]="true" (rowClick)="selectedItem($event)" heading="Table with export, sort, row action enabled."
+    [columns]="columns" [dataObservable]="tableData" rowStatusHeading="Row Status Heading"  actionHeading="Action Heading"
+>
+    <ng-template #selectedItemAction select="selectedItemAction" let-item="item">
+        <button class="btn btn-primary" (click)="selectedItem(item)">Open</button>
+    </ng-template>
+
+    <ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
+        <button class="btn btn-danger" (click)="selectedItems(items)">Delete</button>
+    </ng-template>
+
+    <ng-template #actions let-items="items">
+        <button class="btn btn-primary" (click)="selectedItems(items)">Button</button>
+        <button class="btn btn-primary" (click)="selectedItems(items)">Button</button>
+        <button class="btn btn-primary" (click)="selectedItems(items)">Button</button>
+        <button class="btn btn-primary" (click)="selectedItems(items)">Button</button>
+        <button class="btn btn-primary" (click)="selectedItems(items)">Button</button>
+        <button class="btn btn-primary" (click)="selectedItems(items)">Button</button>
+    </ng-template>
+
+    <ng-template #rowStatus select="rowStatus" let-table="item">
+        Running...
+    </ng-template>
+
+    <ng-template #rowAction select="rowAction" let-table="item">
+        <button class="btn btn-danger" (click)="selectedItem(item)">Cancel</button>
+    </ng-template>
+
+
+</dexih-table>
+<hr/>
+
+
+<dexih-table [enableCellValue]="false" [columns]="columns" [dataObservable]="tableData" heading="Table with custom cells">
+    <ng-template #cell select="cell" let-value="value">
+        <button class="btn btn-success">{{value}}</button>
+    </ng-template>
+</dexih-table>
+
+<hr/>
+
+<div cdkDropList [cdkDropListConnectedTo]="[listOne.cdkDropList]" cdkDropListData="drop data">
+    <div cdkDrag >
+        <button class="btn btn-primary">
+            drag this to table.
+        </button>
+    </div>
+</div>
+
+<dexih-table [dataObservable]="tableData" (onDrop)="dropped($event)" [enableSort]="true" [enableManualSort]="true" #listOne
+ heading="droppable table"></dexih-table>
+<hr/>
+
+<hr/>

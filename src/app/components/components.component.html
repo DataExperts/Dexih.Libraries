@@ -1,0 +1,644 @@
+<dexih-toast #toasts></dexih-toast>
+<dexih-modal #modal></dexih-modal>
+
+<h3>Widget Vertically</h3>
+
+<div class="p-3 b-3">
+    <dexih-widget-vertical>
+        <dexih-widget title="widget" [padding]="true">
+            The widget content.
+
+            <ng-template #footer>
+                footer template
+            </ng-template>
+        </dexih-widget>
+        <dexih-widget title="widget"></dexih-widget>
+        <dexih-widget title="widget"></dexih-widget>
+        <dexih-widget title="widget"></dexih-widget>
+        <dexih-widget title="widget"></dexih-widget>
+        <dexih-widget title="widget"></dexih-widget>
+    </dexih-widget-vertical>
+</div>
+
+<h3>Widget Deck</h3>
+
+<div class="p-3 b-3">
+    <div class="card-deck">
+        <div dexihWidget title="widget" [padding]="true">
+                The widget content.
+    
+            <ng-template #footer>
+                footer template
+            </ng-template>
+        </div>        
+        <div dexihWidget title="widget" [padding]="true">
+            The widget content.
+        </div>
+        <div dexihWidget title="widget" [padding]="true">
+            <p>Lots of  content.</p>
+            <p>Lots of  content.</p>
+            <p>Lots of  content.</p>
+            <p>Lots of  content.</p>
+            <p>Lots of  content.</p>
+            <p>Lots of  content.</p>
+            <p>Lots of  content.</p>
+            <p>Lots of  content.</p>
+            <p>Lots of  content.</p>
+            <ng-template #footer>
+                footer template
+            </ng-template>
+        </div>
+        <div dexihWidget title="widget"></div>
+        <div dexihWidget title="widget"></div>
+        <div dexihWidget title="widget"></div>
+    </div>
+</div>
+    
+<h3>Widget Columns</h3>
+
+<div class="p-3 b-3">
+    <dexih-widget-columns>
+        <dexih-widget title="widget" [padding]="true">
+            The widget content.
+
+            <ng-template #footer>
+                footer template
+            </ng-template>
+        </dexih-widget>        
+        <dexih-widget title="widget"></dexih-widget>
+        <dexih-widget title="widget"></dexih-widget>
+        <dexih-widget title="widget"></dexih-widget>
+        <dexih-widget title="widget"></dexih-widget>
+        <dexih-widget title="widget"></dexih-widget>
+    </dexih-widget-columns>
+</div>
+
+<h3>Widget Group</h3>
+
+<div class="p-3 b-3">
+    <dexih-widget-group>
+        <dexih-widget title="widget" [padding]="true">
+            The widget content.
+
+            <ng-template #footer>
+                footer template
+            </ng-template>
+        </dexih-widget>        
+        <dexih-widget title="widget"></dexih-widget>
+        <dexih-widget title="widget"></dexih-widget>
+        <dexih-widget title="widget"></dexih-widget>
+        <dexih-widget title="widget"></dexih-widget>
+        <dexih-widget title="widget"></dexih-widget>
+    </dexih-widget-group>
+</div>
+
+
+
+
+<dexih-widget-vertical>
+    <dexih-widget title="Show all elements" [padding]="true" [showFilter]="true" [showCloseButton]="true" iconClass="fa fa-lg fa-fw fa-database" [showExpandButton]="true">
+
+        <ng-template #header>
+            header template
+        </ng-template>
+
+        <ng-template #subTitle>
+            subtitle template
+        </ng-template>
+
+        <ng-template #tools>
+            tools template
+        </ng-template>
+
+        <ng-template #subHeader>
+            sub-header template
+        </ng-template>
+
+        <ng-template #footer>
+            footer template
+        </ng-template>
+
+        the body of the widget
+
+    </dexih-widget>
+
+    <dexih-widget title="Show all with different classes" 
+        headerClass="text-white bg-success" 
+        subTitleClass="text-white bg-primary"
+        subHeaderClass="text-white bg-warning"
+        bodyClass="text-white bg-secondary"
+        footerClass="text-white bg-danger"
+        [padding]="true" [showFilter]="true" [showCloseButton]="true" [showExpandButton]="true" iconClass="fa fa-lg fa-fw fa-database">
+
+            <ng-template #header>
+                header template
+            </ng-template>
+    
+            <ng-template #subTitle>
+                subtitle template
+            </ng-template>
+    
+            <ng-template #tools>
+                tools template
+            </ng-template>
+    
+            <ng-template #subHeader>
+                sub-header template
+            </ng-template>
+    
+            <ng-template #footer>
+                footer template
+            </ng-template>
+    
+            the body of the widget
+    
+        </dexih-widget>
+
+    <dexih-widget title="just a footer" bodyClass="text-white bg-secondary">
+
+        <ng-template #footer>
+            footer template
+        </ng-template>
+
+        something in the body
+    </dexih-widget>
+
+    <dexih-widget title="waiting" loadingMessage="Loading the widget..." [showIf]="false">
+
+    </dexih-widget>
+
+    <dexih-widget title="body with no padding" [padding]="false" bodyClass="text-white bg-secondary">
+this should have no padding.
+    </dexih-widget>
+    
+</dexih-widget-vertical>
+
+<dexih-widget-columns class="p-3">
+        <dexih-widget title="Toasts" [padding]="true" >
+            <dexih-button (click)="addToasts()" text="Add Toasts"></dexih-button>
+            <dexih-button (click)="addToast('success')" text="Add Success"></dexih-button>
+            <dexih-button (click)="addToast('error')" text="Add Error"></dexih-button>
+        </dexih-widget>
+
+        <dexih-widget title="Modals" [padding]="true" >
+            <div class="row">
+                <dexih-button (click)="modalInformation()" text="Information"></dexih-button>
+                Result: {{modalInformationValue}}
+            </div>
+            <div class="row">
+                <dexih-button (click)="modalConfirm()" text="Confirm"></dexih-button>
+                Result: {{modalConfirmValue}}
+            </div>
+            <div class="row">
+                <dexih-button (click)="modalPrompt()" text="Prompt"></dexih-button>
+                Result: {{modalPromptValue}}
+            </div>
+            </dexih-widget>
+
+        <dexih-widget title="Progress" [padding]="true" iconClass="fa fa-lg fa-fw fa-database">
+            <dexih-progressbar width="100px" class="m-3" [animate]="true" [showCancel]="true" (cancelled)="cancelled()" (progressClick)="progress()"
+                value="90" type="success">
+                smaller width
+            </dexih-progressbar>
+
+
+            <dexih-progressbar class="m-3" [animate]="true" [showCancel]="true" (cancelled)="cancelled()" (progressClick)="progress()"
+                value="0" type="success">
+                Not started
+            </dexih-progressbar>
+        
+            <dexih-progressbar class="m-3" [animate]="true" [showCancel]="true" (cancelled)="cancelled()" (progressClick)="progress()"
+                value="25" type="success">
+                25% complete
+            </dexih-progressbar>
+        
+            <dexih-progressbar class="m-3" [animate]="true" [showCancel]="true" (cancelled)="cancelled()" (progressClick)="progress()"
+                value="50" type="success">
+                50% complete
+            </dexih-progressbar>
+        
+            <dexih-progressbar class="m-3" [animate]="true" [showCancel]="true" (cancelled)="cancelled()" (progressClick)="progress()"
+                value="75" type="success">
+                75% complete
+            </dexih-progressbar>
+        
+            <dexih-progressbar class="m-3" [animate]="true" [showCancel]="true" (cancelled)="cancelled()" (progressClick)="progress()"
+                value="100" type="success">
+                100% complete
+            </dexih-progressbar>
+
+            <dexih-progressbar class="m-3" [animate]="true" [showCancel]="false" (progressClick)="progress()"
+                value="100" type="success">
+                100% complete no cancel
+            </dexih-progressbar>
+
+        </dexih-widget>
+
+        <dexih-widget title="Inputs" [padding]="true" iconClass="fa fa-lg fa-fw fa-database">
+
+            <form>
+                <form-input placeholder="No labels"></form-input>
+                <form-input autocapitalize="on" label="auto capitalize"></form-input>
+                <form-input label="input label" labelLeft="label left" note="a note to describe the input" placeholder="input something"></form-input>
+                <form-input label="input label" note="a note to describe the input" placeholder="input with icon" iconClass="fa fa-pie-chart"></form-input>
+                <form-input label="input with error" note="a note to describe the input and [link](http://dataexpertsgroup.com)" errors="this is invalid" placeholder="input something"
+                    iconClass="fa fa-pie-chart"></form-input>
+                <form-input label="input with sub label" subLabel="the label" placeholder="input something" iconClass="fa fa-pie-chart"></form-input>
+                <form-input label="input disabled" [disabled]="true" placeholder="input something" iconClass="fa fa-pie-chart" value="can't change this text"></form-input>
+
+                <div class="row">
+                    <div class="col">
+                        <form-input label="side by side" placeholder="input something" iconClass="fa fa-pie-chart"></form-input>
+                    </div>
+                    <div class="col">
+                        <form-input label="side by side" placeholder="input something" iconClass="fa fa-pie-chart"></form-input>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <form-input labelLeft="side by side" placeholder="input something" iconClass="fa fa-pie-chart"></form-input>
+                    </div>
+                    <div class="col">
+                        <form-input labelLeft="side by side" placeholder="input something" iconClass="fa fa-pie-chart"></form-input>
+                    </div>
+                </div>
+            </form>
+        </dexih-widget>
+
+        <dexih-widget title="Text Areas" [padding]="true" iconClass="fa fa-lg fa-fw fa-database">
+            <form>
+                <form-textarea label="edit shown" [showCopy]="true" [isHidden]="false" value="a **bold** item, [a link](http://www.microsoft.com)"></form-textarea>
+                <form-textarea label="copy a key" [showCopy]="true" [isHidden]="true" [showPreview]="false" [disabled]="true" [rows]="1" value="abdefghijklmnopqrtruvwxyz"></form-textarea>
+                <form-textarea label="edit hidden" [isHidden]="true" value="a **bold** item"></form-textarea>
+                <form-textarea label="with errors" [isHidden]="true" value="a **bold** item" errors="the error"></form-textarea>
+                <form-textarea label="with note" [isHidden]="true" value="a **bold** item" note="a note describing the textarea"></form-textarea>
+
+            </form>
+
+        </dexih-widget>
+
+        <dexih-widget title="Dropdowns" [padding]="true" iconClass="fa fa-lg fa-fw fa-database">
+            <form>
+                <div>enableTextEntry=true</div>
+                <div>selected item: {{selectedItem}}</div>
+                <div>text value: {{textValue}}</div>
+                <form-select name="formSelect" label="Simple Select" [items]="['item1', 'item2','item3']" (ngModelChange)="selectChange($event)" [enableTextEntry]="true" [(ngModel)]="selectedItem" [ngModelOptions]="{standalone: true}" [(textValue)]="textValue" ></form-select>
+                
+                <form-select label="No Filter" [items]="['item1', 'item2','item3']" [enableFilter]="false"></form-select>
+                <form-select label="Default Value" [allowNullSelect]="true" selectNullMessage="Use null value" [items]="['item1', 'item2','item3']" [enableTextEntry]="true"></form-select>
+                
+                <form-select label="No Items" [items]="[]" [enableTextEntry]="true" iconClass="fa fa-pie-chart"></form-select>
+
+                <form-select label="Items added dynamically" [items]="dynamicItems" [enableTextEntry]="true" iconClass="fa fa-pie-chart"><dexih-button-refresh (click)="AddItems()"></dexih-button-refresh></form-select>
+
+                <form-select label="No Items no text entry" [enableTextEntry]="false" [items]="[]"></form-select>
+
+
+                <div>selected item key: {{selectedItem0}}</div>
+                <form-select label="Selected Item 0" [items]="[0, 1, 2]" [(ngModel)]="selectedItem0" [ngModelOptions]="{standalone: true}"  ></form-select>
+                
+                <div>enableTextEntry=false</div>
+                <div>selected item key: {{selectedItem2}}</div>
+                <div>text value: {{textValue2}}</div>
+                <form-select label="Select with key/value" [items]="[{key:1, name:'item1'}, {key:2, name:'item2'}, {key:3, name:'item3'}]"
+                    itemName='name' itemKey='key' [(ngModel)]="selectedItem2" [(textValue)]="textValue2" [ngModelOptions]="{standalone: true}"></form-select>
+
+                <div>enableTextEntry=true, enableTextEntryMatch=false</div>
+                <div>selected item key: {{selectedItem3}}</div>
+                <div>text value: {{textValue3}}</div>
+                <form-select label="Select with key/value & text entry" [items]="[{key:1, name:'item1'}, {key:2, name:'item2'}, {key:3, name:'item3'}]"
+                    itemName='name' itemKey='key' [(ngModel)]="selectedItem3" [(textValue)]="textValue3" [ngModelOptions]="{standalone: true}" [enableTextEntry]="true" [enableTextEntryMatch]="false"></form-select>
+    
+                <div>enableTextEntry=true, enableTextEntryMatch=false</div>
+                <div>selected item key: {{selectedItem4}}</div>
+                <div>text value: {{textValue4}}</div>
+                <form-select label="Select with parent/child" [items]="
+                    [
+                    {category: 'category1', items: ['cat1 item1', 'cat1 item2', 'cat1 item3']}, 
+                    {category: 'category2', items: ['cat2 item1', 'cat2 item2', 'cat2 item3']},
+                    {category: 'category3', items: ['cat3 item1', 'cat3 item2', 'cat3 item3']}
+                    ]" parentName='category' childItems='items' 
+                    [(ngModel)]="selectedItem4" [(textValue)]="textValue4" [enableTextEntry]="true" [enableTextEntryMatch]="false" [ngModelOptions]="{standalone: true}"
+                    >
+                </form-select>
+
+                <div>enableTextEntry=true, enableTextEntryMatch=false</div>
+                <div>selected item: {{selectedItem5}}</div>
+                <div>text value: {{textValue5}}</div>
+                <form-select label="Select with grand parent/child" [items]="
+                [{region: 'region1', categories: [
+                {category: 'category1', items: ['cat1 item1', 'cat1 item2', 'cat1 item3']}, 
+                {category: 'category2', items: ['cat2 item1', 'cat2 item2', 'cat2 item3']},
+                {category: 'category3', items: ['cat3 item1', 'cat3 item2', 'cat3 item3']}
+                ]},
+                {region: 'region2', categories: [
+                {category: 'category1', items: ['cat1 item1', 'cat1 item2', 'cat1 item3']}, 
+                {category: 'category2', items: ['cat2 item1', 'cat2 item2', 'cat2 item3']},
+                {category: 'category3', items: ['cat3 item1', 'cat3 item2', 'cat3 item3']}
+                ]}]" grandParentName='region' parentName='category' grandChildItems='items' childItems='categories'
+                [(ngModel)]="selectedItem5" [(textValue)]="textValue5" [enableTextEntry]="true" [ngModelOptions]="{standalone: true}"></form-select>
+
+                <div>enableTextEntry=true</div>
+                <div>selected item key: {{selectedItem6}}</div>
+                <div>text value: {{textValue6}}</div>
+                <form-select label="Text Items" 
+                [items]="['item1', 'item2','item3']" 
+                [(ngModel)]="selectedItem6"  [ngModelOptions]="{standalone: true}"
+                [(textValue)]="textValue6" 
+                [textEntryItems]="['value1', 'value2', 'value3']" [enableTextEntry]="true" [enableFilter]="false"></form-select>
+
+            </form>
+
+            <form-select label="Select with note" [items]="[{key:1, name:'item1'}, {key:2, name:'item2'}, {key:3, name:'item3'}]" itemName='name'
+                itemKey='key' note='this describes the selection'></form-select>
+            <form-select label="Select with error" [items]="[{key:1, name:'item1'}, {key:2, name:'item2'}, {key:3, name:'item3'}]" itemName='name'
+                itemKey='key' errors='this has errors'></form-select>
+        </dexih-widget>
+
+
+        <dexih-widget title="Checkboxes" [padding]="true" iconClass="fa fa-lg fa-fw fa-database">
+            <form>
+                <form-checkbox></form-checkbox>
+                <form-checkbox label="Simple Checkbox"></form-checkbox>
+                <form-checkbox>Check box with text content</form-checkbox>
+                <form-checkbox [border]="true">Check box with text content and border</form-checkbox>
+                <form-checkbox label="Border" [border]="true"></form-checkbox>
+                <form-checkbox label="Checkbox with note" note="this describes the checkbox"></form-checkbox>
+                <form-checkbox label="Checkbox with error" errors="this checkbox has errors"></form-checkbox>
+                <form-checkbox label="Checkbox with error" [border]="true" errors="this checkbox has errors"></form-checkbox>
+            </form>
+        </dexih-widget>
+
+        <dexih-widget title="Date" [padding]="true" iconClass="fa fa-lg fa-fw fa-database">
+            <form>
+                <form-date placeholder="input date"></form-date>
+                <form-date label="input label" note="a note to describe the date" placeholder="input date"></form-date>
+            </form>
+        </dexih-widget>
+
+        <dexih-widget title="Day of week" [padding]="true" iconClass="fa fa-lg fa-fw fa-database">
+            <form>
+                <form-daysofweek></form-daysofweek>
+                <form-daysofweek label="Select the days"></form-daysofweek>
+                <form-daysofweek label="With note" note="this is the note"></form-daysofweek>
+                <form-daysofweek label="Has errors" errors="this is the error"></form-daysofweek>
+            </form>
+        </dexih-widget>
+
+        <dexih-widget title="Tags" [padding]="true" iconClass="fa fa-lg fa-fw fa-database">
+            <form>
+                <form-tags placeholder="input tags"></form-tags>
+                <form-tags label="input tags" [value]="['item1', 'item2']" placeholder="input tags"></form-tags>
+                <form-tags label="input tags" [value]="null" note="a note to describe the tags" placeholder="input tags"></form-tags>
+                <form-tags label="input errors" errors="the error message" placeholder="input tags"></form-tags>
+            </form>
+        </dexih-widget>
+
+        <dexih-widget title="Tags DropDown" [padding]="true" iconClass="fa fa-lg fa-fw fa-database">
+            <form>
+                <form-tags-dropdown placeholder="input tags" [items]="['item1', 'item2','item3']" ></form-tags-dropdown>
+                <form-tags-dropdown label="input tags" note="a note to describe the tags" placeholder="input tags" [items]="['item1', 'item2','item3']"></form-tags-dropdown>
+                <form-tags-dropdown label="input tags (2 selected)" note="a note to describe the tags" placeholder="input tags" [items]="['item1', 'item2','item3']" [value]="['item1', 'item2']"></form-tags-dropdown>
+                <form-tags-dropdown label="input tags (2 selected)" note="a note to describe the tags" placeholder="input tags" 
+                [items]="[{key:1, name:'item1'}, {key:2, name:'item2'}, {key:3, name:'item3'}]" itemKey="key" itemName="name"
+                [(ngModel)]="selectedTags" [ngModelOptions]="{standalone: true}"></form-tags-dropdown>
+            </form>
+        </dexih-widget>
+
+        <dexih-widget title="Time" [padding]="true" iconClass="fa fa-lg fa-fw fa-database">
+            <form>
+                <form-time></form-time>
+                <form-time label="time with label"></form-time>
+                <form-time label="time with note" note="this time description"></form-time>
+                <form-time label="time with error" errors="the time error"></form-time>
+            </form>
+        </dexih-widget>
+
+        <dexih-widget title="Buttons" [padding]="true" iconClass="fa fa-lg fa-fw fa-database">
+            <form>
+                <dexih-button>Default</dexih-button>
+                <dexih-button iconClass="fa fa-bar-chart">With Icon</dexih-button>
+                <dexih-button iconClass="fa fa-bar-chart" badge="12">With Badge</dexih-button>
+                <dexih-button iconClass="fa fa-bar-chart" badge="12" badgeClass="badge-danger">Danger Badge
+                </dexih-button>
+                <dexih-button iconClass="fa fa-bar-chart" title="the tool tip">With Tooltip</dexih-button>
+                <dexih-button iconClass="fa fa-bar-chart" [compact]="true">Compact</dexih-button>
+                <dexih-button iconClass="fa fa-bar-chart" [busy]="true">Busy</dexih-button>
+                <dexih-button-apply></dexih-button-apply>
+                <dexih-button-cancel></dexih-button-cancel>
+                <dexih-button-close></dexih-button-close>
+                <dexih-button-delete></dexih-button-delete>
+                <dexih-button-download></dexih-button-download>
+                <dexih-button-edit></dexih-button-edit>
+                <dexih-button-export></dexih-button-export>
+                <dexih-button-history></dexih-button-history>
+                <dexih-button-new></dexih-button-new>
+                <dexih-button-open></dexih-button-open>
+                <dexih-button-preview></dexih-button-preview>
+                <dexih-button-private></dexih-button-private>
+                <dexih-button-refresh></dexih-button-refresh>
+                <dexih-button-save-local></dexih-button-save-local>
+                <dexih-button-validate></dexih-button-validate>
+                <dexih-button-view></dexih-button-view>
+                <dexih-button-chart></dexih-button-chart>
+                <dexih-button-link>this is a link button</dexih-button-link>
+
+                <dexih-button-dropdown text="drop down" [autoCompact]="false">
+                    <a class="dropdown-item" (click)="this. show('hi there')">item 1</a>
+                    <a class="dropdown-item">item 2</a>
+                    <a class="dropdown-item">item 3</a>
+                </dexih-button-dropdown>
+
+                <dexih-button-dropdown text="drop down manual" buttonClass="btn btn-outline-secondary"
+                    #manualDropDown [autoClose]="false" (onOpenChange)="window.alert('open/close changed')">
+                    <a class="dropdown-item" (click)="manualDropDown.hideDropdown()">closes dropdown</a>
+                    <a class="dropdown-item">doesn't close dropdown</a>
+                </dexih-button-dropdown>
+
+                <dexih-button (click)="manualDropDown.hideDropdown()">Hide Dropdown</dexih-button>
+                <dexih-button (click)="manualDropDown.showDropdown()">Show Dropdown</dexih-button>
+
+                <dexih-button-dropdown text="drop down class" buttonClass="btn btn-outline-secondary">
+                    <a class="dropdown-item">item 1</a>
+                    <a class="dropdown-item">item 2</a>
+                    <a class="dropdown-item">item 3</a>
+                </dexih-button-dropdown>
+
+                <dexih-button-dropdown text="drop down no carrot" iconClass="fa fa-bar-chart" badge="1"
+                    [pullRight]="true" [hideCarrot]="true">
+                    <a class="dropdown-item">item 1</a>
+                    <a class="dropdown-item">item 2</a>
+                    <a class="dropdown-item">item 3</a>
+                </dexih-button-dropdown>
+
+                <dexih-button-dropdown text="drop down badge" badge="12" badgeClass="badge-info"
+                    [hideCarrot]="true">
+                    <a class="dropdown-item">item 1</a>
+                    <a class="dropdown-item">item 2</a>
+                    <a class="dropdown-item">item 3</a>
+                </dexih-button-dropdown>
+
+                <dexih-button-dropdown text="align right" [pullRight]="true">
+                    <a class="dropdown-item">item 1</a>
+                    <a class="dropdown-item">item 2</a>
+                    <a class="dropdown-item">item 3</a>
+                </dexih-button-dropdown>
+
+                <dexih-button-splitdropdown iconClass="fa fa-bar-chart" text="split">
+                    <a class="dropdown-item">item 1</a>
+                    <a class="dropdown-item">item 2</a>
+                    <a class="dropdown-item">item 3</a>
+                </dexih-button-splitdropdown>
+
+                <dexih-button-more>
+                    <a class="dropdown-item">item 1</a>
+                    <a class="dropdown-item">item 2</a>
+                    <a class="dropdown-item">item 3</a>
+                </dexih-button-more>
+
+                <dexih-button-dropdown text="notification" [pullRight]="true">
+                    <div class="list-group" style="width: 400px;">
+                        <a href="#"
+                            class="list-group-item list-group-item-action flex-column align-items-start active">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h5 class="mb-1">List group item heading</h5>
+                                <small>3 days ago</small>
+                            </div>
+                            <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget
+                                risus varius blandit.</p>
+                            <small>Donec id elit non mi porta.</small>
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h5 class="mb-1">List group item heading</h5>
+                                <small class="text-muted">3 days ago</small>
+                            </div>
+                            <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget
+                                risus varius blandit.</p>
+                            <small class="text-muted">Donec id elit non mi porta.</small>
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h5 class="mb-1">List group item heading</h5>
+                                <small class="text-muted">3 days ago</small>
+                            </div>
+                            <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget
+                                risus varius blandit.</p>
+                            <small class="text-muted">Donec id elit non mi porta.</small>
+                        </a>
+                    </div>
+                </dexih-button-dropdown>
+
+                <dexih-button-collapsible text="collapsible">
+                    here is the content.
+                </dexih-button-collapsible>
+            </form>
+        </dexih-widget>
+        <dexih-widget title="Groups" [padding]="true" iconClass="fa fa-lg fa-fw fa-database">
+            <form>
+                <div class="m-1">
+                    <form-select labelLeft="select" [items]="['item1', 'item2','item3']" [enableTextEntry]="true">
+                    </form-select>
+                </div>
+
+                <div class="m-1">
+                    <form-input labelLeft="input" placeholder="input 1"></form-input>
+                </div>
+
+                <div class="m-1">
+                    <form-tags labelLeft="tags" placeholder="input 1"></form-tags>
+                </div>
+
+                <div class="m-1">
+                    <form-tags-dropdown labelLeft="tags dropdown" placeholder="input tags"
+                        [items]="['item1', 'item2','item3']"></form-tags-dropdown>
+                </div>
+
+                <div class="input-group m-1">
+                    <div leftLabel="input groups" class="form-control p-0">
+                        <form-input [border]="false"></form-input>
+                    </div>
+                    <div class="form-control p-0">
+                        <form-input [border]="false"></form-input>
+                    </div>
+                    <div class="form-control p-0">
+                        <form-input [border]="false"></form-input>
+                    </div>
+                    <div class="form-control p-0">
+                        <form-input [border]="false"></form-input>
+                    </div>
+                </div>
+
+                <div class="input-group m-1">
+                    <div class="form-control p-0">
+                        <form-input [border]="false"></form-input>
+                    </div>
+                    <div class="form-control p-0">
+                        <form-select [border]="false" [items]="['item1', 'item2','item3']"></form-select>
+                    </div>
+                    <div class="form-control p-0">
+                        <form-select [border]="false"></form-select>
+                    </div>
+                </div>
+
+                <div class="input-group m-1">
+                    <form-tags class="form-control p-0" [border]="false" placeholder="input 1"></form-tags>
+                    <form-tags-dropdown class="form-control p-0" [border]="false" placeholder="input tags"
+                        [items]="['item1', 'item2','item3']"></form-tags-dropdown>
+                </div>
+
+                <div class="input-group m-1">
+                    <form-input class="form-control p-0" [border]="false" placeholder="input 1"></form-input>
+                    <dexih-button-view class="input-group-append"></dexih-button-view>
+                </div>
+            </form>
+        </dexih-widget>
+
+        <dexih-widget 
+            title="header" 
+            [padding]="true" 
+            [showCloseButton]="true"
+            iconClass="fa fa-lg fa-fw fa-database">
+
+                <form>
+                </form>
+            </dexih-widget>
+            <dexih-widget title="Tabs" [padding]="true" iconClass="fa fa-lg fa-fw fa-database">
+                <ng-template #header>
+                    <ul class="nav nav-tabs card-header-tabs">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#">Active</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Link</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link disabled" href="#">Disabled</a>
+                            </li>
+                            </ul>
+                </ng-template>
+            </dexih-widget>
+
+            <dexih-widget 
+                title="pills" 
+                [padding]="true" 
+                [showCloseButton]="true"
+                iconClass="fa fa-lg fa-fw fa-database">
+                <ng-template #header>
+                    <ul class="nav nav-pills card-header-pills">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#">Active</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Link</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link disabled" href="#">Disabled</a>
+                            </li>
+                            </ul>
+                </ng-template>
+                    <form>
+                    </form>
+                </dexih-widget>
+</dexih-widget-columns>

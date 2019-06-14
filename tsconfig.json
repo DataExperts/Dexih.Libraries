@@ -24,6 +24,12 @@
       ],
       "components/*": [
         "dist/components/*"
+      ],
+      "table": [
+        "dist/table"
+      ],
+      "table/*": [
+        "dist/table/*"
       ]
     }
   }

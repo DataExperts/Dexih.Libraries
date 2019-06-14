@@ -3,22 +3,25 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Route } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 import { NgxMdModule } from 'ngx-md';
 import { BsDropdownModule, ModalModule, BsModalService, BsModalRef } from 'ngx-bootstrap';
+
 import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module';
 
 import { DexihComponentsModule } from '../../projects/components/src/public-api';
+import { DexihTableModule } from '../../projects/table/src/public-api';
 import { HttpClientModule } from '@angular/common/http';
-
-const ROUTES: Route[] = [
-  // HERE ROUTES DEFINITIONS
-];
+import { ComponentsComponent } from './components/components.component';
+import { TableComponent } from './table/table.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ComponentsComponent,
+    TableComponent
   ],
   providers: [
     BsModalService,
@@ -29,11 +32,13 @@ const ROUTES: Route[] = [
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    RouterModule.forRoot(ROUTES),
+    AppRoutingModule,
     NgxMdModule.forRoot(),
     BsDropdownModule.forRoot(),
     ModalModule.forRoot(),
-    DexihComponentsModule
+    DexihComponentsModule,
+    DexihTableModule,
+    DragDropModule
   ],
   bootstrap: [AppComponent]
 })

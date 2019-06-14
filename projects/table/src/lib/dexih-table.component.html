@@ -1,0 +1,156 @@
+<div class="p-0">
+    <div *ngIf="heading" class="dexih-table-heading">
+        <h3>{{heading}}</h3>
+    </div>
+
+    <div class="dexih-table-error" *ngIf="error">
+        <div class="alert alert-danger">
+            {{error}}
+        </div>
+    </div>
+
+    <div *ngIf="actionsTemplate || selectedItemActionsTemplate || selectedItemsActionsTemplate || ( enableFilter && tableItems?.length > 0 && !hideTable) || tableHeaderTemplate" class="dexih-table-toolbar">
+        <div class="form-row">
+            <div class="form-group col-md">
+                <div class="btn-toolbar">
+                    <button *ngIf="enableSaveCsv && tableItems?.length > 0 && !hideTable" (click)="saveCsv()" class="btn btn btn-primary mr-1" title="Export the current data to a csv file.">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 8 8">
+                                <path fill="white" d="M0 0v8h8v-2h-1v1h-6v-6h1v-1h-2zm4 0l1.5 1.5-2.5 2.5 1 1 2.5-2.5 1.5 1.5v-4h-4z" />
+                              </svg>                        
+                              <span class="ml-1 d-none d-md-inline">Export</span>
+                    </button>
+
+                    <ng-template *ngIf="actionsTemplate" [ngTemplateOutlet]="actionsTemplate" [ngTemplateOutletContext]="{items: currentSelectedItems}"
+                        [ngTemplateOutletContext]="items">
+                    </ng-template>
+                    &nbsp;
+                    <ng-template *ngIf="selectedItemActionsTemplate && selectedItemsCount == 1" [ngTemplateOutlet]="selectedItemActionsTemplate"
+                        [ngTemplateOutletContext]="{item: currentSelectedItems[0]}" [ngTemplateOutletContext]="item">
+                    </ng-template>
+                    &nbsp;
+                    <ng-template *ngIf="selectedItemsActionsTemplate && selectedItemsCount > 0" [ngTemplateOutlet]="selectedItemsActionsTemplate"
+                        [ngTemplateOutletContext]="{items: currentSelectedItems}" [ngTemplateOutletContext]="items">
+                    </ng-template>
+                </div>
+            </div>
+            <div *ngIf="enableFilter && tableItems?.length > 0 && !hideTable" class="form-group align-self-end">
+                <div [ngClass]="{disabled : manualSort}" class="input-group w-auto">
+                    <span class="input-group-addon input-group-prepend">
+                        <span class="input-group-text">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 8 8">
+                                    <path d="M3.5 0c-1.93 0-3.5 1.57-3.5 3.5s1.57 3.5 3.5 3.5c.59 0 1.17-.14 1.66-.41a1 1 0 0 0 .13.13l1 1a1.02 1.02 0 1 0 1.44-1.44l-1-1a1 1 0 0 0-.16-.13c.27-.49.44-1.06.44-1.66 0-1.93-1.57-3.5-3.5-3.5zm0 1c1.39 0 2.5 1.11 2.5 2.5 0 .66-.24 1.27-.66 1.72-.01.01-.02.02-.03.03a1 1 0 0 0-.13.13c-.44.4-1.04.63-1.69.63-1.39 0-2.5-1.11-2.5-2.5s1.11-2.5 2.5-2.5z"/>
+                                  </svg>                        
+                                </span>
+                    </span>
+                    <input [formControl]="filterControl" class="form-control input-md" placeholder="Search..." type="search"
+                        name="filterString"  />
+                </div>
+            </div>
+        </div>
+        <ng-template *ngIf="tableHeaderTemplate" [ngTemplateOutlet]="tableHeaderTemplate" [ngTemplateOutletContext]="{items: currentSelectedItems}"
+            [ngTemplateOutletContext]="items">
+        </ng-template>
+
+    </div>
+
+    <div *ngIf="tableItems && !hideTable" [ngClass]="{'table-responsive': enableResponsive}">
+        <table name="dexih-table" #table [class]="tableClass" width="100%" cdkDropList #cdkDropList="cdkDropList" (cdkDropListDropped)="manualSortChange($event)" [cdkDropListConnectedTo]="dropListConnectedTo">
+            <thead>
+                <tr *ngIf="currentColumns && enableHeaderRow">
+                    <th *ngIf="enableMultiSelect" width="1%">
+                        <input type="checkbox" [(ngModel)]="selectAllState" (ngModelChange)="selectAll($event)">
+                    </th>
+                    <th class="text-center" *ngIf="enableManualSort" width="1%">
+                            <span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 8 8">
+                                    <path d="M2 0v6h-2l2.5 2 2.5-2h-2v-6h-1zm2 0v1h2v-1h-2zm0 2v1h3v-1h-3zm0 2v1h4v-1h-4z" />
+                                </svg>
+                            </span>
+                        </th>
+                    <th class="text-center" *ngFor="let column of currentColumns">
+                        <span name="dexih-column-heading" class="d-flex d-flex-row" (click)="enableSort && ( column.name || column.name == 0 ) && sort(column.name)">
+                            <span *ngIf="(sortColumn || sortColumn == '0') && sortColumn == column.name && sortDirection == 1" title="Sorted ascending">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 8 8">
+                                    <path d="M2 0v6h-2l2.5 2 2.5-2h-2v-6h-1zm2 0v1h2v-1h-2zm0 2v1h3v-1h-3zm0 2v1h4v-1h-4z" />
+                                </svg>
+                            </span>
+
+                            <span *ngIf="(sortColumn || sortColumn == '0') && sortColumn == column.name && sortDirection==-1" title="Sorted descending">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 8 8">
+                                    <path d="M2 0v6h-2l2.5 2 2.5-2h-2v-6h-1zm2 0v1h4v-1h-4zm0 2v1h3v-1h-3zm0 2v1h2v-1h-2z" />
+                                </svg>
+                            </span>
+                            {{column.title}}
+                        </span>
+                    </th>
+                    <th class="text-center" *ngIf="rowActionTemplate">{{actionHeading}}</th>
+                    <th class="text-center" *ngIf="rowStatusTemplate">{{rowStatusHeading}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngIf="tableItems.length == 0 || !currentColumns">
+                    <td [attr.colspan]="columnCount">There are no rows available.</td>
+                </tr>
+                <ng-template ngFor let-tableItem [ngForOf]="tableItems" let-i="index">
+                    <tr name="dexih-table-row" *ngIf="!tableItem.isFiltered" [class.active]="tableItem?.isSelected" cdkDrag>
+                        <div *cdkDragPreview class="container">
+                            <div class="row">
+                                <div class="col-sm list-group-item list-group-item-secondary" *ngFor="let column of currentColumns | slice:0:5; let columnIndex = index;">
+                                        <b>{{column.title}}</b>:{{data[tableItem.index][column.name]}}
+                                </div>
+                            </div>
+                        </div>
+                        <td *ngIf="enableMultiSelect">
+                            <input type="checkbox" [(ngModel)]="tableItem.isSelected" (ngModelChange)="itemSelected(true)">
+                        </td>
+                        <td [hidden]="!enableManualSort" >
+                            <button class="btn btn-sm btn-primary" title="Drag button to move row to another position" cdkDragHandle>
+                                <svg width="12px" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M10 9h4V6h3l-5-5-5 5h3v3zm-1 1H6V7l-5 5 5 5v-3h3v-4zm14 2l-5-5v3h-3v4h3v3l5-5zm-9 3h-4v3H7l5 5 5-5h-3v-3z"></path>
+                                    <path d="M0 0h24v24H0z" fill="none"></path>
+                                </svg>
+                            </button>
+                        </td>
+                        <td name="dexih-table-cell" *ngFor="let column of currentColumns; let columnIndex = index;" [ngStyle]="{'text-align': column.align, 'width': column.width, 'background-color': column.backgroundColor, 'text-color': column.textColor}"
+                            (click)="selectRowClick(data[tableItem.index])" [title]="data[tableItem.index][column.tooltip] ? data[tableItem.index][column.tooltip] : ''">
+
+                            <ng-template *ngIf="cellTemplate" [ngTemplateOutlet]="cellTemplate" [ngTemplateOutletContext]="{item: data[tableItem.index], column: column, value: data[tableItem.index][column.name]}"
+                                [ngTemplateOutletContext]="item" [ngTemplateOutletContext]="column" [ngTemplateOutletContext]="value">
+                            </ng-template>
+                            
+                            <dexih-table-cell *ngIf="enableCellValue" [column]="column" [row]="data[tableItem.index]" [nodeExpanded]="expandedNodes[tableItem.index] == columnIndex" (onNodeClick)="nodeClick(tableItem.index, columnIndex)"></dexih-table-cell>
+                        </td>
+                        <td *ngIf="rowActionTemplate">
+                            <ng-template [ngTemplateOutlet]="rowActionTemplate" [ngTemplateOutletContext]="{item: data[tableItem.index]}" [ngTemplateOutletContext]="item">
+                            </ng-template>
+                        </td>
+                        <td *ngIf="rowStatusTemplate">
+                            <ng-template [ngTemplateOutlet]="rowStatusTemplate" [ngTemplateOutletContext]="{item: data[tableItem.index]}" [ngTemplateOutletContext]="item">
+                            </ng-template>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td *ngIf="!tableItem.isFiltered && expandedNodes[tableItem.index] >= 0" [attr.colspan]="columnCount">
+                            <dexih-table [enableSaveCsv]="enableSaveCsv" [enableFilter]="enableFilter" [heading]="currentColumns[expandedNodes[tableItem.index]].title ? currentColumns[expandedNodes[tableItem.index]].title : currentColumns[expandedNodes[tableItem.index]].name" [data]="data[tableItem.index][currentColumns[expandedNodes[tableItem.index]].name]" [columns]="currentColumns[expandedNodes[tableItem.index]].childColumns">
+                                    <ng-template #actions let-items="items">
+                                        <button class="btn btn-danger" (click)="nodeClose(tableItem.index)">Close</button>
+                                    </ng-template>
+                            </dexih-table>
+                        </td>
+                    </tr>
+                </ng-template>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="!tableItems && !error && !hideTable">
+        <div class="row">
+            <div class="col-lg-9 col-md-7 col-sm-12 col-xs-12">
+                <div class="table-loader-container">
+                <div class="table-loader"></div>
+                <div name="dexih-data-loading" class="table-loader-text">{{loadingMessage}}</div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
