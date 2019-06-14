@@ -2,4 +2,4 @@
  * Public API Surface of table
  */
 
-export * from './lib';
+export * from './lib/index';

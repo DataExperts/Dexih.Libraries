@@ -339,7 +339,7 @@ export class DexihFormSelectComponent implements ControlValueAccessor, OnInit, O
         this.manualControl.setValue(this.selectedName);
     }
 
-    onTextEntryEnter() {
+    onTextEntryEnter($event: any) {
         this.updateTextEntry();
     }
 

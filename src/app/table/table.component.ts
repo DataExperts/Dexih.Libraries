@@ -58,14 +58,14 @@ export class TableComponent implements OnInit, AfterViewInit {
     ]}
   ];
 
-  private tableData = new BehaviorSubject<Array<DataModel>>(null);
+  public tableData = new BehaviorSubject<Array<DataModel>>(null);
   // tableData: Observable<Array<DataModel>> = this.tableData.asObservable();
 
   public dataEmpty: string[] = [];
   public delayedData: any[] = null;
   public oneRow: any[] = [];
 
-  private arrayData = new BehaviorSubject<string[][]>(null);
+  public arrayData = new BehaviorSubject<string[][]>(null);
   // arrayData: Observable<string[][]> = this.arrayData.asObservable();
   public arrayColumns: Array<any>;
 

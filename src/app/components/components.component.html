@@ -451,7 +451,7 @@ this should have no padding.
                 </dexih-button-dropdown>
 
                 <dexih-button-dropdown text="drop down manual" buttonClass="btn btn-outline-secondary"
-                    #manualDropDown [autoClose]="false" (onOpenChange)="window.alert('open/close changed')">
+                    #manualDropDown [autoClose]="false" (onOpenChange)="openChange()">
                     <a class="dropdown-item" (click)="manualDropDown.hideDropdown()">closes dropdown</a>
                     <a class="dropdown-item">doesn't close dropdown</a>
                 </dexih-button-dropdown>

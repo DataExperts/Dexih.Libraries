@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { ToastMessage, DexihToastComponent, DexihModalComponent } from 'projects/components/src/public-api';
+import { ToastMessage, DexihToastComponent, DexihModalComponent } from '../../../projects/components/src/public-api';
 
 @Component({
   selector: 'app-components',
@@ -96,4 +96,10 @@ export class ComponentsComponent {
     this.modal.prompt('Prompt', 'Tell me something', 'The Value:', 'save', 'quit').then(result => {
       this.modalPromptValue = result;
     }).catch(() => this.modalPromptValue = 'cancelled');
-  }}
+  }
+
+  public openChange() {
+    window.alert('open/close changed');
+  }
+}
+

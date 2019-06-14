@@ -1,6 +1,5 @@
 // need to export all components for AOT builds.
 
-export * from './';
 export * from './dexih-components.module';
 export * from './widget/index';
 export * from './buttons/index';
