@@ -1,0 +1,13 @@
+{
+  "name": "dexih-ngx-components",
+  "version": "0.3.0",
+  "peerDependencies": {
+    "@angular/common": "^8.0.1",
+    "@angular/core": "^8.0.1",
+    "@angular/forms": ">= 6.0.0",
+    "@angular/router": ">= 6.0.0",
+    "@angular/animations": ">= 6.0.0",
+    "ngx-md": ">= 6.0.0",
+    "ngx-bootstrap": ">= 3.0.0"
+  }
+}

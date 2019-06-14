@@ -1,0 +1,62 @@
+<div class="form-group">
+    <label [for]="id" class="mt-1">{{label}}
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <a class="btn btn-outline-primary btn-sm" (click)="selectAllDays()">All</a>
+                <a class="btn btn-outline-primary btn-sm" (click)="selectNoDays()">None</a>
+                <a class="btn btn-outline-primary btn-sm" (click)="selectWeekend()">Weekend</a>
+            </div>
+            <div class="input-group-append">
+                <a class="btn btn-outline-primary btn-sm" (click)="selectWeekDays()">Weekdays</a>
+            </div>
+        </div>
+        <ng-content></ng-content>
+    </label>
+
+    <div class="input-group">
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" [id]="id + '1'" [(ngModel)]="daysOfWeek[0]"
+                (ngModelChange)="hasChanged($event)">
+            <label class="form-check-label" [for]="id + '1'">Sunday</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" [id]="id + '2'" [(ngModel)]="daysOfWeek[1]"
+                (ngModelChange)="hasChanged($event)">
+            <label class="form-check-label" [for]="id + '2'">Monday</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" [id]="id + '3'" [(ngModel)]="daysOfWeek[2]"
+                (ngModelChange)="hasChanged($event)">
+            <label class="form-check-label" [for]="id + '3'">Tuesday</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" [id]="id + '4'" [(ngModel)]="daysOfWeek[3]"
+                (ngModelChange)="hasChanged($event)">
+            <label class="form-check-label" [for]="id + '4'">Wednesday</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" [id]="id + '5'" [(ngModel)]="daysOfWeek[4]"
+                (ngModelChange)="hasChanged($event)">
+            <label class="form-check-label" [for]="id + '5'">Thursday</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" [id]="id + '6'" [(ngModel)]="daysOfWeek[5]"
+                (ngModelChange)="hasChanged($event)">
+            <label class="form-check-label" [for]="id + '6'">Friday</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" [id]="id + '7'" [(ngModel)]="daysOfWeek[6]"
+                (ngModelChange)="hasChanged($event)">
+            <label class="form-check-label" [for]="id + '7'">Saturday</label>
+        </div>
+
+    </div>
+    <div *ngIf="errors" class="invalid-feedback d-block">
+        {{ errors }}
+    </div>
+
+
+    <small *ngIf="note" class="form-text text-muted">
+        <markdown (click)="sharedFunctions.getRoute($event)" [data]="note"></markdown>
+    </small>
+</div>

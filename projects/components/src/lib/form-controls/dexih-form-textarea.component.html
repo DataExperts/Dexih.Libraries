@@ -1,0 +1,40 @@
+<div>
+    <label *ngIf="label" [for]="id" class="mt-1">
+        {{label}}
+        <a class="btn btn-outline-primary btn-sm" *ngIf="!hideToggle"
+            (click)='toggleState()'>{{isHidden == true ? (disabled ? 'Show' : 'Edit') : 'Hide'}}</a>
+        <a class="btn btn-outline-primary btn-sm ml-1" *ngIf="showCopy" (click)='copyMessage()'>
+            <i class="fa fa-copy"></i>
+            Copy
+        </a>
+        <ng-content></ng-content>
+    </label>
+    <div [@slideDown]="isHidden ? 'hide' : 'show'">
+        <div class="input-group">
+            <div *ngIf="labelLeft" class="input-group-prepend">
+                <span class="input-group-text" [ngClass]="{'border-0 rounded-0 bg-transparent': !border}"> {{labelLeft}}</span>
+            </div>
+
+            <textarea class="form-control" [id]="id" [disabled]="disabled" [rows]="rows" [(ngModel)]="value"
+                (ngModelChange)="hasChanged($event)" [placeholder]="placeholder"
+                [ngClass]="{'is-invalid': errors}"></textarea>
+            <div *ngIf="iconClass" class="input-group-append">
+                <span class="input-group-text">
+                    <i *ngIf="iconClass" class="icon-append {{iconClass}}"></i>
+                </span>
+            </div>
+            <div for="inputValue" *ngIf="errors" class="invalid-feedback">
+                {{ errors }}
+            </div>
+        </div>
+        <small for="inputValue" *ngIf="note" class="form-text text-muted">
+            <markdown (click)="sharedFunctions.getRoute($event)" [data]="note"></markdown>
+        </small>
+    </div>
+    <div *ngIf="showPreview && value">
+        <label *ngIf="!isHidden">Preview</label>
+        <div class="border rounded p-2">
+            <markdown *ngIf="value" (click)="getRoute($event)" [data]="value"></markdown>
+        </div>
+    </div>
+</div>

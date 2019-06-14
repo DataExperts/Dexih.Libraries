@@ -1,0 +1,14 @@
+<div>
+    <div dexihProgress [animate]="animate" [max]="max" [ngStyle]="{'min-width': width, 'height': height }" style="width:100%" class="bg-secondary">
+    
+        <div (click)="onClick()" class="bg-secondary" [ngClass]="{'progress-width': showCancel, 'w-100': !showCancel}" style="display: inline-block">
+            <dexih-bar [type]="type" [value]="value" [max]="max" [height]="height">
+                <ng-content></ng-content>
+            </dexih-bar>
+        </div>
+        <a *ngIf="showCancel" class="btn btn-sm btn-danger text-white rounded-0 pull-right" style="display: inline-block" title="Cancel the task" (click)="cancelClick()">
+                <i class="fa fa-ban"></i>
+            </a>
+    
+    </div>
+</div>

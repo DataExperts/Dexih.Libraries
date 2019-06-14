@@ -1,0 +1,31 @@
+/*
+Used to add a scrollable menu to dropdown menus
+*/
+.scrollable-menu {
+    height: auto;
+    max-height: 300px;
+    overflow-x: hidden;
+  }
+//   .scrollable-menu .active {
+//       -webkit-text-fill-color: #FFFFFF;
+//    }
+  
+//    .scrollable-menu .scrollable-item :hover {
+//       -webkit-text-fill-color: #FFFFFF;
+//    }
+  .scrollable-menu-fixed {
+    overflow-x: visible
+  }
+  
+  /*
+  Used to add a scrollable menu to dropdown menus
+  */
+  .scrollable-list {
+    height: auto;
+    max-height: 400px;
+    overflow-x: hidden
+  }
+
+.disabled-input {
+  color: black;
+}

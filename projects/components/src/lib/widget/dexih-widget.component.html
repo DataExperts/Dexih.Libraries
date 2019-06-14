@@ -1,0 +1,76 @@
+    <div class="card" [@fadeInAnimation]='state'>
+        <div [ngClass]="['card-header', headerClass]" *ngIf="title || iconClass || headerTemplate || showFilter">
+            <div class="d-flex flex-row p-0">
+
+                <span>
+                    <i class="{{iconClass}}"></i>
+                    <b>{{title}}</b>
+                </span>
+
+                <div class="d-flex ml-auto">
+                    <div *ngIf="headerTemplate">
+                        <ng-template [ngTemplateOutlet]="headerTemplate">
+                        </ng-template>
+                    </div>
+
+                    <div *ngIf="showFilter" class=" mr-3 ml-3">
+                        <div class="input-group">
+                            <span class="input-group-addon input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="fa fa-search"></i>
+                                </span>
+                            </span>
+                            <input [formControl]="filterControl" type="text" placeholder="Filter the items">
+                        </div>
+                    </div>
+                    <button *ngIf="showExpandButton" type="button" class="close ml-2" (click)="isExpanded=!isExpanded"
+                        aria-label="Expand" [ngClass]="[headerClass]">
+                        <i *ngIf="!isExpanded" class="fa fa-angle-double-down" title="Expand"></i>
+                        <i *ngIf="isExpanded" class="fa fa-angle-double-up" title="Collapse"></i>
+                    </button>
+                    <button *ngIf="showCloseButton" type="button" class="close ml-2" (click)="doClose()"
+                        aria-label="Close" [ngClass]="[headerClass]">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div [ngClass]="['card-header', subTitleClass]" *ngIf="subTitleTemplate || subTitle || toolsTemplate">
+                <div class="d-flex flex-row">
+                    <div class="card-subtitle">{{subTitle}}</div>
+                    <ng-template [ngTemplateOutlet]="subTitleTemplate">
+                    </ng-template>
+                    <div class="d-flex ml-auto">
+                        <ng-template [ngTemplateOutlet]="toolsTemplate">
+                        </ng-template>
+                    </div>
+                </div>
+            </div>
+
+            <div [ngClass]="['card-header', subHeaderClass]" *ngIf="subHeaderTemplate">
+                <ng-template [ngTemplateOutlet]="subHeaderTemplate">
+                </ng-template>
+            </div>
+    
+
+        <div *ngIf="isExpanded" [@slideInOut]>
+            <div [ngClass]="['card-body', bodyClass]" [ngStyle]="{'padding': padding ? null : 0}">
+                <div *ngIf="!showIf">
+                    <div class="table-loader-container">
+                        <div class="table-loader"></div>
+                        <div name="dexih-data-loading" class="table-loader-text">{{loadingMessage}}</div>
+                    </div>
+                </div>
+                <div *ngIf="showIf">
+                    <ng-content></ng-content>
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="footerTemplate" [ngClass]="['card-footer', footerClass]">
+            <ng-template [ngTemplateOutlet]="footerTemplate">
+            </ng-template>
+        </div>
+
+    </div>

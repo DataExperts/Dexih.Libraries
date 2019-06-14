@@ -1,0 +1,8 @@
+<div aria-live="polite" aria-atomic="true" class="dexih-toast">
+  <!-- Position it -->
+  <a *ngIf="messages.length > 1" [@fadeInOut] class="btn btn-sm btn-primary text-white pull-right mb-2" style="z-index: 10000;" (click)="clearAll()">Clear All</a>
+
+  <div style="position: absolute; top: 0; right: 0;" #toastContainer>
+    <!-- toast items will go here -->
+  </div>
+</div>

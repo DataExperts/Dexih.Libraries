@@ -1,0 +1,37 @@
+<div>
+    <label *ngIf="label" [for]="id" class="mt-1">{{label}}
+        <ng-content></ng-content>
+    </label>
+
+    <small *ngIf="subLabel" class="form-text">{{subLabel}}</small>
+
+        <div class="input-group m-0" [ngClass]="{ 'border rounded': border,  'border-danger': errors, 'border-success': !errors && isDirty}">
+            <div *ngIf="labelLeft" class="input-group-prepend">
+                <span class="input-group-text border-0" [ngClass]="{'border-0 rounded-0': !border}"> {{labelLeft}}</span>
+            </div>
+    
+            <div *ngFor="let item of value" class="border rounded bg-light my-auto ml-1" >
+                {{item}}
+                <button (click)="remove(item)" type="button" class="close" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <input class="form-control border-0 bg-transparent" [id]="id" [disabled]="disabled" [(ngModel)]="tag" (keydown)="keydownEvent($event)" [type]="type"
+                [placeholder]="placeholder ? placeholder : ''" [attr.maxlength]="maxlength" [ngClass]="{'is-invalid': errors, 'is-valid': !errors && isDirty}" [autocapitalize]="autocapitalize"
+            />
+
+            <div *ngIf="iconClass" class="input-group-append">
+                <span class="input-group-text" [ngClass]="{'border-0 rounded-0 bg-transparent': !border}">
+                    <i *ngIf="iconClass" class="icon-append {{iconClass}}"></i>
+                </span>
+            </div>
+
+        </div>
+    <div *ngIf="errors" class="d-block invalid-feedback">
+        {{ errors }}
+    </div>
+
+    <small *ngIf="note" class="form-text text-muted">
+        <markdown (click)="sharedFunctions.getRoute($event)" [data]="note"></markdown>
+    </small>
+</div>

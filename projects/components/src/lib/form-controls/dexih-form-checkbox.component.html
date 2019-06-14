@@ -1,0 +1,41 @@
+<div *ngIf="!border">
+    <div class="form-check">
+        <div [ngClass]="{'is-invalid': errors, 'is-valid': !errors && isDirty}">
+            <input class="form-check-input" [id]="id" type="checkbox" [disabled]="disabled" [(ngModel)]="value" (ngModelChange)="hasChanged($event)"
+                [ngClass]="{'is-invalid': errors, 'is-valid': !errors && isDirty}" />
+            <label class="form-check-label" [for]="id">{{label}}
+                <ng-container *ngTemplateOutlet="tempOutlet" ></ng-container>
+            </label>
+            <div *ngIf="errors" class="invalid-feedback">
+                {{ errors }}
+            </div>
+        </div>
+    </div>
+
+    <small *ngIf="note" class="form-text text-muted">
+        {{note}}
+    </small>
+</div>
+<div *ngIf="border">
+    <div class="input-group">
+        <div class="input-group-text w-100" [ngClass]="{'is-invalid': errors, 'is-valid': !errors && isDirty}">
+            <input [id]="id" type="checkbox" [disabled]="disabled" [(ngModel)]="value" (ngModelChange)="hasChanged($event)"
+                [ngClass]="{'is-invalid': errors, 'is-valid': !errors && isDirty}" />
+            <label class="form-check-label" [for]="id">{{label}}
+                <ng-container *ngTemplateOutlet="tempOutlet" ></ng-container>
+            </label>
+        </div>
+
+        <div *ngIf="errors" class="invalid-feedback d-block">
+            {{ errors }}
+        </div>
+    </div>
+
+    <small *ngIf="note" class="form-text text-muted">
+        <markdown (click)="sharedFunctions.getRoute($event)" [data]="note"></markdown>
+    </small>
+</div>
+
+<ng-template #tempOutlet>
+    <ng-content></ng-content>
+</ng-template>

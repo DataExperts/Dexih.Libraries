@@ -1,0 +1,13 @@
+
+.progress-width {
+    width: -webkit-calc(100% - 30px);
+    width:    -moz-calc(100% - 30px);
+    width:         calc(100% - 30px);
+}​
+
+.content {
+    cursor: pointer ; 
+    display:inline; 
+    overflow: hidden; 
+    white-space: nowrap;
+}

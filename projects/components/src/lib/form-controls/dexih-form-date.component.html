@@ -1,0 +1,31 @@
+
+
+<div>
+    <label *ngIf="label" [for]="id" class="mt-1">{{label}}
+        <ng-content></ng-content>
+    </label>
+
+    <div class="input-group" >
+        <div *ngIf="labelLeft" class="input-group-prepend">
+            <span class="input-group-text" [ngClass]="{'border-0 rounded-0': !border}"> {{labelLeft}}</span>
+        </div>
+
+        <input class="form-control" [id]="id" [disabled]="disabled" [(ngModel)]="value" (ngModelChange)="hasChanged($event)"
+        type="date" [placeholder]="placeholder ? placeholder : ''"
+            [ngClass]="{'is-invalid': errors, 'is-valid': !errors && isDirty}" />
+        <div *ngIf="iconClass" class="input-group-append">
+            <span class="input-group-text">
+                <i *ngIf="iconClass" class="icon-append fa fa-calendar"></i>
+            </span>
+        </div>
+
+        <div *ngIf="errors" class="invalid-feedback">
+            {{ errors }}
+        </div>
+
+    </div>
+
+    <small *ngIf="note" class="form-text text-muted">
+        <markdown (click)="sharedFunctions.getRoute($event)" [data]="note"></markdown>
+    </small>
+</div>
