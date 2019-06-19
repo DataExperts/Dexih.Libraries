@@ -5,7 +5,7 @@
       <i *ngIf="message?.type == 'info'"  class="fa fa-info-circle text-white"></i>
       <i *ngIf="message?.type == 'error'"  class="fa fa-exclamation-circle text-white"></i>
       <strong class="ml-2 mr-auto text-white">{{message?.title}}</strong>
-      <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close" (click)="close()">
+      <button type="button" class="ml-2 mb-1 close text-white" data-dismiss="toast" aria-label="Close" (click)="close()">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
