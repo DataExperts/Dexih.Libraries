@@ -307,7 +307,7 @@ export class DexihTableComponent implements OnInit, OnDestroy, OnChanges, AfterV
         if (this.data) {
             this.selectedItemsCount = this.tableItems.filter(t => t.isSelected === true).length;
             this.currentSelectedItems = [];
-            this.tableItems.filter(t => t.isSelected).forEach(item => {
+            this.tableItems.filter(t => t.isSelected && !t.isFiltered).forEach(item => {
                 this.currentSelectedItems.push(this.data[item.index]);
             });
         } else {
@@ -321,7 +321,7 @@ export class DexihTableComponent implements OnInit, OnDestroy, OnChanges, AfterV
     }
 
     selectAll(event: any) {
-        this.tableItems.forEach(item => item.isSelected = this.selectAllState);
+        this.tableItems.filter(c => !c.isFiltered).forEach(item => item.isSelected = this.selectAllState);
         this.itemSelected(true);
     }
 

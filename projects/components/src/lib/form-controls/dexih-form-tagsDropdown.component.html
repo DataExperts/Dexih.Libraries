@@ -7,8 +7,8 @@
 
     <div #dropdown dropdown [ngClass]="{'border rounded': border, 'border-danger': errors, 'border-success': !errors && isDirty}">
         <div class="input-group" dropdownToggle (click)="dropdown.autoClose=false">
-            <div  class="input-group-prepend">
-                <span *ngIf="labelLeft" class="input-group-text" [ngClass]="{'border-0 rounded-0 bg-transparent': !border}">{{labelLeft}}</span>
+            <div *ngIf="labelLeft" class="input-group-prepend">
+                <span class="input-group-text border-0"> {{labelLeft}}</span>
             </div>
             <ul *dropdownMenu class="w-100 dropdown-menu scrollable-menu" role="menu">
                 <li *ngIf="enableAddAll" class="scrollable-item">
@@ -35,7 +35,7 @@
             <input class="form-control border-0 rounded-0 invisible" [disabled]="true">
 
             <div  class="input-group-append">
-                <span class="input-group-text" [ngClass]="{'border-0 rounded-0 bg-transparent': !border}">
+                <span class="input-group-text border-0 rounded-0" [ngClass]="{'bg-transparent': !border}">
                     <i *ngIf="items && items.length > 0" class="icon-append fa fa-caret-down"></i>
                     <i  *ngIf="iconClass && (!items || items.length == 0) " class="icon-append {{iconClass}}"></i>
                 </span>

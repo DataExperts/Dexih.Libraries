@@ -14,14 +14,14 @@
             [type]="type" [placeholder]="placeholder ? placeholder : ''" [attr.maxlength]="maxlength" [autocapitalize]="autocapitalize"
             [ngClass]="{'border-0 rounded-0  bg-transparent': !border, 'is-invalid': errors, 'is-valid': !errors && isDirty}" />
         
+            <div *ngIf="errors" class="invalid-feedback order-1">
+                {{ errors }}
+            </div>
+       
         <div *ngIf="iconClass" class="input-group-append">
             <span class="input-group-text"  [ngClass]="{'border-0 rounded-0 bg-transparent': !border}" >
                 <i *ngIf="iconClass" class="icon-append {{iconClass}}"></i>
             </span>
-        </div>
-
-        <div *ngIf="errors" class="invalid-feedback">
-            {{ errors }}
         </div>
 
     </div>

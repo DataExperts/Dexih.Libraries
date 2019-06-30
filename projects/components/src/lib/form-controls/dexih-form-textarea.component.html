@@ -18,13 +18,15 @@
             <textarea class="form-control" [id]="id" [disabled]="disabled" [rows]="rows" [(ngModel)]="value"
                 (ngModelChange)="hasChanged($event)" [placeholder]="placeholder"
                 [ngClass]="{'is-invalid': errors}"></textarea>
+            
+            <div *ngIf="errors" class="invalid-feedback order-1">
+                {{ errors }}
+            </div>
+
             <div *ngIf="iconClass" class="input-group-append">
                 <span class="input-group-text">
                     <i *ngIf="iconClass" class="icon-append {{iconClass}}"></i>
                 </span>
-            </div>
-            <div for="inputValue" *ngIf="errors" class="invalid-feedback">
-                {{ errors }}
             </div>
         </div>
         <small for="inputValue" *ngIf="note" class="form-text text-muted">

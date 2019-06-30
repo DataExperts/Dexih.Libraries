@@ -286,6 +286,9 @@ this should have no padding.
                 <form-select name="formSelect" label="Simple Select" [items]="['item1', 'item2','item3']" (ngModelChange)="selectChange($event)" [enableTextEntry]="true" [(ngModel)]="selectedItem" [ngModelOptions]="{standalone: true}" [(textValue)]="textValue" ></form-select>
                 
                 <form-select label="No Filter" [items]="['item1', 'item2','item3']" [enableFilter]="false"></form-select>
+
+                <form-select labelLeft="Label Left" [items]="['item1', 'item2','item3']" [enableFilter]="false"></form-select>
+                
                 <form-select label="Default Value" [allowNullSelect]="true" selectNullMessage="Use null value" [items]="['item1', 'item2','item3']" [enableTextEntry]="true"></form-select>
                 
                 <form-select label="No Items" [items]="[]" [enableTextEntry]="true" iconClass="fa fa-pie-chart"></form-select>
@@ -373,6 +376,7 @@ this should have no padding.
         <dexih-widget title="Date" [padding]="true" iconClass="fa fa-lg fa-fw fa-database">
             <form>
                 <form-date placeholder="input date"></form-date>
+                <form-date labelLeft="label left"></form-date>
                 <form-date label="input label" note="a note to describe the date" placeholder="input date"></form-date>
             </form>
         </dexih-widget>
@@ -381,6 +385,7 @@ this should have no padding.
             <form>
                 <form-daysofweek></form-daysofweek>
                 <form-daysofweek label="Select the days"></form-daysofweek>
+                <form-daysofweek labelLeft="label left"></form-daysofweek>
                 <form-daysofweek label="With note" note="this is the note"></form-daysofweek>
                 <form-daysofweek label="Has errors" errors="this is the error"></form-daysofweek>
             </form>
@@ -390,6 +395,7 @@ this should have no padding.
             <form>
                 <form-tags placeholder="input tags"></form-tags>
                 <form-tags label="input tags" [value]="['item1', 'item2']" placeholder="input tags"></form-tags>
+                <form-tags labelLeft="label left" [value]="['item1', 'item2']" placeholder="input tags"></form-tags>
                 <form-tags label="input tags" [value]="null" note="a note to describe the tags" placeholder="input tags"></form-tags>
                 <form-tags label="input errors" errors="the error message" placeholder="input tags"></form-tags>
             </form>
@@ -398,6 +404,7 @@ this should have no padding.
         <dexih-widget title="Tags DropDown" [padding]="true" iconClass="fa fa-lg fa-fw fa-database">
             <form>
                 <form-tags-dropdown placeholder="input tags" [items]="['item1', 'item2','item3']" ></form-tags-dropdown>
+                <form-tags-dropdown labelLeft="label left" placeholder="input tags" [items]="['item1', 'item2','item3']" ></form-tags-dropdown>
                 <form-tags-dropdown label="input tags" note="a note to describe the tags" placeholder="input tags" [items]="['item1', 'item2','item3']"></form-tags-dropdown>
                 <form-tags-dropdown label="input tags (2 selected)" note="a note to describe the tags" placeholder="input tags" [items]="['item1', 'item2','item3']" [value]="['item1', 'item2']"></form-tags-dropdown>
                 <form-tags-dropdown label="input tags (2 selected)" note="a note to describe the tags" placeholder="input tags" 
@@ -410,6 +417,7 @@ this should have no padding.
             <form>
                 <form-time></form-time>
                 <form-time label="time with label"></form-time>
+                <form-time labelLeft="label left"></form-time>
                 <form-time label="time with note" note="this time description"></form-time>
                 <form-time label="time with error" errors="the time error"></form-time>
             </form>
