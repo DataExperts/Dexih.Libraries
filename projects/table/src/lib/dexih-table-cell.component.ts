@@ -4,7 +4,8 @@ import { Column, ColumnOperations } from './dexih-table.models';
 
 @Component({
     selector: 'dexih-table-cell',
-    templateUrl: 'dexih-table-cell.component.html'
+    templateUrl: 'dexih-table-cell.component.html',
+    styleUrls: [ './dexih-table-cell.component.scss' ]
 })
 
 export class DexihTableCellComponent implements OnInit, OnDestroy {
@@ -16,10 +17,12 @@ export class DexihTableCellComponent implements OnInit, OnDestroy {
     private _interval: any;
 
     public value: any;
+    public jsonValue: any;
     public formattedValue: string;
     public alignment: string;
     public footer: string;
     public header: string;
+    public format: string;
 
     private columnOperations = new ColumnOperations();
 
@@ -28,12 +31,34 @@ export class DexihTableCellComponent implements OnInit, OnDestroy {
     constructor() { }
 
     ngOnInit() {
+        this.format = this.column.format;
         if (this.column.name || this.column.name === 0) {
             this.value = this.columnOperations.fetchFromObject(this.row, this.column.name);
             this.footer = this.columnOperations.fetchFromObject(this.row, this.column.footer);
             this.header = this.columnOperations.fetchFromObject(this.row, this.column.header);
             this.formattedValue = this.columnOperations.formatValue(this.column, this.value);
             this.alignment = this.setAlignment(this.value)
+
+            // if (typeof this.value === 'object' || this.value instanceof Array) {
+            //     this.value
+            //     const json = JSON.stringify(this.value, null, 2);
+            //     this.jsonValue = this.syntaxHighlight(json);
+            //     this.format = 'Json';
+            // }
+
+            if (this.column.format === 'Json') {
+                let json: string;
+                if(this.value === Object(this.value)) {
+                    json = JSON.stringify(this.value, null, 2);
+                } else {
+                    if (this.value) {
+                        json = JSON.stringify(JSON.parse(this.value), null, 2);
+                    } else {
+                        json = '';
+                    }
+                }
+                this.jsonValue = this.syntaxHighlight(json);   
+            }
 
             if (this.column.format === 'Countdown') {
                 this._startTimer();
@@ -42,6 +67,26 @@ export class DexihTableCellComponent implements OnInit, OnDestroy {
         } else {
             this.value = '';
         }
+    }
+
+    /// found at https://stackoverflow.com/questions/4810841/how-can-i-pretty-print-json-using-javascript
+    syntaxHighlight(json: string) {
+        json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
+            var cls = 'number';
+            if (/^"/.test(match)) {
+                if (/:$/.test(match)) {
+                    cls = 'key';
+                } else {
+                    cls = 'string';
+                }
+            } else if (/true|false/.test(match)) {
+                cls = 'boolean';
+            } else if (/null/.test(match)) {
+                cls = 'null';
+            }
+            return '<span class="' + cls + '">' + match + '</span>';
+        });
     }
 
     ngOnDestroy() {
@@ -68,14 +113,14 @@ export class DexihTableCellComponent implements OnInit, OnDestroy {
 
 
     setAlignment(value: any): string {
-        if (this.column.format === 'Date' ||
-            this.column.format === 'Time' ||
-            this.column.format === 'DateTime' ||
+        if (this.format === 'Date' ||
+            this.format === 'Time' ||
+            this.format === 'DateTime' ||
             value instanceof Date ||
             this.isNumeric(value)
         ) {
             return 'right';
-        } else if (this.column.format === 'Boolean') {
+        } else if (this.format === 'Boolean') {
             return 'center';
         }
 

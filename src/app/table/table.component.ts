@@ -12,7 +12,8 @@ class DataModel {
       public dateValue: Date,
       public timeValue: Date,
       public boolValue: boolean,
-      public codeValue: string,
+      public codeValue: any,
+      public jsonValue: any,
       public toolTip: string,
       public icon: string,
       public markdown: string,
@@ -49,6 +50,7 @@ export class TableComponent implements OnInit, AfterViewInit {
     { name: 'boolValue', title: 'Bool', format: 'Boolean' },
     { name: 'codeValue', title: 'Code', format: 'Code' },
     { name: 'codeValue', title: 'Html', format: 'Html' },
+    { name: 'jsonValue', title: 'Json', format: 'Json' },
     { name: 'markdown', title: 'Markdown', format: 'Md', footer: 'markdownFooter' },
     { name: 'charArray', title: 'Char Array', format: 'CharArray'},
     { name: 'childNodes', title: 'Node', format: 'Node', childColumns: [
@@ -87,14 +89,16 @@ export class TableComponent implements OnInit, AfterViewInit {
 
     const childNodes = [new ChildModel('child1', 'child2', 'child3'), new ChildModel('r2child1', 'r2child2', 'r2child3')];
 
+    const simpleObject = {a: '1', b: '2', c: '3', d: {d1: '1', d2: '2'}};
+
     const data = new Array<DataModel>();
     data.push(new DataModel(1, 'row3', 'row 1 footer', 'row 1 header', new Date(date.getTime() + 30000), date,
-      true, '<b>bold 1</b>', 'tip 1', 'fa fa-spin fa-cog', 'markdown **bold**', 'footer **bold**', ['a', 'b', 'c'],
+      true, '<b>bold 1</b>', simpleObject, 'tip 1', 'fa fa-spin fa-cog', 'markdown **bold**', 'footer **bold**', ['a', 'b', 'c'],
       childNodes));
     data.push(new DataModel(2, 'row2', 'row 2 footer', 'row 2 header', new Date(date.getTime() + 300000), date,
-      true, '<b>bold 1</b>', 'tip 2', 'fa fa-spin fa-cog', null, null, ['a', 'b', 'c'], childNodes));
+      true, '<b>bold 1</b>', simpleObject, 'tip 2', 'fa fa-spin fa-cog', null, null, ['a', 'b', 'c'], childNodes));
     data.push(new DataModel(3, 'row1', 'row 3 footer', 'row 3 header', new Date(date.getTime() + 3000000), date,
-      true, '<b>bold 1</b>', 'tip 3', 'fa fa-spin fa-cog', 'markdown **bold 2** [link](http://google.com)',
+      true, '<b>bold 1</b>', JSON.stringify(simpleObject), 'tip 3', 'fa fa-spin fa-cog', 'markdown **bold 2** [link](http://google.com)',
         'footer2 **bold** [link](http://google.com)', ['a', 'b', 'c'], childNodes));
 
     this.tableData.next(data);

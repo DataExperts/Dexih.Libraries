@@ -1,4 +1,4 @@
-<div [class]="row[column.class]" [ngSwitch]="column.format" [ngStyle]="{'text-align': alignment}">
+<div [class]="row[column.class]" [ngSwitch]="format" [ngStyle]="{'text-align': alignment}">
         <!-- <dexih-invalid-form-icon *ngIf="column.control" [control]="row[column.control]"></dexih-invalid-form-icon> -->
         <i *ngIf="column.iconClass" [class]="row[column.iconClass]"></i>
         <div *ngIf="column.control && !column.name; else other_content">
@@ -13,6 +13,7 @@
                 <div><small *ngIf="footer"><markdown [data]="footer"></markdown></small></div>
             </div>
             <pre *ngSwitchCase="'Code'"><code>{{value}}</code></pre>
+            <pre *ngSwitchCase="'Json'" [innerHtml]="jsonValue"></pre>
             <div *ngSwitchCase="'Node'">
                 <button *ngIf="!nodeExpanded" (click)="expand()" class="btn btn btn-primary mr-1" title="Expand the current node">
                     <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 320 512">

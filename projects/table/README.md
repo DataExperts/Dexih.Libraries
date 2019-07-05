@@ -23,6 +23,15 @@ dexih-ngx-table is an Angular (2+) component for building data driven tables.
 
 ## Releases Summary
 
+### Release 0.5.8
+
+* Added color and formatting to the json fields.
+
+
+### Release 0.5.7
+
+* When values containing objects are passed in the data, they are now displayed as json.
+
 ### Release 0.5.4
 
 * Updated select all to only select items which are not filtered.
@@ -194,6 +203,7 @@ The following properties can be hard coded in the column settings an apply to al
   - `Countdown` - runs a countdown timer to a future date/time.
   - `Boolean` - formats as a checkbox.
   - `Code` - formats code.
+  - `Json` - formats and color codes json.
   - `Html` - renders a html snippet.
   - `Md` - renders markdown format.
   - 'CharArray' - formats an array of chars as a single string (i.e. ['a', 'b', 'c'] formatted as 'abc')
