@@ -23,7 +23,7 @@ dexih-ngx-table is an Angular (2+) component for building data driven tables.
 
 ## Releases Summary
 
-### Release 0.5.8
+### Release 0.5.9
 
 * Added color and formatting to the json fields.
 
