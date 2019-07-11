@@ -92,7 +92,7 @@
                     <td [attr.colspan]="columnCount">There are no rows available.</td>
                 </tr>
                 <ng-template ngFor let-tableItem [ngForOf]="tableItems" let-i="index">
-                    <tr name="dexih-table-row" *ngIf="!tableItem.isFiltered" [class.active]="tableItem?.isSelected" cdkDrag>
+                    <tr name="dexih-table-row" *ngIf="data && !tableItem.isFiltered" [class.active]="tableItem?.isSelected" cdkDrag>
                         <div *cdkDragPreview class="container">
                             <div class="row">
                                 <div class="col-sm list-group-item list-group-item-secondary" *ngFor="let column of currentColumns | slice:0:5; let columnIndex = index;">

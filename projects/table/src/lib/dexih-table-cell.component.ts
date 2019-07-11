@@ -1,5 +1,6 @@
 import { Component, Input, OnDestroy, OnInit, Output, EventEmitter } from '@angular/core';
 import { Column, ColumnOperations } from './dexih-table.models';
+import { strictEqual } from 'assert';
 
 
 @Component({
@@ -48,14 +49,14 @@ export class DexihTableCellComponent implements OnInit, OnDestroy {
 
             if (this.column.format === 'Json') {
                 let json: string;
-                if(this.value === Object(this.value)) {
-                    json = JSON.stringify(this.value, null, 2);
-                } else {
+                if(typeof this.value === 'string') {
                     if (this.value) {
                         json = JSON.stringify(JSON.parse(this.value), null, 2);
                     } else {
                         json = '';
                     }
+                } else {
+                    json = JSON.stringify(this.value, null, 2);
                 }
                 this.jsonValue = this.syntaxHighlight(json);   
             }
@@ -71,6 +72,8 @@ export class DexihTableCellComponent implements OnInit, OnDestroy {
 
     /// found at https://stackoverflow.com/questions/4810841/how-can-i-pretty-print-json-using-javascript
     syntaxHighlight(json: string) {
+        if(!json) { return null; }
+        
         json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
         return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
             var cls = 'number';
