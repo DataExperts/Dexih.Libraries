@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ContentChild, TemplateRef } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({
@@ -19,7 +19,9 @@ export class DexihWidgetSectionComponent implements OnInit {
     @Input() public iconClass: string;
     @Input() public showExpandButton = false;
     @Input() public isExpanded = true;
-    @Input() public sectionClass = 'active';
+    @Input() public sectionClass = '';
+
+    @ContentChild('header', { static: true }) headerTemplate: TemplateRef<any>;
     
     constructor() { }
 
