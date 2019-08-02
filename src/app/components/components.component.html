@@ -96,7 +96,7 @@
 
 
 <dexih-widget-vertical>
-    <dexih-widget title="Show all elements" [padding]="true" [showFilter]="true" [showCloseButton]="true" iconClass="fa fa-lg fa-fw fa-database" [showExpandButton]="true">
+    <dexih-widget title="Show all elements" [padding]="false" [showFilter]="true" [showCloseButton]="true" iconClass="fa fa-lg fa-fw fa-database" [showExpandButton]="true">
 
         <ng-template #header>
             header template
@@ -118,7 +118,14 @@
             footer template
         </ng-template>
 
-        the body of the widget
+        <dexih-widget-section title='section 1'>
+            section 1 content
+        </dexih-widget-section>
+
+        <dexih-widget-section title='section 2' [showExpandButton]="true" iconClass="fa fa-bar-chart" sectionClass="text-white bg-secondary">
+            section 2 content
+        </dexih-widget-section>
+    
 
     </dexih-widget>
 

@@ -1,0 +1,26 @@
+<div class="card-header" [ngClass]="[sectionClass]">
+  <div class="d-flex flex-row">
+    <span>
+      <i *ngIf="iconClass" class="{{iconClass}} mr-1"></i>
+      <b>{{title}}</b>
+    </span>
+
+    <div class="d-flex ml-auto">
+      <div *ngIf="headerTemplate">
+        <ng-template [ngTemplateOutlet]="headerTemplate">
+        </ng-template>
+      </div>
+
+      <button *ngIf="showExpandButton" type="button" class="close ml-2" (click)="isExpanded=!isExpanded" aria-label="Expand" [ngClass]="[sectionClass]">
+        <i *ngIf="!isExpanded" class="fa fa-angle-double-down" title="Expand"></i>
+        <i *ngIf="isExpanded" class="fa fa-angle-double-up" title="Collapse"></i>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div [@slideDown]="isExpanded ? 'show' : 'hide'">
+    <div class="p-3">
+        <ng-content></ng-content>
+    </div>
+</div>

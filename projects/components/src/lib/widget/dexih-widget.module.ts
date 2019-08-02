@@ -6,6 +6,7 @@ import { DexihWidgetColumnsComponent } from './dexih-widget-columns.component';
 import { DexihWidgetDeckComponent } from './dexih-widget-deck.component';
 import { DexihWidgetVerticalComponent } from './dexih-widget-vertical.component';
 import { DexihWidgetGroupComponent } from './dexih-widget-group.component';
+import { DexihWidgetSectionComponent } from './dexih-widget-section.component';
 
 @NgModule({
   imports: [
@@ -19,6 +20,7 @@ import { DexihWidgetGroupComponent } from './dexih-widget-group.component';
     DexihWidgetColumnsComponent,
     DexihWidgetDeckComponent,
     DexihWidgetVerticalComponent,
+    DexihWidgetSectionComponent,
   ],
   exports: [
     DexihWidgetComponent,
@@ -26,6 +28,7 @@ import { DexihWidgetGroupComponent } from './dexih-widget-group.component';
     DexihWidgetColumnsComponent,
     DexihWidgetDeckComponent,
     DexihWidgetVerticalComponent,
+    DexihWidgetSectionComponent,
   ],
 })
 export class DexihWidgetModule {

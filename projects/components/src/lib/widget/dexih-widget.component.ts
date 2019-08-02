@@ -69,6 +69,7 @@ export class DexihWidgetComponent implements OnInit {
             });
     }
 
+
     doClose() {
         this.close.emit();
     }
