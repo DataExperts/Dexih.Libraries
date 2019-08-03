@@ -77,11 +77,11 @@
         <button class="btn btn-primary" (click)="selectedItems(items)">Button</button>
     </ng-template>
 
-    <ng-template #rowStatus select="rowStatus" let-table="item">
-        Running... {{table.stringValue}}
+    <ng-template #rowStatus select="rowStatus" let-item="item">
+        Running... {{item.stringValue}}
     </ng-template>
 
-    <ng-template #rowAction select="rowAction" let-table="item">
+    <ng-template #rowAction select="rowAction" let-item="item">
         <button class="btn btn-danger" (click)="selectedItem(item)">Cancel</button>
     </ng-template>
 

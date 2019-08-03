@@ -54,7 +54,7 @@
       </div>
 
       <div [@slideDown]="isExpanded ? 'show' : 'hide'">
-        <div [ngClass]="['card-body', bodyClass]" [ngStyle]="{'padding': padding ? null : 0}">
+        <div class='card-body {{bodyClass}}' [ngClass]="{'p-0': !padding}">
           <div *ngIf="!showIf">
             <div class="table-loader-container">
               <div class="table-loader"></div>

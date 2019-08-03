@@ -10,8 +10,8 @@ import { SharedFunctions } from './shared-functions';
     animations: [
     // trigger name for attaching this animation to an element using the [@triggerName] syntax
     trigger('slideDown', [
-        state('hide', style({ height: 0, overflow: 'hidden' })),
-        state('show', style({ height: '*', overflow: 'unset' })),
+        state('hide', style({ 'max-height': '0px', opacity: 0 })),
+        state('show', style({ 'max-height': '*', opacity: 1 })),
         transition('hide <=> show', animate('100ms ease-in')),
     ])
     ]

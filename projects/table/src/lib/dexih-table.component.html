@@ -20,16 +20,13 @@
                               <span class="ml-1 d-none d-md-inline">Export</span>
                     </button>
 
-                    <ng-template *ngIf="actionsTemplate" [ngTemplateOutlet]="actionsTemplate" [ngTemplateOutletContext]="{items: currentSelectedItems}"
-                        [ngTemplateOutletContext]="items">
+                    <ng-template *ngIf="actionsTemplate" [ngTemplateOutlet]="actionsTemplate" [ngTemplateOutletContext]="{items: currentSelectedItems}">
                     </ng-template>
                     &nbsp;
-                    <ng-template *ngIf="selectedItemActionsTemplate && selectedItemsCount == 1" [ngTemplateOutlet]="selectedItemActionsTemplate"
-                        [ngTemplateOutletContext]="{item: currentSelectedItems[0]}" [ngTemplateOutletContext]="item">
+                    <ng-template *ngIf="selectedItemActionsTemplate && selectedItemsCount == 1" [ngTemplateOutlet]="selectedItemActionsTemplate" [ngTemplateOutletContext]="{item: currentSelectedItems[0]}">
                     </ng-template>
                     &nbsp;
-                    <ng-template *ngIf="selectedItemsActionsTemplate && selectedItemsCount > 0" [ngTemplateOutlet]="selectedItemsActionsTemplate"
-                        [ngTemplateOutletContext]="{items: currentSelectedItems}" [ngTemplateOutletContext]="items">
+                    <ng-template *ngIf="selectedItemsActionsTemplate && selectedItemsCount > 0" [ngTemplateOutlet]="selectedItemsActionsTemplate" [ngTemplateOutletContext]="{items: currentSelectedItems}">
                     </ng-template>
                 </div>
             </div>
@@ -47,8 +44,7 @@
                 </div>
             </div>
         </div>
-        <ng-template *ngIf="tableHeaderTemplate" [ngTemplateOutlet]="tableHeaderTemplate" [ngTemplateOutletContext]="{items: currentSelectedItems}"
-            [ngTemplateOutletContext]="items">
+        <ng-template *ngIf="tableHeaderTemplate" [ngTemplateOutlet]="tableHeaderTemplate" [ngTemplateOutletContext]="{items: currentSelectedItems}">
         </ng-template>
 
     </div>
@@ -115,17 +111,17 @@
                             (click)="selectRowClick(data[tableItem.index])" [title]="data[tableItem.index][column.tooltip] ? data[tableItem.index][column.tooltip] : ''">
 
                             <ng-template *ngIf="cellTemplate" [ngTemplateOutlet]="cellTemplate" [ngTemplateOutletContext]="{item: data[tableItem.index], column: column, value: data[tableItem.index][column.name]}"
-                                [ngTemplateOutletContext]="item" [ngTemplateOutletContext]="column" [ngTemplateOutletContext]="value">
+                                >
                             </ng-template>
                             
                             <dexih-table-cell *ngIf="enableCellValue" [column]="column" [row]="data[tableItem.index]" [nodeExpanded]="expandedNodes[tableItem.index] == columnIndex" (onNodeClick)="nodeClick(tableItem.index, columnIndex)"></dexih-table-cell>
                         </td>
                         <td *ngIf="rowActionTemplate">
-                            <ng-template [ngTemplateOutlet]="rowActionTemplate" [ngTemplateOutletContext]="{item: data[tableItem.index]}" [ngTemplateOutletContext]="item">
+                            <ng-template [ngTemplateOutlet]="rowActionTemplate" [ngTemplateOutletContext]="{item: data[tableItem.index]}">
                             </ng-template>
                         </td>
                         <td *ngIf="rowStatusTemplate">
-                            <ng-template [ngTemplateOutlet]="rowStatusTemplate" [ngTemplateOutletContext]="{item: data[tableItem.index]}" [ngTemplateOutletContext]="item">
+                            <ng-template [ngTemplateOutlet]="rowStatusTemplate" [ngTemplateOutletContext]="{item: data[tableItem.index]}">
                             </ng-template>
                         </td>
                     </tr>

@@ -118,8 +118,8 @@
             footer template
         </ng-template>
 
-        <dexih-widget-section title='section 1'>
-            section 1 content
+        <dexih-widget-section title='section 1' [padding]="false">
+            no padding section
         </dexih-widget-section>
 
         <dexih-widget-section title='section 2' [showExpandButton]="true" iconClass="fa fa-bar-chart" sectionClass="text-white bg-secondary">
@@ -280,7 +280,6 @@ this should have no padding.
                 <form-textarea label="edit hidden" [isHidden]="true" value="a **bold** item"></form-textarea>
                 <form-textarea label="with errors" [isHidden]="true" value="a **bold** item" errors="the error"></form-textarea>
                 <form-textarea label="with note" [isHidden]="true" value="a **bold** item" note="a note describing the textarea"></form-textarea>
-
             </form>
 
         </dexih-widget>

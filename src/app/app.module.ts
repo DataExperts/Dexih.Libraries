@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterModule, Route } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { NgxMdModule } from 'ngx-md';
@@ -16,6 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ComponentsComponent } from './components/components.component';
 import { TableComponent } from './table/table.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -28,6 +28,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     BsModalRef
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     FormsModule,
     HttpClientModule,

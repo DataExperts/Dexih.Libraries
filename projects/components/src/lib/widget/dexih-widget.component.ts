@@ -19,8 +19,8 @@ import { debounceTime } from 'rxjs/operators';
         ]),
     ]),
     trigger('slideDown', [
-        state('hide', style({ height: 0, overflow: 'hidden' })),
-        state('show', style({ height: '*', overflow: 'unset' })),
+        state('hide', style({ height: 0, opacity: 0 })),
+        state('show', style({ height: '*', opacity: 1 })),
         transition('hide <=> show', animate('200ms ease-in')),
     ]),
     ]
@@ -29,7 +29,7 @@ export class DexihWidgetComponent implements OnInit {
     @Input() public title: string;
     @Input() public subTitle: string;
     @Input() public iconClass: string;
-    @Input() public headerClass = '';
+    @Input() public headerClass = 'text-white bg-secondary';
     @Input() public subTitleClass = 'bg-light';
     @Input() public subHeaderClass = '';
     @Input() public bodyClass = '';

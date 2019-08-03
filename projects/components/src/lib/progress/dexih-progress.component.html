@@ -1,5 +1,5 @@
 <div>
-    <div dexihProgress [animate]="animate" [max]="max" [ngStyle]="{'min-width': width, 'height': height }" style="width:100%" class="bg-secondary">
+    <div dexihProgress [animate]="animate" [max]="max" [ngStyle]="{'min-width': width, 'height': height, 'width': '100%' }" class="bg-secondary">
     
         <div (click)="onClick()" class="bg-secondary" [ngClass]="{'progress-width': showCancel, 'w-100': !showCancel}" style="display: inline-block">
             <dexih-bar [type]="type" [value]="value" [max]="max" [height]="height">
