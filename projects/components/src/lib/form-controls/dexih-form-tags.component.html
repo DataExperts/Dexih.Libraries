@@ -17,7 +17,7 @@
                 </button>
             </div>
             <input class="form-control border-0 bg-transparent" [id]="id" [disabled]="disabled" [(ngModel)]="tag" (keydown)="keydownEvent($event)" [type]="type"
-                [placeholder]="placeholder ? placeholder : ''" [attr.maxlength]="maxlength" [ngClass]="{'is-invalid': errors, 'is-valid': !errors && isDirty}" [autocapitalize]="autocapitalize"
+                [placeholder]="placeholder ? placeholder : ''" [attr.maxlength]="maxlength" [ngClass]="{'is-invalid': errors, 'is-valid': !errors && isDirty}" [attr.autocapitalize]="autocapitalize"
             />
 
             <div *ngIf="iconClass" class="input-group-append">
