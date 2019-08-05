@@ -16,7 +16,7 @@ import { DexihTableComponent } from './dexih-table.component';
   ],
   declarations: [
     DexihTableComponent,
-    DexihTableCellComponent
+    DexihTableCellComponent,
   ],
   exports: [
     DexihTableComponent

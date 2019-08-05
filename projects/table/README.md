@@ -25,6 +25,11 @@ dexih-ngx-table is an Angular (2+) component for building data driven tables.
 
 ### Release 0.5.9
 
+* modified drag to use dropName.  Previous drop feature was broken for a few releases.
+* tested against version 8.2.0.
+
+### Release 0.5.9
+
 * Added color and formatting to the json fields.
 
 
@@ -319,7 +324,7 @@ Events are used as follows in the `dexih-table` declaration:
 Drag and drop can be used as follows:
 
 ```xml
-<div cdkDropList [cdkDropListConnectedTo]="[listOne.cdkDropList]" cdkDropListData="drop data">
+<div cdkDropList [cdkDropListConnectedTo]="['tableDrop']" cdkDropListData="drop data">
     <div cdkDrag >
         <button class="btn btn-primary">
             drag this to table.
@@ -327,7 +332,7 @@ Drag and drop can be used as follows:
     </div>
 </div>
 
-<dexih-table [dataObservable]="tableData" (onDrop)="dropped($event)" [enableSort]="true" [enableManualSort]="true" #listOne heading="droppable table">
+<dexih-table [dataObservable]="tableData" (onDrop)="dropped($event)" [enableSort]="true" [enableManualSort]="true" dropName="tableDrop" heading="droppable table">
  </dexih-table>
  ```
 ## Credits

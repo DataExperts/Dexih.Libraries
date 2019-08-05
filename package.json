@@ -12,6 +12,7 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "^8.2.0",
+    "@angular/cdk": "^8.1.2",
     "@angular/common": "^8.2.0",
     "@angular/compiler": "^8.2.0",
     "@angular/core": "^8.2.0",
@@ -19,12 +20,12 @@
     "@angular/platform-browser": "^8.2.0",
     "@angular/platform-browser-dynamic": "^8.2.0",
     "@angular/router": "^8.2.0",
-    "@angular/cdk": "^8.1.2",
     "ngx-bootstrap": "^5.1.0",
     "ngx-md": "^8.0.0",
+    "npm-check-updates": "^3.1.20",
     "rxjs": "~6.5.2",
     "tslib": "^1.9.0",
-    "zone.js": "~0.10.1"
+    "zone.js": "~0.9.1"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.802.0",
@@ -48,6 +49,6 @@
     "ts-node": "~8.3.0",
     "tsickle": "^0.36.0",
     "tslint": "~5.18.0",
-    "typescript": "~3.5.3"
+    "typescript": "~3.4.1"
   }
 }

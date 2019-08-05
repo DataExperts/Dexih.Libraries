@@ -98,7 +98,7 @@
 
 <hr/>
 
-<div cdkDropList [cdkDropListConnectedTo]="[listOne.cdkDropList]" cdkDropListData="drop data">
+<div cdkDropList [cdkDropListConnectedTo]="['tableDrop']" cdkDropListData="drop data">
     <div cdkDrag >
         <button class="btn btn-primary">
             drag this to table.
@@ -106,8 +106,6 @@
     </div>
 </div>
 
-<dexih-table [dataObservable]="tableData" (onDrop)="dropped($event)" [enableSort]="true" [enableManualSort]="true" #listOne
+<dexih-table [dataObservable]="tableData" (onDrop)="dropped($event)" [enableSort]="true" [enableManualSort]="true" dropName="tableDrop"
  heading="droppable table"></dexih-table>
-<hr/>
-
 <hr/>

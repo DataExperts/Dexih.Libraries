@@ -49,12 +49,12 @@ export class DexihTableComponent implements OnInit, OnDestroy, OnChanges, AfterV
     @Input() public tableClass = 'table table-striped table-bordered table-hover m-0';
     @Input() public error: string;
     @Input() public heading: string;
-    @Input() public dropListConnectedTo;
     @Input() public dropListEnterPredicate;
     @Input() public loadingMessage = 'Data is loading...';
     @Input() public hideTable = false;
     @Input() public rowStatusHeading = 'Status';
     @Input() public actionHeading = 'Action';
+    @Input() public dropName = '';
 
     @Output() rowClick: EventEmitter<any> = new EventEmitter<any>();
     @Output() onSelectedChange: EventEmitter<Array<any>> = new EventEmitter<Array<any>>();
@@ -77,7 +77,7 @@ export class DexihTableComponent implements OnInit, OnDestroy, OnChanges, AfterV
 
     public currentSelectedItems: Array<any>;
 
-    public tableItems: Array<TableItem>;
+    public tableItems: TableItem[] = [];
     public currentColumns: Column[];
 
     // array containing column number of expanded nodes in each row
@@ -238,11 +238,9 @@ export class DexihTableComponent implements OnInit, OnDestroy, OnChanges, AfterV
             moveItemInArray(this.tableItems, event.previousIndex, event.currentIndex);
 
             const newData = new Array<any>();
-
             this.tableItems.forEach((tableItem, index) => {
                 newData.push(this.data[tableItem.index]);
             });
-
             this.onSortChanged.emit(newData);
         } else {
             this.onDrop.emit(event);
@@ -290,8 +288,9 @@ export class DexihTableComponent implements OnInit, OnDestroy, OnChanges, AfterV
                 this.tableItems.forEach(item => item.sortValue =
                         this.columnOperations.fetchFromObject(this.data[item.index], this.sortColumn));
             } else {
+                // GH - commented as it causes change in the manual reordering.  Not sure if has other impacts.
                 // if no sort column, sort to original order
-                this.tableItems.forEach(item => item.sortValue = item.index);
+                // this.tableItems.forEach(item => item.sortValue = item.index);
             }
 
             this.tableItems = this.tableItems.sort((a, b) => {

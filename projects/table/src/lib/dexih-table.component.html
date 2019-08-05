@@ -46,11 +46,10 @@
         </div>
         <ng-template *ngIf="tableHeaderTemplate" [ngTemplateOutlet]="tableHeaderTemplate" [ngTemplateOutletContext]="{items: currentSelectedItems}">
         </ng-template>
-
     </div>
 
     <div *ngIf="tableItems && !hideTable" [ngClass]="{'table-responsive': enableResponsive}">
-        <table name="dexih-table" #table [class]="tableClass" width="100%" cdkDropList #cdkDropList="cdkDropList" (cdkDropListDropped)="manualSortChange($event)" [cdkDropListConnectedTo]="dropListConnectedTo">
+        <table [class]="tableClass" width="100%">
             <thead>
                 <tr *ngIf="currentColumns && enableHeaderRow">
                     <th *ngIf="enableMultiSelect" width="1%">
@@ -83,12 +82,12 @@
                     <th class="text-center" *ngIf="rowStatusTemplate">{{rowStatusHeading}}</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="{{dropName}}" cdkDropList (cdkDropListDropped)="manualSortChange($event)">
                 <tr *ngIf="tableItems.length == 0 || !currentColumns">
                     <td [attr.colspan]="columnCount">There are no rows available.</td>
                 </tr>
                 <ng-template ngFor let-tableItem [ngForOf]="tableItems" let-i="index">
-                    <tr name="dexih-table-row" *ngIf="data && !tableItem.isFiltered" [class.active]="tableItem?.isSelected" cdkDrag>
+                    <tr name="dexih-table-row" [hidden]="!(data && !tableItem.isFiltered)" [class.active]="tableItem?.isSelected" cdkDrag>
                         <div *cdkDragPreview class="container">
                             <div class="row">
                                 <div class="col-sm list-group-item list-group-item-secondary" *ngFor="let column of currentColumns | slice:0:5; let columnIndex = index;">
