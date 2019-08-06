@@ -3,10 +3,14 @@ import { Routes, RouterModule } from '@angular/router';
 import { ComponentsComponent } from './components/components.component';
 import { TableComponent } from './table/table.component';
 import { AppComponent } from './app.component';
+import { ChildComponent } from './components/child.component';
 
 const routes: Routes = [
   { path: '', component: AppComponent},
-  { path: 'components',  component: ComponentsComponent },
+  { path: 'components', children: [
+    { path: '', component: ComponentsComponent },
+    { path: 'child', component: ChildComponent },
+  ]},
   { path: 'table',  component: TableComponent },
 ];
 

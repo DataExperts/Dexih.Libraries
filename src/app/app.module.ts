@@ -13,6 +13,7 @@ import { DexihComponentsModule } from '../../projects/components/src/public-api'
 import { DexihTableModule } from '../../projects/table/src/public-api';
 import { HttpClientModule } from '@angular/common/http';
 import { ComponentsComponent } from './components/components.component';
+import { ChildComponent } from './components/child.component';
 import { TableComponent } from './table/table.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { CommonModule } from '@angular/common';
@@ -21,6 +22,7 @@ import { CommonModule } from '@angular/common';
   declarations: [
     AppComponent,
     ComponentsComponent,
+    ChildComponent,
     TableComponent
   ],
   providers: [

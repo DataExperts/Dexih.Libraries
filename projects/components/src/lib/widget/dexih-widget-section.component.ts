@@ -6,8 +6,8 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
     templateUrl: 'dexih-widget-section.component.html',
     animations: [
         trigger('slideDown', [
-            state('hide', style({ height: 0, opacity: 0 })),
-            state('show', style({ height: '*', opacity: 1 })),
+            state('hide', style({ 'height': '0px', opacity: 0, overflow: 'hidden' })),
+            state('show', style({ 'height': '*', opacity: 1 })),
             transition('hide <=> show', animate('200ms ease-in')),
         ]),
     ]    
