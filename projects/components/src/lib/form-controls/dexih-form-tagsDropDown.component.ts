@@ -39,6 +39,7 @@ export class DexihFormTagsDropdownComponent implements ControlValueAccessor, OnC
     id = 'input_' + Math.random().toString(36).substr(2, 9);
 
     labels: string[] = [];
+    selectedItems: any[];
 
     sortedItems: Array<ListItem>;
     sharedFunctions = new SharedFunctions();
@@ -50,11 +51,11 @@ export class DexihFormTagsDropdownComponent implements ControlValueAccessor, OnC
 
     ngOnChanges() {
        // this.updateLabels();
-        this.writeValue(this.value);
+        this.writeValue(this.getItems());
     }
 
     hasChanged() {
-        this.onChange(this.value);
+        this.onChange(this.getItems());
         this.onTouched();
         this.isDirty = true;
     }
@@ -68,43 +69,62 @@ export class DexihFormTagsDropdownComponent implements ControlValueAccessor, OnC
     }
 
     writeValue(value: string[]) {
-        this.value = value;
+        if (value) {
+            if (this.itemKey) {
+                this.selectedItems = value.map(c => this.items.find(i => i[this.itemKey] === c)).filter(c => c);
+            } else {
+                this.selectedItems = value;
+            }
+        } else {
+            this.selectedItems = value;
+        }
+
         this.updateLabels();
     }
 
-    updateLabels() {
-        if (this.value === null || typeof(this.value) === undefined) {
-            this.sortedItems = [];
-            this.labels = [];
-        } else {
-            let items: Array<any>;
-            if (this.sortItems) {
-                items = this.items.sort((a, b) => {
-                    let aLabel = this.sharedFunctions.fetchFromObject(a, this.itemName);
-                    let bLabel = this.sharedFunctions.fetchFromObject(b, this.itemName);
-                    if (aLabel > bLabel) {
-                        return 1;
-                    }
-                    if (aLabel < aLabel) {
-                        return -1;
-                    }
-                    return 0;
-                });
+    getItems() {
+        if (this.itemKey) {
+            if (this.selectedItems) {
+                return this.selectedItems.map(c => c[this.itemKey]).filter(c => c);
             } else {
-                items = this.items;
+                return null;
             }
+        } else {
+            return this.selectedItems;
+        }
+    }
 
-            this.sortedItems = items.map(c => {
-                return {
-                    label: this.sharedFunctions.fetchFromObject(c, this.itemName),
-                    key: this.sharedFunctions.fetchFromObject(c, this.itemKey),
-                    title: this.sharedFunctions.fetchFromObject(c, this.itemTitle),
-                    item: c
-                };
+    updateLabels() {
+
+        let items: Array<any>;
+        if (this.sortItems) {
+            items = this.items.sort((a, b) => {
+                let aLabel = this.sharedFunctions.fetchFromObject(a, this.itemName);
+                let bLabel = this.sharedFunctions.fetchFromObject(b, this.itemName);
+                if (aLabel > bLabel) {
+                    return 1;
+                }
+                if (aLabel < aLabel) {
+                    return -1;
+                }
+                return 0;
             });
+        } else {
+            items = this.items;
+        }
 
-            this.labels = [];
-            this.value.forEach(item => {
+        this.sortedItems = items.map(c => {
+            return {
+                label: this.sharedFunctions.fetchFromObject(c, this.itemName),
+                key: this.sharedFunctions.fetchFromObject(c, this.itemKey),
+                title: this.sharedFunctions.fetchFromObject(c, this.itemTitle),
+                item: c
+            };
+        });
+
+        this.labels = [];
+        if (this.selectedItems) {
+            this.selectedItems.forEach(item => {
                 let itemLookup: string;
                 if (this.returnKeys) {
                     itemLookup = this.items.find(c => this.sharedFunctions.fetchFromObject(c, this.itemKey) === item);
@@ -122,31 +142,29 @@ export class DexihFormTagsDropdownComponent implements ControlValueAccessor, OnC
         }
     }
 
-    selectItem(selectedItem: ListItem, autoClose: boolean) {
+    selectItem(selectedItem: ListItem) {
         if (selectedItem) {
             let item: any;
-            if (!this.value) { this.value = []; }
-            item = this.value.find(c => this.sharedFunctions.fetchFromObject(c, this.itemKey) === selectedItem.key);
+            if (!this.selectedItems) { this.selectedItems = []; }
+            item = this.selectedItems.find(c => this.sharedFunctions.fetchFromObject(c, this.itemKey) === selectedItem.key);
             if (this.returnKeys) {
                 item = this.sharedFunctions.fetchFromObject(item, this.itemKey);
             }
             if (item) { return; }
-            this.value.push(selectedItem.item);
+            this.selectedItems.push(selectedItem.item);
             this.labels.push(selectedItem.label);
         }
 
-        this.onChange(this.value);
+        this.onChange(this.getItems());
         this.onTouched();
         this.isDirty = true;
 
-        if (autoClose) {
-            this.dropdown.hide();
-        }
+        this.dropdown.hide();
     }
 
     remove(index: number) {
-        if (index >= 0 && this.value) {
-            this.value.splice(index, 1);
+        if (index >= 0 && this.selectedItems) {
+            this.selectedItems.splice(index, 1);
             this.labels.splice(index, 1);
             this.hasChanged();
         }
@@ -154,9 +172,9 @@ export class DexihFormTagsDropdownComponent implements ControlValueAccessor, OnC
 
     addAll() {
         if (this.returnKeys) {
-            this.value = this.sortedItems.map(c => c.key);
+            this.selectedItems = this.sortedItems.map(c => c.key);
         } else {
-            this.value = this.sortedItems.map(c => c.item);
+            this.selectedItems = this.sortedItems.map(c => c.item);
         }
 
         this.labels = this.sortedItems.map(c => c.label);
@@ -165,7 +183,7 @@ export class DexihFormTagsDropdownComponent implements ControlValueAccessor, OnC
     }
 
     clearAll() {
-        this.value = [];
+        this.selectedItems = [];
         this.labels = [];
         this.hasChanged();
     }

@@ -42,12 +42,6 @@
                     <a class="dropdown-item" [ngClass]="{'active': !selectedItem }" (click)="selectItem(null)">{{selectNullMessage}}</a>
                 </li>
 
-                <ng-template [ngIf]="textEntryItems && textEntryItems.length > 0">
-                    <li *ngFor="let item of textEntryItems"  class="scrollable-item" >
-                        <a class="dropdown-item" [ngClass]="{'active': selectedItem == item}"  (click)="selectText(item)"> {{item}}</a>
-                    </li>
-                </ng-template>
-
                 <ng-template [ngIf]="!childItems && !grandChildItems">
                     <li *ngFor="let item of sortedItems | filter: itemName: filterString"  class="scrollable-item" >
                         <a class="dropdown-item" [ngClass]="{'active': selectedItem == item}"  (click)="selectItem(item)" [title]="itemTitle && item ? item[itemTitle] : ''"> {{itemName && item ? item[itemName] : item}}</a>
@@ -81,6 +75,13 @@
                             </ng-template>
                         </ng-template>
                     </ng-template>
+                </ng-template>
+
+                <ng-template [ngIf]="textEntryItems && textEntryItems.length > 0">
+                    <li *ngIf="textEntryItemsTitle" class="list-group-item list-group-item-heading list-group-item-info" ><b>{{textEntryItemsTitle}}</b></li>
+                    <li *ngFor="let item of textEntryItems"  class="scrollable-item" >
+                        <a class="dropdown-item" [ngClass]="{'active': selectedItem == item}"  (click)="selectText(item)"> {{item}}</a>
+                    </li>
                 </ng-template>
             </ng-template>
         </ul>

@@ -30,7 +30,8 @@ export class ComponentsComponent {
   public selectedItem6 = 1;
   public textValue6: string = null;
 
-  public selectedTags = [{key: 1, name: 'item1'}, {key: 3, name: 'item3'}];
+  // public selectedTags = [{key: 1, name: 'item1'}, {key: 3, name: 'item3'}];
+  public selectedTags = [1, 3];
 
   public dynamicItems: string[] = null;
 

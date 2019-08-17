@@ -5,8 +5,8 @@
 
     <small *ngIf="subLabel" class="form-text">{{subLabel}}</small>
 
-    <div #dropdown dropdown [ngClass]="{'border rounded': border, 'border-danger': errors, 'border-success': !errors && isDirty}">
-        <div class="input-group" dropdownToggle (click)="dropdown.autoClose=false">
+    <div #dropdown dropdown [ngClass]="{'border rounded': border, 'border-danger': errors, 'border-success': !errors && isDirty}" [autoClose]="false">
+        <div class="input-group" dropdownToggle >
             <div *ngIf="labelLeft" class="input-group-prepend">
                 <span class="input-group-text border-0"> {{labelLeft}}</span>
             </div>
@@ -21,7 +21,7 @@
                 <div class="dropdown-divider"></div>
 
                 <li *ngFor="let item of sortedItems" class="scrollable-item">
-                    <a  class="dropdown-item" (click)="selectItem(item, true)" [title]="item.title"> {{item.label}}</a>
+                    <a  class="dropdown-item" (click)="selectItem(item)" [title]="item.title"> {{item.label}}</a>
                 </li>
             </ul>
 

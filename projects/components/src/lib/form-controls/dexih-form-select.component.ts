@@ -32,6 +32,7 @@ export class DexihFormSelectComponent implements ControlValueAccessor, OnInit, O
     @Input() enableTextEntry = false; // allows text to be entered in addition to selected entries.
     @Input() enableTextEntryMatch = true; // keeps text entry in sync with the value variable.
     @Input() textEntryItems: string[] = [];
+    @Input() textEntryItemsTitle: string;
     @Input() textEntryNote = 'Enter a value';
     @Input() disabledNote = 'There are no items available for selection.';
     @Input() textValue: string = null;
