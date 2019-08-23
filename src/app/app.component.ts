@@ -93,7 +93,7 @@ export class AppComponent {
   }
 
   public modalPrompt() {
-    this.modal.prompt('Prompt', 'Tell me something', 'The Value:', 'save', 'quit').then(result => {
+    this.modal.prompt('Prompt', 'Tell me something', 'The Value:', 'here is the value', 'save', 'quit').then(result => {
       this.modalPromptValue = result;
     }).catch(() => this.modalPromptValue = 'cancelled');
   }}

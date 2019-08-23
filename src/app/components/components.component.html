@@ -34,8 +34,8 @@
         <div dexihWidget title="widget" [padding]="true">
             The widget content.
         </div>
-        <div dexihWidget title="widget" [padding]="true">
-            <p>Lots of  content.</p>
+        <div dexihWidget #widget title="widget" [padding]="true" [showExpandButton]="true">
+            <p>width {{widget.getBodySize().width}}, height: {{widget.getBodySize().height}}</p>
             <p>Lots of  content.</p>
             <p>Lots of  content.</p>
             <p>Lots of  content.</p>

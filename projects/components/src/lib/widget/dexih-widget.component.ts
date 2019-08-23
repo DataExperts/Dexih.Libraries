@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, ContentChild, TemplateRef, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, ContentChild, TemplateRef, EventEmitter, ElementRef, ViewChild, AfterContentInit, AfterViewInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { debounceTime } from 'rxjs/operators';
@@ -25,7 +25,7 @@ import { debounceTime } from 'rxjs/operators';
     ]),
     ]
 })
-export class DexihWidgetComponent implements OnInit {
+export class DexihWidgetComponent implements OnInit, AfterViewInit {
     @Input() public title: string;
     @Input() public subTitle: string;
     @Input() public iconClass: string;
@@ -39,9 +39,12 @@ export class DexihWidgetComponent implements OnInit {
     @Input() public maxHeight: number;
     @Input() public showFilter = false;
     @Input() public showCloseButton = false;
+    @Input() public showHeader = true;
     @Input() public padding = false;
     @Input() public showExpandButton = false;
     @Input() public isExpanded = true;
+
+    @Output() public onResize = new EventEmitter<{width: number, height: number}>();
 
     @Output() public filterString = new EventEmitter<string>();
 
@@ -52,6 +55,7 @@ export class DexihWidgetComponent implements OnInit {
     @ContentChild('subTitle', { static: true }) subTitleTemplate: TemplateRef<any>;
     @ContentChild('subHeader', { static: true }) subHeaderTemplate: TemplateRef<any>;
     @ContentChild('footer', { static: true }) footerTemplate: TemplateRef<any>;
+    @ViewChild('body', { static: true }) body: ElementRef;
 
     filterControl = new FormControl();
 
@@ -69,8 +73,16 @@ export class DexihWidgetComponent implements OnInit {
             });
     }
 
+    ngAfterViewInit(): void {
+        this.onResize.emit({width: this.body.nativeElement.offsetWidth, height: this.body.nativeElement.offsetHeight});    
+    }
 
     doClose() {
         this.close.emit();
     }
+
+    public getBodySize(): {width: number, height: number} {
+        return {width: this.body.nativeElement.offsetWidth, height: this.body.nativeElement.offsetHeight};
+    }
+
 }

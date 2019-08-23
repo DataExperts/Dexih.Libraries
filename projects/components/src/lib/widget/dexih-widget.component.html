@@ -1,5 +1,5 @@
-<div class="card" [@fadeInAnimation]='state' style="height: 100%">
-  <div [ngClass]="['card-header', headerClass]" *ngIf="title || iconClass || headerTemplate || showFilter">
+<div class="card h-100" [@fadeInAnimation]='state'>
+  <div [ngClass]="['card-header', headerClass]" *ngIf="showHeader && (title || iconClass || headerTemplate || showFilter)">
     <div class="d-flex flex-row p-0">
 
       <span>
@@ -53,17 +53,15 @@
     </ng-template>
   </div>
 
-  <div [@slideDown]="isExpanded ? 'show' : 'hide'">
-    <div class='card-body {{bodyClass}}' [ngClass]="{'p-0': !padding}">
+  <div [@slideDown]="isExpanded ? 'show' : 'hide'" class='card-body w-100 {{bodyClass}}' [ngClass]="{'p-0': !padding}">
       <div *ngIf="!showIf">
         <div class="table-loader-container">
           <div class="table-loader"></div>
           <div name="dexih-data-loading" class="table-loader-text">{{loadingMessage}}</div>
         </div>
       </div>
-      <div *ngIf="showIf">
-        <ng-content></ng-content>
-      </div>
+      <div #body class="w-100 h-100" >
+      <ng-content *ngIf="showIf"></ng-content>
     </div>
   </div>
 

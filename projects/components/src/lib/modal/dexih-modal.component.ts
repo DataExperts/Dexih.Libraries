@@ -35,6 +35,7 @@ export class DexihModalComponent implements OnInit {
             title: string,
             content: string,
             inputPrompt = 'Enter value:',
+            inputValue = '',
             okButton = 'Ok',
             cancelButton = 'Cancel'): Promise<string> {
         return new Promise<string>((resolve, reject) => {
@@ -42,6 +43,7 @@ export class DexihModalComponent implements OnInit {
             this.title = title;
             this.content = content;
             this.inputPrompt = inputPrompt;
+            this.inputValue = inputValue;
             this.okButton = okButton;
             this.cancelButton = cancelButton;
             this.modalRef = this.modalService.show(this.template, this.config);
@@ -92,7 +94,7 @@ export class DexihModalComponent implements OnInit {
                 this.resolveBool(true);
                 break;
             case 'confirm':
-                this.reject();
+                this.resolveBool(false);
                 break;
         }
     }

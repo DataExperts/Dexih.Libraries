@@ -442,7 +442,7 @@ export class DexihFormSelectComponent implements ControlValueAccessor, OnInit, O
         this.dropdown.toggle();
 
         if (this.enableTextEntry) {
-            // for text entry enabeld, just set the current value and emit.
+            // for text entry enabled, just set the current value and emit.
             this.value = this.selectedItem;
             this.textValueChange.emit(this.textValue);
         } else if (!this.hasValue(this.selectedItem)) {

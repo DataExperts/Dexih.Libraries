@@ -39,6 +39,9 @@ export class ComponentsComponent {
   public modalConfirmValue: string;
   public modalPromptValue: string;
 
+  public bodyWidth: number;
+  public bodyHeight: number;
+
   public AddItems() {
       this.dynamicItems = ['item1', 'item2', 'item3'];
   }
@@ -61,6 +64,11 @@ export class ComponentsComponent {
 
   public selectChange(value: string) {
     alert('selected - ' + value);
+  }
+
+  public resize($event) {
+    this.bodyHeight = $event.height;
+    this.bodyWidth = $event.width;
   }
 
   public addToasts() {
