@@ -20,8 +20,9 @@ import { debounceTime } from 'rxjs/operators';
     ]),
     trigger('slideDown', [
         state('hide', style({ height: 0, opacity: 0 })),
-        state('show', style({ height: '*', opacity: 1 })),
+        state('show', style({ height: '{{height}}', opacity: 1 }), {params: {height: '*'}}),
         transition('hide <=> show', animate('200ms ease-in')),
+        
     ]),
     ]
 })
@@ -43,6 +44,7 @@ export class DexihWidgetComponent implements OnInit, AfterViewInit {
     @Input() public padding = false;
     @Input() public showExpandButton = false;
     @Input() public isExpanded = true;
+    @Input() public height = '*';
 
     @Output() public onResize = new EventEmitter<{width: number, height: number}>();
 

@@ -2,7 +2,7 @@
   <div [ngClass]="['card-header', headerClass]" *ngIf="showHeader && (title || iconClass || headerTemplate || showFilter)">
     <div class="d-flex flex-row p-0">
 
-      <span>
+      <span class="text-truncate">
         <i class="{{iconClass}}"></i>
         <b>{{title}}</b>
       </span>
@@ -53,14 +53,14 @@
     </ng-template>
   </div>
 
-  <div [@slideDown]="isExpanded ? 'show' : 'hide'" class='card-body w-100 {{bodyClass}}' [ngClass]="{'p-0': !padding}">
+  <div [@slideDown]="{value: isExpanded ? 'show' : 'hide', params: {height: height}}" class='card-body {{bodyClass}}' [ngClass]="{'p-0': !padding}" class="overflow-auto">
       <div *ngIf="!showIf">
         <div class="table-loader-container">
           <div class="table-loader"></div>
           <div name="dexih-data-loading" class="table-loader-text">{{loadingMessage}}</div>
         </div>
       </div>
-      <div #body class="w-100 h-100" >
+      <div #body>
       <ng-content *ngIf="showIf"></ng-content>
     </div>
   </div>

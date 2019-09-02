@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
     selector: 'dexih-widget-deck, [dexihWidgetDeck]',
@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['./dexih-widget-deck.component.scss']
 })
 export class DexihWidgetDeckComponent implements OnInit {
-
+    
     constructor() {
     }
 

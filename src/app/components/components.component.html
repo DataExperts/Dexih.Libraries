@@ -23,18 +23,18 @@
 <h3>Widget Deck</h3>
 
 <div class="p-3 b-3">
-    <div class="card-deck">
-        <div dexihWidget title="widget" [padding]="true">
+    <dexih-widget-deck >
+        <div dexihWidget title="widget" [padding]="true" height="300px">
                 The widget content.
     
             <ng-template #footer>
                 footer template
             </ng-template>
         </div>        
-        <div dexihWidget title="widget" [padding]="true">
+        <div dexihWidget title="widget" [padding]="true" height="300px">
             The widget content.
         </div>
-        <div dexihWidget #widget title="widget" [padding]="true" [showExpandButton]="true">
+        <div dexihWidget #widget title="widget" [padding]="true" [showExpandButton]="true" height="300px">
             <p>width {{widget.getBodySize().width}}, height: {{widget.getBodySize().height}}</p>
             <p>Lots of  content.</p>
             <p>Lots of  content.</p>
@@ -48,10 +48,36 @@
                 footer template
             </ng-template>
         </div>
-        <div dexihWidget title="widget"></div>
-        <div dexihWidget title="widget"></div>
-        <div dexihWidget title="widget"></div>
-    </div>
+        <div dexihWidget title="widget" [padding]="true" height="300px">
+            <p>this should scroll</p>            
+            <p>this should scroll</p>            
+            <p>this should scroll</p>            
+            <p>this should scroll</p>            
+            <p>this should scroll</p>            
+            <p>this should scroll</p>            
+            <p>this should scroll</p>            
+            <p>this should scroll</p>            
+            <p>this should scroll</p>            
+            <p>this should scroll</p>            
+            <p>this should scroll</p>            
+            <p>this should scroll</p>            
+            <p>this should scroll</p>            
+            <p>this should scroll</p>            
+            <p>this should scroll</p>            
+            <p>this should scroll</p>            
+            <p>this should scroll</p>            
+            <p>this should scroll</p>            
+            <p>this should scroll</p>            
+            <p>this should scroll</p>            
+            <p>this should scroll</p>    
+            
+            <ng-template #footer>
+                    footer template
+                </ng-template>
+        </div>
+        <div dexihWidget title="widget" height="300px"></div>
+        <div dexihWidget title="widget" height="300px"></div>
+    </dexih-widget-deck>
 </div>
     
 <h3>Widget Columns</h3>
@@ -76,19 +102,43 @@
 <h3>Widget Group</h3>
 
 <div class="p-3 b-3">
-    <dexih-widget-group>
-        <dexih-widget title="widget" [padding]="true">
+    <dexih-widget-group >
+        <dexih-widget title="widget" [padding]="true"  height="300px">
             The widget content.
 
             <ng-template #footer>
                 footer template
             </ng-template>
         </dexih-widget>        
-        <dexih-widget title="widget"></dexih-widget>
-        <dexih-widget title="widget"></dexih-widget>
-        <dexih-widget title="widget"></dexih-widget>
-        <dexih-widget title="widget"></dexih-widget>
-        <dexih-widget title="widget"></dexih-widget>
+        <dexih-widget title="widget" height="300px"></dexih-widget>
+        <dexih-widget title="widget" height="300px"></dexih-widget>
+        <dexih-widget title="widget" height="300px"></dexih-widget>
+        <dexih-widget title="widget" height="300px">
+                <p>this should scroll</p>            
+                <p>this should scroll</p>            
+                <p>this should scroll</p>            
+                <p>this should scroll</p>            
+                <p>this should scroll</p>            
+                <p>this should scroll</p>            
+                <p>this should scroll</p>            
+                <p>this should scroll</p>            
+                <p>this should scroll</p>            
+                <p>this should scroll</p>            
+                <p>this should scroll</p>            
+                <p>this should scroll</p>            
+                <p>this should scroll</p>            
+                <p>this should scroll</p>            
+                <p>this should scroll</p>            
+                <p>this should scroll</p>            
+                <p>this should scroll</p>            
+                <p>this should scroll</p>            
+                <p>this should scroll</p>            
+                <p>this should scroll</p>            
+                <p>this should scroll</p>   
+        </dexih-widget>
+        <dexih-widget title="will truncate. should not see this text"  height="300px" style="width: 200px">
+            <dexih-widget-section title="will truncate. should not see this text"></dexih-widget-section>
+        </dexih-widget>
     </dexih-widget-group>
 </div>
 
