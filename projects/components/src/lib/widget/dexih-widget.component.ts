@@ -45,6 +45,7 @@ export class DexihWidgetComponent implements OnInit, AfterViewInit {
     @Input() public showExpandButton = false;
     @Input() public isExpanded = true;
     @Input() public height = '*';
+    @Input() public scrollable = false;
 
     @Output() public onResize = new EventEmitter<{width: number, height: number}>();
 

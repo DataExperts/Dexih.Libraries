@@ -34,7 +34,7 @@
         <div dexihWidget title="widget" [padding]="true" height="300px">
             The widget content.
         </div>
-        <div dexihWidget #widget title="widget" [padding]="true" [showExpandButton]="true" height="300px">
+        <div dexihWidget #widget title="widget" [padding]="true" [showExpandButton]="true" height="300px" [scrollable]="true">
             <p>width {{widget.getBodySize().width}}, height: {{widget.getBodySize().height}}</p>
             <p>Lots of  content.</p>
             <p>Lots of  content.</p>
@@ -48,7 +48,7 @@
                 footer template
             </ng-template>
         </div>
-        <div dexihWidget title="widget" [padding]="true" height="300px">
+        <div dexihWidget title="widget" [padding]="true" height="300px" [scrollable]="true">
             <p>this should scroll</p>            
             <p>this should scroll</p>            
             <p>this should scroll</p>            
@@ -113,7 +113,7 @@
         <dexih-widget title="widget" height="300px"></dexih-widget>
         <dexih-widget title="widget" height="300px"></dexih-widget>
         <dexih-widget title="widget" height="300px"></dexih-widget>
-        <dexih-widget title="widget" height="300px">
+        <dexih-widget title="widget" height="300px" [scrollable]="true">
                 <p>this should scroll</p>            
                 <p>this should scroll</p>            
                 <p>this should scroll</p>            

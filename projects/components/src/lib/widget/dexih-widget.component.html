@@ -53,7 +53,7 @@
     </ng-template>
   </div>
 
-  <div [@slideDown]="{value: isExpanded ? 'show' : 'hide', params: {height: height}}" class='card-body {{bodyClass}}' [ngClass]="{'p-0': !padding}" class="overflow-auto">
+  <div [@slideDown]="{value: isExpanded ? 'show' : 'hide', params: {height: height}}" class='card-body {{bodyClass}}' [ngClass]="{'p-0': !padding, 'overflow-auto': scrollable}">
       <div *ngIf="!showIf">
         <div class="table-loader-container">
           <div class="table-loader"></div>
