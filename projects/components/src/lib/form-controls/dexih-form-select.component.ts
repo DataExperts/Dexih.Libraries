@@ -207,11 +207,11 @@ export class DexihFormSelectComponent implements ControlValueAccessor, OnInit, O
                 let childItems = <Array<any>> item[this.childItems];
 
                 if (this.grandChildItems) {
-                    if (value && !this.selectedItem) {
-                        childItems.forEach(childItem => {
+                    childItems.forEach(childItem => {
+                        if (this.hasValue(value) && !this.hasValue(this.selectedItem)) {
                             this.setSelectedItem(value, childItem[this.grandChildItems]);
-                        });
-                    }
+                        }
+                    });
                 } else {
                     if (this.hasValue(value) && !this.hasValue(this.selectedItem)) {
                         this.setSelectedItem(value, childItems);
