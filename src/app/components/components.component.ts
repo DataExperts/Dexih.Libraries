@@ -27,11 +27,13 @@ export class ComponentsComponent {
   public selectedItem5 = 'cat2 item2';
   public textValue5: string = null;
 
-  public selectedItem6 = 1;
+  public selectedItem6 = "item1";
   public textValue6: string = null;
 
-  public selectedItem7 = 2;
+  public selectedItem7 = 3;
   public textValue7: string = null;
+
+  public selectedItem8 =  {key: 3, name: 'cat1 item2'};
 
   // public selectedTags = [{key: 1, name: 'item1'}, {key: 3, name: 'item3'}];
   public selectedTags = [1, 3];

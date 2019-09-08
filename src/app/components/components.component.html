@@ -406,7 +406,7 @@ this should have no padding.
                 [items]="['item1', 'item2','item3']" 
                 [(ngModel)]="selectedItem6"  [ngModelOptions]="{standalone: true}"
                 [(textValue)]="textValue6" 
-                [textEntryItems]="['value1', 'value2', 'value3']" [enableTextEntry]="true" [enableFilter]="false"></form-select>
+                [textEntryItems]="['value1', 'value2', 'value3']" [enableTextEntry]="true"  [enableTextEntryMatch]="false" [enableFilter]="false"></form-select>
 
 
                 <div>enableTextEntry=true</div>
@@ -415,8 +415,8 @@ this should have no padding.
                 <form-select label="Select with grand parent/child key" 
                 [items]="
                 [{region: 'region1', categories: [
-                {category: 'category1', items: [{key: 1, name: 'cat1 item1'}, {key: 2, name: 'cat1 item2'}, {key: 3, name: 'cat1 item3'}]}, 
-                {category: 'category2', items: [{key: 4, name: 'cat2 item1'}, {key: 5, name: 'cat2 item2'}, {key: 6, name: 'cat2 item3'}]},
+                {category: 'category1', items: [{key: 2, name: 'cat1 item1'}, {key: 3, name: 'cat1 item2'}, {key: 4, name: 'cat1 item3'}]}, 
+                {category: 'category2', items: [{key: 1, name: 'cat2 item1'}, {key: 5, name: 'cat2 item2'}, {key: 6, name: 'cat2 item3'}]},
                 {category: 'category3', items: [{key: 7, name: 'cat3 item1'}, {key: 8, name: 'cat3 item2'}, {key: 9, name: 'cat3 item3'}]}
                 ]},
                 {region: 'region2', categories: [
@@ -428,6 +428,24 @@ this should have no padding.
                 grandParentName='region' parentName='category' grandChildItems='items' childItems='categories' itemName="name" itemKey="key"
                 [enableTextEntry]="true" [enableFilter]="false"></form-select>
 
+                <div>enableTextEntry=true, enableKeySelect=false</div>
+                <div>selected item name: {{selectedItem8.name}}</div>
+                <div>text value: {{textValue8}}</div>
+                <form-select label="Select with grand parent/child key" 
+                [items]="
+                [{region: 'region1', categories: [
+                {category: 'category1', items: [{key: 2, name: 'cat1 item1'}, {key: 3, name: 'cat1 item2'}, {key: 4, name: 'cat1 item3'}]}, 
+                {category: 'category2', items: [{key: 1, name: 'cat2 item1'}, {key: 5, name: 'cat2 item2'}, {key: 6, name: 'cat2 item3'}]},
+                {category: 'category3', items: [{key: 7, name: 'cat3 item1'}, {key: 8, name: 'cat3 item2'}, {key: 9, name: 'cat3 item3'}]}
+                ]},
+                {region: 'region2', categories: [
+                {category: 'category1', items: [{key: 10, name: 'cat1 item1'}, {key: 11, name: 'cat1 item2'}, {key: 12, name:  'cat1 item3'}]}, 
+                {category: 'category2', items: [{key: 13, name: 'cat2 item1'}, {key: 14, name: 'cat2 item2'}, {key: 15, name: 'cat2 item3'}]},
+                {category: 'category3', items: [{key: 16, name: 'cat3 item1'}, {key: 17, name: 'cat3 item2'}, {key: 18, name: 'cat3 item3'}]}
+                ]}]" 
+                [(ngModel)]="selectedItem8"  [ngModelOptions]="{standalone: true}"
+                grandParentName='region' parentName='category' grandChildItems='items' childItems='categories' itemName="name" itemKey="key"
+                [enableTextEntry]="true" [enableFilter]="false" [enableKeySelect]="false"></form-select>
 
             </form>
 

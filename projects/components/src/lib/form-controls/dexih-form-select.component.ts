@@ -31,6 +31,7 @@ export class DexihFormSelectComponent implements ControlValueAccessor, OnInit, O
     @Input() selectNullMessage = 'Select nothing';
     @Input() enableTextEntry = false; // allows text to be entered in addition to selected entries.
     @Input() enableTextEntryMatch = true; // keeps text entry in sync with the value variable.
+    @Input() enableKeySelect = true; // the output value will be the key field (rather than the item value)
     @Input() textEntryItems: string[] = [];
     @Input() textEntryItemsTitle: string;
     @Input() textEntryNote = 'Enter a value';
@@ -202,28 +203,76 @@ export class DexihFormSelectComponent implements ControlValueAccessor, OnInit, O
                 }
             }
         }
-        if (this.childItems) {
-            this.items.forEach(item => {
-                let childItems = <Array<any>> item[this.childItems];
+        // if (this.childItems) {
+        //     this.items.forEach(item => {
+        //         let childItems = <Array<any>> item[this.childItems];
 
-                if (this.grandChildItems) {
-                    childItems.forEach(childItem => {
-                        if (this.hasValue(value) && !this.hasValue(this.selectedItem)) {
-                            this.setSelectedItem(value, childItem[this.grandChildItems]);
+        //         if (this.grandChildItems) {
+        //             childItems.forEach(childItem => {
+        //                 if (this.hasValue(value) && !this.hasValue(this.selectedItem)) {
+        //                     this.setSelectedItem(value, childItem[this.grandChildItems]);
+        //                 }
+        //             });
+        //         } else {
+        //             if (this.hasValue(value) && !this.hasValue(this.selectedItem)) {
+        //                 this.setSelectedItem(value, childItems);
+        //             }
+        //         }
+        //     });
+        // }
+    }
+
+    lookupItem(value: any):any {
+        let found: any = null;
+        for(let i = 0; i < this.items.length; i++) {
+            let item = this.items[i];
+            if (this.childItems) {
+                let children = item[this.childItems]
+                for(let j = 0; j < children.length; j++) {
+                    let child = children[j];
+                    if (this.grandChildItems) {
+                        let grandChildren = child[this.grandChildItems];
+                        for (let k = 0; k < grandChildren.length; k++) {
+                            let grandChild = grandChildren[k];
+                            if (this.testItem(grandChild, value)) {
+                                return grandChild;
+                            }
                         }
-                    });
-                } else {
-                    if (this.hasValue(value) && !this.hasValue(this.selectedItem)) {
-                        this.setSelectedItem(value, childItems);
+                    } else {
+                        if (this.testItem(child, value)) {
+                            return child;
+                        }
                     }
                 }
-            });
+            } else {
+                if (this.testItem (item, value)) {
+                    return item;
+                }
+            }
+        }
+
+        return null;
+    }
+
+    testItem(item: any, testValue: any): boolean {
+        if(this.hasValue(item)) {
+            if(this.itemKey) {
+                if (this.enableKeySelect) {
+                    return item[this.itemKey] === testValue;
+                } else {
+                    return item[this.itemKey] == testValue[this.itemKey];
+                }
+            } else {
+                return item === testValue;
+            }
+        } else {
+            return false;
         }
     }
 
     updateValueFromItem(item: any) {
         if (this.hasValue(item)) {
-            if (this.hasValue(this.itemKey)) {
+            if (this.hasValue(this.itemKey) && this.enableKeySelect) {
                 this.value = item[this.itemKey];
             } else {
                 this.value = item;
@@ -314,15 +363,17 @@ export class DexihFormSelectComponent implements ControlValueAccessor, OnInit, O
     }
 
     private setSelectedItem(value: any, items: Array<any>) {
-        if (this.hasValue(this.itemKey)) {
-            if (this.hasValue(value) && items) {
-                this.selectedItem = items.find(c => c[this.itemKey] === value);
-            } else {
-                this.selectedItem = value;
-            }
-        } else {
-            this.selectedItem = value;
-        }
+        // if (this.hasValue(this.itemKey)) {
+        //     if (this.hasValue(value) && items) {
+        //         this.selectedItem = items.find(c => c[this.itemKey] === value);
+        //     } else {
+        //         this.selectedItem = value;
+        //     }
+        // } else {
+        //     this.selectedItem = value;
+        // }
+
+        this.selectedItem = this.lookupItem(value);
 
         if (this.hasValue(this.itemName)) {
             if (this.hasValue(value) && items) {
