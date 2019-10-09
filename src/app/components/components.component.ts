@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { ToastMessage, DexihToastComponent, DexihModalComponent } from '../../../projects/components/src/public-api';
+import { isNumber } from 'util';
 
 @Component({
   selector: 'app-components',
@@ -27,7 +28,7 @@ export class ComponentsComponent {
   public selectedItem5 = 'cat2 item2';
   public textValue5: string = null;
 
-  public selectedItem6 = "item1";
+  public selectedItem6 = 'item1';
   public textValue6: string = null;
 
   public selectedItem7 = 3;
@@ -46,6 +47,9 @@ export class ComponentsComponent {
 
   public bodyWidth: number;
   public bodyHeight: number;
+
+  public inputNumber = 0;
+  public inputString = 'hi';
 
   public AddItems() {
       this.dynamicItems = ['item1', 'item2', 'item3'];

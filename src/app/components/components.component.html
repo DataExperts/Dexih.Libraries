@@ -294,7 +294,8 @@ this should have no padding.
         <dexih-widget title="Inputs" [padding]="true" iconClass="fa fa-lg fa-fw fa-database">
 
             <form>
-                <form-input placeholder="No labels"></form-input>
+                the value is {{inputString}}
+                <form-input placeholder="No labels" [(ngModel)]="inputString" [ngModelOptions]="{standalone: true}"></form-input>
                 <form-input autocapitalize="on" label="auto capitalize"></form-input>
                 <form-input label="input label" labelLeft="label left" note="a note to describe the input" placeholder="input something"></form-input>
                 <form-input label="input label" note="a note to describe the input" placeholder="input with icon" iconClass="fa fa-pie-chart"></form-input>
@@ -302,6 +303,9 @@ this should have no padding.
                     iconClass="fa fa-pie-chart"></form-input>
                 <form-input label="input with sub label" subLabel="the label" placeholder="input something" iconClass="fa fa-pie-chart"></form-input>
                 <form-input label="input disabled" [disabled]="true" placeholder="input something" iconClass="fa fa-pie-chart" value="can't change this text"></form-input>
+
+                the number is {{inputNumber}}
+                <form-input type="number" label="a number" placeholder="input number" [(ngModel)]="inputNumber" [ngModelOptions]="{standalone: true}"></form-input>
 
                 <div class="row">
                     <div class="col">

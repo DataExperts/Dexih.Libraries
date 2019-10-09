@@ -1,3 +1,5 @@
+import { Type } from '@angular/compiler';
+
 export class TableItem {
     constructor(
         public index: number,
@@ -18,6 +20,7 @@ export class Column {
     public footer: string;
     public header: string;
     public childColumns: Column[];
+    public enum: Type;
 }
 
 export class ColumnOperations {
@@ -93,6 +96,12 @@ export class ColumnOperations {
                         return this.countDown(value);
                     } else {
                         return this.countDown(new Date(value));
+                    }
+                case 'Enum':
+                    if (column.enum) {
+                        return column.enum[value];
+                    } else {
+                        return value;
                     }
                 default:
                     return value;

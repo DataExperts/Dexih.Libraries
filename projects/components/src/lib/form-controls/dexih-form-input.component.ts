@@ -20,7 +20,7 @@ export class DexihFormInputComponent implements ControlValueAccessor {
     @Input() placeholder: string;
     @Input() iconClass: string;
     @Input() errors: string;
-    @Input() value: string;
+    @Input() value: any;
     @Input() type = 'text';
     @Input() subLabel: string;
     @Input() maxlength: number;
@@ -41,6 +41,12 @@ export class DexihFormInputComponent implements ControlValueAccessor {
     constructor() { }
 
     hasChanged($event: any) {
+        if(this.type.toLocaleLowerCase() == 'number') { 
+            this.value = +$event;
+        } else {
+            this.value = $event;
+        }
+
         this.onChange(this.value);
         this.onTouched();
         this.isDirty = true;

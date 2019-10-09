@@ -5,22 +5,23 @@ import { BehaviorSubject, Observable } from 'rxjs';
 
 class DataModel {
   constructor(
-      public intValue: number,
-      public stringValue: string,
-      public footerValue: string,
-      public headerValue: string,
-      public dateValue: Date,
-      public timeValue: Date,
-      public boolValue: boolean,
-      public codeValue: any,
-      public jsonValue: any,
-      public toolTip: string,
-      public icon: string,
-      public markdown: string,
-      public markdownFooter: string,
-      public charArray: string[],
-      public childNodes: ChildModel[]
-  ) {}
+    public intValue: number,
+    public stringValue: string,
+    public footerValue: string,
+    public headerValue: string,
+    public dateValue: Date,
+    public timeValue: Date,
+    public boolValue: boolean,
+    public codeValue: any,
+    public jsonValue: any,
+    public toolTip: string,
+    public icon: string,
+    public markdown: string,
+    public markdownFooter: string,
+    public charArray: string[],
+    public childNodes: ChildModel[],
+    public enumValue: eEnum,
+  ) { }
 }
 
 class ChildModel {
@@ -29,6 +30,12 @@ class ChildModel {
     public child2: string,
     public child3: string
   ) {}
+}
+
+enum eEnum {
+  enum1,
+  enum2,
+  enum3
 }
 
 @Component({
@@ -57,7 +64,8 @@ export class TableComponent implements OnInit, AfterViewInit {
       { name: 'child1', title: 'child1', format: '' },
       { name: 'child2', title: 'child2', format: '' },
       { name: 'child3', title: 'child3', format: '' },
-    ]}
+    ]},
+    { name: 'enumValue', title: 'Enum', format: 'Enum', enum: eEnum }
   ];
 
   public tableData = new BehaviorSubject<Array<DataModel>>(null);
@@ -94,12 +102,12 @@ export class TableComponent implements OnInit, AfterViewInit {
     const data = new Array<DataModel>();
     data.push(new DataModel(1, 'row3', 'row 1 footer', 'row 1 header', new Date(date.getTime() + 30000), date,
       true, '<b>bold 1</b>', simpleObject, 'tip 1', 'fa fa-spin fa-cog', 'markdown **bold**', 'footer **bold**', ['a', 'b', 'c'],
-      childNodes));
+      childNodes, eEnum.enum1));
     data.push(new DataModel(2, 'row2', 'row 2 footer', 'row 2 header', new Date(date.getTime() + 300000), date,
-      true, '<b>bold 1</b>', simpleObject, 'tip 2', 'fa fa-spin fa-cog', null, null, ['a', 'b', 'c'], childNodes));
+      true, '<b>bold 1</b>', simpleObject, 'tip 2', 'fa fa-spin fa-cog', null, null, ['a', 'b', 'c'], childNodes, eEnum.enum2));
     data.push(new DataModel(3, 'row1', 'row 3 footer', 'row 3 header', new Date(date.getTime() + 3000000), date,
       true, '<b>bold 1</b>', JSON.stringify(simpleObject), 'tip 3', 'fa fa-spin fa-cog', 'markdown **bold 2** [link](http://google.com)',
-        'footer2 **bold** [link](http://google.com)', ['a', 'b', 'c'], childNodes));
+        'footer2 **bold** [link](http://google.com)', ['a', 'b', 'c'], childNodes, eEnum.enum3));
 
     this.tableData.next(data);
 
