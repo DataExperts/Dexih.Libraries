@@ -17,7 +17,7 @@ export class DexihFormTagsDropdownComponent implements ControlValueAccessor, OnC
     @Input() placeholder: string;
     @Input() iconClass: string;
     @Input() errors: string;
-    @Input() value: Array<string> = [];
+    @Input() value: Array<any> = [];
     @Input() type = 'text';
     @Input() subLabel: string;
     @Input() maxlength: number;
@@ -28,7 +28,7 @@ export class DexihFormTagsDropdownComponent implements ControlValueAccessor, OnC
     @Input() sortItems = false;
     @Input() border = true;
     @Input() enableAddAll = false;
-    @Input() returnKeys = false;
+    @Input() returnKeys = true;
 
     @ViewChild(BsDropdownDirective, { static: true }) dropdown: BsDropdownDirective;
     @ViewChild('dropdown', { static: true }) dropdownElement: any;
@@ -39,7 +39,7 @@ export class DexihFormTagsDropdownComponent implements ControlValueAccessor, OnC
     id = 'input_' + Math.random().toString(36).substr(2, 9);
 
     labels: string[] = [];
-    selectedItems: any[];
+    selectedKeys: any[];  // list of selected keys
 
     sortedItems: Array<ListItem>;
     sharedFunctions = new SharedFunctions();
@@ -71,26 +71,30 @@ export class DexihFormTagsDropdownComponent implements ControlValueAccessor, OnC
     writeValue(value: string[]) {
         if (value) {
             if (this.itemKey) {
-                this.selectedItems = value.map(c => this.items.find(i => i[this.itemKey] === c)).filter(c => c);
+                if (this.returnKeys) {
+                    this.selectedKeys = value;
+                } else {
+                    this.selectedKeys = value.map(c => this.sharedFunctions.fetchFromObject(c, this.itemKey)).filter(c => c !== null);
+                }
             } else {
-                this.selectedItems = value;
+                this.selectedKeys = value;
             }
         } else {
-            this.selectedItems = value;
+            this.selectedKeys = value;
         }
 
         this.updateLabels();
     }
 
     getItems() {
-        if (this.itemKey) {
-            if (this.selectedItems) {
-                return this.selectedItems.map(c => c[this.itemKey]).filter(c => c);
-            } else {
-                return null;
-            }
+        if (!this.itemKey || (this.itemKey && this.returnKeys)) {
+            return this.selectedKeys;
         } else {
-            return this.selectedItems;
+            if(this.selectedKeys) {
+                return this.selectedKeys.map(key => this.sortedItems.find(c => c.key === key).item);
+            } else {
+                return [];
+            }
         }
     }
 
@@ -123,20 +127,12 @@ export class DexihFormTagsDropdownComponent implements ControlValueAccessor, OnC
         });
 
         this.labels = [];
-        if (this.selectedItems) {
-            this.selectedItems.forEach(item => {
-                let itemLookup: string;
-                if (this.returnKeys) {
-                    itemLookup = this.items.find(c => this.sharedFunctions.fetchFromObject(c, this.itemKey) === item);
-                } else {
-                    itemLookup = this.items.find(c => this.sharedFunctions.fetchFromObject(c, this.itemKey)
-                        === this.sharedFunctions.fetchFromObject(item, this.itemKey));
-                }
+        if (this.selectedKeys) {
+            this.selectedKeys.forEach(item => {
+                let itemLookup = this.sortedItems.find(c => c.key === item);
 
                 if (itemLookup) {
-                    this.labels.push(this.sharedFunctions.fetchFromObject(itemLookup, this.itemName));
-                } else {
-                    this.labels.push(item);
+                    this.labels.push(itemLookup.label);
                 }
             });
         }
@@ -144,14 +140,14 @@ export class DexihFormTagsDropdownComponent implements ControlValueAccessor, OnC
 
     selectItem(selectedItem: ListItem) {
         if (selectedItem) {
-            let item: any;
-            if (!this.selectedItems) { this.selectedItems = []; }
-            item = this.selectedItems.find(c => this.sharedFunctions.fetchFromObject(c, this.itemKey) === selectedItem.key);
-            if (this.returnKeys) {
-                item = this.sharedFunctions.fetchFromObject(item, this.itemKey);
+            if (!this.selectedKeys) { this.selectedKeys = []; }
+
+            // if the item already selected, then do nothing
+            if(this.selectedKeys.findIndex(c => c === selectedItem.key) >= 0) {
+                return;
             }
-            if (item) { return; }
-            this.selectedItems.push(selectedItem.item);
+
+            this.selectedKeys.push(selectedItem.key);
             this.labels.push(selectedItem.label);
         }
 
@@ -163,27 +159,22 @@ export class DexihFormTagsDropdownComponent implements ControlValueAccessor, OnC
     }
 
     remove(index: number) {
-        if (index >= 0 && this.selectedItems) {
-            this.selectedItems.splice(index, 1);
+        if (index >= 0 && this.selectedKeys) {
+            this.selectedKeys.splice(index, 1);
             this.labels.splice(index, 1);
             this.hasChanged();
         }
     }
 
     addAll() {
-        if (this.returnKeys) {
-            this.selectedItems = this.sortedItems.map(c => c.key);
-        } else {
-            this.selectedItems = this.sortedItems.map(c => c.item);
-        }
-
+        this.selectedKeys = this.sortedItems.map(c => c.key);
         this.labels = this.sortedItems.map(c => c.label);
         this.hasChanged();
         this.dropdown.hide();
     }
 
     clearAll() {
-        this.selectedItems = [];
+        this.selectedKeys = [];
         this.labels = [];
         this.hasChanged();
     }

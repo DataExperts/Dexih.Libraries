@@ -510,7 +510,12 @@ this should have no padding.
 
                 <form-tags-dropdown label="input tags: selected={{selectedTags}}" note="a note to describe the tags" placeholder="input tags" 
                 [items]="[{key:1, name:'item1'}, {key:2, name:'item2'}, {key:3, name:'item3'}]" itemKey="key" itemName="name"
-                [(ngModel)]="selectedTags" [ngModelOptions]="{standalone: true}" [enableAddAll]="true"></form-tags-dropdown>
+                [(ngModel)]="selectedTags" [ngModelOptions]="{standalone: true}" [enableAddAll]="true"  ></form-tags-dropdown>
+
+                <form-tags-dropdown label="input tags: selected count={{complexTagsSelected.length}}" note="a note to describe the tags" placeholder="input tags" 
+                [items]="complexTags" itemKey="column.key" itemName="column.name"
+                [(ngModel)]="complexTagsSelected" [ngModelOptions]="{standalone: true}" [enableAddAll]="true" [returnKeys]="false"></form-tags-dropdown>
+
             </form>
         </dexih-widget>
 

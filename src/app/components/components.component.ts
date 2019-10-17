@@ -51,6 +51,13 @@ export class ComponentsComponent {
   public inputNumber = 0;
   public inputString = 'hi';
 
+  public complexTags = [
+    {column: {key: 1, name: 'col1'}},
+    {column: {key: 2, name: 'col2'}}
+  ];
+
+  public complexTagsSelected = [{column: {key: 1, name: 'col1'}}];
+
   public AddItems() {
       this.dynamicItems = ['item1', 'item2', 'item3'];
   }
