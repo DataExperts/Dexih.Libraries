@@ -251,6 +251,10 @@ export class DexihFormSelectComponent implements ControlValueAccessor, OnInit, O
             }
         }
 
+        if(this.enableTextEntry) {
+            return value;
+        }
+
         return null;
     }
 
