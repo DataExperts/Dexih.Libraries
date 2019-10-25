@@ -11,7 +11,7 @@
             </div>
 
             <input 
-                [attr.disabled]="((enableFilter && showDropDown) || enableTextEntry) ? null : ''" 
+                [attr.readonly]="((enableFilter && showDropDown) || enableTextEntry) ? null : ''" 
                 [formControl]="manualControl" 
                 [placeholder]="placeholder" 
                 (keydown.arrowdown)="down()"
