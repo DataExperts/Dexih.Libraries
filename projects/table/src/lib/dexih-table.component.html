@@ -13,13 +13,24 @@
         <div class="form-row">
             <div class="form-group col-md">
                 <div class="btn-toolbar">
-                    <button *ngIf="enableSaveCsv && tableItems?.length > 0 && !hideTable" (click)="saveCsv()" class="btn btn btn-primary mr-1" title="Export the current data to a csv file.">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 8 8">
-                                <path fill="white" d="M0 0v8h8v-2h-1v1h-6v-6h1v-1h-2zm4 0l1.5 1.5-2.5 2.5 1 1 2.5-2.5 1.5 1.5v-4h-4z" />
-                              </svg>                        
-                              <span class="ml-1 d-none d-md-inline">Export</span>
+                    <button *ngIf="enableSaveCsv && tableItems?.length > 0 && !hideTable" (click)="saveCsv()" class="btn btn-primary mr-1" title="Export the current data to a csv file.">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 8 8">
+                            <path fill="white" d="M0 0v8h8v-2h-1v1h-6v-6h1v-1h-2zm4 0l1.5 1.5-2.5 2.5 1 1 2.5-2.5 1.5 1.5v-4h-4z" />
+                        </svg>                        
                     </button>
 
+                    <div *ngIf="enableViewToggle && !hideTable" class="btn-group btn-group-toggle mr-1" data-toggle="buttons" title="Display table view">
+                        <label class="btn btn-primary" [ngClass]="{'active': view==='table'}">
+                            <input type="radio" [(ngModel)]="view" value="table">
+                            <svg fill="white" width="15" height="15" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M576 1376v-192q0-14-9-23t-23-9h-320q-14 0-23 9t-9 23v192q0 14 9 23t23 9h320q14 0 23-9t9-23zm0-384v-192q0-14-9-23t-23-9h-320q-14 0-23 9t-9 23v192q0 14 9 23t23 9h320q14 0 23-9t9-23zm512 384v-192q0-14-9-23t-23-9h-320q-14 0-23 9t-9 23v192q0 14 9 23t23 9h320q14 0 23-9t9-23zm-512-768v-192q0-14-9-23t-23-9h-320q-14 0-23 9t-9 23v192q0 14 9 23t23 9h320q14 0 23-9t9-23zm512 384v-192q0-14-9-23t-23-9h-320q-14 0-23 9t-9 23v192q0 14 9 23t23 9h320q14 0 23-9t9-23zm512 384v-192q0-14-9-23t-23-9h-320q-14 0-23 9t-9 23v192q0 14 9 23t23 9h320q14 0 23-9t9-23zm-512-768v-192q0-14-9-23t-23-9h-320q-14 0-23 9t-9 23v192q0 14 9 23t23 9h320q14 0 23-9t9-23zm512 384v-192q0-14-9-23t-23-9h-320q-14 0-23 9t-9 23v192q0 14 9 23t23 9h320q14 0 23-9t9-23zm0-384v-192q0-14-9-23t-23-9h-320q-14 0-23 9t-9 23v192q0 14 9 23t23 9h320q14 0 23-9t9-23zm128-320v1088q0 66-47 113t-113 47h-1344q-66 0-113-47t-47-113v-1088q0-66 47-113t113-47h1344q66 0 113 47t47 113z"/></svg>
+                        </label>
+                        <label class="btn btn-primary" [ngClass]="{'active': view==='cards'}" title="Display cards view">
+                            <input type="radio" [(ngModel)]="view" value="cards">
+                            <svg fill="white" width="18" height="15" viewBox="0 0 2048 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1024 1131q0-64-9-117.5t-29.5-103-60.5-78-97-28.5q-6 4-30 18t-37.5 21.5-35.5 17.5-43 14.5-42 4.5-42-4.5-43-14.5-35.5-17.5-37.5-21.5-30-18q-57 0-97 28.5t-60.5 78-29.5 103-9 117.5 37 106.5 91 42.5h512q54 0 91-42.5t37-106.5zm-157-520q0-94-66.5-160.5t-160.5-66.5-160.5 66.5-66.5 160.5 66.5 160.5 160.5 66.5 160.5-66.5 66.5-160.5zm925 509v-64q0-14-9-23t-23-9h-576q-14 0-23 9t-9 23v64q0 14 9 23t23 9h576q14 0 23-9t9-23zm0-260v-56q0-15-10.5-25.5t-25.5-10.5h-568q-15 0-25.5 10.5t-10.5 25.5v56q0 15 10.5 25.5t25.5 10.5h568q15 0 25.5-10.5t10.5-25.5zm0-252v-64q0-14-9-23t-23-9h-576q-14 0-23 9t-9 23v64q0 14 9 23t23 9h576q14 0 23-9t9-23zm256-320v1216q0 66-47 113t-113 47h-352v-96q0-14-9-23t-23-9h-64q-14 0-23 9t-9 23v96h-768v-96q0-14-9-23t-23-9h-64q-14 0-23 9t-9 23v96h-352q-66 0-113-47t-47-113v-1216q0-66 47-113t113-47h1728q66 0 113 47t47 113z"/></svg>
+                        </label>
+                    </div>
+
+                    
                     <ng-template *ngIf="actionsTemplate" [ngTemplateOutlet]="actionsTemplate" [ngTemplateOutletContext]="{items: currentSelectedItems}">
                     </ng-template>
                     &nbsp;
@@ -31,14 +42,7 @@
                 </div>
             </div>
             <div *ngIf="enableFilter && tableItems?.length > 0 && !hideTable" class="form-group align-self-end">
-                <div [ngClass]="{disabled : manualSort}" class="input-group w-auto">
-                    <span class="input-group-addon input-group-prepend">
-                        <span class="input-group-text">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 8 8">
-                                    <path d="M3.5 0c-1.93 0-3.5 1.57-3.5 3.5s1.57 3.5 3.5 3.5c.59 0 1.17-.14 1.66-.41a1 1 0 0 0 .13.13l1 1a1.02 1.02 0 1 0 1.44-1.44l-1-1a1 1 0 0 0-.16-.13c.27-.49.44-1.06.44-1.66 0-1.93-1.57-3.5-3.5-3.5zm0 1c1.39 0 2.5 1.11 2.5 2.5 0 .66-.24 1.27-.66 1.72-.01.01-.02.02-.03.03a1 1 0 0 0-.13.13c-.44.4-1.04.63-1.69.63-1.39 0-2.5-1.11-2.5-2.5s1.11-2.5 2.5-2.5z"/>
-                                  </svg>                        
-                                </span>
-                    </span>
+                <div [ngClass]="{disabled : manualSort}" class="input-group w-auto input-expand">
                     <input [formControl]="filterControl" class="form-control input-md" placeholder="Search..." type="search"
                         name="filterString"  />
                 </div>
@@ -49,7 +53,7 @@
     </div>
 
     <div *ngIf="tableItems && !hideTable" [ngClass]="{'table-responsive': enableResponsive}">
-        <table [class]="tableClass" width="100%">
+        <table *ngIf="view === 'table'" [class]="tableClass" width="100%">
             <thead>
                 <tr *ngIf="currentColumns && enableHeaderRow">
                     <th *ngIf="enableMultiSelect" width="1%">
@@ -126,7 +130,7 @@
                     </tr>
                     <tr>
                         <td *ngIf="!tableItem.isFiltered && expandedNodes[tableItem.index] >= 0" [attr.colspan]="columnCount">
-                            <dexih-table [enableSaveCsv]="enableSaveCsv" [enableFilter]="enableFilter" [heading]="currentColumns[expandedNodes[tableItem.index]].title ? currentColumns[expandedNodes[tableItem.index]].title : currentColumns[expandedNodes[tableItem.index]].name" [data]="data[tableItem.index][currentColumns[expandedNodes[tableItem.index]].name]" [columns]="currentColumns[expandedNodes[tableItem.index]].childColumns">
+                            <dexih-table [enableSaveCsv]="enableSaveCsv" [enableFilter]="enableFilter" [heading]="currentColumns[expandedNodes[tableItem.index]].title ? currentColumns[expandedNodes[tableItem.index]].title : currentColumns[expandedNodes[tableItem.index]].name" [data]="data[tableItem.index][currentColumns[expandedNodes[tableItem.index]].name]" [columns]="currentColumns[expandedNodes[tableItem.index]].childColumns" [enableViewToggle]="false" view="table">
                                     <ng-template #actions let-items="items">
                                         <button class="btn btn-danger" (click)="nodeClose(tableItem.index)">Close</button>
                                     </ng-template>
@@ -136,6 +140,53 @@
                 </ng-template>
             </tbody>
         </table>
+        <div *ngIf="view === 'cards'" class="card-columns m-3">
+            <ng-template ngFor let-tableItem [ngForOf]="tableItems" let-i="index">
+                <div class="card" >
+                    <div class="card-body p-0">
+                        <div *ngIf="enableMultiSelect" class="m-3">
+                            <input type="checkbox" [(ngModel)]="tableItem.isSelected" (ngModelChange)="itemSelected(true)">
+                        </div>
+                        <table class="table" (click)="selectRowClick(data[tableItem.index])">
+                            <tr *ngFor="let column of currentColumns; let columnIndex=index;">
+                                <td>
+                                    <b>{{column.title}}</b>
+                                </td>
+                                <td>
+                                    <ng-template *ngIf="cellTemplate" [ngTemplateOutlet]="cellTemplate"
+                                        [ngTemplateOutletContext]="{item: data[tableItem.index], column: column, value: data[tableItem.index][column.name]}">
+                                    </ng-template>
+                                    <dexih-table-cell *ngIf="enableCellValue" [column]="column" [row]="data[tableItem.index]"
+                                        [nodeExpanded]="expandedNodes[tableItem.index] == columnIndex"
+                                        (onNodeClick)="nodeClick(tableItem.index, columnIndex)">
+                                    </dexih-table-cell>
+                                </td>
+                            </tr>
+                            <tr *ngIf="rowActionTemplate">
+                                <td>
+                                    <b>{{actionHeading}}</b>
+                                </td>
+                                <td>
+                                    <ng-template [ngTemplateOutlet]="rowActionTemplate"
+                                        [ngTemplateOutletContext]="{item: data[tableItem.index]}">
+                                    </ng-template>
+                                </td>
+                            </tr>
+                            <tr *ngIf="rowStatusTemplate">
+                                <td>
+                                    <b>{{rowStatusHeading}}</b>
+                                </td>
+                                <td>
+                                    <ng-template [ngTemplateOutlet]="rowStatusTemplate"
+                                        [ngTemplateOutletContext]="{item: data[tableItem.index]}">
+                                    </ng-template>
+                                </td>
+                            </tr>
+                        </table>
+                </div>
+                </div>
+            </ng-template>
+        </div>
     </div>
 
     <div *ngIf="!tableItems && !error && !hideTable">

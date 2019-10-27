@@ -4,6 +4,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 @Component({
     selector: 'dexih-button-collapsible',
     templateUrl: 'dexih-button-collapsible.component.html',
+    styleUrls: ['./dexih-button.component.scss'],
     animations: [
     trigger('slideDown', [
         state('hide', style({ height: 0, overflow: 'hidden' })),

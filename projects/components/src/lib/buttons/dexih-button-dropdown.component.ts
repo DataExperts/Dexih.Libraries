@@ -4,7 +4,7 @@ import { BsDropdownDirective } from 'ngx-bootstrap';
 @Component({
     selector: 'dexih-button-dropdown',
     templateUrl: './dexih-button-dropdown.component.html',
-    styleUrls: ['./dexih-button-dropdown.component.scss']
+    styleUrls: ['./dexih-button-dropdown.component.scss', './dexih-button.component.scss']
 })
 export class DexihButtonDropDownComponent {
     @Input() buttonClass = 'btn btn-primary';

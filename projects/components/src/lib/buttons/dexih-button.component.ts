@@ -2,7 +2,8 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
     selector: 'dexih-button',
-    templateUrl: './dexih-button.component.html'
+    templateUrl: './dexih-button.component.html',
+    styleUrls: ['./dexih-button.component.scss']
 })
 
 export class DexihButtonComponent implements OnInit {

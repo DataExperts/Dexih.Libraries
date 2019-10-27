@@ -2,7 +2,8 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { DexihButtonDropDownComponent} from './dexih-button-dropdown.component';
 @Component({
     selector: 'dexih-button-more',
-    templateUrl: './dexih-button-dropdown.component.html'
+    templateUrl: './dexih-button-dropdown.component.html',
+    styleUrls: ['./dexih-button.component.scss']
 })
 
 export class DexihButtonMoreComponent extends DexihButtonDropDownComponent {

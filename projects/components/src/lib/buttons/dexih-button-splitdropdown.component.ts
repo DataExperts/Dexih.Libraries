@@ -3,7 +3,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 @Component({
     selector: 'dexih-button-splitdropdown',
     templateUrl: 'dexih-button-splitdropdown.component.html',
-    styleUrls: ['./dexih-button-dropdown.component.scss']
+    styleUrls: ['./dexih-button-dropdown.component.scss', './dexih-button.component.scss']
 })
 
 export class DexihButtonSplitDropDownComponent implements OnInit {
@@ -19,7 +19,9 @@ export class DexihButtonSplitDropDownComponent implements OnInit {
     @Input() badge: string;
     @Input() badgeClass = '';
     @Output() buttonClick = new EventEmitter<any>();
-
+    @Input() compact = false;
+    @Input() autoCompact = true;
+    
     constructor() { }
 
     ngOnInit() { }

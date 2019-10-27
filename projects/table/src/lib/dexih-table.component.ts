@@ -55,6 +55,8 @@ export class DexihTableComponent implements OnInit, OnDestroy, OnChanges, AfterV
     @Input() public rowStatusHeading = 'Status';
     @Input() public actionHeading = 'Action';
     @Input() public dropName = '';
+    @Input() public enableViewToggle = true;
+    @Input() public view: 'table' | 'cards' = 'table';
 
     @Output() rowClick: EventEmitter<any> = new EventEmitter<any>();
     @Output() onSelectedChange: EventEmitter<Array<any>> = new EventEmitter<Array<any>>();
@@ -347,6 +349,14 @@ export class DexihTableComponent implements OnInit, OnDestroy, OnChanges, AfterV
                 link.click();
                 document.body.removeChild(link);
             }
+        }
+    }
+
+    public toggleView() {
+        if (this.view === 'table' ) {
+            this.view = 'cards';
+        } else {
+            this.view = 'table'
         }
     }
 

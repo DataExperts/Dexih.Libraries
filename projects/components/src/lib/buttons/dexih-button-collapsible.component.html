@@ -1,8 +1,8 @@
 <div class="btn-group">
-  <button type="button" (click)="onClick($event)" [disabled]="disabled" [ngClass]="['btn', buttonClass]" [title]="title">
+  <button type="button" (click)="onClick($event)" [disabled]="disabled" [ngClass]="['btn', 'auto-compact', buttonClass]" [title]="title">
     <i *ngIf="busy" class="fa fa-spin fa-cog"></i>
     <i [class]="iconClass"></i>
-    <span class="d-none d-md-inline">
+    <span *ngIf="!compact" [ngClass]="[autoCompact && iconClass ? 'auto-compact-item' : '']">
         &nbsp;{{text}}
     </span>
     <span *ngIf="badge" class="badge " [ngClass]="[badgeClass]">{{badge}}</span>

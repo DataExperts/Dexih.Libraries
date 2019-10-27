@@ -15,7 +15,6 @@
   background: #9b9b9b;
 }
 
-
 .dexih-table-error {
 		display:block;
 		padding:8px 10px;
@@ -60,6 +59,23 @@
   
   .cdk-drag-animating {
     transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+  }
+
+  .input-expand {
+    input[type=search] {
+      width: 40px;
+      -webkit-transition: width 0.4s ease-in-out;
+      transition: width 0.4s ease-in-out;
+      background-color: white;
+      background-image: url('images/search.svg');
+      background-position: 10px 8px; 
+      background-repeat: no-repeat;
+      padding: 12px 20px 12px 40px;
+  }
+    
+    input[type=search]:focus {
+      width: 200px;
+    }
   }
 
 // .search {
