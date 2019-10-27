@@ -141,6 +141,11 @@
             </tbody>
         </table>
         <div *ngIf="view === 'cards'" class="card-columns m-3">
+            <div *ngIf="tableItems.length == 0 || !currentColumns" class="card">
+                <div class="card-body">
+                    There are no rows available.
+                </div>
+            </div>
             <ng-template ngFor let-tableItem [ngForOf]="tableItems" let-i="index">
                 <div class="card" >
                     <div class="card-body p-0">
@@ -160,6 +165,11 @@
                                         [nodeExpanded]="expandedNodes[tableItem.index] == columnIndex"
                                         (onNodeClick)="nodeClick(tableItem.index, columnIndex)">
                                     </dexih-table-cell>
+
+                                    <div *ngIf="!tableItem.isFiltered && expandedNodes[tableItem.index] === columnIndex" >
+                                        <dexih-table [enableSaveCsv]="false" [enableFilter]="false" [data]="data[tableItem.index][currentColumns[expandedNodes[tableItem.index]].name]" [columns]="currentColumns[expandedNodes[tableItem.index]].childColumns" [enableViewToggle]="false" view="table">
+                                        </dexih-table>
+                                    </div>
                                 </td>
                             </tr>
                             <tr *ngIf="rowActionTemplate">
