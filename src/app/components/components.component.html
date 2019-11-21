@@ -343,7 +343,7 @@ this should have no padding.
                 <div>enableTextEntry=true</div>
                 <div>selected item: {{selectedItem}}</div>
                 <div>text value: {{textValue}}</div>
-                <form-select name="formSelect" label="Simple Select" [items]="['item1', 'item2','item3']" (ngModelChange)="selectChange($event)" [enableTextEntry]="true" [(ngModel)]="selectedItem" [ngModelOptions]="{standalone: true}" [(textValue)]="textValue" ></form-select>
+                <form-select name="formSelect" label="Simple Select" [items]="['item1', 'item2','item3']" (ngModelChange)="selectChange($event)" [enableTextEntry]="true" [(ngModel)]="selectedItem" [ngModelOptions]="{standalone: true}" [(textValue)]="textValue" (onShown)="opened()"></form-select>
 
                 <form-select label="Selected item not in list" [items]="['item1', 'item2','item3']" [enableTextEntry]="true" [(ngModel)]="textValue" [ngModelOptions]="{standalone: true}" [enableFilter]="false"></form-select>
 
@@ -505,7 +505,7 @@ this should have no padding.
 
         <dexih-widget title="Tags DropDown" [padding]="true" iconClass="fa fa-lg fa-fw fa-database">
             <form>
-                <form-tags-dropdown placeholder="input tags" [items]="['item1', 'item2','item3']" [enableAddAll]="true"></form-tags-dropdown>
+                <form-tags-dropdown placeholder="input tags" [items]="['item1', 'item2','item3']" [enableAddAll]="true" (onShown)="opened()"></form-tags-dropdown>
                 <form-tags-dropdown labelLeft="label left" placeholder="input tags" [items]="['item1', 'item2','item3']" ></form-tags-dropdown>
                 <form-tags-dropdown label="input tags" note="a note to describe the tags" placeholder="input tags" [items]="['item1', 'item2','item3']"></form-tags-dropdown>
                 <form-tags-dropdown label="input tags (2 selected)" note="a note to describe the tags" placeholder="input tags" [items]="['item1', 'item2','item3']" [value]="['item1', 'item2']" [enableAddAll]="true"></form-tags-dropdown>
@@ -523,8 +523,11 @@ this should have no padding.
 
         <dexih-widget title="Time" [padding]="true" iconClass="fa fa-lg fa-fw fa-database">
             <form>
-                <form-time></form-time>
-                <form-time label="time with label"></form-time>
+                Value: {{timeString}}
+                <div style="width: 120px">
+                <form-time [(ngModel)]="timeString" [ngModelOptions]="{standalone: true}" ></form-time>
+            </div>
+                <form-time  label="time with label"></form-time>
                 <form-time labelLeft="label left"></form-time>
                 <form-time label="time with note" note="this time description"></form-time>
                 <form-time label="time with error" errors="the time error"></form-time>
@@ -561,6 +564,12 @@ this should have no padding.
                 <dexih-button-link>this is a link button</dexih-button-link>
 
                 <dexih-button-dropdown text="drop down" [autoCompact]="false">
+                    <a class="dropdown-item" (click)="this. show('hi there')">item 1</a>
+                    <a class="dropdown-item">item 2</a>
+                    <a class="dropdown-item">item 3</a>
+                </dexih-button-dropdown>
+
+                <dexih-button-dropdown text="drop compact" iconClass="fa fa-bar-chart">
                     <a class="dropdown-item" (click)="this. show('hi there')">item 1</a>
                     <a class="dropdown-item">item 2</a>
                     <a class="dropdown-item">item 3</a>

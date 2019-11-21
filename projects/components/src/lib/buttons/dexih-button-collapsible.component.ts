@@ -28,6 +28,8 @@ export class DexihButtonCollapsibleComponent implements OnInit {
     @Input() badgeClass = '';
     @Input() isExpanded = true;
     @Output() buttonClick = new EventEmitter<any>();
+    @Input() compact = false;
+    @Input() autoCompact = true;
 
 
     constructor() { }

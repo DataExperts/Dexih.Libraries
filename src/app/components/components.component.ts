@@ -51,6 +51,8 @@ export class ComponentsComponent {
   public inputNumber = 0;
   public inputString = 'hi';
 
+  public timeString = '1:2:3';
+
   public complexTags = [
     {column: {key: 1, name: 'col1'}},
     {column: {key: 2, name: 'col2'}}
@@ -126,5 +128,14 @@ export class ComponentsComponent {
   public openChange() {
     window.alert('open/close changed');
   }
+
+  public opened() {
+    this.toasts.add(new ToastMessage('success', 'Opened',  null, 5000));
+  }
+
+  public closed() {
+    this.toasts.add(new ToastMessage('success', 'Closed',  null, 5000));
+  }
+
 }
 

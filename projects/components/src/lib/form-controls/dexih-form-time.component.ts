@@ -16,6 +16,8 @@ export class DexihFormTimeComponent implements AfterViewInit, ControlValueAccess
     @Input() value: string;
     @Input() border = true;
 
+    dateError = '';
+
     hours: number;
     minutes: number;
     seconds: number;
@@ -33,6 +35,54 @@ export class DexihFormTimeComponent implements AfterViewInit, ControlValueAccess
      }
 
     ngAfterViewInit() {
+        this.updateTime();
+
+        // workaround for change detection required when using Afterview Init https://github.com/angular/angular/issues/6005
+        this._changeDetectionRef.detectChanges();
+    }
+
+    hasChanged($event: any) {
+        if(this.hours === null) { this.hours = 0; }
+        if(this.minutes === null) { this.minutes = 0; }
+        if(this.seconds === null) { this.hours = 0; }
+
+        this.value = this.zeroPad(this.hours) + ':' + this.zeroPad(this.minutes) + ':' + this.zeroPad(this.seconds);
+
+        this.onChange(this.value);
+        this.onTouched();
+        this.validate();
+        this.isDirty = true;
+    }
+
+    zeroPad(value: number) {
+
+        if(value == null) { 
+            return '00';
+        }
+
+        if(value >=0 && value <=9) {
+            return '0' + value;
+        }
+
+        return value;
+    }
+
+    registerOnChange(fn: any) {
+        this.onChange = fn;
+    }
+
+    registerOnTouched(fn: any) {
+        this.onTouched = fn;
+    }
+
+    writeValue(value: string) {
+        if (value) {
+            this.value = value;
+            this.updateTime();
+        }
+    }
+
+    updateTime() {
         if (this.value) {
             let parsedTime = this.value.split(':');
             this.hours = Number(parsedTime[0]);
@@ -47,39 +97,26 @@ export class DexihFormTimeComponent implements AfterViewInit, ControlValueAccess
             this.minutes = 0;
             this.seconds = 0;
         }
-        // workaround for change detection required when using Afterview Init https://github.com/angular/angular/issues/6005
-        this._changeDetectionRef.detectChanges();
-    }
-
-    hasChanged($event: any) {
-        this.value = this.hours + ':' + this.minutes + ':' + this.seconds;
-
-        this.onChange(this.value);
-        this.onTouched();
-        this.validate();
-        this.isDirty = true;
-    }
-
-    registerOnChange(fn: any) {
-        this.onChange = fn;
-    }
-
-    registerOnTouched(fn: any) {
-        this.onTouched = fn;
-    }
-
-    writeValue(value: string) {
-        if (value) {
-            this.value = value;
-        }
     }
 
     validate() {
-        if (this.hours) {
-            let hours = Number(this.hours);
-            if (!(this.hours && this.hours >= 0 && this.hours < 24)) {
-                this.errors = 'The hours must be between 0 and 24.';
-            }
+        if(+this.hours > 23) {
+            this.hours = 23;
+        }
+        if(+this.hours < 0) {
+            this.hours = 0;
+        }
+        if(+this.minutes > 59) {
+            this.minutes = 59;
+        }
+        if(+this.minutes < 0) {
+            this.minutes = 0;
+        }
+        if(+this.seconds > 59) {
+            this.seconds = 59;
+        }
+        if(+this.seconds < 0) {
+            this.seconds = 0;
         }
     }
 }

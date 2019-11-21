@@ -4,7 +4,7 @@
         <ng-content></ng-content>
     </label>
     
-    <div #dropdown dropdown [autoClose]="false" class="input-group" style="width: 100%" >
+    <div #dropdown dropdown [autoClose]="false" class="input-group" style="width: 100%" (onShown)="shown()">
         <div class="input-group" [id]="id" (click)="dropdownToggle()" style="width: 100%">
             <div *ngIf="labelLeft" class="input-group-prepend">
                 <span class="input-group-text" [ngClass]="{'border-0 rounded-0 bg-transparent': !border}"> {{labelLeft}}</span>

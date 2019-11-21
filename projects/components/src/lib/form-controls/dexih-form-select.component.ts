@@ -41,9 +41,10 @@ export class DexihFormSelectComponent implements ControlValueAccessor, OnInit, O
     @Input() sortItems = false;
     @Input() enableFilter = true;
     @Input() autoMatchTextEntry = true;
-    @Output() textValueChange = new EventEmitter();
     @Input() autocapitalize = 'none';
-
+    @Output() textValueChange = new EventEmitter();
+    @Output() onShown = new EventEmitter();
+    
     @ViewChild(BsDropdownDirective, { static: true }) dropdown: BsDropdownDirective;
     @ViewChild('dropdown', { static: true }) dropdownElement: any;
 
@@ -155,6 +156,8 @@ export class DexihFormSelectComponent implements ControlValueAccessor, OnInit, O
         //             this.filterString = newValue;
         //         }
         //     });
+
+        this.dropdown.onHidden
      }
 
     ngOnChanges(changes: SimpleChanges) {
@@ -491,6 +494,10 @@ export class DexihFormSelectComponent implements ControlValueAccessor, OnInit, O
         if (this.items && this.items.length > 0) {
             this.dropdown.toggle(true);
         }
+    }
+
+    shown() {
+        this.onShown.emit();
     }
 
     private updateTextEntry() {

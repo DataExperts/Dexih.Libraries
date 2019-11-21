@@ -30,6 +30,8 @@ export class DexihFormTagsDropdownComponent implements ControlValueAccessor, OnC
     @Input() enableAddAll = false;
     @Input() returnKeys = true;
 
+    @Output() onShown = new EventEmitter();
+
     @ViewChild(BsDropdownDirective, { static: true }) dropdown: BsDropdownDirective;
     @ViewChild('dropdown', { static: true }) dropdownElement: any;
 
@@ -177,6 +179,10 @@ export class DexihFormTagsDropdownComponent implements ControlValueAccessor, OnC
         this.selectedKeys = [];
         this.labels = [];
         this.hasChanged();
+    }
+
+    shown() {
+        this.onShown.emit();
     }
 
     // detect a click outside the control, and hide the dropdown

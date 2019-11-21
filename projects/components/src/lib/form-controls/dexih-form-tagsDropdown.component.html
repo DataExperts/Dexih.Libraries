@@ -5,7 +5,7 @@
 
     <small *ngIf="subLabel" class="form-text">{{subLabel}}</small>
 
-    <div #dropdown dropdown [ngClass]="{'border rounded': border, 'border-danger': errors, 'border-success': !errors && isDirty}" [autoClose]="false">
+    <div #dropdown dropdown [ngClass]="{'border rounded': border, 'border-danger': errors, 'border-success': !errors && isDirty}" [autoClose]="false" (onShown)="shown()">
         <div class="input-group" dropdownToggle >
             <div *ngIf="labelLeft" class="input-group-prepend">
                 <span class="input-group-text border-0"> {{labelLeft}}</span>

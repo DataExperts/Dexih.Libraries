@@ -1,4 +1,4 @@
-<div>
+<div style="min-width: 130px;">
     <label *ngIf="label" [for]="id" class="mt-1">{{label}}
         <ng-content></ng-content>
     </label>
@@ -7,16 +7,19 @@
             <span class="input-group-text" [ngClass]="{'border-0 rounded-0': !border}"> {{labelLeft}}</span>
         </div>
 
-        <input type="number" class="form-control border-0" style="width: 90px" [(ngModel)]="hours"
+        <input type="number" class="form-control border-0 pr-0"  [(ngModel)]="hours"
             (ngModelChange)="hasChanged($event)" placeholder="Hour" required max="23" min="0" title="Hours">
-        <input type="number" class="form-control border-0" style="width: 90px" [(ngModel)]="minutes"
+        <input type="number" class="form-control border-0  pr-0"  [(ngModel)]="minutes"
             (ngModelChange)="hasChanged($event)" placeholder="Min" required max="59" min="0" title="Minutes">
-        <input type="number" class="form-control border-0" style="width: 90px" [(ngModel)]="seconds"
+        <input type="number" class="form-control border-0 pr-0"  [(ngModel)]="seconds"
             (ngModelChange)="hasChanged($event)" placeholder="Sec" required max="59" min="0" title="Seconds">
     </div>
 
     <div *ngIf="errors" class="invalid-feedback d-block">
-        {{ errors }}
+        {{ errors }} 
+    </div>
+    <div *ngIf="dateError" class="invalid-feedback d-block">
+        {{dateError}}
     </div>
     <small *ngIf="note" class="form-text text-muted">
         <markdown (click)="sharedFunctions.getRoute($event)" [data]="note"></markdown>

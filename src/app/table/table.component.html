@@ -1,6 +1,7 @@
 <dexih-table [data]="null" heading="Table still loading">
     <ng-template #actions let-items="items">
-        <button class="btn btn-danger">Cancel</button>
+        <button class="btn btn-danger">Cancel</button> 
+        <input class="form-control" style="width:100px" />
     </ng-template>
 </dexih-table>
 <hr/>
@@ -31,6 +32,9 @@
 <hr/>
 
 <dexih-table [dataObservable]="arrayData" heading="Table with populated from array"></dexih-table>
+
+<dexih-table [dataObservable]="tableData" heading="Table fixed height" tableHeight="200px"></dexih-table>
+
 
 <div style="width: 320px">
     <dexih-table [dataObservable]="arrayData" [columns]="columns"  heading="Responsive table (horizontal across bar)">
