@@ -247,6 +247,11 @@ this should have no padding.
                 Result: {{modalConfirmValue}}
             </div>
             <div class="row">
+                <dexih-button (click)="modalConfirmTwice()" text="Confirm twice"></dexih-button>
+                Result: {{modalConfirmValue}}
+            </div>
+
+            <div class="row">
                 <dexih-button (click)="modalPrompt()" text="Prompt"></dexih-button>
                 Result: {{modalPromptValue}}
             </div>

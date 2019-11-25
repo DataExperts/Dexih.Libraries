@@ -119,6 +119,12 @@ export class ComponentsComponent {
     }).catch(() => this.modalConfirmValue = 'cancelled');
   }
 
+  public modalConfirmTwice() {
+    this.modalConfirm();
+    this.modalConfirm();
+  }
+
+
   public modalPrompt() {
     this.modal.prompt('Prompt', 'Tell me something', 'The Value:', 'save', 'quit').then(result => {
       this.modalPromptValue = result;

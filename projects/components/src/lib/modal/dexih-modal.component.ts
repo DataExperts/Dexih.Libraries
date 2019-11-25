@@ -38,6 +38,8 @@ export class DexihModalComponent implements OnInit {
             inputValue = '',
             okButton = 'Ok',
             cancelButton = 'Cancel'): Promise<string> {
+
+        if (this.modalRef) { return; }
         return new Promise<string>((resolve, reject) => {
             this.type = 'prompt';
             this.title = title;
@@ -54,6 +56,7 @@ export class DexihModalComponent implements OnInit {
     }
 
     public information(title: string, content: string, okButton = 'Close'): Promise<boolean> {
+        if (this.modalRef) { return; }
         return new Promise<boolean>((resolve, reject) => {
             this.type = 'information';
             this.title = title;
@@ -67,6 +70,7 @@ export class DexihModalComponent implements OnInit {
     }
 
     public confirm(title: string, content: string, okButton = 'Ok', cancelButton = 'Cancel'): Promise<boolean> {
+        if (this.modalRef) { return; }
         return new Promise<boolean>((resolve, reject) => {
             this.type = 'confirm';
             this.title = title;
@@ -84,6 +88,7 @@ export class DexihModalComponent implements OnInit {
     public cancel() {
         if (this.modalRef) {
             this.modalRef.hide();
+            this.modalRef = null;
         }
 
         switch (this.type) {
@@ -102,6 +107,7 @@ export class DexihModalComponent implements OnInit {
     public ok() {
         if (this.modalRef) {
             this.modalRef.hide();
+            this.modalRef = null;
         }
 
         switch (this.type) {
