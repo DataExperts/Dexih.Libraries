@@ -360,6 +360,8 @@ this should have no padding.
                 
                 <form-select label="No Items" [items]="[]" [enableTextEntry]="true" iconClass="fa fa-pie-chart"></form-select>
 
+                <form-select label="Text entry only" [enableTextEntry]="true" [textEntryItems]="['value1', 'value2', 'value3']" iconClass="fa fa-pie-chart"></form-select>
+
                 <form-select label="Items added dynamically" [items]="dynamicItems" [enableTextEntry]="true" iconClass="fa fa-pie-chart"><dexih-button-refresh (click)="AddItems()"></dexih-button-refresh></form-select>
 
                 <form-select label="No Items no text entry" [enableTextEntry]="false" [items]="[]"></form-select>

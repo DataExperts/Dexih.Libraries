@@ -313,7 +313,12 @@ export class DexihFormSelectComponent implements ControlValueAccessor, OnInit, O
                 return 0;
             });
         } else {
-            this.sortedItems = this.items;
+            if (this.items) {
+                this.sortedItems = this.items;
+            } else {
+                this.sortedItems = [];
+            }
+            
         }
 
         this.flattenedItems = [];
@@ -329,7 +334,11 @@ export class DexihFormSelectComponent implements ControlValueAccessor, OnInit, O
                 }
             });
         } else {
-            this.flattenedItems = this.items;
+            if (this.items) {
+                this.flattenedItems = this.items;
+            } else {
+                this.flattenedItems = [];
+            }
         }
     }
 
@@ -491,7 +500,7 @@ export class DexihFormSelectComponent implements ControlValueAccessor, OnInit, O
     }
 
     dropdownToggle() {
-        if (this.items && this.items.length > 0) {
+        if (this.showDropDown) {
             this.dropdown.toggle(true);
         }
     }
