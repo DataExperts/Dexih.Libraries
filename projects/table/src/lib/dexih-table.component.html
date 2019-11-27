@@ -10,8 +10,8 @@
     </div>
 
     <div *ngIf="actionsTemplate || selectedItemActionsTemplate || selectedItemsActionsTemplate || ( enableFilter && tableItems?.length > 0 && !hideTable) || tableHeaderTemplate" class="dexih-table-toolbar">
-        <div class="form-row">
-            <div class="form-group col-md">
+        <div class="d-flex d-flex-row">
+            <div>
                 <div class="btn-toolbar">
                     <button *ngIf="enableSaveCsv && tableItems?.length > 0 && !hideTable" (click)="saveCsv()" class="btn btn-primary mr-1" title="Export the current data to a csv file.">
                         <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 8 8">
@@ -41,7 +41,7 @@
                     </ng-template>
                 </div>
             </div>
-            <div *ngIf="enableFilter && tableItems?.length > 0 && !hideTable" class="form-group align-self-end">
+            <div *ngIf="enableFilter && tableItems?.length > 0 && !hideTable" class="ml-auto">
                 <div [ngClass]="{disabled : manualSort}" class="input-group w-auto input-expand">
                     <input [formControl]="filterControl" class="form-control input-md" placeholder="Search..." type="search"
                         name="filterString"  />
