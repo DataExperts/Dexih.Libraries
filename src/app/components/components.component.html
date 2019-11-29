@@ -381,6 +381,20 @@ this should have no padding.
                 </form-select>
 
 
+                <form-select label="Empty list with items before and after" [items]="[]" [enableTextEntry]="true" [(ngModel)]="textValue" [ngModelOptions]="{standalone: true}" [enableFilter]="false">
+                    <ng-template #startItems>
+                        <li class="scrollable-item" >
+                            <a class="dropdown-item">Item before</a>
+                        </li>
+                    </ng-template>
+                    <ng-template #endItems>
+                        <li class="scrollable-item" >
+                            <a class="dropdown-item">Item after</a>
+                        </li>
+                               
+                    </ng-template>
+                </form-select>
+
                 <div>selected item key: {{selectedItem0}}</div>
                 <form-select label="Selected Item 0" [items]="[0, 1, 2]" [(ngModel)]="selectedItem0" [ngModelOptions]="{standalone: true}"  ></form-select>
                 

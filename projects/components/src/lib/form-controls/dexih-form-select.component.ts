@@ -295,6 +295,8 @@ export class DexihFormSelectComponent implements ControlValueAccessor, OnInit, O
     refreshItems() {
         this.showDropDown = (this.items && this.items.length > 0) ||
         (this.textEntryItems && this.textEntryItems.length > 0) ||
+        typeof(this.startItemsTemplate) !== 'undefined' || 
+        typeof(this.endItemsTemplate) !== 'undefined' || 
         this.allowNullSelect;
 
         this.disableInput = !this.showDropDown && !this.enableTextEntry;
