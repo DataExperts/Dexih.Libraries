@@ -1,5 +1,5 @@
 import { Component, OnInit, OnChanges, OnDestroy, forwardRef, Input, Output,
-    ViewChild, HostListener, EventEmitter, SimpleChanges } from '@angular/core';
+    ViewChild, HostListener, EventEmitter, SimpleChanges, ContentChild, TemplateRef } from '@angular/core';
 import { FormControl, ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { BsDropdownDirective } from 'ngx-bootstrap';
 import { Subscription } from 'rxjs';
@@ -47,6 +47,9 @@ export class DexihFormSelectComponent implements ControlValueAccessor, OnInit, O
     
     @ViewChild(BsDropdownDirective, { static: true }) dropdown: BsDropdownDirective;
     @ViewChild('dropdown', { static: true }) dropdownElement: any;
+
+    @ContentChild('startItems', {static: true }) public startItemsTemplate: TemplateRef<any>;
+    @ContentChild('endItems', {static: true }) public endItemsTemplate: TemplateRef<any>;
 
     id = 'input_' + Math.random().toString(36).substr(2, 9);
     sharedFunctions = new SharedFunctions();

@@ -29,3 +29,7 @@ Used to add a scrollable menu to dropdown menus
 .disabled-input {
   color: black;
 }
+
+.dropdown-menu li:hover {
+  cursor: pointer;
+}

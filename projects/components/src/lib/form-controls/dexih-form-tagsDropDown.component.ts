@@ -6,6 +6,7 @@ import { SharedFunctions, ListItem } from './shared-functions';
 @Component({
     selector: 'form-tags-dropdown',
     templateUrl: './dexih-form-tagsDropdown.component.html',
+    styleUrls: ['./dexih-form.component.scss'],
     providers: [
         { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => DexihFormTagsDropdownComponent), multi: true },
     ]
