@@ -44,6 +44,10 @@ export class DexihFormSelectComponent implements ControlValueAccessor, OnInit, O
     @Input() autocapitalize = 'none';
     @Output() textValueChange = new EventEmitter();
     @Output() onShown = new EventEmitter();
+
+    @Input() showRefresh = false;
+    @Input() isRefreshing = false;
+    @Output() onRefresh = new EventEmitter();
     
     @ViewChild(BsDropdownDirective, { static: true }) dropdown: BsDropdownDirective;
     @ViewChild('dropdown', { static: true }) dropdownElement: any;
@@ -81,6 +85,8 @@ export class DexihFormSelectComponent implements ControlValueAccessor, OnInit, O
     showDropDown = true;
     disableInput = false;
     placeholder: string;
+
+    private blockMenuClose = false;
 
     onChange: any = () => { };
     onTouched: any = () => { };
@@ -297,7 +303,7 @@ export class DexihFormSelectComponent implements ControlValueAccessor, OnInit, O
         (this.textEntryItems && this.textEntryItems.length > 0) ||
         typeof(this.startItemsTemplate) !== 'undefined' || 
         typeof(this.endItemsTemplate) !== 'undefined' || 
-        this.allowNullSelect;
+        this.allowNullSelect || this.showRefresh;
 
         this.disableInput = !this.showDropDown && !this.enableTextEntry;
 
@@ -345,6 +351,11 @@ export class DexihFormSelectComponent implements ControlValueAccessor, OnInit, O
                 this.flattenedItems = [];
             }
         }
+    }
+
+    refresh() {
+        this.blockMenuClose = true;
+        this.onRefresh.emit();
     }
 
     selectText(item: any) {
@@ -499,7 +510,10 @@ export class DexihFormSelectComponent implements ControlValueAccessor, OnInit, O
     // the timeout is to allow the menu click to occur before closing the dropdown.
     dropdownHide(delay = 500) {
         setTimeout(() => {
-            this.dropdown.hide();
+            if (!this.blockMenuClose) {
+                this.dropdown.hide();
+            }
+            this.blockMenuClose = false;
         },
         delay);
     }

@@ -53,6 +53,9 @@ export class ComponentsComponent {
 
   public timeString = '1:2:3';
 
+  public isRefreshing = false;
+  public refreshItems = [];
+
   public complexTags = [
     {column: {key: 1, name: 'col1'}},
     {column: {key: 2, name: 'col2'}}
@@ -141,6 +144,15 @@ export class ComponentsComponent {
 
   public closed() {
     this.toasts.add(new ToastMessage('success', 'Closed',  null, 5000));
+  }
+
+  public onRefresh() {
+    this.isRefreshing = true;
+
+    setTimeout(() => {
+      this.refreshItems = ['item1', 'item2', 'item3'];
+      this.isRefreshing = false;
+    }, 1000);
   }
 
 }

@@ -395,6 +395,9 @@ this should have no padding.
                     </ng-template>
                 </form-select>
 
+                <form-select label="With refresh" [items]="refreshItems" [enableTextEntry]="false" [showRefresh]="true" [isRefreshing]="isRefreshing"  (onRefresh)="onRefresh()" [enableFilter]="false">
+                </form-select>
+
                 <div>selected item key: {{selectedItem0}}</div>
                 <form-select label="Selected Item 0" [items]="[0, 1, 2]" [(ngModel)]="selectedItem0" [ngModelOptions]="{standalone: true}"  ></form-select>
                 

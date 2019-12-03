@@ -41,6 +41,14 @@
                 <ng-template *ngIf="startItemsTemplate" [ngTemplateOutlet]="startItemsTemplate">
                 </ng-template>
 
+                <li *ngIf="showRefresh" >
+                    <a class="dropdown-item" (click)="refresh()">
+                        <ng-template [ngIf]="isRefreshing"><div class="d-flex d-flex-row"><div class="loader mr-1"></div>Refreshing...</div></ng-template>
+                        <ng-template [ngIf]="!isRefreshing">Refresh ...</ng-template>
+                        
+                    </a>
+                </li>
+
                 <li *ngIf="allowNullSelect" >
                     <a class="dropdown-item" [ngClass]="{'active': !selectedItem }" (click)="selectItem(null)">{{selectNullMessage}}</a>
                 </li>
