@@ -16,6 +16,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 export class DexihWidgetSectionComponent implements OnInit {
     @Input() public title: string;
     @Input() public subTitle: string;
+    @Input() public subTitleClass = 'bg-light';
     @Input() public iconClass: string;
     @Input() public showExpandButton = false;
     @Input() public isExpanded = true;
@@ -23,7 +24,9 @@ export class DexihWidgetSectionComponent implements OnInit {
     @Input() public padding = true;
 
     @ContentChild('header', { static: true }) headerTemplate: TemplateRef<any>;
-    
+    @ContentChild('tools', { static: true }) toolsTemplate: TemplateRef<any>;
+    @ContentChild('subTitle', { static: true }) subTitleTemplate: TemplateRef<any>;
+
     constructor() { }
 
     ngOnInit() { }

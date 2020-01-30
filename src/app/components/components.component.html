@@ -172,10 +172,17 @@
             no padding section
         </dexih-widget-section>
 
-        <dexih-widget-section title='section 2' [showExpandButton]="true" iconClass="fa fa-bar-chart" sectionClass="text-white bg-secondary">
+        <dexih-widget-section title='section 2' [showExpandButton]="true" iconClass="fa fa-bar-chart" sectionClass="text-white bg-secondary" subTitle="the section subtitle">
             section 2 content
         </dexih-widget-section>
-    
+
+        <dexih-widget-section title='section 3' [showExpandButton]="true" iconClass="fa fa-bar-chart" sectionClass="text-white bg-danger">
+            section 3 content
+
+            <ng-template #subTitle>
+                section subtitle template
+            </ng-template>
+        </dexih-widget-section>
 
     </dexih-widget>
 

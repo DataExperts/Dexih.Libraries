@@ -20,7 +20,20 @@
 </div>
 
 <div [@slideDown]="isExpanded ? 'show' : 'hide'">
-    <div class='card-body' [ngClass]="{'p-0': !padding}" >
-        <ng-content></ng-content>
+
+  <div [ngClass]="['card-header', subTitleClass]" *ngIf="subTitleTemplate || subTitle || toolsTemplate">
+    <div class="d-flex flex-row">
+      <div class="card-subtitle">{{subTitle}}</div>
+      <ng-template [ngTemplateOutlet]="subTitleTemplate">
+      </ng-template>
+      <div class="d-flex ml-auto">
+        <ng-template [ngTemplateOutlet]="toolsTemplate">
+        </ng-template>
+      </div>
     </div>
+  </div>
+
+  <div class='card-body' [ngClass]="{'p-0': !padding}">
+    <ng-content></ng-content>
+  </div>
 </div>
