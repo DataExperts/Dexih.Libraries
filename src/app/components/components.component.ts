@@ -111,7 +111,7 @@ export class ComponentsComponent {
   }
 
   public modalInformation() {
-    this.modal.information('Information', 'Some important info', 'Okey dokey').then(result => {
+    this.modal.information('Information', 'Some important info', 'Okey dokey', '<pre>a lot more information here...</pre>').then(result => {
       this.modalInformationValue = 'ok';
     }).catch(() => this.modalInformationValue = 'should never happen');
   }

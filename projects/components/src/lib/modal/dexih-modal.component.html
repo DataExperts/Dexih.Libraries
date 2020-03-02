@@ -7,11 +7,16 @@
   </div>
   <div class="modal-body">
     <div [innerHTML]="content"></div>
+    <button *ngIf="details" type="button" class="btn btn-primary" (click)="showDetails = !showDetails" >{{showDetails ? 'Hide' : 'Details'}}</button>  
     <div *ngIf="type === 'prompt'" class="form-group">
       <label for="input-value" class="col-form-label">{{inputPrompt}}</label>
       <input type="text" class="form-control" id="input-value" [(ngModel)]="inputValue">
     </div>  
   </div>
+  <div *ngIf="showDetails" class="modal-body">
+    <div [innerHTML]="details"></div>
+  </div>
+
   <div class="modal-footer">
     <button *ngIf="type === 'confirm' || type === 'prompt'" type="button" class="btn btn-danger" (click)="cancel()" data-dismiss="modal" >{{cancelButton}}</button>
     <button type="button" class="btn btn-primary" (click)="ok()" >{{okButton}}</button>
