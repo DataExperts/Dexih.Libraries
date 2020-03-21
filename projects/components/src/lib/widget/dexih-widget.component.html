@@ -1,37 +1,55 @@
 <div class="card h-100" [@fadeInAnimation]='state'>
-  <div [ngClass]="['card-header', headerClass]" *ngIf="showHeader && (title || iconClass || headerTemplate || showFilter)">
+  <div [ngClass]="['card-header', headerClass]"
+    *ngIf="showHeader && (title || iconClass || headerTemplate || showFilter)">
     <div class="d-flex flex-row p-0">
-
-      <span class="text-truncate">
+  
+      <span class="text-truncate align-self-center">
         <i class="{{iconClass}}"></i>
         <b>{{title}}</b>
       </span>
-
-      <div class="d-flex ml-auto">
-        <div *ngIf="headerTemplate">
-          <ng-template [ngTemplateOutlet]="headerTemplate">
-          </ng-template>
-        </div>
-
-        <div *ngIf="showFilter" class=" mr-3 ml-3">
-          <div class="input-group">
-            <span class="input-group-addon input-group-prepend">
-              <span class="input-group-text">
-                <i class="fa fa-search"></i>
-              </span>
-            </span>
-            <input [formControl]="filterControl" type="text" placeholder="Filter the items">
+  
+      <div class="d-flex ml-auto ">
+  
+        <div class="d-none d-sm-flex">
+          <div *ngIf="headerTemplate" class="align-self-center">
+            <ng-template [ngTemplateOutlet]="headerTemplate">
+            </ng-template>
+          </div>
+  
+          <div *ngIf="showFilter" class="mr-1 ml-1">
+            <div [ngClass]="{disabled : showFilter}" class="input-group w-auto input-expand search-icon">
+              <input [formControl]="filterControl" class="form-control input-md" placeholder="Search..." type="search" />
+            </div>
           </div>
         </div>
+  
         <button *ngIf="showExpandButton" type="button" class="close ml-2" (click)="isExpanded=!isExpanded"
           aria-label="Expand" [ngClass]="[headerClass]">
           <i *ngIf="!isExpanded" class="fa fa-angle-double-down" title="Expand"></i>
           <i *ngIf="isExpanded" class="fa fa-angle-double-up" title="Collapse"></i>
         </button>
+  
         <button *ngIf="showCloseButton" type="button" class="close ml-2" (click)="doClose()" aria-label="Close"
           [ngClass]="[headerClass]">
           <span aria-hidden="true">&times;</span>
         </button>
+  
+      </div>
+  
+    </div>
+  
+    <div class="p-0 d-sm-none">
+      <div *ngIf="headerTemplate" class="d-flex flex-row align-self-center pt-1">
+        <div class="ml-auto">
+        <ng-template [ngTemplateOutlet]="headerTemplate">
+        </ng-template>
+      </div>
+      </div>
+      <div *ngIf="showFilter" class="d-flex flex-row  pt-1">
+        <div [ngClass]="{disabled : showFilter}" class="input-group w-100 search-icon">
+          <input [formControl]="filterControl" class="form-control input-md" placeholder="Search..." type="search" />
+        </div>
+  
       </div>
     </div>
   </div>

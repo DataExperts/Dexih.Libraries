@@ -13,41 +13,63 @@
         <div class="d-flex d-flex-row">
             <div>
                 <div class="btn-toolbar">
-                    <button *ngIf="enableSaveCsv && tableItems?.length > 0 && !hideTable" (click)="saveCsv()" class="btn btn-primary mr-1" title="Export the current data to a csv file.">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 8 8">
-                            <path fill="white" d="M0 0v8h8v-2h-1v1h-6v-6h1v-1h-2zm4 0l1.5 1.5-2.5 2.5 1 1 2.5-2.5 1.5 1.5v-4h-4z" />
-                        </svg>                        
-                    </button>
-
-                    <div *ngIf="enableViewToggle && !hideTable" class="btn-group btn-group-toggle mr-1" data-toggle="buttons" title="Display table view">
-                        <label class="btn btn-primary" [ngClass]="{'active': view==='table'}">
-                            <input type="radio" [(ngModel)]="view" value="table">
-                            <svg fill="white" width="15" height="15" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M576 1376v-192q0-14-9-23t-23-9h-320q-14 0-23 9t-9 23v192q0 14 9 23t23 9h320q14 0 23-9t9-23zm0-384v-192q0-14-9-23t-23-9h-320q-14 0-23 9t-9 23v192q0 14 9 23t23 9h320q14 0 23-9t9-23zm512 384v-192q0-14-9-23t-23-9h-320q-14 0-23 9t-9 23v192q0 14 9 23t23 9h320q14 0 23-9t9-23zm-512-768v-192q0-14-9-23t-23-9h-320q-14 0-23 9t-9 23v192q0 14 9 23t23 9h320q14 0 23-9t9-23zm512 384v-192q0-14-9-23t-23-9h-320q-14 0-23 9t-9 23v192q0 14 9 23t23 9h320q14 0 23-9t9-23zm512 384v-192q0-14-9-23t-23-9h-320q-14 0-23 9t-9 23v192q0 14 9 23t23 9h320q14 0 23-9t9-23zm-512-768v-192q0-14-9-23t-23-9h-320q-14 0-23 9t-9 23v192q0 14 9 23t23 9h320q14 0 23-9t9-23zm512 384v-192q0-14-9-23t-23-9h-320q-14 0-23 9t-9 23v192q0 14 9 23t23 9h320q14 0 23-9t9-23zm0-384v-192q0-14-9-23t-23-9h-320q-14 0-23 9t-9 23v192q0 14 9 23t23 9h320q14 0 23-9t9-23zm128-320v1088q0 66-47 113t-113 47h-1344q-66 0-113-47t-47-113v-1088q0-66 47-113t113-47h1344q66 0 113 47t47 113z"/></svg>
-                        </label>
-                        <label class="btn btn-primary" [ngClass]="{'active': view==='cards'}" title="Display cards view">
-                            <input type="radio" [(ngModel)]="view" value="cards">
-                            <svg fill="white" width="18" height="15" viewBox="0 0 2048 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1024 1131q0-64-9-117.5t-29.5-103-60.5-78-97-28.5q-6 4-30 18t-37.5 21.5-35.5 17.5-43 14.5-42 4.5-42-4.5-43-14.5-35.5-17.5-37.5-21.5-30-18q-57 0-97 28.5t-60.5 78-29.5 103-9 117.5 37 106.5 91 42.5h512q54 0 91-42.5t37-106.5zm-157-520q0-94-66.5-160.5t-160.5-66.5-160.5 66.5-66.5 160.5 66.5 160.5 160.5 66.5 160.5-66.5 66.5-160.5zm925 509v-64q0-14-9-23t-23-9h-576q-14 0-23 9t-9 23v64q0 14 9 23t23 9h576q14 0 23-9t9-23zm0-260v-56q0-15-10.5-25.5t-25.5-10.5h-568q-15 0-25.5 10.5t-10.5 25.5v56q0 15 10.5 25.5t25.5 10.5h568q15 0 25.5-10.5t10.5-25.5zm0-252v-64q0-14-9-23t-23-9h-576q-14 0-23 9t-9 23v64q0 14 9 23t23 9h576q14 0 23-9t9-23zm256-320v1216q0 66-47 113t-113 47h-352v-96q0-14-9-23t-23-9h-64q-14 0-23 9t-9 23v96h-768v-96q0-14-9-23t-23-9h-64q-14 0-23 9t-9 23v96h-352q-66 0-113-47t-47-113v-1216q0-66 47-113t113-47h1728q66 0 113 47t47 113z"/></svg>
-                        </label>
+                    <div *ngIf="enableSaveCsv && tableItems?.length > 0 && !hideTable">
+                        <button (click)="saveCsv()" class="btn btn-primary mr-1" title="Export the current data to a csv file.">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 8 8">
+                                <path fill="white"
+                                    d="M0 0v8h8v-2h-1v1h-6v-6h1v-1h-2zm4 0l1.5 1.5-2.5 2.5 1 1 2.5-2.5 1.5 1.5v-4h-4z" />
+                            </svg>
+                        </button>
                     </div>
-
-                    
-                    <ng-template *ngIf="actionsTemplate" [ngTemplateOutlet]="actionsTemplate" [ngTemplateOutletContext]="{items: currentSelectedItems}">
-                    </ng-template>
-                    &nbsp;
-                    <ng-template *ngIf="selectedItemActionsTemplate && selectedItemsCount == 1" [ngTemplateOutlet]="selectedItemActionsTemplate" [ngTemplateOutletContext]="{item: currentSelectedItems[0]}">
-                    </ng-template>
-                    &nbsp;
-                    <ng-template *ngIf="selectedItemsActionsTemplate && selectedItemsCount > 0" [ngTemplateOutlet]="selectedItemsActionsTemplate" [ngTemplateOutletContext]="{items: currentSelectedItems}">
-                    </ng-template>
+            
+                    <div *ngIf="enableViewToggle && !hideTable">
+                        <div class="btn-group btn-group-toggle mr-1" data-toggle="buttons" title="Display table view">
+                            <label class="btn btn-primary" [ngClass]="{'active': view==='table'}">
+                                <input type="radio" [(ngModel)]="view" value="table">
+                                <svg fill="white" width="15" height="15" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M576 1376v-192q0-14-9-23t-23-9h-320q-14 0-23 9t-9 23v192q0 14 9 23t23 9h320q14 0 23-9t9-23zm0-384v-192q0-14-9-23t-23-9h-320q-14 0-23 9t-9 23v192q0 14 9 23t23 9h320q14 0 23-9t9-23zm512 384v-192q0-14-9-23t-23-9h-320q-14 0-23 9t-9 23v192q0 14 9 23t23 9h320q14 0 23-9t9-23zm-512-768v-192q0-14-9-23t-23-9h-320q-14 0-23 9t-9 23v192q0 14 9 23t23 9h320q14 0 23-9t9-23zm512 384v-192q0-14-9-23t-23-9h-320q-14 0-23 9t-9 23v192q0 14 9 23t23 9h320q14 0 23-9t9-23zm512 384v-192q0-14-9-23t-23-9h-320q-14 0-23 9t-9 23v192q0 14 9 23t23 9h320q14 0 23-9t9-23zm-512-768v-192q0-14-9-23t-23-9h-320q-14 0-23 9t-9 23v192q0 14 9 23t23 9h320q14 0 23-9t9-23zm512 384v-192q0-14-9-23t-23-9h-320q-14 0-23 9t-9 23v192q0 14 9 23t23 9h320q14 0 23-9t9-23zm0-384v-192q0-14-9-23t-23-9h-320q-14 0-23 9t-9 23v192q0 14 9 23t23 9h320q14 0 23-9t9-23zm128-320v1088q0 66-47 113t-113 47h-1344q-66 0-113-47t-47-113v-1088q0-66 47-113t113-47h1344q66 0 113 47t47 113z" />
+                                </svg>
+                            </label>
+                            <label class="btn btn-primary" [ngClass]="{'active': view==='cards'}" title="Display cards view">
+                                <input type="radio" [(ngModel)]="view" value="cards">
+                                <svg fill="white" width="18" height="15" viewBox="0 0 2048 1792" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M1024 1131q0-64-9-117.5t-29.5-103-60.5-78-97-28.5q-6 4-30 18t-37.5 21.5-35.5 17.5-43 14.5-42 4.5-42-4.5-43-14.5-35.5-17.5-37.5-21.5-30-18q-57 0-97 28.5t-60.5 78-29.5 103-9 117.5 37 106.5 91 42.5h512q54 0 91-42.5t37-106.5zm-157-520q0-94-66.5-160.5t-160.5-66.5-160.5 66.5-66.5 160.5 66.5 160.5 160.5 66.5 160.5-66.5 66.5-160.5zm925 509v-64q0-14-9-23t-23-9h-576q-14 0-23 9t-9 23v64q0 14 9 23t23 9h576q14 0 23-9t9-23zm0-260v-56q0-15-10.5-25.5t-25.5-10.5h-568q-15 0-25.5 10.5t-10.5 25.5v56q0 15 10.5 25.5t25.5 10.5h568q15 0 25.5-10.5t10.5-25.5zm0-252v-64q0-14-9-23t-23-9h-576q-14 0-23 9t-9 23v64q0 14 9 23t23 9h576q14 0 23-9t9-23zm256-320v1216q0 66-47 113t-113 47h-352v-96q0-14-9-23t-23-9h-64q-14 0-23 9t-9 23v96h-768v-96q0-14-9-23t-23-9h-64q-14 0-23 9t-9 23v96h-352q-66 0-113-47t-47-113v-1216q0-66 47-113t113-47h1728q66 0 113 47t47 113z" />
+                                </svg>
+                            </label>
+                        </div>
+                    </div>
+            
+                    <div  *ngIf="actionsTemplate">
+                        <ng-template [ngTemplateOutlet]="actionsTemplate"
+                            [ngTemplateOutletContext]="{items: currentSelectedItems}">
+                        </ng-template>
+                    </div>
+            
+                    <div *ngIf="selectedItemActionsTemplate && selectedItemsCount == 1">
+                        <ng-template 
+                            [ngTemplateOutlet]="selectedItemActionsTemplate"
+                            [ngTemplateOutletContext]="{item: currentSelectedItems[0]}">
+                        </ng-template>
+                    </div>
+            
+                    <div *ngIf="selectedItemsActionsTemplate && selectedItemsCount > 0">
+                        <ng-template 
+                            [ngTemplateOutlet]="selectedItemsActionsTemplate"
+                            [ngTemplateOutletContext]="{items: currentSelectedItems}">
+                        </ng-template>
+                    </div>
                 </div>
             </div>
             <div *ngIf="enableFilter && tableItems?.length > 0 && !hideTable" class="ml-auto">
-                <div [ngClass]="{disabled : manualSort}" class="input-group w-auto input-expand">
+                <div [ngClass]="{disabled : manualSort}" class="input-group w-auto search-icon input-expand">
                     <input [formControl]="filterControl" class="form-control input-md" placeholder="Search..." type="search"
                         name="filterString"  />
                 </div>
             </div>
         </div>
+
         <ng-template *ngIf="tableHeaderTemplate" [ngTemplateOutlet]="tableHeaderTemplate" [ngTemplateOutletContext]="{items: currentSelectedItems}">
         </ng-template>
     </div>
