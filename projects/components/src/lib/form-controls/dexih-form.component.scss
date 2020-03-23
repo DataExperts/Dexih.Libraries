@@ -30,6 +30,10 @@ Used to add a scrollable menu to dropdown menus
   color: black;
 }
 
+.dropdown-menu {
+  line-height: 1.5rem;
+}
+
 .dropdown-menu li:hover {
   cursor: pointer;
 }
