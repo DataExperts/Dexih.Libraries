@@ -68,6 +68,12 @@ export class TableComponent implements OnInit, AfterViewInit {
     { name: 'enumValue', title: 'Enum', format: 'Enum', enum: eEnum }
   ];
 
+  mdColumns = [
+    { title: 'Icon', iconClass: 'icon', tooltip: 'toolTip', width: '1%', align: 'center' },
+    { name: 'markdown', title: 'Markdown', format: 'Md', footer: 'markdownFooter' },
+    { name: 'enumValue', title: 'Enum', format: 'Enum', enum: eEnum }
+  ];
+
   public tableData = new BehaviorSubject<Array<DataModel>>(null);
   // tableData: Observable<Array<DataModel>> = this.tableData.asObservable();
 

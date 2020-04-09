@@ -1,9 +1,11 @@
+// used for formatting json styles
 :host ::ng-deep .string { color: green; }
 :host ::ng-deep .number { color: darkorange; }
 :host ::ng-deep .boolean { color: blue; }
 :host ::ng-deep .null { color: magenta; }
 :host ::ng-deep .key { color: red; }
 
-p {
+// stops markdown leaving margin at bottom
+:host ::ng-deep p {
     margin-bottom: 0rem;
 }
