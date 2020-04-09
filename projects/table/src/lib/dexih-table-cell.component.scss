@@ -3,3 +3,7 @@
 :host ::ng-deep .boolean { color: blue; }
 :host ::ng-deep .null { color: magenta; }
 :host ::ng-deep .key { color: red; }
+
+p {
+    margin-bottom: 0rem;
+}

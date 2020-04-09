@@ -387,7 +387,7 @@ export class DexihFormSelectComponent implements ControlValueAccessor, OnInit, O
 
         this.textValue = this.selectedName;
         this.manualControl.setValue(this.selectedName);
-        this.textValueChange.emit(this.textValue);
+        // this.textValueChange.emit(this.textValue);
 
         this.hasChanged();
         if (hideDropdown) { this.dropdown.hide(); }

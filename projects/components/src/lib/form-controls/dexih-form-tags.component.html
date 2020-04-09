@@ -5,7 +5,7 @@
 
     <small *ngIf="subLabel" class="form-text">{{subLabel}}</small>
 
-        <div class="input-group m-0" [ngClass]="{ 'border rounded': border,  'border-danger': errors, 'border-success': !errors && isDirty}">
+        <div class="input-group m-0" [ngClass]="{ 'border rounded': border,  'border-danger': errors, 'border-success': !errors && isDirty}" [title]="errors">
             <div *ngIf="labelLeft" class="input-group-prepend">
                 <span class="input-group-text border-0"> {{labelLeft}}</span>
             </div>
@@ -27,7 +27,7 @@
             </div>
 
         </div>
-    <div *ngIf="errors" class="d-block invalid-feedback">
+    <div *ngIf="errors && border" class="d-block invalid-feedback">
         {{ errors }}
     </div>
 

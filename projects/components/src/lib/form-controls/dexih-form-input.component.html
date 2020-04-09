@@ -12,9 +12,9 @@
 
         <input class="form-control" [id]="id" [disabled]="disabled" [ngModel]="value" (ngModelChange)="hasChanged($event)" (keydown)="keydownEvent($event)"
             [type]="type" [placeholder]="placeholder ? placeholder : ''" [attr.maxlength]="maxlength" [attr.autocapitalize]="autocapitalize"
-            [ngClass]="{'border-0 rounded-0  bg-transparent': !border, 'is-invalid': errors, 'is-valid': !errors && isDirty}" />
+            [ngClass]="{'border-0 rounded-0  bg-transparent': !border, 'is-invalid': errors, 'is-valid': !errors && isDirty}" [title]="errors" />
         
-            <div *ngIf="errors" class="invalid-feedback order-1">
+            <div *ngIf="errors && border" class="invalid-feedback order-1">
                 {{ errors }}
             </div>
        

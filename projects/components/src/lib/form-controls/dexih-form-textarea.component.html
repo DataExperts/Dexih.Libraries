@@ -17,9 +17,9 @@
 
             <textarea class="form-control" [id]="id" [disabled]="disabled" [rows]="rows" [(ngModel)]="value"
                 (ngModelChange)="hasChanged($event)" [placeholder]="placeholder"
-                [ngClass]="{'is-invalid': errors}"></textarea>
+                [ngClass]="{'is-invalid': errors}" [title]="errors"></textarea>
             
-            <div *ngIf="errors" class="invalid-feedback order-1">
+            <div *ngIf="errors && border" class="invalid-feedback order-1">
                 {{ errors }}
             </div>
 
