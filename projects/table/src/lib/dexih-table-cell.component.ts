@@ -1,5 +1,5 @@
 import { Component, Input, OnDestroy, OnInit, Output, EventEmitter } from '@angular/core';
-import { Column, ColumnOperations } from './dexih-table.models';
+import { Column, ColumnOperations, Tag } from './dexih-table.models';
 import { strictEqual } from 'assert';
 
 
@@ -14,6 +14,7 @@ export class DexihTableCellComponent implements OnInit, OnDestroy {
     @Input() public row: any;
     @Input() public nodeExpanded = -1;
     @Output() onNodeClick: EventEmitter<any> = new EventEmitter<any>();
+    @Output() onTagClick: EventEmitter<Tag> = new EventEmitter<Tag>();
 
     private _interval: any;
 
@@ -24,6 +25,7 @@ export class DexihTableCellComponent implements OnInit, OnDestroy {
     public footer: string;
     public header: string;
     public format: string;
+    public tags: Tag[];
 
     private columnOperations = new ColumnOperations();
 
@@ -37,6 +39,7 @@ export class DexihTableCellComponent implements OnInit, OnDestroy {
             this.value = this.columnOperations.fetchFromObject(this.row, this.column.name);
             this.footer = this.columnOperations.fetchFromObject(this.row, this.column.footer);
             this.header = this.columnOperations.fetchFromObject(this.row, this.column.header);
+            this.tags = this.columnOperations.fetchFromObject(this.row, this.column.tags);
             this.formattedValue = this.columnOperations.formatValue(this.column, this.value);
             this.alignment = this.setAlignment(this.value)
 
@@ -140,6 +143,10 @@ export class DexihTableCellComponent implements OnInit, OnDestroy {
 
     collapse() {
         this.onNodeClick.emit();
+    }
+
+    tagClick(tag: Tag) {
+        this.onTagClick.emit(tag);
     }
 
     getRoute(event: any) {

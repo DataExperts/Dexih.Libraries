@@ -19,7 +19,7 @@ import { FormControl } from '@angular/forms';
 import { Observable, Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
-import { Column, ColumnOperations, TableItem } from './dexih-table.models';
+import { Column, ColumnOperations, TableItem, Tag } from './dexih-table.models';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
@@ -62,7 +62,8 @@ export class DexihTableComponent implements OnInit, OnDestroy, OnChanges, AfterV
     @Output() onSelectedChange: EventEmitter<Array<any>> = new EventEmitter<Array<any>>();
     @Output() public onSortChanged: EventEmitter<Array<any>> = new EventEmitter<Array<any>>();
     @Output() public onDrop: EventEmitter<CdkDragDrop<string[]>> = new EventEmitter();
-
+    @Output() onTagClick: EventEmitter<Tag> = new EventEmitter<Tag>();
+    
     @ContentChild('rowAction', {static: true }) public rowActionTemplate: TemplateRef<any>;
     @ContentChild('rowStatus', {static: true }) public rowStatusTemplate: TemplateRef<any>;
     @ContentChild('selectedItemsAction', {static: true }) public selectedItemsActionsTemplate: TemplateRef<any>;
@@ -396,6 +397,11 @@ export class DexihTableComponent implements OnInit, OnDestroy, OnChanges, AfterV
     public nodeClose(row: number) {
         this.preventRowClick = true;
         this.expandedNodes[row] = -1;
+    }
+
+    public tagClick(tag: Tag) {
+        this.onTagClick.emit(tag);
+        event.stopPropagation();
     }
 
 }

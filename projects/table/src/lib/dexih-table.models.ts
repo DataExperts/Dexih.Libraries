@@ -21,6 +21,12 @@ export class Column {
     public header: string;
     public childColumns: Column[];
     public enum: Type;
+    public tags: Tag[];
+}
+
+export class Tag {
+    name: string;
+    color: string;
 }
 
 export class ColumnOperations {

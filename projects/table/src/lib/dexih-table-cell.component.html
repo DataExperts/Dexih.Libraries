@@ -10,6 +10,9 @@
             <div *ngSwitchCase="'Md'" (click)="getRoute($event)">
                 <div><small *ngIf="header"><markdown [data]="header"></markdown></small></div>
                 <markdown *ngIf="value" [data]="value" ></markdown>
+                <div *ngIf="tags">
+                    <h5><a *ngFor="let tag of tags" href="javascript:void(0)" (click)="tagClick(tag)" [ngStyle]="{'background-color': tag.color}" class="badge mr-1"><span class="blend-text">{{tag.name}}</span></a></h5>
+                </div>
                 <div><small *ngIf="footer"><markdown [data]="footer"></markdown></small></div>
             </div>
             <pre *ngSwitchCase="'Code'"><code>{{value}}</code></pre>
@@ -29,9 +32,12 @@
                     </button>
                 </div>
             <span *ngSwitchDefault>
-                <div><small *ngIf="header">{{header}}</small></div>
+                <div *ngIf="header"><small>{{header}}</small></div>
                     {{formattedValue}}
-                <div><small *ngIf="footer">{{footer}}</small></div>
+                <div *ngIf="tags">
+                    <h5><a *ngFor="let tag of tags" href="javascript:void(0)" (click)="tagClick(tag)" [ngStyle]="{'background-color': tag.color}" class="badge mr-1"><span class="blend-text">{{tag.name}}</span></a></h5>
+                </div>
+                <div *ngIf="footer"><small>{{footer}}</small></div>
             </span>
         </ng-template>
     </div>

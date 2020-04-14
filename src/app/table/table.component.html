@@ -22,7 +22,7 @@
 </dexih-table>
 <hr/>
 
-<dexih-table [dataObservable]="tableData" [columns]="mdColumns" heading="Table with an markdown column"></dexih-table>
+<dexih-table [dataObservable]="tableData" [columns]="mdColumns" heading="Table with an markdown column" (onTagClick)="tagClick($event)" (rowClick)="selectedItem($event)"></dexih-table>
 <hr/>
 
 <dexih-table [dataObservable]="tableData" heading="Table with auto generated column names"></dexih-table>

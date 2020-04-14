@@ -2,6 +2,7 @@ import { Component, ViewChild, ChangeDetectorRef, OnInit, AfterViewInit } from '
 import { ToastMessage, DexihToastComponent, DexihModalComponent } from 'projects/components/src/public-api';
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { Tag } from 'projects/table/src/lib/dexih-table.models';
 
 class DataModel {
   constructor(
@@ -21,6 +22,7 @@ class DataModel {
     public charArray: string[],
     public childNodes: ChildModel[],
     public enumValue: eEnum,
+    public tags: Tag[]
   ) { }
 }
 
@@ -49,7 +51,7 @@ export class TableComponent implements OnInit, AfterViewInit {
   columns = [
     { title: 'Icon', iconClass: 'icon', tooltip: 'toolTip', width: '1%', align: 'center' },
     { name: 'intValue', title: 'Int', format: '' },
-    { name: 'stringValue', title: 'String', format: '', footer: 'footerValue', header: 'headerValue' },
+    { name: 'stringValue', title: 'String', format: '', footer: 'footerValue', header: 'headerValue', tags: 'tags' },
     { name: 'dateValue', title: 'Countdown', format: 'Countdown' },
     { name: 'dateValue', title: 'Date/Time', format: 'DateTime' },
     { name: 'dateValue', title: 'Date', format: 'Date' },
@@ -70,7 +72,7 @@ export class TableComponent implements OnInit, AfterViewInit {
 
   mdColumns = [
     { title: 'Icon', iconClass: 'icon', tooltip: 'toolTip', width: '1%', align: 'center' },
-    { name: 'markdown', title: 'Markdown', format: 'Md', footer: 'markdownFooter' },
+    { name: 'markdown', title: 'Markdown', format: 'Md', footer: 'markdownFooter', tags: 'tags' },
     { name: 'enumValue', title: 'Enum', format: 'Enum', enum: eEnum }
   ];
 
@@ -108,12 +110,12 @@ export class TableComponent implements OnInit, AfterViewInit {
     const data = new Array<DataModel>();
     data.push(new DataModel(1, 'row3', 'row 1 footer', 'row 1 header', new Date(date.getTime() + 30000), date,
       true, '<b>bold 1</b>', simpleObject, 'tip 1', 'fa fa-spin fa-cog', 'markdown **bold**', 'footer **bold**', ['a', 'b', 'c'],
-      childNodes, eEnum.enum1));
+      childNodes, eEnum.enum1, [{color: 'blue', name: 'blue'}, {color: 'red', name: 'red'}, ]));
     data.push(new DataModel(2, 'row2', 'row 2 footer', 'row 2 header', new Date(date.getTime() + 300000), date,
-      true, '<b>bold 1</b>', simpleObject, 'tip 2', 'fa fa-spin fa-cog', null, null, ['a', 'b', 'c'], childNodes, eEnum.enum2));
+      true, '<b>bold 1</b>', simpleObject, 'tip 2', 'fa fa-spin fa-cog', null, null, ['a', 'b', 'c'], childNodes, eEnum.enum2, null));
     data.push(new DataModel(3, 'row1', 'row 3 footer', 'row 3 header', new Date(date.getTime() + 3000000), date,
       true, '<b>bold 1</b>', JSON.stringify(simpleObject), 'tip 3', 'fa fa-spin fa-cog', 'markdown **bold 2** [link](http://google.com)',
-        'footer2 **bold** [link](http://google.com)', ['a', 'b', 'c'], childNodes, eEnum.enum3));
+        'footer2 **bold** [link](http://google.com)', ['a', 'b', 'c'], childNodes, eEnum.enum3, null));
 
     this.tableData.next(data);
 
@@ -136,6 +138,10 @@ export class TableComponent implements OnInit, AfterViewInit {
 
   public selectedItem(item: DataModel) {
     window.alert('selected ' + item.intValue);
+  }
+
+  public tagClick(tag: Tag) {
+    window.alert('tag clicked: ' + tag.name);
   }
 
   dropped(event: CdkDragDrop<string[]>) {
