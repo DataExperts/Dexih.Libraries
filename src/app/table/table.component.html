@@ -25,7 +25,11 @@
 <dexih-table [dataObservable]="tableData" [columns]="mdColumns" heading="Table with an markdown column" (onTagClick)="tagClick($event)" (rowClick)="selectedItem($event)" [tags]="tags"></dexih-table>
 <hr/>
 
-<dexih-table [dataObservable]="tableData" heading="Table with auto generated column names"></dexih-table>
+<dexih-table [dataObservable]="tableData" heading="Table with auto generated column names">
+    <ng-template #filter let-items="filter">
+        <button class="btn btn-success">Filter Button</button>
+    </ng-template>
+</dexih-table>
 <hr/>
 
 <dexih-table [dataObservable]="tableData" [columns]="columns" heading="Table with formatted column names"></dexih-table>

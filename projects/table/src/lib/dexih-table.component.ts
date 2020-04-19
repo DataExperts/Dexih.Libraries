@@ -72,6 +72,7 @@ export class DexihTableComponent implements OnInit, OnDestroy, OnChanges, AfterV
     @ContentChild('actions', {static: true }) public actionsTemplate: TemplateRef<any>;
     @ContentChild('cell', {static: true }) public cellTemplate: TemplateRef<any>;
     @ContentChild('tableHeader', {static: true }) public tableHeaderTemplate: TemplateRef<any>;
+    @ContentChild('filter', {static: true }) public filterTemplate: TemplateRef<any>;
 
     @ViewChild('cdkDropList', {static: true }) public cdkDropList: ElementRef;
 

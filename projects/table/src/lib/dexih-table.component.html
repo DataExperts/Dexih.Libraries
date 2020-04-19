@@ -64,6 +64,12 @@
             </div>
             
             <div *ngIf="enableFilter && tableItems?.length > 0 && !hideTable" class="btn-toolbar ml-auto">
+                <div  *ngIf="filterTemplate">
+                    <ng-template [ngTemplateOutlet]="filterTemplate"
+                        [ngTemplateOutletContext]="{items: currentSelectedItems}">
+                    </ng-template>
+                </div>
+
                 <div *ngIf="tagStates" class="btn-group mr-1" dropdown #dropdown="bs-dropdown" [autoClose]="true"
                     placement="bottom right">
                     <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">

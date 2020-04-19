@@ -273,6 +273,11 @@ The templates objects can be populated using `ng-template` tags within the `dexi
         <button class="btn btn-primary" (click)="selectedItems(items)">any items</button>
     </ng-template>
 
+    <ng-template #filter let-items="items">
+        <!-- items contains an array of selected items -->
+        <button class="btn btn-primary" (click)="selectedItems(items)">any items</button>
+    </ng-template>
+
     <ng-template #rowAction select="rowAction" let-item="item">
         <!-- item contains the current row -->
         <button class="btn btn-primary" (click)="selectedItems(items)">selected items</button>
