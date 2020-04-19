@@ -29,6 +29,11 @@ export class Tag {
     color: string;
 }
 
+export class TagState {
+    public tag: Tag
+    public isChecked = false;
+}
+
 export class ColumnOperations {
 
     // converts a date to a countdown string

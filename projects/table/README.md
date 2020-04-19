@@ -213,6 +213,7 @@ The following properties can be hard coded in the column settings an apply to al
   - `Md` - renders markdown format.
   - 'CharArray' - formats an array of chars as a single string (i.e. ['a', 'b', 'c'] formatted as 'abc')
 - `width` - the width to apply to the table column (e.g. 10%, 100px).
+- `tags` - a pointer to an array of tags.  Tags are an array containing properties name/color (i.e. [{color: 'blue', name: 'blue'}, {color: 'red', name: 'red'}, ])
 - `align` (`left`, `centre`, `right`) - the text alignment for the column.
 
 The following properties reference an property in the data row and are defined on a row by row basis:
@@ -304,9 +305,9 @@ The templates objects can be populated using `ng-template` tags within the `dexi
 
 The following events can be used to response to table actions:
 
-- `rowClick` (item containing row) - called when a row is clicked (excluding: checkbox, rowAction, rowStatus) column
+- `rowClick` (item containing row) - called when a row is clicked (excluding: checkbox, rowAction, rowStatus) column.
+- `tagClick` (item containing tag) - called when a tag is clicked.
 - `onSelectedChange` (item containing selected items) - called when a row selection changes.
-- `onSortChanged` (array of sorted items) - called when a manual drag/drop sort is completed.
 - `onSortChanged` (array of sorted items) - called when a manual drag/drop sort is completed.
 - `onDrop` (drop data) - called when data is dropped on the table.  Passes the event data from the cdkDropList event.
 

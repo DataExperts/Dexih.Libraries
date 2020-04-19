@@ -19,7 +19,7 @@ import { FormControl } from '@angular/forms';
 import { Observable, Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
-import { Column, ColumnOperations, TableItem, Tag } from './dexih-table.models';
+import { Column, ColumnOperations, TableItem, Tag, TagState } from './dexih-table.models';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
@@ -57,6 +57,7 @@ export class DexihTableComponent implements OnInit, OnDestroy, OnChanges, AfterV
     @Input() public dropName = '';
     @Input() public enableViewToggle = true;
     @Input() public view: 'table' | 'cards' = 'table';
+    @Input() public tags: Tag[];
 
     @Output() rowClick: EventEmitter<any> = new EventEmitter<any>();
     @Output() onSelectedChange: EventEmitter<Array<any>> = new EventEmitter<Array<any>>();
@@ -99,6 +100,8 @@ export class DexihTableComponent implements OnInit, OnDestroy, OnChanges, AfterV
     private dataDiffer: any;
     private columnOperations = new ColumnOperations();
 
+    public tagStates: TagState[];
+
     constructor(public el: ElementRef, public differs: KeyValueDiffers) {
         this.dataDiffer = differs.find({}).create();
     }
@@ -106,6 +109,8 @@ export class DexihTableComponent implements OnInit, OnDestroy, OnChanges, AfterV
     ngOnInit() {
         this.currentSelectedItems = this.selectedItems;
         this.loadTableData();
+        
+        this.updateTags();
     }
 
     ngOnDestroy() {
@@ -264,23 +269,50 @@ export class DexihTableComponent implements OnInit, OnDestroy, OnChanges, AfterV
 
     private updateFilter() {
         if (this.tableItems) {
-            if (this.filterString) {
-                const filter = this.filterString.toLowerCase();
+            let selectedTags = this.tagStates ? this.tagStates.filter(c => c.isChecked) : [];
+            if (this.filterString || selectedTags.length > 0 ) {
+                let filter: string = null;
+                if(this.filterString) {
+                    filter = this.filterString.toLowerCase();
+                }
 
                 this.tableItems.forEach((row, index) => {
-                    let isMatch = false;
+                    let isStringMatch = false;
+
+                    // if there are any checkedTags then assume false, until we find a match
+                    let isTagMatch = selectedTags.length > 0 ? false : true;
                     const dataRow = this.data[this.columnOperations.fetchFromObject(row, 'index')];
                     this.currentColumns.forEach(column => {
-                        const columnNameValue = this.columnOperations.fetchFromObject(dataRow, column.name);
-                        const columnFooterValue = this.columnOperations.fetchFromObject(dataRow, column.footer);
-                        const columnHeaderValue = this.columnOperations.fetchFromObject(dataRow, column.header);
-                        if ((columnNameValue != null && String(columnNameValue).toLowerCase().includes(filter)) ||
-                            (columnFooterValue != null && String(columnFooterValue).toLowerCase().includes(filter)) ||
-                            (columnHeaderValue != null && String(columnHeaderValue).toLowerCase().includes(filter)) ) {
-                            isMatch = true;
+
+                        if (filter) {
+                            const columnNameValue = this.columnOperations.fetchFromObject(dataRow, column.name);
+                            const columnFooterValue = this.columnOperations.fetchFromObject(dataRow, column.footer);
+                            const columnHeaderValue = this.columnOperations.fetchFromObject(dataRow, column.header);
+                            if ((columnNameValue != null && String(columnNameValue).toLowerCase().includes(filter)) ||
+                                (columnFooterValue != null && String(columnFooterValue).toLowerCase().includes(filter)) ||
+                                (columnHeaderValue != null && String(columnHeaderValue).toLowerCase().includes(filter))) {
+                                isStringMatch = true;
+                            }
+                        } else {
+                            isStringMatch = true;
                         }
                     });
-                    this.tableItems[index].isFiltered = !isMatch;
+
+                    let tagColumn = this.currentColumns.find(c => c.tags);
+                    // check if the tags are filtered.
+                    if (this.tagStates && selectedTags.length > 0 && tagColumn.tags && tagColumn.tags.length > 0) {
+                        let columnTags = this.columnOperations.fetchFromObject(dataRow, tagColumn.tags);
+                        if(columnTags) {
+                            for(let tag of columnTags) {
+                                if (selectedTags.findIndex(c => c.tag.name === tag.name) >= 0) {
+                                    isTagMatch = true;
+                                    break;
+                                }
+                            }
+                        } 
+                    } 
+
+                    this.tableItems[index].isFiltered = !isStringMatch || !isTagMatch;
                 });
             } else {
                 this.tableItems.forEach(item => item.isFiltered = false);
@@ -400,8 +432,38 @@ export class DexihTableComponent implements OnInit, OnDestroy, OnChanges, AfterV
     }
 
     public tagClick(tag: Tag) {
+        this.tagStates.forEach(c => {
+            if(c.tag.name === tag.name) {
+                c.isChecked = true;
+            } else {
+                c.isChecked = false;
+            }
+        });
+        this.updateFilter();
+
         this.onTagClick.emit(tag);
         event.stopPropagation();
+    }
+
+    public updateTags() {
+        if(this.tags) {
+            this.tagStates = new Array(this.tags.length);
+            for (let i = 0; i < this.tagStates.length; i++) {
+                let tag = this.tags[i];
+                this.tagStates[i] = new TagState();
+                this.tagStates[i].tag = tag;
+                this.tagStates[i].isChecked = false;
+            }
+        }
+    }
+
+    clearTags() {
+        this.tagStates.forEach(c => c.isChecked = false);
+        this.updateFilter();
+    }
+
+    changeTags() {
+        this.updateFilter();
     }
 
 }
