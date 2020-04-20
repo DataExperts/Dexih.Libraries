@@ -6,7 +6,7 @@ import { strictEqual } from 'assert';
 @Component({
     selector: 'dexih-table-cell',
     templateUrl: 'dexih-table-cell.component.html',
-    styleUrls: [ './dexih-table-cell.component.scss' ]
+    styleUrls: [ './dexih-table-cell.component.scss', './dexih-table.component.scss' ]
 })
 
 export class DexihTableCellComponent implements OnInit, OnDestroy {
