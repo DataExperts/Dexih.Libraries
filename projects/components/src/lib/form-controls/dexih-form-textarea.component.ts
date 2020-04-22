@@ -69,9 +69,7 @@ export class DexihFormTextAreaComponent implements OnInit, ControlValueAccessor 
     }
 
     writeValue(value: string) {
-        if (value) {
-            this.value = value;
-        }
+        this.value = value;
     }
 
     getRoute(event: any) {

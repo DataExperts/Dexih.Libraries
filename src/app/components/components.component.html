@@ -560,7 +560,7 @@ this should have no padding.
                 [(ngModel)]="selectedTags" [ngModelOptions]="{standalone: true}" [enableAddAll]="true"  ></form-tags-dropdown>
 
                 <form-tags-dropdown label="input tags: selected count={{complexTagsSelected.length}}" note="a note to describe the tags" placeholder="input tags" 
-                [items]="complexTags" itemKey="column.key" itemName="column.name"
+                [items]="complexTags" itemKey="column.key" itemName="column.name" itemColor="column.color"
                 [(ngModel)]="complexTagsSelected" [ngModelOptions]="{standalone: true}" [enableAddAll]="true" [returnKeys]="false"></form-tags-dropdown>
 
             </form>

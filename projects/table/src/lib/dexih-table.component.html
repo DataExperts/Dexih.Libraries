@@ -63,7 +63,7 @@
                 </div>
             </div>
             
-            <div *ngIf="enableFilter && tableItems?.length > 0 && !hideTable" class="btn-toolbar ml-auto">
+            <div *ngIf="tableItems?.length > 0 && !hideTable" class="btn-toolbar ml-auto">
                 <div  *ngIf="filterTemplate">
                     <ng-template [ngTemplateOutlet]="filterTemplate"
                         [ngTemplateOutletContext]="{items: currentSelectedItems}">
@@ -76,20 +76,23 @@
                         <i class="fa fa-tags"></i>
                     </button>
                     <ul *dropdownMenu class="p-0 dropdown-menu dropdown-menu-right">
-                        <a class="dropdown-item" (click)="clearTags()" title="Clear tag filters"><span class="text-danger"><i
-                                    class="fa fa-trash-o text-danger"></i> Clear Filter</span></a>
+                        <a class="dropdown-item pl-1" (click)="clearTags()" title="Clear tag filters">
+                            <span class="text-danger"><i class="fa fa-trash-o text-danger"></i> Clear Filter(s)</span>
+                        </a>
                         <a *ngFor="let tagState of tagStates" class="dropdown-item">
                             <div class="input-group">
-                                <input type="checkbox" class="form-check-input" [(ngModel)]="tagState.isChecked"
-                                    (change)="changeTags()">
-                                <h5><span class="badge" [ngStyle]="{'background-color': tagState.tag.color}"><span
-                                            class="blend-text">{{tagState.tag.name}}</span></span></h5>
+                                <input type="checkbox" class="form-check-input" [(ngModel)]="tagState.isChecked" (change)="changeTags()">
+                                <h5>
+                                    <span class="badge" [ngStyle]="{'background-color': tagState.tag.color}">
+                                        <span class="blend-text">{{tagState.tag.name}}</span>
+                                    </span>
+                                </h5>
                             </div>
                         </a>
                     </ul>
                 </div>
             
-                <div [ngClass]="{disabled : manualSort}" class="input-group w-auto search-icon input-expand">
+                <div *ngIf="enableFilter" [ngClass]="{disabled : manualSort}" class="input-group w-auto search-icon input-expand">
                     <input [formControl]="filterControl" class="form-control input-md" placeholder="Search..." type="search"
                         name="filterString" />
                 </div>

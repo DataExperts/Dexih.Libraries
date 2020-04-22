@@ -57,8 +57,8 @@ export class ComponentsComponent {
   public refreshItems = [];
 
   public complexTags = [
-    {column: {key: 1, name: 'col1'}},
-    {column: {key: 2, name: 'col2'}}
+    {column: {key: 1, name: 'col1', color: 'blue'}},
+    {column: {key: 2, name: 'col2', color: 'red'}}
   ];
 
   public complexTagsSelected = [{column: {key: 1, name: 'col1'}}];

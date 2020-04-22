@@ -3,6 +3,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { BsDropdownDirective } from 'ngx-bootstrap';
 import { SharedFunctions, ListItem } from './shared-functions';
 
+
 @Component({
     selector: 'form-tags-dropdown',
     templateUrl: './dexih-form-tagsDropdown.component.html',
@@ -25,6 +26,7 @@ export class DexihFormTagsDropdownComponent implements ControlValueAccessor, OnC
     @Input() items: Array<any>;
     @Input() itemKey: any;
     @Input() itemName: string;
+    @Input() itemColor: string;
     @Input() itemTitle: string;
     @Input() sortItems = false;
     @Input() border = true;
@@ -41,7 +43,7 @@ export class DexihFormTagsDropdownComponent implements ControlValueAccessor, OnC
     tag: string;
     id = 'input_' + Math.random().toString(36).substr(2, 9);
 
-    labels: string[] = [];
+    tags: any[] = [];
     selectedKeys: any[];  // list of selected keys
 
     sortedItems: Array<ListItem>;
@@ -123,19 +125,20 @@ export class DexihFormTagsDropdownComponent implements ControlValueAccessor, OnC
         this.sortedItems = items.map(c => {
             return {
                 label: this.sharedFunctions.fetchFromObject(c, this.itemName),
+                color: this.itemColor ? this.sharedFunctions.fetchFromObject(c, this.itemColor) : null,
                 key: this.sharedFunctions.fetchFromObject(c, this.itemKey),
                 title: this.sharedFunctions.fetchFromObject(c, this.itemTitle),
                 item: c
             };
         });
 
-        this.labels = [];
+        this.tags = [];
         if (this.selectedKeys) {
             this.selectedKeys.forEach(item => {
                 let itemLookup = this.sortedItems.find(c => c.key === item);
 
                 if (itemLookup) {
-                    this.labels.push(itemLookup.label);
+                    this.tags.push({label: itemLookup.label, color: itemLookup.color});
                 }
             });
         }
@@ -151,7 +154,7 @@ export class DexihFormTagsDropdownComponent implements ControlValueAccessor, OnC
             }
 
             this.selectedKeys.push(selectedItem.key);
-            this.labels.push(selectedItem.label);
+            this.tags.push({label: selectedItem.label, color: selectedItem.color});
         }
 
         this.onChange(this.getItems());
@@ -164,21 +167,21 @@ export class DexihFormTagsDropdownComponent implements ControlValueAccessor, OnC
     remove(index: number) {
         if (index >= 0 && this.selectedKeys) {
             this.selectedKeys.splice(index, 1);
-            this.labels.splice(index, 1);
+            this.tags.splice(index, 1);
             this.hasChanged();
         }
     }
 
     addAll() {
         this.selectedKeys = this.sortedItems.map(c => c.key);
-        this.labels = this.sortedItems.map(c => c.label);
+        this.tags = this.sortedItems.map(c => { return {label: c.label, color: c.color}});
         this.hasChanged();
         this.dropdown.hide();
     }
 
     clearAll() {
         this.selectedKeys = [];
-        this.labels = [];
+        this.tags = [];
         this.hasChanged();
     }
 

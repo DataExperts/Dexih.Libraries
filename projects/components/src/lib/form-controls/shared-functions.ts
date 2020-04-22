@@ -44,4 +44,5 @@ export class ListItem {
     public key: any;
     public title: string;
     public item: any;
+    public color: string;
 }

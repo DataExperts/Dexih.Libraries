@@ -120,6 +120,7 @@ export class DexihTableComponent implements OnInit, OnDestroy, OnChanges, AfterV
     }
 
     ngOnChanges(changes: SimpleChanges) {
+        
         if (this.columns) {
             this.columnCount = this.columns.length;
         } else if (this.data) {
@@ -139,6 +140,8 @@ export class DexihTableComponent implements OnInit, OnDestroy, OnChanges, AfterV
                 this.doLoadData(this.data);
             }
         }
+
+        this.updateTags();
     }
 
     ngAfterViewInit() {
@@ -433,14 +436,20 @@ export class DexihTableComponent implements OnInit, OnDestroy, OnChanges, AfterV
     }
 
     public tagClick(tag: Tag) {
-        this.tagStates.forEach(c => {
-            if(c.tag.name === tag.name) {
-                c.isChecked = true;
-            } else {
-                c.isChecked = false;
+        if(this.tagStates) {
+            let tagState = this.tagStates.find(c => c.tag.name === tag.name);
+            if (tagState) {
+                tagState.isChecked = !tagState.isChecked;
             }
-        });
-        this.updateFilter();
+            
+            this.tagStates.forEach(c => {
+                if(c.tag.name != tag.name) {
+                    c.isChecked = false;
+                }
+            });
+
+            this.updateFilter();
+        }
 
         this.onTagClick.emit(tag);
         event.stopPropagation();

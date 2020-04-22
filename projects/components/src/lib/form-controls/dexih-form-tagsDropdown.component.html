@@ -21,15 +21,21 @@
                 <div class="dropdown-divider"></div>
 
                 <li *ngFor="let item of sortedItems" class="scrollable-item">
-                    <a  class="dropdown-item" (click)="selectItem(item)" [title]="item.title"> {{item.label}}</a>
+                    <div *ngIf="item.color" class="dropdown-item bg-light" (click)="selectItem(item)" [title]="item.title">
+                        <h5><span class="badge" [ngStyle]="{'background-color': item.color}" ><span class="blend-text">{{item.label}}</span></span></h5>
+                    </div>
+                    <a *ngIf="!item.color"  class="dropdown-item" (click)="selectItem(item)" [title]="item.title" >{{item.label}}</a>
                 </li>
             </ul>
 
-            <div *ngFor="let item of labels; let i = index" class="border rounded bg-light my-auto ml-1">
-                {{item}}
-                <button (click)="remove(i)" type="button" class="close" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+            <div *ngFor="let item of tags; let i = index" class="border rounded my-auto ml-1 "
+                [ngStyle]="{'background-color': item.color ? item.color : '#e5e7e9'}">
+                <span class="blend-text p-1">
+                    {{item.label}}
+                    <button (click)="remove(i)" type="button" class="close" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </span>
             </div>
 
             <input class="form-control border-0 rounded-0 invisible" [disabled]="true">
