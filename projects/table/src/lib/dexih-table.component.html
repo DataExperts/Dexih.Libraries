@@ -143,7 +143,7 @@
                     <td [attr.colspan]="columnCount">There are no rows available.</td>
                 </tr>
                 <ng-template ngFor let-tableItem [ngForOf]="tableItems" let-i="index">
-                    <tr name="dexih-table-row" [hidden]="!(data && !tableItem.isFiltered)" [class.active]="tableItem?.isSelected" cdkDrag>
+                    <tr name="dexih-table-row" [hidden]="!(data && !tableItem.isFiltered)" [class.table-primary]="tableItem?.isSelected" cdkDrag>
                         <div *cdkDragPreview class="container">
                             <div class="row">
                                 <div class="col-sm list-group-item list-group-item-secondary" *ngFor="let column of currentColumns | slice:0:5; let columnIndex = index;">
@@ -201,11 +201,11 @@
             <ng-template ngFor let-tableItem [ngForOf]="tableItems" let-i="index">
                 <div class="card" >
                     <div class="card-body p-0">
-                        <div *ngIf="enableMultiSelect" class="m-3">
-                            <input type="checkbox" [(ngModel)]="tableItem.isSelected" (ngModelChange)="itemSelected(true)">
-                        </div>
-                        <table class="table" (click)="selectRowClick(data[tableItem.index])">
+                          <table class="table" (click)="selectRowClick(data[tableItem.index])" [class.table-primary]="tableItem?.isSelected">
                             <tr *ngFor="let column of currentColumns; let columnIndex=index;">
+                                <td *ngIf="enableMultiSelect" style="width: 1%;">
+                                    <input *ngIf="columnIndex == 0" type="checkbox" [(ngModel)]="tableItem.isSelected" (ngModelChange)="itemSelected(true)">
+                                </td>
                                 <td>
                                     <b>{{column.title}}</b>
                                 </td>
@@ -225,6 +225,8 @@
                                 </td>
                             </tr>
                             <tr *ngIf="rowActionTemplate">
+                                <td *ngIf="enableMultiSelect" style="width: 1%;">
+                                </td>
                                 <td>
                                     <b>{{actionHeading}}</b>
                                 </td>
@@ -235,6 +237,8 @@
                                 </td>
                             </tr>
                             <tr *ngIf="rowStatusTemplate">
+                                <td *ngIf="enableMultiSelect" style="width: 1%;">
+                                </td>
                                 <td>
                                     <b>{{rowStatusHeading}}</b>
                                 </td>
