@@ -1,7 +1,7 @@
 import { Component, OnInit, OnChanges, OnDestroy, forwardRef, Input, Output,
     ViewChild, HostListener, EventEmitter, SimpleChanges, ContentChild, TemplateRef } from '@angular/core';
 import { FormControl, ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { BsDropdownDirective } from 'ngx-bootstrap';
+import { BsDropdownDirective } from 'ngx-bootstrap/dropdown';
 import { Subscription } from 'rxjs';
 import { SharedFunctions } from './shared-functions';
 

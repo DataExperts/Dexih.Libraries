@@ -201,15 +201,15 @@
             <ng-template ngFor let-tableItem [ngForOf]="tableItems" let-i="index">
                 <div class="card" >
                     <div class="card-body p-0">
-                          <table class="table" (click)="selectRowClick(data[tableItem.index])" [class.table-primary]="tableItem?.isSelected">
+                          <table class="table" [class.table-primary]="tableItem?.isSelected">
                             <tr *ngFor="let column of currentColumns; let columnIndex=index;">
                                 <td *ngIf="enableMultiSelect" style="width: 1%;">
                                     <input *ngIf="columnIndex == 0" type="checkbox" [(ngModel)]="tableItem.isSelected" (ngModelChange)="itemSelected(true)">
                                 </td>
-                                <td>
+                                <td (click)="selectRowClick(data[tableItem.index])">
                                     <b>{{column.title}}</b>
                                 </td>
-                                <td>
+                                <td (click)="selectRowClick(data[tableItem.index])">
                                     <ng-template *ngIf="cellTemplate" [ngTemplateOutlet]="cellTemplate"
                                         [ngTemplateOutletContext]="{item: data[tableItem.index], column: column, value: data[tableItem.index][column.name]}">
                                     </ng-template>

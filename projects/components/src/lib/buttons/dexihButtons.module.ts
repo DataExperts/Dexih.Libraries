@@ -26,7 +26,7 @@ import { DexihButtonValidateComponent } from './dexih-button-validate.component'
 import { DexihButtonHistoryComponent } from './dexih-button-history.component';
 import { DexihButtonLinkComponent } from './dexih-button-link.component';
 import { DexihButtonChartComponent } from './dexih-button-chart.component';
-import { BsDropdownModule } from 'ngx-bootstrap';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { DexihButtonCollapsibleComponent } from './dexih-button-collapsible.component';
 
 @NgModule({

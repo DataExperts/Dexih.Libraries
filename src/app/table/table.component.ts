@@ -53,6 +53,7 @@ export class TableComponent implements OnInit, AfterViewInit {
     { name: 'intValue', title: 'Int', format: '' },
     { name: 'stringValue', title: 'String', format: '', footer: 'footerValue', header: 'headerValue', tags: 'tags' },
     { name: 'dateValue', title: 'Countdown', format: 'Countdown' },
+    { name: 'dateValue', title: 'Calendar', format: 'Calendar' },
     { name: 'dateValue', title: 'Date/Time', format: 'DateTime' },
     { name: 'dateValue', title: 'Date', format: 'Date' },
     { name: 'timeValue', title: 'Time', format: 'Time' },
@@ -122,8 +123,8 @@ export class TableComponent implements OnInit, AfterViewInit {
       childNodes, eEnum.enum1, [this.tags[0], this.tags[1]]));
     data.push(new DataModel(2, 'row2', 'row 2 footer', 'row 2 header', new Date(date.getTime() + 300000), date,
       true, '<b>bold 1</b>', simpleObject, 'tip 2', 'fa fa-spin fa-cog',
-      null, null, ['a', 'b', 'c'], childNodes, eEnum.enum2, [this.tags[0],]));
-    data.push(new DataModel(3, 'row1', 'row 3 footer', 'row 3 header', new Date(date.getTime() + 3000000), date,
+      null, null, ['a', 'b', 'c'], childNodes, eEnum.enum2, [this.tags[0]]));
+    data.push(new DataModel(3, 'row1', 'row 3 footer', 'row 3 header',  new Date(date.getTime() + 3000000), date,
       true, '<b>bold 1</b>', JSON.stringify(simpleObject), 'tip 3', 'fa fa-spin fa-cog', 'markdown **bold 2** [link](http://google.com)',
         'footer2 **bold** [link](http://google.com)', ['a', 'b', 'c'], childNodes, eEnum.enum3, null));
 

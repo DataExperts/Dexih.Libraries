@@ -1,4 +1,7 @@
 import { Type } from '@angular/compiler';
+import * as moment_ from "moment";
+
+const moment = moment_;
 
 export class TableItem {
     constructor(
@@ -87,19 +90,34 @@ export class ColumnOperations {
         return obj[prop];
     }
 
+    getLanguage() {
+        var language;
+        if (window.navigator.languages) {
+            language = window.navigator.languages[0];
+        } else {
+            language = window.navigator.language;
+        }
+
+        return language;
+    }
+
     formatValue(column: Column, value: any) {
+        moment.locale(this.getLanguage());
+
         if (!value && value !== false && value !== 0) {
             return '';
         } else if (Object.keys(value).length === 0 && value.constructor === Object) {
             return '(null)';
         } else {
             switch (column.format) {
+                case 'Calendar':
+                    return moment(value).calendar();
                 case 'Date':
-                    return (new Date(value).toLocaleDateString());
+                    return moment(value).format('LL');
                 case 'Time':
-                    return (new Date(value).toLocaleTimeString());
+                    return moment(value).format('LTS');
                 case 'DateTime':
-                    return (new Date(value).toLocaleDateString()) + ' ' + (new Date(value).toLocaleTimeString());
+                    return moment(value).format('LLL');
                 case 'CharArray':
                     return [].concat(value).join('');
                 case 'Countdown':

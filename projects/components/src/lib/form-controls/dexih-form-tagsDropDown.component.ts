@@ -1,6 +1,6 @@
 import { Component, forwardRef, Input, EventEmitter, Output, HostListener, ViewChild, OnChanges } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { BsDropdownDirective } from 'ngx-bootstrap';
+import { BsDropdownDirective } from 'ngx-bootstrap/dropdown';
 import { SharedFunctions, ListItem } from './shared-functions';
 
 

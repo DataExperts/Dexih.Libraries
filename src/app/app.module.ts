@@ -4,7 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { NgxMdModule } from 'ngx-md';
-import { BsDropdownModule, ModalModule, BsModalService, BsModalRef } from 'ngx-bootstrap';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { ModalModule, BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';

@@ -12,7 +12,7 @@ import { DexihFormTagsComponent } from './dexih-form-tags.component';
 import { DexihFormTagsDropdownComponent } from './dexih-form-tagsDropdown.component';
 
 import { DexihSelectFilterPipe } from './dexih-select-filter.pipe';
-import { BsDropdownModule } from 'ngx-bootstrap';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { NgxMdModule } from 'ngx-md';
 
 @NgModule({

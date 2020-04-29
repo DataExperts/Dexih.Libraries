@@ -122,6 +122,7 @@ export class DexihTableCellComponent implements OnInit, OnDestroy {
         if (this.format === 'Date' ||
             this.format === 'Time' ||
             this.format === 'DateTime' ||
+            this.format === 'Calendar' ||
             value instanceof Date ||
             this.isNumeric(value)
         ) {

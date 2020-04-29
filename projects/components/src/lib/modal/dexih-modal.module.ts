@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { DexihModalComponent } from './dexih-modal.component';
-import { ModalModule } from 'ngx-bootstrap';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 @NgModule({
     imports: [

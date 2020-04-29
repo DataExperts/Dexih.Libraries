@@ -1,5 +1,5 @@
 import { Component, OnInit, OnChanges, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
-import { BsDropdownDirective } from 'ngx-bootstrap';
+import { BsDropdownDirective } from 'ngx-bootstrap/dropdown';
 
 @Component({
     selector: 'dexih-button-dropdown',
