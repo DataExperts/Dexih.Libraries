@@ -362,6 +362,7 @@ export class DexihTableComponent implements OnInit, OnDestroy, OnChanges, AfterV
                 // this.tableItems.forEach(item => item.sortValue = item.index);
             }
 
+            // triggers the change detection on the table
             this.tableItems = [...this.tableItems];
 
             this.itemSelected(false);

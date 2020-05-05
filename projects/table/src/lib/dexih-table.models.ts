@@ -113,11 +113,11 @@ export class ColumnOperations {
                 case 'Calendar':
                     return moment(value).calendar();
                 case 'Date':
-                    return moment(value).format('LL');
+                    return moment(value).format('L');
                 case 'Time':
                     return moment(value).format('LTS');
                 case 'DateTime':
-                    return moment(value).format('LLL');
+                    return moment(value).format('L') + ' ' + moment(value).format('LTS');
                 case 'CharArray':
                     return [].concat(value).join('');
                 case 'Countdown':
