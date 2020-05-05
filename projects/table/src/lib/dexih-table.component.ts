@@ -49,7 +49,7 @@ export class DexihTableComponent implements OnInit, OnDestroy, OnChanges, AfterV
     @Input() public tableClass = 'table table-striped table-bordered table-hover m-0';
     @Input() public error: string;
     @Input() public heading: string;
-    @Input() public dropListEnterPredicate;
+    // @Input() public dropListEnterPredicate;
     @Input() public loadingMessage = 'Data is loading...';
     @Input() public hideTable = false;
     @Input() public rowStatusHeading = 'Status';
@@ -58,6 +58,8 @@ export class DexihTableComponent implements OnInit, OnDestroy, OnChanges, AfterV
     @Input() public enableViewToggle = true;
     @Input() public view: 'table' | 'cards' = 'table';
     @Input() public tags: Tag[];
+    @Input() public rowsPerPage = 100;
+    @Input() public enablePages = true;
 
     @Output() rowClick: EventEmitter<any> = new EventEmitter<any>();
     @Output() onSelectedChange: EventEmitter<Array<any>> = new EventEmitter<Array<any>>();
@@ -102,6 +104,11 @@ export class DexihTableComponent implements OnInit, OnDestroy, OnChanges, AfterV
     private columnOperations = new ColumnOperations();
 
     public tagStates: TagState[];
+
+    public pages = new Array(0);
+    public pageNumber = 1;
+    public inputPageNumber = 1;
+    public rowCount = 0;
 
     constructor(public el: ElementRef, public differs: KeyValueDiffers) {
         this.dataDiffer = differs.find({}).create();
@@ -197,6 +204,7 @@ export class DexihTableComponent implements OnInit, OnDestroy, OnChanges, AfterV
 
             // reset the tableItems array.
             this.tableItems = new Array(this.data.length);
+
             this.data.forEach((item, index) => {
                 let isSelected = false;
                 if (this.keyColumn && this.selectedItems) {
@@ -207,6 +215,8 @@ export class DexihTableComponent implements OnInit, OnDestroy, OnChanges, AfterV
                     isSelected = selected >= 0 ? true : false;
                 }
                 this.tableItems[index] = new TableItem(index, null, isSelected, false);
+                this.pageNumber = 1;
+                this.inputPageNumber = 1;
             });
 
             // update the data each time the source changes.
@@ -222,8 +232,11 @@ export class DexihTableComponent implements OnInit, OnDestroy, OnChanges, AfterV
                     this.updateFilter();
                 });
         } else {
+            this.pageNumber = 1;
+            this.inputPageNumber = 1;
             this.data = null;
             this.tableItems = null;
+            this.pages = null;
         }
     }
 
@@ -280,6 +293,8 @@ export class DexihTableComponent implements OnInit, OnDestroy, OnChanges, AfterV
                     filter = this.filterString.toLowerCase();
                 }
 
+                this.rowCount = 0;
+
                 this.tableItems.forEach((row, index) => {
                     let isStringMatch = false;
 
@@ -316,26 +331,38 @@ export class DexihTableComponent implements OnInit, OnDestroy, OnChanges, AfterV
                         } 
                     } 
 
-                    this.tableItems[index].isFiltered = !isStringMatch || !isTagMatch;
+                    if(!isStringMatch || !isTagMatch) {
+                        this.tableItems[index].isFiltered = true;
+                    } else {
+                        this.tableItems[index].isFiltered = false;
+                        this.rowCount++;
+                    }
                 });
             } else {
+                this.rowCount = this.tableItems.length;
                 this.tableItems.forEach(item => item.isFiltered = false);
             }
+
+            let pageCount = Math.ceil(this.rowCount / this.rowsPerPage);
+            this.pages = Array(pageCount).fill(pageCount).map( (x,i) => i+1 ); // [1,2,3,4,5]
+
 
             if (this.sortColumn) {
                 // add the sorted value to each of the table items.
                 this.tableItems.forEach(item => item.sortValue =
                         this.columnOperations.fetchFromObject(this.data[item.index], this.sortColumn));
+
+                this.tableItems = this.tableItems.sort((a, b) => {
+                    const result = (a.sortValue < b.sortValue) ? -1 : (a.sortValue > b.sortValue) ? 1 : 0;
+                    return result * this.sortDirection;
+                });
             } else {
                 // GH - commented as it causes change in the manual reordering.  Not sure if has other impacts.
                 // if no sort column, sort to original order
                 // this.tableItems.forEach(item => item.sortValue = item.index);
             }
 
-            this.tableItems = this.tableItems.sort((a, b) => {
-                const result = (a.sortValue < b.sortValue) ? -1 : (a.sortValue > b.sortValue) ? 1 : 0;
-                return result * this.sortDirection;
-            });
+            this.tableItems = [...this.tableItems];
 
             this.itemSelected(false);
         }
@@ -474,6 +501,19 @@ export class DexihTableComponent implements OnInit, OnDestroy, OnChanges, AfterV
 
     changeTags() {
         this.updateFilter();
+    }
+
+    goToPage(page) {
+        this.pageNumber = page;
+        this.inputPageNumber = page;
+    }
+
+    inputPageChange($event) {
+        if(this.inputPageNumber >= 0 &&  this.inputPageNumber <= this.pages.length) {
+            this.pageNumber = this.inputPageNumber;
+        } else {
+            this.inputPageNumber = this.pageNumber;
+        }
     }
 
 }

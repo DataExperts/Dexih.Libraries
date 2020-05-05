@@ -97,6 +97,13 @@ export class TableComponent implements OnInit, AfterViewInit {
   // arrayData: Observable<string[][]> = this.arrayData.asObservable();
   public arrayColumns: Array<any>;
 
+  public largeData: Array<any>;
+
+  public largeColumns = [
+    { name: 'item number' },
+    { name: 'item' },
+  ];
+
   constructor(private cdr: ChangeDetectorRef) {}
 
   ngOnInit() {
@@ -129,6 +136,11 @@ export class TableComponent implements OnInit, AfterViewInit {
         'footer2 **bold** [link](http://google.com)', ['a', 'b', 'c'], childNodes, eEnum.enum3, null));
 
     this.tableData.next(data);
+
+    this.largeData = new Array(10000);
+    for (let i = 0; i < 10000; i++) {
+      this.largeData[i] = [i,  `item ${i}`];
+    }
 
     setTimeout(() => {
         this.delayedData = [];

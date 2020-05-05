@@ -96,6 +96,8 @@
                     <input [formControl]="filterControl" class="form-control input-md" placeholder="Search..." type="search"
                         name="filterString" />
                 </div>
+
+                <ng-template [ngTemplateOutlet]="paginator"></ng-template>
             </div>
 
         </div>
@@ -142,8 +144,8 @@
                 <tr *ngIf="tableItems.length == 0 || !currentColumns">
                     <td [attr.colspan]="columnCount">There are no rows available.</td>
                 </tr>
-                <ng-template ngFor let-tableItem [ngForOf]="tableItems" let-i="index">
-                    <tr name="dexih-table-row" [hidden]="!(data && !tableItem.isFiltered)" [class.table-primary]="tableItem?.isSelected" cdkDrag>
+                <ng-template ngFor let-tableItem [ngForOf]="tableItems | tableFilter:enablePages:rowsPerPage:pageNumber" let-i="index">
+                    <tr name="dexih-table-row" [class.table-primary]="tableItem?.isSelected" cdkDrag>
                         <div *cdkDragPreview class="container">
                             <div class="row">
                                 <div class="col-sm list-group-item list-group-item-secondary" *ngFor="let column of currentColumns | slice:0:5; let columnIndex = index;">
@@ -198,7 +200,7 @@
                     There are no rows available.
                 </div>
             </div>
-            <ng-template ngFor let-tableItem [ngForOf]="tableItems" let-i="index">
+            <ng-template ngFor let-tableItem [ngForOf]="tableItems | tableFilter:enablePages:rowsPerPage:pageNumber" let-i="index">
                 <div class="card" >
                     <div class="card-body p-0">
                           <table class="table" [class.table-primary]="tableItem?.isSelected">
@@ -252,8 +254,11 @@
                 </div>
                 </div>
             </ng-template>
+            
         </div>
-    </div>
+
+        <ng-template [ngTemplateOutlet]="paginator"></ng-template>
+</div>
 
     <div *ngIf="!tableItems && !error && !hideTable">
         <div class="row">
@@ -266,3 +271,27 @@
         </div>
     </div>
 </div>
+
+<ng-template #paginator>
+    <nav *ngIf="enablePages && rowCount > rowsPerPage">
+        <ul class="pagination justify-content-end">
+            <li class="page-item">
+                <a class="page-link" [ngClass]="{'disabled': pageNumber === 1}" href="javascript:void(0);"
+                    (click)="goToPage(0)" tabindex="-1">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <ng-template ngFor let-page [ngForOf]="pages">
+                <li *ngIf="page !== pageNumber && (page === 1 || page === pages.length || (page > pageNumber -3 && page < pageNumber + 3))" class="page-item"><a
+                        class="page-link" href="javascript:void(0);" (click)="goToPage(page)">{{page}}</a></li>
+                <input *ngIf="page === pageNumber" type="number" [(ngModel)]="inputPageNumber" (change)="inputPageChange($event)" style="width: 80px;">
+    
+            </ng-template>
+            <li class="page-item">
+                <a class="page-link" href="javascript:void(0);" (click)="goToPage(pageNumber + 1)">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</ng-template>

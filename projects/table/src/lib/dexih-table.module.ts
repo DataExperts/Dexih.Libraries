@@ -7,6 +7,7 @@ import { NgxMdModule } from 'ngx-md';
 
 import { DexihTableCellComponent } from './dexih-table-cell.component';
 import { DexihTableComponent } from './dexih-table.component';
+import {TableFilterPipe} from './table-filter.pipe';
 
 @NgModule({
   imports: [
@@ -19,6 +20,7 @@ import { DexihTableComponent } from './dexih-table.component';
   declarations: [
     DexihTableComponent,
     DexihTableCellComponent,
+    TableFilterPipe
   ],
   exports: [
     DexihTableComponent
