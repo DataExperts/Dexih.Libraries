@@ -97,7 +97,9 @@
                         name="filterString" />
                 </div>
 
-                <ng-template [ngTemplateOutlet]="paginator"></ng-template>
+                <div *ngIf="enablePages && rowCount > rowsPerPage" class="ml-1">
+                    <ng-template [ngTemplateOutlet]="paginator"></ng-template>
+                </div>
             </div>
 
         </div>
@@ -257,7 +259,10 @@
             
         </div>
 
-        <ng-template [ngTemplateOutlet]="paginator"></ng-template>
+        <div *ngIf="enablePages && rowCount > rowsPerPage" class="m-1">
+            <ng-template [ngTemplateOutlet]="paginator"></ng-template>
+        </div>
+        
 </div>
 
     <div *ngIf="!tableItems && !error && !hideTable">
@@ -273,11 +278,11 @@
 </div>
 
 <ng-template #paginator>
-    <nav *ngIf="enablePages && rowCount > rowsPerPage">
+    <nav >
         <ul class="pagination justify-content-end">
-            <li class="page-item">
-                <a class="page-link" [ngClass]="{'disabled': pageNumber === 1}" href="javascript:void(0);"
-                    (click)="goToPage(0)" tabindex="-1">
+            <li class="page-item" [class.disabled]="pageNumber === 1 ? true : null">
+                <a class="page-link" [class.disabled]="pageNumber === 1 ? true : null" href="javascript:void(0);"
+                    (click)="goToPage(1)" tabindex="-1">
                     <span aria-hidden="true">&laquo;</span>
                 </a>
             </li>
@@ -287,8 +292,8 @@
                 <input *ngIf="page === pageNumber" type="number" [(ngModel)]="inputPageNumber" (change)="inputPageChange($event)" style="width: 80px;">
     
             </ng-template>
-            <li class="page-item">
-                <a class="page-link" href="javascript:void(0);" (click)="goToPage(pageNumber + 1)">
+            <li class="page-item" [class.disabled]="pageNumber === pages.length ? true : null">
+                <a class="page-link" [class.disabled]="pageNumber === pages.length ? true : null" href="javascript:void(0);" (click)="goToPage(pageNumber + 1)">
                     <span aria-hidden="true">&raquo;</span>
                 </a>
             </li>

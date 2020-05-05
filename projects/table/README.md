@@ -257,6 +257,13 @@ Action & Status Headings
 - `rowStatusHeading` (Status default) - The heading for the rowStatus column.
 - `actionHeading` (Action default) - The heading for the action column.
 
+Pagination
+- `enablePages` (true default) - Enables the paginator.
+- `rowsPerPage` (100 default) - Sets the number of rows per page.
+
+Tags
+- `Tags` - An Array<Tag>.  Contains the possible tags for the table.  Example: [{color: 'blue', name: 'blue'}, {color:'ref', name: 'red'}].
+
 The templates objects can be populated using `ng-template` tags within the `dexih-table` selection, as in the following sample:
 
 ```xml

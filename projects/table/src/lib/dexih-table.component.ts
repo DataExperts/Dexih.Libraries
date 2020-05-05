@@ -344,7 +344,12 @@ export class DexihTableComponent implements OnInit, OnDestroy, OnChanges, AfterV
             }
 
             let pageCount = Math.ceil(this.rowCount / this.rowsPerPage);
-            this.pages = Array(pageCount).fill(pageCount).map( (x,i) => i+1 ); // [1,2,3,4,5]
+            this.pages = Array(pageCount).fill(pageCount).map( (x,i) => i+1 );
+
+            if (this.pageNumber > this.pages.length) { 
+                this.pageNumber = this.pages.length; 
+                this.inputPageNumber = this.pages.length;
+            }
 
 
             if (this.sortColumn) {

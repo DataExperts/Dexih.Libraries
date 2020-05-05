@@ -10,22 +10,38 @@ export class TableFilterPipe implements PipeTransform {
         return [];
     }
 
+    let array;
+
     if (enablePages) {
-        let startRow = (pageNumber-1)*rowsPerPage;
-        let endRow = pageNumber*rowsPerPage;
+        let startRow = (pageNumber-1) * rowsPerPage;
+        let endRow = pageNumber * rowsPerPage;
         let count = 0;
-        return items.filter(c => {
-            if(c.isFiltered) {
-                return false;
-            } else {
-                let filter = count >= startRow && count < endRow;
-                count++;
-                return filter;
+        let arrayCount = 0;
+        array = [rowsPerPage];
+        for(let i = 0; i < items.length && arrayCount <= rowsPerPage; i++) {
+          let c = items[i];
+          if(c.isFiltered) {
+            continue;
+        } else {
+          count++;
+          if(count > startRow && count <= endRow)
+            {
+              array[arrayCount++] = c;
             }
-        });
+        }
+      }
+
+      if(arrayCount != rowsPerPage) {
+        array = array.slice(0, arrayCount);
+      } else {
+        array = array;
+      }
+      
+
     } else {
-        return items.filter(c => !c.isFiltered);
+        array = items.filter(c => !c.isFiltered);
     }
+    return array;
   }
 }
 

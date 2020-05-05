@@ -84,7 +84,13 @@ export class TableComponent implements OnInit, AfterViewInit {
     {color: 'white', name: 'white'},
     {color: 'yellow', name: 'yellow'},
     {color: 'black', name: 'black'},
-  ]
+  ];
+
+  largeColumns = [
+    { title: 'row', tooltip: 'toolTip', width: '1%', align: 'center' },
+    { name: 'markdown', title: 'Markdown', format: 'Md', footer: 'markdownFooter', tags: 'tags' },
+    { name: 'enumValue', title: 'Enum', format: 'Enum', enum: eEnum }
+  ];
 
   public tableData = new BehaviorSubject<Array<DataModel>>(null);
   // tableData: Observable<Array<DataModel>> = this.tableData.asObservable();
@@ -98,11 +104,6 @@ export class TableComponent implements OnInit, AfterViewInit {
   public arrayColumns: Array<any>;
 
   public largeData: Array<any>;
-
-  public largeColumns = [
-    { name: 'item number' },
-    { name: 'item' },
-  ];
 
   constructor(private cdr: ChangeDetectorRef) {}
 
@@ -139,7 +140,9 @@ export class TableComponent implements OnInit, AfterViewInit {
 
     this.largeData = new Array(10000);
     for (let i = 0; i < 10000; i++) {
-      this.largeData[i] = [i,  `item ${i}`];
+      this.largeData[i] = new DataModel(i, `row ${i}`, 'row 1 footer', 'row 1 header', new Date(date.getTime() + 30000), date,
+      true, '<b>bold 1</b>', simpleObject, 'tip 1', 'fa fa-spin fa-cog', 'markdown **bold**', 'footer **bold**', ['a', 'b', 'c'],
+      childNodes, eEnum.enum1, [this.tags[0], this.tags[1]])
     }
 
     setTimeout(() => {
