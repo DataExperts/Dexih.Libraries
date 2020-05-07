@@ -11,3 +11,17 @@
     overflow: hidden; 
     white-space: nowrap;
 }
+
+.cancel-border {
+    border-top-right-radius: .25rem;
+    border-bottom-right-radius: .25rem;
+    border-top-left-radius: 0rem;
+    border-bottom-left-radius: 0rem;
+}
+
+.progress-border {
+    border-top-right-radius: 0rem;
+    border-bottom-right-radius: 0rem;
+    border-top-left-radius: .25rem;
+    border-bottom-left-radius: .25rem;
+}

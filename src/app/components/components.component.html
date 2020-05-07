@@ -265,38 +265,40 @@ this should have no padding.
             </dexih-widget>
 
         <dexih-widget title="Progress" [padding]="true" iconClass="fa fa-lg fa-fw fa-database">
-            <dexih-progressbar width="100px" class="m-3" [animate]="true" [showCancel]="true" (cancelled)="cancelled()" (progressClick)="progress()"
-                value="90" type="success">
-                smaller width
+            <dexih-button (click)="startAnimateProgress()">start</dexih-button>
+            <dexih-button (click)="stopAnimateProgress()">stop</dexih-button>
+            <dexih-progressbar width="100px" class="m-3" [showCancel]="true" (cancelled)="cancelled()" (progressClick)="progress()"
+                [value]="percent" type="success">
+                animated {{percent}}
             </dexih-progressbar>
 
 
-            <dexih-progressbar class="m-3" [animate]="true" [showCancel]="true" (cancelled)="cancelled()" (progressClick)="progress()"
+            <dexih-progressbar class="m-3" [showCancel]="true" (cancelled)="cancelled()" (progressClick)="progress()"
                 value="0" type="success">
                 Not started
             </dexih-progressbar>
         
-            <dexih-progressbar class="m-3" [animate]="true" [showCancel]="true" (cancelled)="cancelled()" (progressClick)="progress()"
-                value="25" type="success">
+            <dexih-progressbar class="m-3" [showCancel]="true" (cancelled)="cancelled()" (progressClick)="progress()"
+                value="25" type="warning">
                 25% complete
             </dexih-progressbar>
         
-            <dexih-progressbar class="m-3" [animate]="true" [showCancel]="true" (cancelled)="cancelled()" (progressClick)="progress()"
-                value="50" type="success">
+            <dexih-progressbar class="m-3" [showCancel]="true" (cancelled)="cancelled()" (progressClick)="progress()"
+                value="50" type="info">
                 50% complete
             </dexih-progressbar>
         
-            <dexih-progressbar class="m-3" [animate]="true" [showCancel]="true" (cancelled)="cancelled()" (progressClick)="progress()"
-                value="75" type="success">
+            <dexih-progressbar class="m-3"  [showCancel]="true" (cancelled)="cancelled()" (progressClick)="progress()"
+                value="75" type="danger">
                 75% complete
             </dexih-progressbar>
         
-            <dexih-progressbar class="m-3" [animate]="true" [showCancel]="true" (cancelled)="cancelled()" (progressClick)="progress()"
-                value="100" type="success">
+            <dexih-progressbar class="m-3" [showCancel]="true" (cancelled)="cancelled()" (progressClick)="progress()"
+                value="100" type="primary">
                 100% complete
             </dexih-progressbar>
 
-            <dexih-progressbar class="m-3" [animate]="true" [showCancel]="false" (progressClick)="progress()"
+            <dexih-progressbar class="m-3" [showCancel]="false" (progressClick)="progress()"
                 value="100" type="success">
                 100% complete no cancel
             </dexih-progressbar>

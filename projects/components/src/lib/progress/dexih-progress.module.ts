@@ -1,9 +1,7 @@
 import {NgModule} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { DexihProgressDirective } from './dexih-progress.directive';
 import { DexihProgressbarComponent } from './dexih-progress.component';
-import { DexihBarComponent } from './dexih-bar.component';
 import { RouterModule } from '@angular/router';
 
 @NgModule({
@@ -13,9 +11,7 @@ import { RouterModule } from '@angular/router';
     RouterModule
   ],
   declarations: [
-    DexihProgressDirective,
     DexihProgressbarComponent,
-    DexihBarComponent
   ],
   exports: [DexihProgressbarComponent],
 })

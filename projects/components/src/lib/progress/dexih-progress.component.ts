@@ -1,13 +1,12 @@
 
-import {Component, Input, Output, EventEmitter} from '@angular/core';
+import {Component, Input, Output, EventEmitter, OnChanges, SimpleChanges} from '@angular/core';
 
 @Component({
     selector: 'dexih-progressbar, [dexih-progressbar]',
     templateUrl: './dexih-progress.component.html',
     styleUrls: [ './dexih-progress.component.scss']
 })
-export class DexihProgressbarComponent  {
-    @Input() public animate: boolean;
+export class DexihProgressbarComponent implements OnChanges  {
     @Input() public max = 100;
     @Input() public type: string;
     @Input() public value: number;
@@ -17,6 +16,12 @@ export class DexihProgressbarComponent  {
 
     @Output() cancelled = new EventEmitter();
     @Output() progressClick = new EventEmitter();
+
+    public percent: number;
+
+    ngOnChanges(simpleChanges: SimpleChanges) {
+        this.percent = +(100 * this.value / this.max).toFixed(2);
+    }
 
     onClick()     {
         this.progressClick.emit();

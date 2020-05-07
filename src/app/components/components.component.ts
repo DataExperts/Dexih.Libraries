@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { ToastMessage, DexihToastComponent, DexihModalComponent } from '../../../projects/components/src/public-api';
-import { isNumber } from 'util';
+
 
 @Component({
   selector: 'app-components',
@@ -55,6 +55,9 @@ export class ComponentsComponent {
 
   public isRefreshing = false;
   public refreshItems = [];
+
+  public timer;
+  public percent = 0;
 
   public complexTags = [
     {column: {key: 1, name: 'col1', color: 'blue'}},
@@ -155,5 +158,16 @@ export class ComponentsComponent {
     }, 1000);
   }
 
+  public startAnimateProgress() {
+
+    this.timer = setInterval(() => {
+      this.percent += 10;
+      if (this.percent > 100) { this.percent = 0;}
+    }, 1000);
+  }
+
+  public stopAnimateProgress() {
+    clearInterval(this.timer);
+  }
 }
 
