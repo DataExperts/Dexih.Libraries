@@ -2,7 +2,7 @@
   <button type="button" (click)="onClick($event)" [disabled]="disabled" [ngClass]="['btn', 'auto-compact', buttonClass]" [title]="title">
     <i *ngIf="busy" class="fa fa-spin fa-cog"></i>
     <i [class]="iconClass"></i>
-    <span *ngIf="!compact" [ngClass]="[autoCompact && iconClass ? 'auto-compact-item' : '']">
+    <span *ngIf="!compact && text" [ngClass]="[autoCompact && iconClass ? 'auto-compact-item' : '']">
         &nbsp;{{text}}
     </span>
     <span *ngIf="badge" class="badge " [ngClass]="[badgeClass]">{{badge}}</span>

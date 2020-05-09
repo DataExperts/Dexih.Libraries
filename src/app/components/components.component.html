@@ -272,6 +272,10 @@ this should have no padding.
                 animated {{percent}}
             </dexih-progressbar>
 
+            <dexih-progressbar class="m-3" [showCancel]="true" (cancelled)="cancelled()" (progressClick)="progress()"
+                value="0" type="success">
+                With a very long text that should be truncated with an ellipsis. With a very long text that should be truncated with an ellipsis.
+            </dexih-progressbar>
 
             <dexih-progressbar class="m-3" [showCancel]="true" (cancelled)="cancelled()" (progressClick)="progress()"
                 value="0" type="success">
@@ -585,6 +589,7 @@ this should have no padding.
             <form>
                 <dexih-button>Default</dexih-button>
                 <dexih-button iconClass="fa fa-bar-chart">With Icon</dexih-button>
+                <dexih-button iconClass="fa fa-bar-chart" tooltip='no text'></dexih-button>
                 <dexih-button iconClass="fa fa-bar-chart" badge="12">With Badge</dexih-button>
                 <dexih-button iconClass="fa fa-bar-chart" badge="12" badgeClass="badge-danger">Danger Badge
                 </dexih-button>
