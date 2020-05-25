@@ -43,7 +43,7 @@ export class DexihModalComponent implements OnInit {
             cancelButton = 'Cancel',
             details = null): Promise<string> {
 
-        if (this.modalRef) { return; }
+        if (this.modalRef) { return Promise.reject('The modal is already open'); }
         return new Promise<string>((resolve, reject) => {
             this.type = 'prompt';
             this.title = title;
@@ -61,7 +61,7 @@ export class DexihModalComponent implements OnInit {
     }
 
     public information(title: string, content: string, okButton = 'Close', details = null): Promise<boolean> {
-        if (this.modalRef) { return; }
+        if (this.modalRef) { return Promise.reject('The modal is already open'); }
         return new Promise<boolean>((resolve, reject) => {
             this.type = 'information';
             this.title = title;
@@ -76,7 +76,7 @@ export class DexihModalComponent implements OnInit {
     }
 
     public confirm(title: string, content: string, okButton = 'Ok', cancelButton = 'Cancel', details = null): Promise<boolean> {
-        if (this.modalRef) { return; }
+        if (this.modalRef) { return Promise.reject('The modal is already open'); }
         return new Promise<boolean>((resolve, reject) => {
             this.type = 'confirm';
             this.title = title;

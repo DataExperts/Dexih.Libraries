@@ -169,5 +169,9 @@ export class ComponentsComponent {
   public stopAnimateProgress() {
     clearInterval(this.timer);
   }
+
+  public textValueChange($event) {
+    window.alert('text selected - ' + $event);
+  }
 }
 

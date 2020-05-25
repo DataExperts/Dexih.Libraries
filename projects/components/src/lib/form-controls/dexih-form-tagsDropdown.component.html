@@ -32,10 +32,10 @@
                 [ngStyle]="{'background-color': item.color ? item.color : '#e5e7e9'}">
                 <span class="blend-text p-1">
                     {{item.label}}
-                    <button (click)="remove(i)" type="button" class="close" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
                 </span>
+                <button (click)="remove(i)" type="button" class="close" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
 
             <input class="form-control border-0 rounded-0 invisible" [disabled]="true">

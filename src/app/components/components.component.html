@@ -408,7 +408,7 @@ this should have no padding.
                     </ng-template>
                 </form-select>
 
-                <form-select label="With refresh" [items]="refreshItems" [enableTextEntry]="false" [showRefresh]="true" [isRefreshing]="isRefreshing"  (onRefresh)="onRefresh()" [enableFilter]="false">
+                <form-select label="With refresh" [items]="refreshItems"  [textEntryItems]="['value1', 'value2', 'value3']" [showRefresh]="true" textEntryItemsTitle="Text items" [isRefreshing]="isRefreshing" [enableTextEntryMatch]="false"  (onRefresh)="onRefresh()" [enableFilter]="false" (textValueChange)="textValueChange($event)">
                 </form-select>
 
                 <div>selected item key: {{selectedItem0}}</div>

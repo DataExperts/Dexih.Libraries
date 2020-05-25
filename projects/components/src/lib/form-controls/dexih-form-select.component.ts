@@ -109,7 +109,9 @@ export class DexihFormSelectComponent implements ControlValueAccessor, OnInit, O
                     if (this.hasValue(newValue) && this.enableTextEntryMatch) {
                         if (this.itemName) {
                             foundItem = this.flattenedItems
-                                .find(c => (<string>c[this.itemName]).toLocaleLowerCase() === newValue.toLowerCase());
+                                .find(c => (c && c[this.itemName] && c[this.itemName].toString().toLocaleLowerCase() === newValue.toLocaleLowerCase()) ||
+                                    (c && c[this.itemKey] && c[this.itemKey].toString().toLocaleLowerCase() === newValue.toLocaleLowerCase())
+                                );
                             if (this.hasValue(foundItem)) {
                                 this.selectedItem = foundItem;
                                 this.doManualControlUpdate = false;
@@ -125,7 +127,7 @@ export class DexihFormSelectComponent implements ControlValueAccessor, OnInit, O
                                 this.selectedItem = newValue;
                             }
                         } else {
-                            foundItem = this.flattenedItems.find(c => (<string>c).toLocaleLowerCase() === newValue.toLowerCase());
+                            foundItem = this.flattenedItems.find(c => c && c.toString().toLocaleLowerCase() === newValue.toLocaleLowerCase());
                             if (this.hasValue(foundItem)) {
                                 this.selectedItem = foundItem;
                                 this.doManualControlUpdate = false;
@@ -395,15 +397,6 @@ export class DexihFormSelectComponent implements ControlValueAccessor, OnInit, O
     }
 
     private setSelectedItem(value: any, items: Array<any>) {
-        // if (this.hasValue(this.itemKey)) {
-        //     if (this.hasValue(value) && items) {
-        //         this.selectedItem = items.find(c => c[this.itemKey] === value);
-        //     } else {
-        //         this.selectedItem = value;
-        //     }
-        // } else {
-        //     this.selectedItem = value;
-        // }
 
         this.selectedItem = this.lookupItem(value);
 
@@ -539,7 +532,7 @@ export class DexihFormSelectComponent implements ControlValueAccessor, OnInit, O
             // no selected item, then revert to previous one.
             this.doManualControlUpdate = false;
             if (this.hasValue(this.itemName) && this.hasValue(this.value)) {
-                let item = this.flattenedItems.find(c => c[this.itemKey] === this.value);
+                let item = this.flattenedItems.find(c => c && c[this.itemKey] === this.value);
                 if (item) {
                     this.textValue = item[this.itemName];
                 } else {
