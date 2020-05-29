@@ -523,6 +523,7 @@ this should have no padding.
                 <form-checkbox label="Checkbox with note" note="this describes the checkbox"></form-checkbox>
                 <form-checkbox label="Checkbox with error" errors="this checkbox has errors"></form-checkbox>
                 <form-checkbox label="Checkbox with error" [border]="true" errors="this checkbox has errors"></form-checkbox>
+                <form-checkbox label="Checkbox with custom values" [border]="true" [(ngModel)]="customCheckValue"  [ngModelOptions]="{standalone: true}" checkedValue="checked" unCheckedValue="unchecked"></form-checkbox> value is {{customCheckValue}}
             </form>
         </dexih-widget>
 

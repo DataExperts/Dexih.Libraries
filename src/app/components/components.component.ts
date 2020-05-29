@@ -59,6 +59,8 @@ export class ComponentsComponent {
   public timer;
   public percent = 0;
 
+  public customCheckValue = 'checked';
+
   public complexTags = [
     {column: {key: 1, name: 'col1', color: 'blue'}},
     {column: {key: 2, name: 'col2', color: 'red'}}

@@ -1,7 +1,7 @@
 <div *ngIf="!border">
     <div class="form-check">
         <div [ngClass]="{'is-invalid': errors, 'is-valid': !errors && isDirty}" [title]="errors">
-            <input class="form-check-input" [id]="id" type="checkbox" [disabled]="disabled" [(ngModel)]="value" (ngModelChange)="hasChanged($event)"
+            <input class="form-check-input" [id]="id" type="checkbox" [disabled]="disabled" [(ngModel)]="isChecked" (ngModelChange)="hasChanged($event)"
                 [ngClass]="{'is-invalid': errors, 'is-valid': !errors && isDirty}" />
             <label class="form-check-label" [for]="id">{{label}}
                 <ng-container *ngTemplateOutlet="tempOutlet" ></ng-container>
@@ -16,7 +16,7 @@
 <div *ngIf="border">
     <div class="input-group">
         <div class="input-group-text w-100" [ngClass]="{'is-invalid': errors, 'is-valid': !errors && isDirty}">
-            <input [id]="id" type="checkbox" [disabled]="disabled" [(ngModel)]="value" (ngModelChange)="hasChanged($event)"
+            <input [id]="id" type="checkbox" [disabled]="disabled" [(ngModel)]="isChecked" (ngModelChange)="hasChanged($event)"
                 [ngClass]="{'is-invalid': errors, 'is-valid': !errors && isDirty}" />
             <label class="form-check-label ml-1" [for]="id">{{label}}
                 <ng-container *ngTemplateOutlet="tempOutlet" ></ng-container>
