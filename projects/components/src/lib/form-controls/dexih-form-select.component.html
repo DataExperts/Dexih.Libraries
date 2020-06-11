@@ -5,11 +5,23 @@
     </label>
     
     <div #dropdown dropdown [autoClose]="false" class="input-group" style="width: 100%" (onShown)="shown()">
-        <div class="input-group" [id]="id" (click)="dropdownToggle()" style="width: 100%">
+        <div class="input-group" [id]="id" (click)="dropdownToggle()" style="width: 100%" [ngClass]="{ 'border rounded': border,  'border-danger': errors, 'border-success': !errors && isDirty}">
             <div *ngIf="labelLeft" class="input-group-prepend">
                 <span class="input-group-text" [ngClass]="{'border-0 rounded-0 bg-transparent': !border}"> {{labelLeft}}</span>
             </div>
 
+            <ng-template [ngIf]="multiSelect" >
+                <div *ngFor="let item of value; let i = index" class="border rounded my-auto ml-1 "
+                [ngStyle]="{'background-color': item.color ? item.color : '#e5e7e9'}">
+                    <span class="blend-text p-1">
+                        {{itemName && item ? item[itemName] : item}}
+                    </span>
+                    <button (click)="remove(i)" type="button" class="close" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </ng-template>
+            
             <input 
                 [attr.readonly]="((enableFilter && showDropDown) || enableTextEntry) ? null : ''" 
                 [formControl]="manualControl" 
@@ -17,17 +29,13 @@
                 (keydown.arrowdown)="down()"
                 (keydown.arrowup)="up()"
                 (keyup.enter)="onTextEntryEnter($event)" 
-                class="form-control disabled-input bg-transparent" 
-                [ngClass]="{'border-0': !border, 'is-invalid': errors, 'is-valid': !errors && isDirty, 'font-italic': !selectedItem && textValue }"
+                class="form-control disabled-input bg-transparent  border-0" 
+                [ngClass]="{'is-invalid': errors, 'is-valid': !errors && isDirty, 'font-italic': !selectedItem && textValue }"
                 (focusout)="dropdownHide()"
                 [attr.autocapitalize]="autocapitalize"
                 [title]="errors"
-                />
+            />
 
-            <div *ngIf="errors && border" class="invalid-feedback order-1">
-                {{ errors }}
-            </div>
-            
             <div class="input-group-append">
                 <span class="input-group-text" [ngClass]="{'border-0 rounded-0 bg-transparent': !border}">
                     <i *ngIf="showDropDown" class="icon-append fa fa-caret-down"></i>
@@ -42,11 +50,17 @@
                 <ng-template *ngIf="startItemsTemplate" [ngTemplateOutlet]="startItemsTemplate">
                 </ng-template>
 
+                <li *ngIf="multiSelect && enableAddAll" class="scrollable-item">
+                    <a class="dropdown-item" (click)="addAll()" title="Add all items to the list">Add all</a>
+                </li>
+                <li *ngIf="multiSelect" class="scrollable-item">
+                    <a class="dropdown-item" (click)="clearAll()" title="Clear all items">Clear all</a>
+                </li>
+
                 <li *ngIf="showRefresh" >
                     <a class="dropdown-item" (click)="refresh()">
                         <ng-template [ngIf]="isRefreshing"><div class="d-flex d-flex-row"><div class="loader mr-1"></div>Refreshing...</div></ng-template>
                         <ng-template [ngIf]="!isRefreshing">Refresh ...</ng-template>
-                        
                     </a>
                 </li>
 
@@ -101,8 +115,11 @@
     
             </ng-template>
         </ul>
-        <ng-template></ng-template>
-</div>
+
+    </div>        
+    <div *ngIf="errors && border" class="invalid-feedback d-block order-1">
+        {{ errors }}
+    </div>
     <small *ngIf="note" class="form-text text-muted">
         <markdown (click)="sharedFunctions.getRoute($event)" [data]="note"></markdown>
     </small>     

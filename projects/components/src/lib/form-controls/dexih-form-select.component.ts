@@ -4,6 +4,7 @@ import { FormControl, ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/f
 import { BsDropdownDirective } from 'ngx-bootstrap/dropdown';
 import { Subscription } from 'rxjs';
 import { SharedFunctions } from './shared-functions';
+import { timeout } from 'rxjs/operators';
 
 @Component({
     selector: 'form-select',
@@ -42,8 +43,10 @@ export class DexihFormSelectComponent implements ControlValueAccessor, OnInit, O
     @Input() enableFilter = true;
     @Input() autoMatchTextEntry = true;
     @Input() autocapitalize = 'none';
+    @Input() multiSelect = false;
     @Output() textValueChange = new EventEmitter();
     @Output() onShown = new EventEmitter();
+    @Input() enableAddAll = false;
 
     @Input() showRefresh = false;
     @Input() isRefreshing = false;
@@ -91,6 +94,12 @@ export class DexihFormSelectComponent implements ControlValueAccessor, OnInit, O
     onChange: any = () => { };
     onTouched: any = () => { };
 
+    selectedKeys: any[];  // list of selected keys
+
+    isChangingCounter = 0;
+
+    oldValue = this.value;
+
     constructor() {
 
      }
@@ -106,6 +115,7 @@ export class DexihFormSelectComponent implements ControlValueAccessor, OnInit, O
                     this.selectedName = this.textValue;
 
                     let foundItem;
+                    
                     if (this.hasValue(newValue) && this.enableTextEntryMatch) {
                         if (this.itemName) {
                             foundItem = this.flattenedItems
@@ -159,22 +169,18 @@ export class DexihFormSelectComponent implements ControlValueAccessor, OnInit, O
                 this.doManualControlUpdate = true;
             });
 
-         // this.refreshItems();
-        // this.filterSubscription = this.manualControl.valueChanges
-        //     .pipe(debounceTime(500))
-        //     .subscribe(newValue => {
-        //         if (this.doManualControlUpdate) {
-        //             this.filterString = newValue;
-        //         }
-        //     });
-
         this.dropdown.onHidden
      }
 
     ngOnChanges(changes: SimpleChanges) {
+        if (changes.multiSelect) {
+            if (changes.multiSelect.currentValue) {
+                this.clearAll();
+            } else {
+                this.value = null;
+            }
+        }
         this.refreshItems();
-
-      //  this.writeValue(this.value);
     }
 
     ngOnDestroy() {
@@ -182,10 +188,37 @@ export class DexihFormSelectComponent implements ControlValueAccessor, OnInit, O
         if (this.manualSubscription) { this.manualSubscription.unsubscribe(); }
     }
 
+    
     hasChanged() {
-        this.onChange(this.value);
-        this.onTouched();
-        this.isDirty = true;
+        if (JSON.stringify(this.value) !== JSON.stringify(this.oldValue)) {
+            if (this.multiSelect) {
+                this.value = [...this.value];
+                this.oldValue = [...this.value];
+            } else {
+                this.oldValue = this.value;
+            }
+            this.onChange(this.value);
+            this.onTouched();
+            this.isDirty = true;
+            
+        }
+
+
+        // this.isChangingCounter++;
+
+        // // put in a delay bunch multiple changes into one event.
+        // setTimeout(() => {
+        //     this.isChangingCounter--;
+
+        //     if (this.isChangingCounter === 0) {
+        //         if (this.multiSelect) {
+        //             this.value = [...this.value];
+        //         }
+        //         this.onChange(this.value);
+        //         this.onTouched();
+        //         this.isDirty = true;
+        //     }
+        // }, 500);
     }
 
     registerOnChange(fn: any) {
@@ -201,39 +234,43 @@ export class DexihFormSelectComponent implements ControlValueAccessor, OnInit, O
         return result;
     }
 
+    getItemName(value: any): string {
+        if (this.hasValue(this.itemName)) {
+            return value[this.itemName];
+        }
+
+        return value;
+    }
+
+    getItemKey(value: any): string {
+        if (this.hasValue(this.itemKey)) {
+            return value[this.itemKey];
+        }
+
+        return value;
+    }
+
     writeValue(value: any) {
         this.selectedItem = null;
         if (this.hasValue(value)) {
             this.value = value;
             this.setSelectedItem(this.value, this.items);
         } else {
-            this.selectedItem = null;
-            this.selectedName = '';
-            if (this.enableTextEntry) {
-                if (this.textValue) {
-                    this.selectedName = this.textValue;
-                    this.doManualControlUpdate = false;
-                    this.manualControl.setValue(this.textValue);
+            if (this.multiSelect) {
+                this.value = [];
+                this.selectedKeys = [];
+            } else {
+                this.selectedItem = null;
+                this.selectedName = '';
+                if (this.enableTextEntry) {
+                    if (this.textValue) {
+                        this.selectedName = this.textValue;
+                        this.doManualControlUpdate = false;
+                        this.manualControl.setValue(this.textValue);
+                    }
                 }
-            }
+            }            
         }
-        // if (this.childItems) {
-        //     this.items.forEach(item => {
-        //         let childItems = <Array<any>> item[this.childItems];
-
-        //         if (this.grandChildItems) {
-        //             childItems.forEach(childItem => {
-        //                 if (this.hasValue(value) && !this.hasValue(this.selectedItem)) {
-        //                     this.setSelectedItem(value, childItem[this.grandChildItems]);
-        //                 }
-        //             });
-        //         } else {
-        //             if (this.hasValue(value) && !this.hasValue(this.selectedItem)) {
-        //                 this.setSelectedItem(value, childItems);
-        //             }
-        //         }
-        //     });
-        // }
     }
 
     lookupItem(value: any):any {
@@ -361,63 +398,131 @@ export class DexihFormSelectComponent implements ControlValueAccessor, OnInit, O
     }
 
     selectText(item: any) {
-        this.dropdown.toggle();
-        this.value = item;
-        this.textValue = item;
-        this.textValueChange.emit(this.textValue);
-        this.manualControl.setValue(item);
+        if (this.multiSelect) {
+            this.pushTextItem(item);
+        } else {
+            this.dropdown.toggle();
+            this.value = item;
+            // this.value = null;
+            this.textValue = item;
+            this.textValueChange.emit(this.textValue);
+            this.manualControl.setValue(item);
+        }
     }
 
     selectItem(selectedItem: any, hideDropdown = true) {
         this.needsUpdate = !hideDropdown;
 
-        this.selectedItem = selectedItem;
-        if (this.hasValue(selectedItem)) {
-            this.updateValueFromItem(selectedItem);
+        if (this.multiSelect) {
+            if (selectedItem) {
+                if (!this.selectedKeys) { this.selectedKeys = []; }
+    
+                const selectedKey = this.getItemKey(selectedItem);
 
-            if (this.hasValue(this.itemName)) {
-                this.selectedName = selectedItem[this.itemName];
-            } else {
-                this.selectedName = selectedItem;
+                // if the item already selected, then do nothing
+                if(this.selectedKeys.findIndex(c => c === selectedKey) >= 0) {
+                    return;
+                }
+
+                let item;
+
+                if (this.itemKey) {
+                    item = Object.assign({}, selectedItem);
+                    item.isKey = true;
+                } else {
+                    item = selectedItem;
+                }
+    
+                this.selectedKeys.push(selectedKey);
+                this.value.push(item);
             }
+        }
+        else {
+            this.selectedItem = selectedItem;
+            if (this.hasValue(selectedItem)) {
+                this.updateValueFromItem(selectedItem);
 
-            this.doManualControlUpdate = false;
-        } else {
-            this.value = null;
-            this.selectedName = '';
+                this.selectedName = this.getItemName(selectedItem);
+
+                this.doManualControlUpdate = false;
+            } else {
+                this.value = null;
+                this.selectedName = '';
+            }
         }
 
         this.textValue = this.selectedName;
+        this.textValueChange.emit(this.textValue);
         this.manualControl.setValue(this.selectedName);
         // this.textValueChange.emit(this.textValue);
 
         this.hasChanged();
-        if (hideDropdown) { this.dropdown.hide(); }
+        if (hideDropdown && !this.multiSelect) { 
+            this.dropdown.hide(); 
+        }
         // this.updateTextEntry(hideDropdown);
     }
 
     private setSelectedItem(value: any, items: Array<any>) {
+        if (this.multiSelect) {
+            if (this.hasValue(value)) {
+                if (this.itemKey) {
+                    this.selectedKeys = value.map(c => c[this.itemKey]);
+                } else {
+                    this.selectedKeys = [...value];
+                }
+            }
+        } else {
+            this.selectedItem = this.lookupItem(value);
 
-        this.selectedItem = this.lookupItem(value);
-
-        if (this.hasValue(this.itemName)) {
-            if (this.hasValue(value) && items) {
-                if (this.selectedItem) {
-                    this.selectedName = this.selectedItem[this.itemName];
+            if (this.hasValue(this.itemName)) {
+                if (this.hasValue(value) && items) {
+                    if (this.selectedItem) {
+                        this.selectedName = this.selectedItem[this.itemName];
+                    }
+                } else {
+                    this.selectedName = this.selectedItem;
                 }
             } else {
                 this.selectedName = this.selectedItem;
             }
-        } else {
-            this.selectedName = this.selectedItem;
-        }
 
-        this.doManualControlUpdate = false;
-        this.manualControl.setValue(this.selectedName);
+            this.doManualControlUpdate = false;
+            this.manualControl.setValue(this.selectedName);
+        }
     }
 
     onTextEntryEnter($event: any) {
         this.updateTextEntry();
+
+        if (this.multiSelect) {
+            this.pushTextItem(this.textValue);
+        }
+    }
+
+    // adds a text item to the tags (multiSelect only)
+    pushTextItem(value: any) {
+        if (!this.selectedKeys) { this.selectedKeys = []; }
+
+        // if the item already selected, then do nothing
+        if(this.selectedKeys.findIndex(c => c === value) >= 0) {
+            return;
+        }
+
+        let item: any;
+        if (this.hasValue(this.itemKey)) {
+            item = {};
+            item[this.itemKey] = value;
+            item[this.itemName] = value;
+            item['isKey'] = false;
+        } else {
+            item = value;
+        }
+
+        this.selectedKeys.push(value);
+        this.value.push(item);
+        this.manualControl.setValue('');
+        this.hasChanged();
     }
 
     // detect a click outside the control, and hide the dropdown
@@ -517,17 +622,45 @@ export class DexihFormSelectComponent implements ControlValueAccessor, OnInit, O
         }
     }
 
+    remove(index: number) {
+        if (index >= 0 && this.selectedKeys) {
+            this.selectedKeys.splice(index, 1);
+            this.value.splice(index, 1);
+            this.hasChanged();
+        }
+    }
+
+    addAll() {
+        if (this.itemKey) {
+            this.selectedKeys = this.sortedItems.map(c => c[this.itemKey]);
+        } else {
+            this.selectedKeys = [...this.sortedItems];;
+        }
+        
+        this.value = [...this.sortedItems];
+        this.hasChanged();
+        this.dropdown.hide();
+    }
+
+    clearAll() {
+        this.selectedKeys = [];
+        this.value = [];
+        this.hasChanged();
+    }
+
     shown() {
         this.onShown.emit();
     }
 
     private updateTextEntry() {
-        this.dropdown.toggle();
+        // this.dropdown.toggle();
+
+        if (this.multiSelect) { return; }
 
         if (this.enableTextEntry) {
             // for text entry enabled, just set the current value and emit.
-            this.value = this.selectedItem;
             this.textValueChange.emit(this.textValue);
+            this.value = this.textValue;
         } else if (!this.hasValue(this.selectedItem)) {
             // no selected item, then revert to previous one.
             this.doManualControlUpdate = false;
@@ -556,9 +689,7 @@ export class DexihFormSelectComponent implements ControlValueAccessor, OnInit, O
 
         this.needsUpdate = false;
         this.filterString = '';
-        this.onChange(this.value);
-        this.onTouched();
-        this.isDirty = true;
+        this.hasChanged();
 
     }
 }

@@ -33,6 +33,10 @@ export class DexihFormTagsDropdownComponent implements ControlValueAccessor, OnC
     @Input() enableAddAll = false;
     @Input() returnKeys = true;
 
+    @Input() showRefresh = false;
+    @Input() isRefreshing = false;
+    @Output() onRefresh = new EventEmitter();
+
     @Output() onShown = new EventEmitter();
 
     @ViewChild(BsDropdownDirective, { static: true }) dropdown: BsDropdownDirective;
@@ -48,6 +52,8 @@ export class DexihFormTagsDropdownComponent implements ControlValueAccessor, OnC
 
     sortedItems: Array<ListItem>;
     sharedFunctions = new SharedFunctions();
+
+    private blockMenuClose = false;
 
     onChange: any = () => { };
     onTouched: any = () => { };
@@ -164,6 +170,20 @@ export class DexihFormTagsDropdownComponent implements ControlValueAccessor, OnC
         this.dropdown.hide();
     }
 
+    dropdownShow() {
+        this.dropdown.show();
+    }
+
+    dropdownHide(delay = 500) {
+        setTimeout(() => {
+            if (!this.blockMenuClose) {
+                this.dropdown.hide();
+            }
+            this.blockMenuClose = false;
+        },
+        delay);
+    }
+
     remove(index: number) {
         if (index >= 0 && this.selectedKeys) {
             this.selectedKeys.splice(index, 1);
@@ -183,6 +203,11 @@ export class DexihFormTagsDropdownComponent implements ControlValueAccessor, OnC
         this.selectedKeys = [];
         this.tags = [];
         this.hasChanged();
+    }
+
+    refresh() {
+        this.blockMenuClose = true;
+        this.onRefresh.emit();
     }
 
     shown() {

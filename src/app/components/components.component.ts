@@ -16,6 +16,9 @@ export class ComponentsComponent {
   public selectedItem: string;
   public textValue = 'text value';
 
+  public multiSelectedItems = ['item1', 'test1'];
+  public multiSelect = true;
+
   public selectedItem2 = 1;
   public textValue2: string = null;
 
@@ -66,6 +69,10 @@ export class ComponentsComponent {
     {column: {key: 2, name: 'col2', color: 'red'}}
   ];
 
+  public showMessage(message) {
+    this.toasts.add(new ToastMessage('info', 'message', message, 5000));
+  }
+
   public complexTagsSelected = [{column: {key: 1, name: 'col1'}}];
 
   public AddItems() {
@@ -73,23 +80,23 @@ export class ComponentsComponent {
   }
 
   public close() {
-    alert('close click');
+    this.showMessage('close click');
   }
 
   public show(value: string) {
-    alert(value);
+    this.showMessage(value);
   }
 
   public cancelled() {
-    alert('cancelled');
+    this.showMessage('cancelled');
   }
 
   public progress() {
-    alert('progress');
+    this.showMessage('progress');
   }
 
   public selectChange(value: string) {
-    alert('selected - ' + value);
+    this.showMessage('selected - ' + value);
   }
 
   public resize($event) {
@@ -140,7 +147,7 @@ export class ComponentsComponent {
   }
 
   public openChange() {
-    window.alert('open/close changed');
+    this.toasts.add(new ToastMessage('success', 'open/close changed',  null, 5000));
   }
 
   public opened() {
@@ -173,7 +180,7 @@ export class ComponentsComponent {
   }
 
   public textValueChange($event) {
-    window.alert('text selected - ' + $event);
+    this.toasts.add(new ToastMessage('success', 'text selected - ' + $event,  null, 5000));
   }
 }
 

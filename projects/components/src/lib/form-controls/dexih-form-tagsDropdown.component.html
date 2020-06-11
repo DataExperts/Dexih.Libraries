@@ -18,6 +18,13 @@
                     <a class="dropdown-item" (click)="clearAll()" title="Clear all items">Clear all</a>
                 </li>
 
+                <li *ngIf="showRefresh" >
+                    <a class="dropdown-item" (click)="refresh()">
+                        <ng-template [ngIf]="isRefreshing"><div class="d-flex d-flex-row"><div class="loader mr-1"></div>Refreshing...</div></ng-template>
+                        <ng-template [ngIf]="!isRefreshing">Refresh ...</ng-template>
+                    </a>
+                </li>
+
                 <div class="dropdown-divider"></div>
 
                 <li *ngFor="let item of sortedItems" class="scrollable-item">
