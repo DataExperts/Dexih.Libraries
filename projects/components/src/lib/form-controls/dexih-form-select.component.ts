@@ -47,6 +47,7 @@ export class DexihFormSelectComponent implements ControlValueAccessor, OnInit, O
     @Output() textValueChange = new EventEmitter();
     @Output() onShown = new EventEmitter();
     @Input() enableAddAll = false;
+    @Input() setTextEntryToValue = true;
 
     @Input() showRefresh = false;
     @Input() isRefreshing = false;
@@ -253,7 +254,23 @@ export class DexihFormSelectComponent implements ControlValueAccessor, OnInit, O
     writeValue(value: any) {
         this.selectedItem = null;
         if (this.hasValue(value)) {
-            this.value = value;
+            if (this.multiSelect) {
+                if (Array.isArray(value)) {
+                    this.value = value;
+                } else {
+                    this.value = [value];
+                }
+            } else {
+                if (Array.isArray(value)) {
+                    if (value.length > 0) {
+                        this.value = value[0];
+                    } else {
+                        this.value = [];
+                    }
+                } else {
+                    this.value = value;
+                }
+            }
             this.setSelectedItem(this.value, this.items);
         } else {
             if (this.multiSelect) {
@@ -402,8 +419,8 @@ export class DexihFormSelectComponent implements ControlValueAccessor, OnInit, O
             this.pushTextItem(item);
         } else {
             this.dropdown.toggle();
-            this.value = item;
-            // this.value = null;
+
+            this.value = this.setTextEntryToValue ? item : null;
             this.textValue = item;
             this.textValueChange.emit(this.textValue);
             this.manualControl.setValue(item);
@@ -631,6 +648,8 @@ export class DexihFormSelectComponent implements ControlValueAccessor, OnInit, O
     }
 
     addAll() {
+        if (!this.sortedItems) { return; }
+        
         if (this.itemKey) {
             this.selectedKeys = this.sortedItems.map(c => c[this.itemKey]);
         } else {
@@ -660,7 +679,8 @@ export class DexihFormSelectComponent implements ControlValueAccessor, OnInit, O
         if (this.enableTextEntry) {
             // for text entry enabled, just set the current value and emit.
             this.textValueChange.emit(this.textValue);
-            this.value = this.textValue;
+            this.value = this.setTextEntryToValue ? this.textValue : null;
+
         } else if (!this.hasValue(this.selectedItem)) {
             // no selected item, then revert to previous one.
             this.doManualControlUpdate = false;

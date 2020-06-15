@@ -19,6 +19,8 @@ export class ComponentsComponent {
   public multiSelectedItems = ['item1', 'test1'];
   public multiSelect = true;
 
+  public multiSelect2 = 'item1';
+
   public selectedItem2 = 1;
   public textValue2: string = null;
 

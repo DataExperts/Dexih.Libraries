@@ -101,7 +101,7 @@ export class DexihFormTagsDropdownComponent implements ControlValueAccessor, OnC
         if (!this.itemKey || (this.itemKey && this.returnKeys)) {
             return this.selectedKeys;
         } else {
-            if(this.selectedKeys) {
+            if(this.selectedKeys && this.sortedItems) {
                 return this.selectedKeys.map(key => this.sortedItems.find(c => c.key === key).item);
             } else {
                 return [];
@@ -139,7 +139,7 @@ export class DexihFormTagsDropdownComponent implements ControlValueAccessor, OnC
         });
 
         this.tags = [];
-        if (this.selectedKeys) {
+        if (this.selectedKeys && this.sortedItems) {
             this.selectedKeys.forEach(item => {
                 let itemLookup = this.sortedItems.find(c => c.key === item);
 
@@ -193,6 +193,8 @@ export class DexihFormTagsDropdownComponent implements ControlValueAccessor, OnC
     }
 
     addAll() {
+        if (!this.sortedItems) { return; }
+        
         this.selectedKeys = this.sortedItems.map(c => c.key);
         this.tags = this.sortedItems.map(c => { return {label: c.label, color: c.color}});
         this.hasChanged();

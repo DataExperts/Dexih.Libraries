@@ -2,13 +2,17 @@
 .auto-compact .auto-compact-item {
     max-width: 0;
     -webkit-transition: max-width 1s;
+    -webkit-transition-delay: 3s;
     transition: max-width 1s;
+    transition-delay: 3s;
     display: inline-block;
     vertical-align: top;
     white-space: nowrap;
     overflow: hidden;
   }
-  .auto-compact:hover .auto-compact-item {
+  .auto-compact:hover, .auto-compact:active .auto-compact-item {
     max-width: 15rem;
+    -webkit-transition-delay: 0s;
+    transition-delay: 0s;
   }
 }

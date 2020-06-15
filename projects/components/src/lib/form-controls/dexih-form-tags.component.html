@@ -10,7 +10,7 @@
                 <span class="input-group-text border-0"> {{labelLeft}}</span>
             </div>
     
-            <div *ngFor="let item of value" class="border rounded bg-light my-auto ml-1" >
+            <div *ngFor="let item of value" class="border rounded my-auto ml-1" [ngStyle]="{'background-color': '#e5e7e9'}">
                 {{item}}
                 <button (click)="remove(item)" type="button" class="close" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
