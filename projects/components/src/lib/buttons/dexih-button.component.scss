@@ -10,9 +10,16 @@
     white-space: nowrap;
     overflow: hidden;
   }
-  .auto-compact:hover, .auto-compact:active .auto-compact-item {
+  .auto-compact:hover .auto-compact-item {
     max-width: 15rem;
     -webkit-transition-delay: 0s;
     transition-delay: 0s;
   }
+
+  .auto-compact:active .auto-compact-item {
+    max-width: 15rem;
+    -webkit-transition-delay: 0s;
+    transition-delay: 0s;
+  }
+
 }
