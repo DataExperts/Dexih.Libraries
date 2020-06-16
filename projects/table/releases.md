@@ -1,5 +1,27 @@
 ## Releases Summary
 
+### Release 0.5.9
+
+* modified drag to use dropName.  Previous drop feature was broken for a few releases.
+* tested against version 8.2.0.
+
+### Release 0.5.9
+
+* Added color and formatting to the json fields.
+
+
+### Release 0.5.7
+
+* When values containing objects are passed in the data, they are now displayed as json.
+
+### Release 0.5.4
+
+* Updated select all to only select items which are not filtered.
+
+### Release 0.5.0
+
+* Updated to Angular 8.0.
+
 
 ### Release 0.4.0
 

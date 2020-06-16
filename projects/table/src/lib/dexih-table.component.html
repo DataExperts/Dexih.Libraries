@@ -9,7 +9,7 @@
         </div>
     </div>
 
-    <div *ngIf="actionsTemplate || selectedItemActionsTemplate || selectedItemsActionsTemplate || ( enableFilter && tableItems?.length > 0 && !hideTable) || tableHeaderTemplate" class="dexih-table-toolbar">
+    <div *ngIf="actionsTemplate || selectedItemActionsTemplate || selectedItemsActionsTemplate || ( enableFilter && tableItems?.length > 0 && !hideTable) || tableHeaderTemplate" class="dexih-table-toolbar" [ngClass]="{'dexih-table-toolbar-sticky': enableStickyToolbar}">
         <div class="d-flex d-flex-row">
             <div>
                 <div class="btn-toolbar">
@@ -63,7 +63,7 @@
                 </div>
             </div>
             
-            <div *ngIf="tableItems?.length > 0 && !hideTable" class="btn-toolbar ml-auto">
+            <div *ngIf="tableItems?.length >= 0 && !hideTable" class="btn-toolbar ml-auto">
                 <div  *ngIf="filterTemplate">
                     <ng-template [ngTemplateOutlet]="filterTemplate"
                         [ngTemplateOutletContext]="{items: currentSelectedItems}">
@@ -143,7 +143,7 @@
                 </tr>
             </thead>
             <tbody id="{{dropName}}" cdkDropList (cdkDropListDropped)="manualSortChange($event)">
-                <tr *ngIf="tableItems.length == 0 || !currentColumns">
+                <tr *ngIf="rowCount == 0 || !currentColumns">
                     <td [attr.colspan]="columnCount">There are no rows available.</td>
                 </tr>
                 <ng-template ngFor let-tableItem [ngForOf]="tableItems | tableFilter:enablePages:rowsPerPage:pageNumber" let-i="index">

@@ -13,7 +13,8 @@ import {
     Output,
     SimpleChanges,
     TemplateRef,
-    ViewChild
+    ViewChild,
+    HostListener
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable, Subscription } from 'rxjs';
@@ -38,6 +39,7 @@ export class DexihTableComponent implements OnInit, OnDestroy, OnChanges, AfterV
     @Input() public enableFilter = true;
     @Input() public filterString: string;
     @Input() public enableHeaderRow = true;
+    @Input() public enableStickyToolbar = false;
     @Input() public columns: Array<Column>;
     @Input() public sortColumn: string;
     @Input() public selectedItems: Array<any>;
@@ -75,7 +77,7 @@ export class DexihTableComponent implements OnInit, OnDestroy, OnChanges, AfterV
     @ContentChild('cell', {static: true }) public cellTemplate: TemplateRef<any>;
     @ContentChild('tableHeader', {static: true }) public tableHeaderTemplate: TemplateRef<any>;
     @ContentChild('filter', {static: true }) public filterTemplate: TemplateRef<any>;
-
+    
     @ViewChild('cdkDropList', {static: true }) public cdkDropList: ElementRef;
 
     public filterControl = new FormControl();
@@ -346,6 +348,8 @@ export class DexihTableComponent implements OnInit, OnDestroy, OnChanges, AfterV
             let pageCount = Math.ceil(this.rowCount / this.rowsPerPage);
             this.pages = Array(pageCount).fill(pageCount).map( (x,i) => i+1 );
 
+            if (this.pageNumber === 0) { this.pageNumber = 1; }
+
             if (this.pageNumber > this.pages.length) { 
                 this.pageNumber = this.pages.length; 
                 this.inputPageNumber = this.pages.length;
@@ -521,7 +525,6 @@ export class DexihTableComponent implements OnInit, OnDestroy, OnChanges, AfterV
             this.inputPageNumber = this.pageNumber;
         }
     }
-
 }
 
 

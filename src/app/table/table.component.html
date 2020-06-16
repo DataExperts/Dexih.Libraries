@@ -1,4 +1,8 @@
-<dexih-table [data]="null" heading="Table still loading">
+<div class="fixed-top bg-white">
+    <h1>Different Tables</h1>
+</div>
+
+<dexih-table [data]="null" heading="Table still loading" >
     <ng-template #actions let-items="items">
         <button class="btn btn-lg btn-danger">Cancel</button> 
         <input class="form-control" style="width:100px" />
@@ -14,7 +18,7 @@
 </dexih-table>
 <hr/>
 
-<dexih-table [data]="[]" [columns]="arrayColumns" heading="Table no data">
+<dexih-table [data]="[]" [columns]="arrayColumns" heading="Table no data and sticky toolbar" [enableStickyToolbar]="true">
     <ng-template #actions let-items="items">
         <button class="btn btn-success">Ok</button>
         <button class="btn btn-danger">Cancel</button>
@@ -67,7 +71,7 @@
 <dexih-table [data]="dataEmpty" heading="Table with auto generated column names (no rows)"></dexih-table>
 <hr/>
 
-<dexih-table [enableMultiSelect]="true" 
+<dexih-table [enableMultiSelect]="true" [enableStickyToolbar]="true"
     [enableSort]="true" [enableManualSort]="true" [enableSaveCsv]="true" (rowClick)="selectedItem($event)" heading="Table with export, sort, row action enabled."
     [columns]="columns" [dataObservable]="tableData" rowStatusHeading="Row Status Heading"  actionHeading="Action Heading"
 >

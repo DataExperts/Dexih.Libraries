@@ -8,6 +8,13 @@
   background: #fafafa;
 }
 
+.dexih-table-toolbar-sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 10000;
+}
+
 .dexih-table-heading {
 //  display:block;
   padding:1px 10px;
