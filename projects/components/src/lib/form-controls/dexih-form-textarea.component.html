@@ -2,7 +2,7 @@
     <label *ngIf="label" [for]="id" class="mt-1">
         {{label}}
         <a class="btn btn-outline-primary btn-sm" *ngIf="!hideToggle"
-            (click)='toggleState()'>{{isHidden == true ? (disabled ? 'Show' : 'Edit') : 'Hide'}}</a>
+            (click)='toggleState()'>{{isHidden == true ? (disabled ? 'Show' : (value ? 'Edit' : 'Add')) : 'Hide'}}</a>
         <a class="btn btn-outline-primary btn-sm ml-1" *ngIf="showCopy" (click)='copyMessage()'>
             <i class="fa fa-copy"></i>
             Copy
