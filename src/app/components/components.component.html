@@ -8,6 +8,11 @@
         <dexih-widget title="widget" [padding]="true">
             The widget content.
 
+            <div class="form-label-group" style="position: relative; margin-bottom: 1rem;">
+                <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+                <label for="inputEmail">Email address</label>
+              </div>
+
             <ng-template #footer>
                 footer template
             </ng-template>
@@ -388,6 +393,8 @@ this should have no padding.
                 <form-select label="Items added dynamically" [items]="dynamicItems" [enableTextEntry]="true" iconClass="fa fa-pie-chart"><dexih-button-refresh (click)="AddItems()"></dexih-button-refresh></form-select>
 
                 <form-select label="No Items no text entry" [enableTextEntry]="false" [items]="[]"></form-select>
+
+                <form-select label="Lots of items" [enableTextEntry]="false" [items]="longItems"></form-select>
 
                 <form-select label="Some manual items before and after" [items]="['item1', 'item2','item3']" [enableTextEntry]="true" [(ngModel)]="textValue" [ngModelOptions]="{standalone: true}" [enableFilter]="false">
                     <ng-template #startItems>

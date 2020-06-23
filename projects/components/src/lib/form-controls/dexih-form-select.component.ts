@@ -203,23 +203,6 @@ export class DexihFormSelectComponent implements ControlValueAccessor, OnInit, O
             this.isDirty = true;
             
         }
-
-
-        // this.isChangingCounter++;
-
-        // // put in a delay bunch multiple changes into one event.
-        // setTimeout(() => {
-        //     this.isChangingCounter--;
-
-        //     if (this.isChangingCounter === 0) {
-        //         if (this.multiSelect) {
-        //             this.value = [...this.value];
-        //         }
-        //         this.onChange(this.value);
-        //         this.onTouched();
-        //         this.isDirty = true;
-        //     }
-        // }, 500);
     }
 
     registerOnChange(fn: any) {
@@ -370,12 +353,22 @@ export class DexihFormSelectComponent implements ControlValueAccessor, OnInit, O
         }
 
         if (this.sortItems) {
+            let hasItemName = this.hasValue(this.itemName);
             this.sortedItems = this.items.sort((a, b) => {
-                if (a[this.itemName] > b[this.itemName]) {
-                    return 1;
-                }
-                if (a[this.itemName] < b[this.itemName]) {
-                    return -1;
+                if(hasItemName) {
+                    if (a[this.itemName] > b[this.itemName]) {
+                        return 1;
+                    }
+                    if (a[this.itemName] < b[this.itemName]) {
+                        return -1;
+                    }
+                } else {
+                    if (a > b) {
+                        return 1;
+                    }
+                    if (a < b) {
+                        return -1;
+                    }
                 }
                 return 0;
             });
@@ -468,12 +461,13 @@ export class DexihFormSelectComponent implements ControlValueAccessor, OnInit, O
             }
         }
 
+        // run hasChanged before textValue changed, so users can see if an item is selected when textvalue changes.
+        this.hasChanged();
+
         this.textValue = this.selectedName;
         this.textValueChange.emit(this.textValue);
         this.manualControl.setValue(this.selectedName);
-        // this.textValueChange.emit(this.textValue);
 
-        this.hasChanged();
         if (hideDropdown && !this.multiSelect) { 
             this.dropdown.hide(); 
         }
@@ -677,9 +671,11 @@ export class DexihFormSelectComponent implements ControlValueAccessor, OnInit, O
         if (this.multiSelect) { return; }
 
         if (this.enableTextEntry) {
+            this.value = this.setTextEntryToValue ? this.textValue : null;
+            this.hasChanged();
+
             // for text entry enabled, just set the current value and emit.
             this.textValueChange.emit(this.textValue);
-            this.value = this.setTextEntryToValue ? this.textValue : null;
 
         } else if (!this.hasValue(this.selectedItem)) {
             // no selected item, then revert to previous one.
@@ -709,7 +705,6 @@ export class DexihFormSelectComponent implements ControlValueAccessor, OnInit, O
 
         this.needsUpdate = false;
         this.filterString = '';
-        this.hasChanged();
 
     }
 }

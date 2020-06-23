@@ -46,6 +46,8 @@ export class ComponentsComponent {
 
   public dynamicItems: string[] = null;
 
+  public longItems = [...Array(500).keys()];
+
   public modalInformationValue: string;
   public modalConfirmValue: string;
   public modalPromptValue: string;
