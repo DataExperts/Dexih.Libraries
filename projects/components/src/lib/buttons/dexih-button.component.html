@@ -4,7 +4,7 @@
   <i [class]="iconClass"></i>
   <span *ngIf="!compact" [ngClass]="[autoCompact && iconClass ? 'auto-compact-item' : '']" >
     <span *ngIf="text" class="ml-1">{{text}}</span>
-    <ng-content></ng-content>
+    <span class="ml-1"><ng-content></ng-content></span>
   </span>
   <span *ngIf="badge" class="badge ml-1" [ngClass]="[badgeClass]">{{badge}}</span>
 </a>
