@@ -225,6 +225,7 @@ Saving as Csv file properties:
 
 Table styling:
 - `enableStickyToolbar` (`true`, `false` default) - Enables the toolbar to stick to the top of the page when scrolling.
+- `toolBarZIndex` - Sets the z-Index for the toolbar for when the toolbar gets hidden (or hides) other items on the page.
 - `enableResponsive` (`true` default, `false`) - Enable bootstrap responsive table (suitable for mobile devices).
 - `tableClass` (default `table table-striped table-bordered table-hover`) - Css class to apply to the table;
 

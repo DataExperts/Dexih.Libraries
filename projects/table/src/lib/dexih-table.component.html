@@ -1,4 +1,3 @@
-<div class="p-0">
     <div *ngIf="heading" class="dexih-table-heading">
         <h3>{{heading}}</h3>
     </div>
@@ -9,7 +8,7 @@
         </div>
     </div>
 
-    <div *ngIf="actionsTemplate || selectedItemActionsTemplate || selectedItemsActionsTemplate || ( enableFilter && tableItems?.length > 0 && !hideTable) || tableHeaderTemplate" class="dexih-table-toolbar" [ngClass]="{'dexih-table-toolbar-sticky': enableStickyToolbar}">
+    <div *ngIf="actionsTemplate || selectedItemActionsTemplate || selectedItemsActionsTemplate || ( enableFilter && tableItems?.length > 0 && !hideTable) || tableHeaderTemplate" class="dexih-table-toolbar" [ngClass]="{'dexih-table-toolbar-sticky': enableStickyToolbar}" [ngStyle]="{'z-index': toolbarZIndex}" >
         <div class="d-flex d-flex-row">
             <div>
                 <div class="btn-toolbar">
@@ -265,17 +264,17 @@
         
 </div>
 
-    <div *ngIf="!tableItems && !error && !hideTable">
-        <div class="row">
-            <div class="col-lg-9 col-md-7 col-sm-12 col-xs-12">
-                <div class="table-loader-container">
-                <div class="table-loader"></div>
-                <div name="dexih-data-loading" class="table-loader-text">{{loadingMessage}}</div>
-            </div>
-            </div>
+<div *ngIf="!tableItems && !error && !hideTable">
+    <div class="row">
+        <div class="col-lg-9 col-md-7 col-sm-12 col-xs-12">
+            <div class="table-loader-container">
+            <div class="table-loader"></div>
+            <div name="dexih-data-loading" class="table-loader-text">{{loadingMessage}}</div>
+        </div>
         </div>
     </div>
 </div>
+
 
 <ng-template #paginator>
     <nav >

@@ -18,7 +18,7 @@
 </dexih-table>
 <hr/>
 
-<dexih-table [data]="[]" [columns]="arrayColumns" heading="Table no data and sticky toolbar" [enableStickyToolbar]="true">
+<dexih-table [data]="[]" [columns]="arrayColumns" heading="Table no data and sticky toolbar" [enableStickyToolbar]="true" [toolbarZIndex]="10000">
     <ng-template #actions let-items="items">
         <button class="btn btn-success">Ok</button>
         <button class="btn btn-danger">Cancel</button>

@@ -40,6 +40,7 @@ export class DexihTableComponent implements OnInit, OnDestroy, OnChanges, AfterV
     @Input() public filterString: string;
     @Input() public enableHeaderRow = true;
     @Input() public enableStickyToolbar = false;
+    @Input() public toolbarZIndex: number;
     @Input() public columns: Array<Column>;
     @Input() public sortColumn: string;
     @Input() public selectedItems: Array<any>;
