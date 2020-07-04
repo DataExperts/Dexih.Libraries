@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { ListItem } from 'components/lib/form-controls/shared-functions';
+import { ListItem } from './shared-functions';
 
 @Component({
     selector: 'base-input',

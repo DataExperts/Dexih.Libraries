@@ -1,4 +1,5 @@
 import { Component, Input, ContentChild, TemplateRef } from '@angular/core';
+import { SharedFunctions } from './shared-functions';
 
 @Component({
     selector: 'base-template',
@@ -7,6 +8,7 @@ import { Component, Input, ContentChild, TemplateRef } from '@angular/core';
 })
 
 export class BaseTemplateComponent {
+    @Input() id: string;
     @Input() label: string;
     @Input() subLabel: string;
     @Input() note: string;
@@ -15,5 +17,6 @@ export class BaseTemplateComponent {
 
     @ContentChild('labelContent', {static: true }) public labelContentTemplate: TemplateRef<any>;
 
+    sharedFunctions = new SharedFunctions();
     constructor() { }
 }
