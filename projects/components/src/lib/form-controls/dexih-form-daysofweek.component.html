@@ -51,10 +51,10 @@
         </div>
 
     </div>
+
     <div *ngIf="errors" class="invalid-feedback d-block">
         {{ errors }}
     </div>
-
 
     <small *ngIf="note" class="form-text text-muted">
         <markdown (click)="sharedFunctions.getRoute($event)" [data]="note"></markdown>

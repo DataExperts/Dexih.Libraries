@@ -4,7 +4,6 @@ import { FormControl, ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/f
 import { BsDropdownDirective } from 'ngx-bootstrap/dropdown';
 import { Subscription } from 'rxjs';
 import { SharedFunctions } from './shared-functions';
-import { timeout } from 'rxjs/operators';
 
 @Component({
     selector: 'form-select',
@@ -14,9 +13,12 @@ import { timeout } from 'rxjs/operators';
 })
 export class DexihFormSelectComponent implements ControlValueAccessor, OnInit, OnDestroy, OnChanges {
     @Input() label: string;
+    @Input() subLabel: string;
     @Input() labelLeft: string;
     @Input() note: string;
     @Input() errors: string;
+    @Input() maxlength: number;
+    @Input() disabled = false;
     @Input() value: any;
     @Input() iconClass: string; // only displays where there are no elements.
     @Input() items: Array<any>;
@@ -48,6 +50,7 @@ export class DexihFormSelectComponent implements ControlValueAccessor, OnInit, O
     @Output() onShown = new EventEmitter();
     @Input() enableAddAll = false;
     @Input() setTextEntryToValue = true;
+    @Input() floatingLabel: string;
 
     @Input() showRefresh = false;
     @Input() isRefreshing = false;
@@ -85,6 +88,7 @@ export class DexihFormSelectComponent implements ControlValueAccessor, OnInit, O
     selectedIndex: number;
 
     isDirty = false;
+    isTextEntry = false;
 
     showDropDown = true;
     disableInput = false;
@@ -106,7 +110,9 @@ export class DexihFormSelectComponent implements ControlValueAccessor, OnInit, O
      }
 
      ngOnInit() {
-        // monitor changes to the filter control, and update if updated after 500ms.
+         this.isTextEntry = ! this.hasValue(this.selectedItem) && this.hasValue(this.textValue);
+
+        // monitor changes to the filter control
         this.manualSubscription = this.manualControl.valueChanges
             .subscribe(newValue => {
                 if (this.doManualControlUpdate) {
@@ -128,6 +134,7 @@ export class DexihFormSelectComponent implements ControlValueAccessor, OnInit, O
                                 this.doManualControlUpdate = false;
                                 this.textValue = foundItem[this.itemName];
                                 this.manualControl.setValue(foundItem[this.itemName]);
+                                this.isTextEntry = false;
                                 if (!this.enableTextEntry) {
                                     this.updateValueFromItem(this.selectedItem);
 
@@ -135,6 +142,7 @@ export class DexihFormSelectComponent implements ControlValueAccessor, OnInit, O
                                     this.hasChanged();
                                 }
                             } else if (this.enableTextEntry) {
+                                this.isTextEntry = true;
                                 this.selectedItem = newValue;
                             }
                         } else {
@@ -144,12 +152,14 @@ export class DexihFormSelectComponent implements ControlValueAccessor, OnInit, O
                                 this.doManualControlUpdate = false;
                                 this.textValue = foundItem;
                                 this.manualControl.setValue(foundItem);
+                                this.isTextEntry = false;
                                 if (!this.enableTextEntry) {
                                     this.updateValueFromItem(this.selectedItem);
                                     this.textValueChange.emit(this.textValue);
                                     this.hasChanged();
                                 }
                             } else if (this.enableTextEntry) {
+                                this.isTextEntry = true;
                                 this.selectedItem = newValue;
                             }
                         }
@@ -274,7 +284,6 @@ export class DexihFormSelectComponent implements ControlValueAccessor, OnInit, O
     }
 
     lookupItem(value: any):any {
-        let found: any = null;
         for(let i = 0; i < this.items.length; i++) {
             let item = this.items[i];
             if (this.childItems) {
@@ -449,6 +458,8 @@ export class DexihFormSelectComponent implements ControlValueAccessor, OnInit, O
         }
         else {
             this.selectedItem = selectedItem;
+            this.isTextEntry = false;
+
             if (this.hasValue(selectedItem)) {
                 this.updateValueFromItem(selectedItem);
 
@@ -503,7 +514,7 @@ export class DexihFormSelectComponent implements ControlValueAccessor, OnInit, O
         }
     }
 
-    onTextEntryEnter($event: any) {
+    onTextEntryEnter() {
         this.updateTextEntry();
 
         if (this.multiSelect) {

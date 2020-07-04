@@ -14,6 +14,8 @@ import { DexihFormTagsDropdownComponent } from './dexih-form-tagsDropdown.compon
 import { DexihSelectFilterPipe } from './dexih-select-filter.pipe';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { NgxMdModule } from 'ngx-md';
+import { BaseInputComponent } from './base-input.component';
+import { BaseTemplateComponent } from './base-template.component';
 
 @NgModule({
   imports: [
@@ -34,6 +36,8 @@ import { NgxMdModule } from 'ngx-md';
     DexihFormTagsComponent,
     DexihFormTagsDropdownComponent,
     DexihSelectFilterPipe,
+    BaseInputComponent,
+    BaseTemplateComponent
   ],
   exports: [
     DexihFormInputComponent,

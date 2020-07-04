@@ -20,7 +20,7 @@ export class DexihFormTextAreaComponent implements OnInit, ControlValueAccessor 
     @Input() label: string;
     @Input() labelLeft: string;
     @Input() note: string;
-    @Input() placeholder: string;
+    @Input() placeholder: string = "";
     @Input() iconClass = 'fa fa-comment';
     @Input() errors: string;
     @Input() value: string;

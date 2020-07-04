@@ -1,4 +1,34 @@
+<base-template 
+    [label]="label" 
+    [subLabel]="subLabel" 
+    [note]="note"
+    [border]="true"
+    [errors]="errors"
+    >
+    
+<ng-template #labelContent>
+    <ng-content></ng-content>
+</ng-template>
 
+<base-input 
+            type="date"
+            [labelLeft]="labelLeft" 
+            [floatingLabel]="floatingLabel"
+            [placeholder]="placeholder" 
+            [iconClass]="iconClass"
+            [errors]="errors"
+            [border]="border"
+            [(ngModel)]="value" 
+            [ngModelOptions]="{standalone: true}" 
+            (ngModelChange)="hasChanged()"
+            [disabled]="disabled"
+            (keydown)="keydownEvent($event)">
+        </base-input>
+
+</base-template>
+
+
+<!-- 
 
 <div>
     <label *ngIf="label" [for]="id" class="mt-1">{{label}}
@@ -29,4 +59,4 @@
     <small *ngIf="note" class="form-text text-muted">
         <markdown (click)="sharedFunctions.getRoute($event)" [data]="note"></markdown>
     </small>
-</div>
+</div> -->

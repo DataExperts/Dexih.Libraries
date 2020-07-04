@@ -40,7 +40,7 @@
             The widget content.
         </div>
         <div dexihWidget #widget title="widget" [padding]="true" [showExpandButton]="true" height="300px" [scrollable]="true">
-            <p>width {{widget.getBodySize().width}}, height: {{widget.getBodySize().height}}</p>
+            <!-- <p>width {{widget.getBodySize().width}}, height: {{widget.getBodySize().height}}</p> -->
             <p>Lots of  content.</p>
             <p>Lots of  content.</p>
             <p>Lots of  content.</p>
@@ -316,10 +316,11 @@ this should have no padding.
 
         <dexih-widget title="Inputs" [padding]="true" iconClass="fa fa-lg fa-fw fa-database">
 
-            <form>
                 the value is {{inputString}}
                 <form-input placeholder="No labels" [(ngModel)]="inputString" [ngModelOptions]="{standalone: true}"></form-input>
                 <form-input autocapitalize="on" label="auto capitalize"></form-input>
+                <form-input floatingLabel="this is a floating label"></form-input>
+                <form-input labelLeft="left label also" floatingLabel="this is a floating label"></form-input>
                 <form-input label="input label" labelLeft="label left" note="a note to describe the input" placeholder="input something"></form-input>
                 <form-input label="input label" note="a note to describe the input" placeholder="input with icon" iconClass="fa fa-pie-chart"></form-input>
                 <form-input label="input with error" note="a note to describe the input and [link](http://dataexpertsgroup.com)" errors="this is invalid" placeholder="input something"
@@ -347,26 +348,23 @@ this should have no padding.
                         <form-input labelLeft="side by side" placeholder="input something" iconClass="fa fa-pie-chart"></form-input>
                     </div>
                 </div>
-            </form>
         </dexih-widget>
 
         <dexih-widget title="Text Areas" [padding]="true" iconClass="fa fa-lg fa-fw fa-database">
-            <form>
                 <form-textarea label="edit shown" [showCopy]="true" [isHidden]="false" value="a **bold** item, [a link](http://www.microsoft.com)"></form-textarea>
                 <form-textarea label="copy a key" [showCopy]="true" [isHidden]="true" [showPreview]="false" [disabled]="true" [rows]="1" value="abdefghijklmnopqrtruvwxyz"></form-textarea>
                 <form-textarea label="edit hidden" [isHidden]="true" value="a **bold** item"></form-textarea>
                 <form-textarea label="with errors" [isHidden]="true" value="a **bold** item" errors="the error"></form-textarea>
                 <form-textarea label="with note" [isHidden]="true" value="a **bold** item" note="a note describing the textarea"></form-textarea>
-            </form>
-
         </dexih-widget>
 
         <dexih-widget title="Dropdowns" [padding]="true" iconClass="fa fa-lg fa-fw fa-database">
-            <form>
                 <div>enableTextEntry=true</div>
                 <div>selected item: {{selectedItem}}</div>
                 <div>text value: {{textValue}}</div>
                 <form-select name="formSelect" label="Simple Select" [items]="['item1', 'item2','item3']" (ngModelChange)="selectChange($event)" [enableTextEntry]="true" [(ngModel)]="selectedItem" [ngModelOptions]="{standalone: true}" [(textValue)]="textValue" (onShown)="opened()"></form-select>
+
+                <form-select name="formSelect" label="Simple Select" [items]="['item1', 'item2','item3']" (ngModelChange)="selectChange($event)" [enableTextEntry]="true" floatingLabel="With Foating Label"></form-select>
 
                 <div>selected items: {{multiSelectedItems}}</div>
                 <form-select name="formSelect" label="Multi Select" [multiSelect]="multiSelect" [items]="['item1', 'item2','item3']" [textEntryItems]="['value1', 'value2', 'value3']" [enableTextEntry]="true" [(ngModel)]="multiSelectedItems" [ngModelOptions]="{standalone: true}" [(textValue)]="textValue"></form-select>
@@ -504,7 +502,6 @@ this should have no padding.
 
                 <div>enableTextEntry=true, enableKeySelect=false</div>
                 <div>selected item name: {{selectedItem8.name}}</div>
-                <div>text value: {{textValue8}}</div>
                 <form-select label="Select with grand parent/child key" 
                 [items]="
                 [{region: 'region1', categories: [
@@ -521,7 +518,6 @@ this should have no padding.
                 grandParentName='region' parentName='category' grandChildItems='items' childItems='categories' itemName="name" itemKey="key"
                 [enableTextEntry]="true" [enableFilter]="false" [enableKeySelect]="false"></form-select>
 
-            </form>
 
             <form-select label="Select with note" [items]="[{key:1, name:'item1'}, {key:2, name:'item2'}, {key:3, name:'item3'}]" itemName='name'
                 itemKey='key' note='this describes the selection'></form-select>
@@ -531,7 +527,6 @@ this should have no padding.
 
 
         <dexih-widget title="Checkboxes" [padding]="true" iconClass="fa fa-lg fa-fw fa-database">
-            <form>
                 <form-checkbox></form-checkbox>
                 <form-checkbox label="Simple Checkbox"></form-checkbox>
                 <form-checkbox>Check box with text content</form-checkbox>
@@ -541,41 +536,36 @@ this should have no padding.
                 <form-checkbox label="Checkbox with error" errors="this checkbox has errors"></form-checkbox>
                 <form-checkbox label="Checkbox with error" [border]="true" errors="this checkbox has errors"></form-checkbox>
                 <form-checkbox label="Checkbox with custom values" [border]="true" [(ngModel)]="customCheckValue"  [ngModelOptions]="{standalone: true}" checkedValue="checked" unCheckedValue="unchecked"></form-checkbox> value is {{customCheckValue}}
-            </form>
         </dexih-widget>
 
         <dexih-widget title="Date" [padding]="true" iconClass="fa fa-lg fa-fw fa-database">
-            <form>
                 <form-date placeholder="input date"></form-date>
                 <form-date labelLeft="label left"></form-date>
+                <form-date floatingLabel="floating label"></form-date>
                 <form-date label="input label" note="a note to describe the date" placeholder="input date"></form-date>
-            </form>
         </dexih-widget>
 
         <dexih-widget title="Day of week" [padding]="true" iconClass="fa fa-lg fa-fw fa-database">
-            <form>
                 <form-daysofweek></form-daysofweek>
                 <form-daysofweek label="Select the days"></form-daysofweek>
                 <form-daysofweek labelLeft="label left"></form-daysofweek>
                 <form-daysofweek label="With note" note="this is the note"></form-daysofweek>
                 <form-daysofweek label="Has errors" errors="this is the error"></form-daysofweek>
-            </form>
         </dexih-widget>
 
         <dexih-widget title="Tags" [padding]="true" iconClass="fa fa-lg fa-fw fa-database">
-            <form>
                 <form-tags placeholder="input tags"></form-tags>
+                <form-tags floatingLabel="with floating label"></form-tags>
                 <form-tags label="input tags" [value]="['item1', 'item2']" placeholder="input tags"></form-tags>
                 <form-tags label="lots of tags" [value]="['item1', 'item2', 'item3', 'item3', 'item3', 'item3', 'item3', 'item3', 'item3', 'item3', 'item3', 'item3', 'item3', 'item3', 'item3', 'item3']" placeholder="input tags"></form-tags>
                 <form-tags labelLeft="label left" [value]="['item1', 'item2']" placeholder="input tags"></form-tags>
                 <form-tags label="input tags" [value]="null" note="a note to describe the tags" placeholder="input tags"></form-tags>
                 <form-tags label="input errors" errors="the error message" placeholder="input tags"></form-tags>
-            </form>
         </dexih-widget>
 
         <dexih-widget title="Tags DropDown" [padding]="true" iconClass="fa fa-lg fa-fw fa-database">
-            <form>
                 <form-tags-dropdown placeholder="input tags" [items]="['item1', 'item2','item3']" [enableAddAll]="true" (onShown)="opened()"></form-tags-dropdown>
+                <form-tags-dropdown floatingLabel="with floating label" [items]="['item1', 'item2','item3']" [enableAddAll]="true" (onShown)="opened()"></form-tags-dropdown>
                 <form-tags-dropdown labelLeft="label left" placeholder="input tags" [items]="['item1', 'item2','item3']" ></form-tags-dropdown>
                 <form-tags-dropdown label="input tags" note="a note to describe the tags" placeholder="input tags" [items]="['item1', 'item2','item3']"></form-tags-dropdown>
                 <form-tags-dropdown label="input tags (2 selected)" note="a note to describe the tags" placeholder="input tags" [items]="['item1', 'item2','item3']" [value]="['item1', 'item2']" [enableAddAll]="true"></form-tags-dropdown>
@@ -590,11 +580,9 @@ this should have no padding.
 
                 <form-tags-dropdown label="With refresh" [items]="refreshItems" [showRefresh]="true" [isRefreshing]="isRefreshing"  (onRefresh)="onRefresh()">
                 </form-tags-dropdown>
-            </form>
         </dexih-widget>
 
         <dexih-widget title="Time" [padding]="true" iconClass="fa fa-lg fa-fw fa-database">
-            <form>
                 Value: {{timeString}}
                 <div style="width: 120px">
                 <form-time [(ngModel)]="timeString" [ngModelOptions]="{standalone: true}" ></form-time>
@@ -603,11 +591,9 @@ this should have no padding.
                 <form-time labelLeft="label left"></form-time>
                 <form-time label="time with note" note="this time description"></form-time>
                 <form-time label="time with error" errors="the time error"></form-time>
-            </form>
         </dexih-widget>
 
         <dexih-widget title="Buttons" [padding]="true" iconClass="fa fa-lg fa-fw fa-database">
-            <form>
                 <dexih-button>Default</dexih-button>
                 <dexih-button iconClass="fa fa-bar-chart">With Icon</dexih-button>
                 <dexih-button iconClass="fa fa-bar-chart" tooltip='no text'></dexih-button>
@@ -731,10 +717,8 @@ this should have no padding.
                 <dexih-button-collapsible text="collapsible">
                     here is the content.
                 </dexih-button-collapsible>
-            </form>
         </dexih-widget>
         <dexih-widget title="Groups" [padding]="true" iconClass="fa fa-lg fa-fw fa-database">
-            <form>
                 <div class="m-1">
                     <form-select labelLeft="select" [items]="['item1', 'item2','item3']" [enableTextEntry]="true">
                     </form-select>
@@ -804,7 +788,6 @@ this should have no padding.
                     <form-input class="form-control p-0" [border]="false" placeholder="input 1"></form-input>
                     <dexih-button-view class="input-group-append"></dexih-button-view>
                 </div>
-            </form>
         </dexih-widget>
 
         <dexih-widget 
@@ -813,8 +796,6 @@ this should have no padding.
             [showCloseButton]="true"
             iconClass="fa fa-lg fa-fw fa-database">
 
-                <form>
-                </form>
             </dexih-widget>
             <dexih-widget title="Tabs" [padding]="true" iconClass="fa fa-lg fa-fw fa-database">
                 <ng-template #header>
@@ -850,7 +831,5 @@ this should have no padding.
                             </li>
                             </ul>
                 </ng-template>
-                    <form>
-                    </form>
                 </dexih-widget>
 </dexih-widget-columns>

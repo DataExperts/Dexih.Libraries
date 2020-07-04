@@ -32,6 +32,8 @@ export class DexihFormTagsDropdownComponent implements ControlValueAccessor, OnC
     @Input() border = true;
     @Input() enableAddAll = false;
     @Input() returnKeys = true;
+    @Input() disabled = false;
+    @Input() floatingLabel: string;
 
     @Input() showRefresh = false;
     @Input() isRefreshing = false;
@@ -215,6 +217,7 @@ export class DexihFormTagsDropdownComponent implements ControlValueAccessor, OnC
     shown() {
         this.onShown.emit();
     }
+    
 
     // detect a click outside the control, and hide the dropdown
     @HostListener('document:click', ['$event.target'])

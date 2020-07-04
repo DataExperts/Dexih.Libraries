@@ -5,6 +5,7 @@ import { SharedFunctions } from './shared-functions';
 @Component({
     selector: 'form-tags',
     templateUrl: './dexih-form-tags.component.html',
+    styleUrls: ['./dexih-form.component.scss'],
     providers: [
         { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => DexihFormTagsComponent), multi: true },
     ]
@@ -23,6 +24,7 @@ export class DexihFormTagsComponent implements ControlValueAccessor {
     @Input() border = true;
     @Input() disabled = false;
     @Input() autocapitalize = 'none';
+    @Input() floatingLabel: string;
 
     isDirty = false;
     id = 'input_' + Math.random().toString(36).substr(2, 9);
@@ -73,9 +75,7 @@ export class DexihFormTagsComponent implements ControlValueAccessor {
         }
     }
 
-    remove(item: any) {
-        if (!this.value) { return; }
-        const index = this.value.findIndex(c => c === item);
+    remove(index: any) {
         if (index >= 0) {
             this.value.splice(index, 1);
             this.hasChanged();

@@ -31,7 +31,7 @@ export class DexihToastItemComponent implements OnInit {
         this.show = true;
 
         if (this.message) {
-            if (this.message.content.length > 200) {
+            if (this.message.content && this.message.content.length > 200) {
                 this.content = this.message.content.substr(0, 200) + ' ...';
             } else {
                 this.content = this.message.content;

@@ -1,0 +1,18 @@
+<div>
+    <label *ngIf="label" [for]="id" class="mt-1">{{label}}
+        <ng-template [ngTemplateOutlet]="labelContentTemplate">
+        </ng-template>
+    </label>
+
+    <small *ngIf="subLabel" class="form-text">{{subLabel}}</small>
+
+    <ng-content></ng-content>
+
+    <div *ngIf="errors && border" class="invalid-feedback d-block order-1">
+        {{ errors }}
+    </div>
+    
+    <small *ngIf="note" class="form-text text-muted">
+        <markdown (click)="sharedFunctions.getRoute($event)" [data]="note"></markdown>
+    </small>
+</div>

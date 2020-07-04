@@ -1,4 +1,36 @@
-<div>
+<base-template 
+    [label]="label" 
+    [subLabel]="subLabel" 
+    [note]="note"
+    [border]="true"
+    [errors]="errors"
+    >
+    
+<ng-template #labelContent>
+    <ng-content></ng-content>
+</ng-template>
+
+<base-input 
+            [labelLeft]="labelLeft" 
+            [floatingLabel]="floatingLabel"
+            [placeholder]="placeholder" 
+            [iconClass]="iconClass"
+            [errors]="errors"
+            [border]="border"
+            [(ngModel)]="tag"
+            [ngModelOptions]="{standalone: true}" 
+            (ngModelChange)="hasChanged()"
+            [disabled]="disabled"
+            [maxlength]="maxlength"
+            [autocapitalize]="autocapitalize"
+            (keydown)="keydownEvent($event)"
+            [tags]="value"
+            (removeTag)="remove($event)">
+        </base-input>
+
+</base-template>
+
+<!-- <div>
     <label *ngIf="label" [for]="id" class="mt-1">{{label}}
         <ng-content></ng-content>
     </label>
@@ -10,7 +42,7 @@
                 <span class="input-group-text border-0"> {{labelLeft}}</span>
             </div>
     
-            <div *ngFor="let item of value" class="border rounded my-auto ml-1" [ngStyle]="{'background-color': '#e5e7e9'}">
+            <div *ngFor="let item of value" class="border rounded my-auto ml-1 bg-gray">
                 {{item}}
                 <button (click)="remove(item)" type="button" class="close" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -34,4 +66,4 @@
     <small *ngIf="note" class="form-text text-muted">
         <markdown (click)="sharedFunctions.getRoute($event)" [data]="note"></markdown>
     </small>
-</div>
+</div> -->

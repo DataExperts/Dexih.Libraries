@@ -1,5 +1,5 @@
-import { OnInit, Component, forwardRef, Input, AfterViewInit, ViewChild, HostListener, ElementRef } from '@angular/core';
-import { FormControl, ControlValueAccessor, NG_VALUE_ACCESSOR, NG_VALIDATORS,  } from '@angular/forms';
+import { Component, forwardRef, Input, Output, EventEmitter } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, NG_VALIDATORS,  } from '@angular/forms';
 import { SharedFunctions } from './shared-functions';
 
 @Component({
@@ -13,6 +13,7 @@ import { SharedFunctions } from './shared-functions';
 export class DexihFormDateComponent implements ControlValueAccessor {
     @Input() label: string;
     @Input() labelLeft: string;
+    @Input() subLabel: string;
     @Input() note: string;
     @Input() placeholder = 'Enter date (yyyy-mm-dd)';
     @Input() iconClass: string;
@@ -20,6 +21,9 @@ export class DexihFormDateComponent implements ControlValueAccessor {
     @Input() value: string;
     @Input() disabled = false;
     @Input() border = true;
+    @Input() floatingLabel: string;
+
+    @Output() keydown: EventEmitter<any> = new EventEmitter<any>();
 
     dateValue: any;
     isValidDate = false;
@@ -32,11 +36,11 @@ export class DexihFormDateComponent implements ControlValueAccessor {
     onChange: any = () => { };
     onTouched: any = () => { };
 
-    constructor(private _elementRef: ElementRef) {
+    constructor() {
 
      }
 
-    hasChanged($event: any) {
+    hasChanged() {
         this.valueToDate();
 
         this.onChange(this.value);
@@ -44,7 +48,7 @@ export class DexihFormDateComponent implements ControlValueAccessor {
         this.isDirty = true;
     }
 
-    dateChanged($event: any) {
+    dateChanged() {
         if (this.dateValue) {
             this.dateToValue();
         } else {
@@ -95,7 +99,7 @@ export class DexihFormDateComponent implements ControlValueAccessor {
     }
 
 
-    validate(c: FormControl): {[key: string]: any} {
+    validate(): {[key: string]: any} {
         if (this.value) {
             let theDate = Date.parse(this.value);
             if (!theDate) {
@@ -104,6 +108,8 @@ export class DexihFormDateComponent implements ControlValueAccessor {
         }
     }
 
-
+    keydownEvent($event: any) {
+        this.keydown.emit($event);
+    }
 
 }

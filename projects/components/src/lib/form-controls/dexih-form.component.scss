@@ -1,3 +1,4 @@
+
 /*
 Used to add a scrollable menu to dropdown menus
 */
@@ -52,13 +53,112 @@ Used to add a scrollable menu to dropdown menus
   100% { transform: rotate(360deg); }
 }
 
+.tags {
+  // overflow-x: scroll;
+  // -webkit-overflow-scrolling: touch;
+}
+
+.tag {
+  max-height: 28px;
+  background-color: var(--secondary);
+}
+
+button.close-button {
+  line-height: 1.4rem;
+  background-color: transparent;
+  font-size: 22px;
+  font-weight: 400;
+  opacity: 0.5;
+  border: 0;
+  padding: 0;
+}
+
+button.close-button:hover {
+  opacity: 1;
+}
+
 .blend-text {
-  background: inherit;
+  // background: inherit;
   background-clip: text;
   -webkit-background-clip: text;
-  color: transparent;
+  background-color: transparent;
   filter: invert(1) grayscale(1) contrast(9);
   -webkit-filter: invert(1) grayscale(1) contrast(9);
 }
 
+.form-control-custom-input {
+  padding: .375rem .75rem;
+  width: inherit;
+  // min-width: 120px;
+}
 
+.form-label-group {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  height: initial;
+}
+
+.form-label-group > input {
+  height: initial;
+  z-index: 3;
+}
+
+.form-label-group > input,
+.form-label-group > label {
+  padding: .75rem .75rem;
+}
+
+.form-label-group > label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  margin-bottom: 0; /* Override default `<label>` margin */
+  line-height: 1.5;
+  color: #495057;
+  border: 1px solid transparent;
+  border-radius: .25rem;
+  transition: all .1s ease-in-out;
+}
+
+.form-label-group input::-webkit-input-placeholder {
+  color: transparent;
+}
+
+.form-label-group input:-ms-input-placeholder {
+  color: transparent;
+}
+
+.form-label-group input::-ms-input-placeholder {
+  color: transparent;
+}
+
+.form-label-group input::-moz-placeholder {
+  color: transparent;
+}
+
+.form-label-group input::placeholder {
+  color: transparent;
+}
+
+.form-label-group input:focus {
+  outline: none;
+}
+
+.form-label-group:focus-within {
+  outline: medium solid var(--blue);
+}
+
+.form-label-group input:not(:placeholder-shown) , .form-label-no-placeholder {
+  padding-top: 1.25rem !important;
+  padding-bottom: 0.25rem !important;
+}
+
+.form-label-group input:not(:placeholder-shown) ~ label, label.form-label-no-placeholder{
+  padding-top: .25rem !important;
+  padding-bottom: .25rem !important;
+  font-size: 12px !important;
+  color: #777 !important;
+}
