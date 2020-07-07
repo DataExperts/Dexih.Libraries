@@ -5,7 +5,7 @@ import { ListItem } from './shared-functions';
 @Component({
     selector: 'base-input',
     templateUrl: 'base-input.component.html',
-    styleUrls: ['./dexih-form.component.scss'],
+    styleUrls: ['./dexih-form.component.scss', './base-input.component.scss'],
     providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => BaseInputComponent), multi: true }]
 })
 
@@ -18,7 +18,7 @@ export class BaseInputComponent implements ControlValueAccessor, OnInit {
     @Input() autocapitalize = 'none';
     @Input() floatingLabel: string;
     @Input() placeholder: string;
-    @Input() readOnly = false;
+    @Input() readonly = false;
     @Input() disabled = false;
     @Input() type = 'text';
     @Input() maxlength: number;

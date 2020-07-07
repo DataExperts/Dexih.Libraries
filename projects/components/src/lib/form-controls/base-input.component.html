@@ -3,11 +3,11 @@
         <span class="input-group-text" [ngClass]="{'border-0 rounded-0 bg-transparent': !border}"> {{labelLeft}}</span>
     </div>
 
-    <div class="form-control d-flex h-100"
-    [ngClass]="{'form-label-group': floatingLabel, 'p-0 m-0': !floatingLabel, 'border-0 rounded-0  bg-transparent': !border, 'is-invalid': errors, 'is-valid': !errors && isDirty, 'flex-wrap': tags && tags.length > 0}">
+    <div class="form-control h-100 p-0 m-0"
+    [ngClass]="{'border-0 rounded-0  bg-transparent': !border, 'is-invalid': errors, 'is-valid': !errors && isDirty, 'flex-wrap': tags && tags.length > 0}">
 
-        <div *ngIf="tags" class="d-flex flex-wrap tags"
-            [ngClass]="{'form-label-no-placeholder': floatingLabel && tags.length > 0}">
+        <div class="d-flex flex-wrap"
+            [ngClass]="{'form-label-group': floatingLabel, 'form-label-group-tags': floatingLabel && tags?.length > 0}">
             <div *ngFor="let item of tags; let i = index" class="border rounded m-1 tag overflow-none"
                 [ngStyle]="{'background-color': item.color}">
                 <div class="d-flex blend-text pl-1">
@@ -19,18 +19,18 @@
                     </button>
                 </div>
             </div>
-        </div>
         
         <input 
             [placeholder]="floatingLabel ? floatingLabel : (placeholder ? placeholder : '')"
+            [readonly]="readonly"
             (keydown)="keyDown.emit($event);"
             (keydown.arrowdown)="arrowDown.emit($event);"
             (keydown.arrowup)="arrowUp.emit($event);"
             (focusout)="focusOut.emit($event)"
             [ngModel]="value" 
             (ngModelChange)="hasChanged($event)"
-            class="border-0 bg-transparent flex-fill" 
-            [ngClass]="{'form-control-custom-input': !floatingLabel, 'font-italic': fontItalic, 'disabled-input': disabled, 'form-label-no-placeholder': floatingLabel && tags && tags.length > 0}" 
+            class="border-0 bg-transparent form-control-custom-input" 
+            [ngClass]="{'form-label-group-tags': floatingLabel && tags && tags.length > 0, 'form-label-no-placeholder': value?.length > 0 && floatingLabel && (!tags || tags.length === 0), 'font-italic': fontItalic, 'disabled-input': disabled}" 
             [disabled]="disabled"
             [id]="id"
             [type]="type"
@@ -39,8 +39,9 @@
             [attr.maxlength]="maxlength"
         />
 
-        <label *ngIf="floatingLabel" [ngClass]="{'form-label-no-placeholder': floatingLabel && tags && tags.length > 0}" [for]="id">{{floatingLabel}}</label>
+        <label *ngIf="floatingLabel" [ngClass]="{'form-label-group-values': value || (tags && tags.length > 0)}" [for]="id">{{floatingLabel}}</label>
     </div>
+</div>
 
     <div class="input-group-append" *ngIf="iconClass">
         <span class="input-group-text" [ngClass]="{'border-0 rounded-0 bg-transparent': !border}">

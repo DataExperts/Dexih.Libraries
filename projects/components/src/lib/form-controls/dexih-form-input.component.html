@@ -11,20 +11,20 @@
 </ng-template>
 
 <base-input 
-            [type]="type"
-            [labelLeft]="labelLeft" 
-            [floatingLabel]="floatingLabel"
-            [placeholder]="placeholder" 
-            [iconClass]="iconClass"
-            [errors]="errors"
-            [border]="border"
-            [(ngModel)]="value" 
-            [ngModelOptions]="{standalone: true}" 
-            (ngModelChange)="hasChanged($event)"
-            [disabled]="disabled"
-            [maxlength]="maxlength"
-            [autocapitalize]="autocapitalize"
-            (keydown)="keydownEvent($event)">
-        </base-input>
+    [type]="type"
+    [labelLeft]="labelLeft" 
+    [floatingLabel]="floatingLabel"
+    [placeholder]="placeholder" 
+    [iconClass]="iconClass"
+    [errors]="errors"
+    [border]="border"
+    [(ngModel)]="value" 
+    [ngModelOptions]="{standalone: true}" 
+    (ngModelChange)="hasChanged($event)"
+    [disabled]="disabled"
+    [maxlength]="maxlength"
+    [autocapitalize]="autocapitalize"
+    (keydown)="keydownEvent($event)">
+</base-input>
 
 </base-template>
