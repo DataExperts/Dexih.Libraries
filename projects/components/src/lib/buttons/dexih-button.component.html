@@ -1,10 +1,20 @@
-<a  [class.disabled]="disabled ? true : null" [routerLink]="routerLink" [queryParamsHandling]="queryParamsHandling" class="btn auto-compact" [ngClass]="[buttonClass]"
-  [title]="title ? title : text">
+<ng-container *ngIf="href && !routerLink; else routeLink">
+  <a [class.disabled]="disabled ? true : null" [href]="href" class="btn auto-compact" [ngClass]="[buttonClass]" [title]="title ? title : text">
+<ng-template [ngTemplateOutlet]="internalBlock"></ng-template>
+  </a>
+</ng-container>
+<ng-template #routeLink>
+  <a [class.disabled]="disabled ? true : null" [routerLink]="routerLink" [queryParamsHandling]="queryParamsHandling" class="btn auto-compact" [ngClass]="[buttonClass]" [title]="title ? title : text">
+    <ng-template [ngTemplateOutlet]="internalBlock"></ng-template>
+  </a>
+</ng-template>
+
+<ng-template #internalBlock>
   <i *ngIf="busy" class="fa fa-spin fa-spinner"></i>
-  <i [class]="iconClass"></i>
+  <i *ngIf="iconClass" [class]="iconClass"></i>
   <span *ngIf="!compact" [ngClass]="[autoCompact && iconClass ? 'auto-compact-item' : '']" >
     <span *ngIf="text" class="ml-1">{{text}}</span>
     <span class="ml-1"><ng-content></ng-content></span>
   </span>
   <span *ngIf="badge" class="badge ml-1" [ngClass]="[badgeClass]">{{badge}}</span>
-</a>
+</ng-template>

@@ -4,7 +4,8 @@ import { ToastMessage, DexihToastComponent, DexihModalComponent } from 'projects
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  preserveWhitespaces: true
 })
 export class AppComponent {
   @ViewChild('toasts', { static: true }) toasts: DexihToastComponent;

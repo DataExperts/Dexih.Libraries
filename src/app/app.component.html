@@ -1,6 +1,46 @@
-<button [routerLink]="['table']" class="btn btn-primary">Tables</button>
-<button [routerLink]="['components']" class="btn btn-primary">Components</button>
+<header>
+    <div class="navbar navbar-dark bg-dark shadow-sm">
+        <div class="container d-flex justify-content-between">
+            <a href="https://dataexpertsgroup.com" class="navbar-brand d-flex align-items-center">
+                <img src="assets/dex_logo_wide_raw.png" height="40">
+                <strong>Angular 8+ Components</strong>
+            </a>
+            <dexih-button-dropdown text="Testing" iconClass="fa fa-chain-broken" [pullRight]="true">
+                <dexih-dropdown-item iconClass="fa fa-table" [routerLink]="['test', 'table']">Table Tests</dexih-dropdown-item>
+                <dexih-dropdown-item [routerLink]="['test', 'components']">Component Tests</dexih-dropdown-item>
+            </dexih-button-dropdown>
+        </div>
+    </div>
+    
+</header>
 
-<dexih-widget title="components">
-    <router-outlet></router-outlet>
-</dexih-widget>
+<main role="main">
+
+    <section class="jumbotron text-center">
+        <div class="container">
+            <h1>Angular 8+ Bootstrap Components</h1>
+            <p class="lead text-muted">Browse the demo's below and feel free to use our Angular 8+ components</p>
+            <p>
+                <dexih-button class="my-2" [routerLink]="['table']">Data Driven Tables</dexih-button>
+                <dexih-button class="my-2" buttonClass="btn btn-secondary" [routerLink]="['components']">Widgets / Form Controls</dexih-button>
+            </p>
+            <p>
+                <dexih-button href="https://github.com/DataExperts/Dexih.Libaries" iconClass="fa fa-github" buttonClass="btn btn-danger" [autoCompact]="false">GitHub</dexih-button>
+            </p>
+        </div>
+    </section>
+
+</main>
+
+<router-outlet></router-outlet>
+
+<footer class="text-muted">
+    <div class="container">
+        <p class="float-right">
+            <a href="#">Back to top</a>
+        </p>
+        <p>Data Experts Group</p>
+        <p>Need some data management tools? <a href="https://dataexpertsgroup.com/">Visit our website to get
+                started</a>.</p>
+    </div>
+</footer>

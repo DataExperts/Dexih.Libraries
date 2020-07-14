@@ -1,10 +1,9 @@
-import { Component, OnInit, OnChanges, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
-import { BsDropdownDirective } from 'ngx-bootstrap/dropdown';
+import { Component, Input, Output, EventEmitter, ViewChild, HostListener } from '@angular/core';
 
 @Component({
     selector: 'dexih-button-dropdown',
     templateUrl: './dexih-button-dropdown.component.html',
-    styleUrls: ['./dexih-button-dropdown.component.scss', './dexih-button.component.scss']
+    styleUrls: ['../dexih-dropdown.scss', './dexih-button.component.scss']
 })
 export class DexihButtonDropDownComponent {
     @Input() buttonClass = 'btn btn-primary';
@@ -24,19 +23,27 @@ export class DexihButtonDropDownComponent {
 
     @Output() isOpenChange = new EventEmitter<any>();
 
-    @ViewChild('dropdown', { static: true }) dropdown: BsDropdownDirective;
-
+    @ViewChild('dropdownButton', { static: true }) dropdownElement: any;
+    
     constructor() { }
-
-    public showDropdown() {
-        this.dropdown.show();
-    }
-
-    public hideDropdown() {
-        this.dropdown.hide();
-    }
 
     public openChange($event: any) {
         this.isOpenChange.emit($event);
+    }
+
+    public dropdownToggle($event) {
+        this.isOpen = !this.isOpen;    
+        this.isOpenChange.emit($event);    
+    }
+
+    // detect a click outside the control, and hide the dropdown
+    @HostListener('document:click', ['$event.target'])
+    public onClick(targetElement: any) {
+        if (this.isOpen && this.autoClose) {
+            const clickedInside = this.dropdownElement.nativeElement.contains(targetElement);
+            if (!clickedInside) {
+                this.isOpen = false;
+            }
+        }
     }
 }

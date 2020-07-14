@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, HostBinding, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ToastMessage} from './dexih-toast.models';
 import { trigger, transition, animate, style } from '@angular/animations';
 

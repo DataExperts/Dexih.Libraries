@@ -1,7 +1,7 @@
 import { DexihToastComponent } from './dexih-toast.component';
 import { Subscription } from 'rxjs';
 import { DexihToastItemComponent } from './dexih-toast-item.component';
-import { ComponentRef, ɵisDefaultChangeDetectionStrategy } from '@angular/core';
+import { ComponentRef } from '@angular/core';
 
 export class ToastMessage {
     public content: string;
@@ -16,6 +16,7 @@ export class ToastMessage {
         this.type = type;
         this.title = title;
         this.content = content;
+        this.delay = delay;
     }
 }
 

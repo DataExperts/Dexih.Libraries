@@ -1,9 +1,9 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, HostListener, ViewChild } from '@angular/core';
 
 @Component({
     selector: 'dexih-button-splitdropdown',
     templateUrl: 'dexih-button-splitdropdown.component.html',
-    styleUrls: ['./dexih-button-dropdown.component.scss', './dexih-button.component.scss']
+    styleUrls: ['../dexih-dropdown.scss', './dexih-button.component.scss']
 })
 
 export class DexihButtonSplitDropDownComponent implements OnInit {
@@ -21,12 +21,33 @@ export class DexihButtonSplitDropDownComponent implements OnInit {
     @Output() buttonClick = new EventEmitter<any>();
     @Input() compact = false;
     @Input() autoCompact = true;
+    @Input() isOpen = false;
+    @Input() autoClose = true;
+    @Output() isOpenChange = new EventEmitter<any>();
+
+    @ViewChild('dropdownButton', { static: true }) dropdownElement: any;
     
     constructor() { }
 
     ngOnInit() { }
 
-    onClick($event: any) {
+    onButtonClick($event: any) {
         this.buttonClick.emit($event);
+    }
+
+    public dropdownToggle($event) {
+        this.isOpen = !this.isOpen;    
+        this.isOpenChange.emit($event);    
+    }
+
+    // detect a click outside the control, and hide the dropdown
+    @HostListener('document:click', ['$event.target'])
+    public onClick(targetElement: any) {
+        if (this.isOpen && this.autoClose) {
+            const clickedInside = this.dropdownElement.nativeElement.contains(targetElement);
+            if (!clickedInside) {
+                this.isOpen = false;
+            }
+        }
     }
 }

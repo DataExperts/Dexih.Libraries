@@ -26,8 +26,8 @@ import { DexihButtonValidateComponent } from './dexih-button-validate.component'
 import { DexihButtonHistoryComponent } from './dexih-button-history.component';
 import { DexihButtonLinkComponent } from './dexih-button-link.component';
 import { DexihButtonChartComponent } from './dexih-button-chart.component';
-import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { DexihButtonCollapsibleComponent } from './dexih-button-collapsible.component';
+import { DexihDropDownItem } from './dexih-dropdown-item.component';
 
 @NgModule({
     imports: [
@@ -35,7 +35,6 @@ import { DexihButtonCollapsibleComponent } from './dexih-button-collapsible.comp
         FormsModule,
         ReactiveFormsModule,
         RouterModule,
-        BsDropdownModule
     ],
     exports: [
         DexihButtonComponent,
@@ -62,7 +61,8 @@ import { DexihButtonCollapsibleComponent } from './dexih-button-collapsible.comp
         DexihButtonHistoryComponent,
         DexihButtonLinkComponent,
         DexihButtonChartComponent,
-        DexihButtonCollapsibleComponent
+        DexihButtonCollapsibleComponent,
+        DexihDropDownItem,
     ],
     declarations: [
         DexihButtonComponent,
@@ -89,7 +89,8 @@ import { DexihButtonCollapsibleComponent } from './dexih-button-collapsible.comp
         DexihButtonHistoryComponent,
         DexihButtonLinkComponent,
         DexihButtonChartComponent,
-        DexihButtonCollapsibleComponent
+        DexihButtonCollapsibleComponent,
+        DexihDropDownItem,
     ],
     providers: [],
 })

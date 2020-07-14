@@ -1,17 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
     selector: 'dexih-modal, [dexih-modal]',
     templateUrl: './dexih-modal.component.html',
+    styleUrls: ['./dexih-modal.component.scss']
 })
 export class DexihModalComponent implements OnInit {
-    @ViewChild('template', { static: true }) template: any ;
-
-    modalRef: BsModalRef;
-
-    config = {ignoreBackdropClick: true};
-
     public isOpen = false;
 
     public type: string;
@@ -29,7 +23,7 @@ export class DexihModalComponent implements OnInit {
     private resolveString: (value?: string | PromiseLike<string>) => void;
     private reject: (reason?: string) => void;
 
-    constructor(private modalService: BsModalService) { }
+    constructor() { }
 
     ngOnInit(): void {
     }
@@ -43,7 +37,7 @@ export class DexihModalComponent implements OnInit {
             cancelButton = 'Cancel',
             details = null): Promise<string> {
 
-        if (this.modalRef) { return Promise.reject('The modal is already open'); }
+        if (this.isOpen) { return Promise.reject('The modal is already open'); }
         return new Promise<string>((resolve, reject) => {
             this.type = 'prompt';
             this.title = title;
@@ -53,7 +47,7 @@ export class DexihModalComponent implements OnInit {
             this.okButton = okButton;
             this.cancelButton = cancelButton;
             this.details = details;
-            this.modalRef = this.modalService.show(this.template, this.config);
+            this.isOpen = true;
 
             this.resolveString = resolve;
             this.reject = reject;
@@ -61,14 +55,14 @@ export class DexihModalComponent implements OnInit {
     }
 
     public information(title: string, content: string, okButton = 'Close', details = null): Promise<boolean> {
-        if (this.modalRef) { return Promise.reject('The modal is already open'); }
+        if (this.isOpen) { return Promise.reject('The modal is already open'); }
         return new Promise<boolean>((resolve, reject) => {
             this.type = 'information';
             this.title = title;
             this.content = content;
             this.okButton = okButton;
             this.details = details;
-            this.modalRef = this.modalService.show(this.template);
+            this.isOpen = true;
 
             this.resolveBool = resolve;
             this.reject = reject;
@@ -76,7 +70,7 @@ export class DexihModalComponent implements OnInit {
     }
 
     public confirm(title: string, content: string, okButton = 'Ok', cancelButton = 'Cancel', details = null): Promise<boolean> {
-        if (this.modalRef) { return Promise.reject('The modal is already open'); }
+        if (this.isOpen) { return Promise.reject('The modal is already open'); }
         return new Promise<boolean>((resolve, reject) => {
             this.type = 'confirm';
             this.title = title;
@@ -84,7 +78,7 @@ export class DexihModalComponent implements OnInit {
             this.okButton = okButton;
             this.cancelButton = cancelButton;
             this.details = details;
-            this.modalRef = this.modalService.show(this.template, this.config);
+            this.isOpen = true;
 
             this.resolveBool = resolve;
             this.reject = reject;
@@ -93,10 +87,7 @@ export class DexihModalComponent implements OnInit {
 
 
     public cancel() {
-        if (this.modalRef) {
-            this.modalRef.hide();
-            this.modalRef = null;
-        }
+        this.isOpen = false;
 
         switch (this.type) {
             case 'prompt':
@@ -112,10 +103,7 @@ export class DexihModalComponent implements OnInit {
     }
 
     public ok() {
-        if (this.modalRef) {
-            this.modalRef.hide();
-            this.modalRef = null;
-        }
+        this.isOpen = false;
 
         switch (this.type) {
             case 'prompt':

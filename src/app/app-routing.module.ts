@@ -1,17 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ComponentsComponent } from './components/components.component';
-import { TableComponent } from './table/table.component';
-import { AppComponent } from './app.component';
-import { ChildComponent } from './components/child.component';
+import { ComponentsComponent } from './test/components/components.component';
+import { TableComponent } from './test/table/table.component';
 
 const routes: Routes = [
-  { path: '', component: AppComponent},
-  { path: 'components', children: [
-    { path: '', component: ComponentsComponent },
-    { path: 'child', component: ChildComponent },
-  ]},
-  { path: 'table',  component: TableComponent },
+    { path: 'test', children: [
+      { path: 'components', component: ComponentsComponent },
+      { path: 'table',  component: TableComponent },
+    ]}
 ];
 
 @NgModule({

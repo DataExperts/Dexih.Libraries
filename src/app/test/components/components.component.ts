@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { ToastMessage, DexihToastComponent, DexihModalComponent } from '../../../projects/components/src/public-api';
+import { ToastMessage, DexihToastComponent, DexihModalComponent } from 'projects/components/src/public-api';
 
 
 @Component({
@@ -135,7 +135,7 @@ export class ComponentsComponent {
 
   public modalConfirm() {
     this.modal.confirm('Confirm', 'Do you want to do this <b>bold test<b>', 'Do it', 'escape...').then(result => {
-      this.modalConfirmValue = 'confirmed';
+      this.modalConfirmValue = result ? 'confirmed' : 'cancelled';
     }).catch(() => this.modalConfirmValue = 'cancelled');
   }
 
@@ -185,7 +185,7 @@ export class ComponentsComponent {
   }
 
   public textValueChange($event) {
-    this.toasts.add(new ToastMessage('success', 'text selected - ' + $event,  null, 5000));
+    this.toasts.add(new ToastMessage('success', 'text selected - ' + $event,  null));
   }
 }
 

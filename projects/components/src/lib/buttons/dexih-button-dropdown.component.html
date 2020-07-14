@@ -1,5 +1,5 @@
-<div class="btn-group" dropdown #dropdown="bs-dropdown" [autoClose]="autoClose" [isOpen]="isOpen" (isOpenChange)="openChange($event)" placement="bottom right">
-  <button dropdownToggle type="button" 
+<div #dropdownButton class="btn-group" (click)="dropdownToggle()"  placement="bottom right">
+  <button type="button" 
     [disabled]="disabled" class="btn {{buttonClass}} auto-compact" [ngClass]="{'dropdown-toggle': !hideCarrot}" [title]="title">
     <i *ngIf="busy" class="fa fa-spin fa-cog"></i>
     <i [class]="iconClass"></i>
@@ -8,7 +8,7 @@
     </span>
     <span *ngIf="badge" class="badge" [ngClass]="[badgeClass]">{{badge}}</span>
   </button>
-  <ul *dropdownMenu class="p-0 dropdown-menu" [ngClass]="{'dropdown-menu-right': pullRight}">
+  <ul class="p-0 dropdown-menu" [ngClass]="{'dropdown-menu-right': pullRight, 'show': isOpen}">
     <ng-content></ng-content>
   </ul>
 </div>

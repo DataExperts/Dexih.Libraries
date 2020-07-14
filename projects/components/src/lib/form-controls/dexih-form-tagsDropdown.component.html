@@ -9,8 +9,8 @@
         <ng-content></ng-content>
     </ng-template>
 
-<div #dropdown dropdown [autoClose]="false" class="input-group w-100" (onShown)="shown()" >
-    <div dropdownToggle class="input-group w-100" [id]="id" >
+<div #dropdownButton class="input-group w-100">
+    <div (click)="dropdownToggle()" class="input-group w-100" [id]="id" >
 
         <base-input class="w-100"
         [labelLeft]="labelLeft" 
@@ -32,7 +32,7 @@
 
     </div>
 
-    <ul *dropdownMenu class="w-100 dropdown-menu scrollable-menu" role="menu">
+    <ul class="w-100 dropdown-menu scrollable-menu" [ngClass]="{'show': isOpen}" role="menu">
         <li *ngIf="enableAddAll" class="scrollable-item">
             <a class="dropdown-item" (click)="addAll()" title="Add all items to the list">Add all</a>
         </li>
@@ -59,72 +59,3 @@
 
 </div>    
 </base-template> 
-
-
-
-<!-- 
-<div>
-    <label *ngIf="label" [for]="id" class="mt-1">{{label}}
-        <ng-content></ng-content>
-    </label>
-
-    <small *ngIf="subLabel" class="form-text">{{subLabel}}</small>
-
-    <div #dropdown dropdown [ngClass]="{'border rounded': border, 'border-danger': errors, 'border-success': !errors && isDirty}" [autoClose]="false" (onShown)="shown()" [title]="errors">
-        <div class="input-group" dropdownToggle >
-            <div *ngIf="labelLeft" class="input-group-prepend">
-                <span class="input-group-text border-0"> {{labelLeft}}</span>
-            </div>
-            <ul *dropdownMenu class="w-100 dropdown-menu scrollable-menu" role="menu">
-                <li *ngIf="enableAddAll" class="scrollable-item">
-                    <a class="dropdown-item" (click)="addAll()" title="Add all items to the list">Add all</a>
-                </li>
-                <li class="scrollable-item">
-                    <a class="dropdown-item" (click)="clearAll()" title="Clear all items">Clear all</a>
-                </li>
-
-                <li *ngIf="showRefresh" >
-                    <a class="dropdown-item" (click)="refresh()">
-                        <ng-template [ngIf]="isRefreshing"><div class="d-flex d-flex-row"><div class="loader mr-1"></div>Refreshing...</div></ng-template>
-                        <ng-template [ngIf]="!isRefreshing">Refresh ...</ng-template>
-                    </a>
-                </li>
-
-                <div class="dropdown-divider"></div>
-
-                <li *ngFor="let item of sortedItems" class="scrollable-item">
-                    <div *ngIf="item.color" class="dropdown-item bg-light" (click)="selectItem(item)" [title]="item.title">
-                        <h5><span class="badge" [ngStyle]="{'background-color': item.color}" ><span class="blend-text">{{item.label}}</span></span></h5>
-                    </div>
-                    <a *ngIf="!item.color"  class="dropdown-item" (click)="selectItem(item)" [title]="item.title" >{{item.label}}</a>
-                </li>
-            </ul>
-
-            <div *ngFor="let item of tags; let i = index" class="border rounded my-auto ml-1 "
-                [ngStyle]="{'background-color': item.color ? item.color : '#e5e7e9'}">
-                <span class="blend-text p-1">
-                    {{item.label}}
-                </span>
-                <button (click)="remove(i)" type="button" class="close blend-text" style="text-shadow: none !important;" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-
-            <input class="form-control border-0 rounded-0 invisible" [disabled]="true">
-
-            <div  class="input-group-append">
-                <span class="input-group-text border-0 rounded-0" [ngClass]="{'bg-transparent': !border}">
-                    <i *ngIf="items && items.length > 0" class="icon-append fa fa-caret-down"></i>
-                    <i  *ngIf="iconClass && (!items || items.length == 0) " class="icon-append {{iconClass}}"></i>
-                </span>
-            </div>
-        </div>
-    </div>
-    <div *ngIf="errors && border" class="d-block invalid-feedback">
-        {{ errors }}
-    </div>
-
-    <small *ngIf="note" class="form-text text-muted">
-        <markdown (click)="sharedFunctions.getRoute($event)" [data]="note"></markdown>
-    </small>
-</div> -->

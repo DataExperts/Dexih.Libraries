@@ -1,13 +1,12 @@
 import { Component, forwardRef, Input, EventEmitter, Output, HostListener, ViewChild, OnChanges } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { BsDropdownDirective } from 'ngx-bootstrap/dropdown';
 import { SharedFunctions, ListItem } from './shared-functions';
 
 
 @Component({
     selector: 'form-tags-dropdown',
     templateUrl: './dexih-form-tagsDropdown.component.html',
-    styleUrls: ['./dexih-form.component.scss'],
+    styleUrls: ['../dexih-dropdown.scss', './dexih-form.component.scss'],
     providers: [
         { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => DexihFormTagsDropdownComponent), multi: true },
     ]
@@ -37,12 +36,15 @@ export class DexihFormTagsDropdownComponent implements ControlValueAccessor, OnC
 
     @Input() showRefresh = false;
     @Input() isRefreshing = false;
+
+    @Input() isOpen = false;
+    @Input() autoClose = true;
+
     @Output() onRefresh = new EventEmitter();
-
     @Output() onShown = new EventEmitter();
+    @Output() isOpenChange = new EventEmitter<any>();
 
-    @ViewChild(BsDropdownDirective, { static: true }) dropdown: BsDropdownDirective;
-    @ViewChild('dropdown', { static: true }) dropdownElement: any;
+    @ViewChild('dropdownButton', { static: true }) dropdownElement: any;
 
     isDirty = false;
 
@@ -169,17 +171,19 @@ export class DexihFormTagsDropdownComponent implements ControlValueAccessor, OnC
         this.onTouched();
         this.isDirty = true;
 
-        this.dropdown.hide();
+        this.dropdownHide();
     }
 
     dropdownShow() {
-        this.dropdown.show();
+        this.isOpen = true;
+        this.isOpenChange.emit();
     }
 
     dropdownHide(delay = 500) {
         setTimeout(() => {
             if (!this.blockMenuClose) {
-                this.dropdown.hide();
+                this.isOpen = false;
+                this.isOpenChange.emit();
             }
             this.blockMenuClose = false;
         },
@@ -200,7 +204,7 @@ export class DexihFormTagsDropdownComponent implements ControlValueAccessor, OnC
         this.selectedKeys = this.sortedItems.map(c => c.key);
         this.tags = this.sortedItems.map(c => { return {label: c.label, color: c.color}});
         this.hasChanged();
-        this.dropdown.hide();
+        this.dropdownHide();
     }
 
     clearAll() {
@@ -214,18 +218,21 @@ export class DexihFormTagsDropdownComponent implements ControlValueAccessor, OnC
         this.onRefresh.emit();
     }
 
-    shown() {
-        this.onShown.emit();
+    private dropdownToggle($event) {
+        this.isOpen = !this.isOpen;    
+        this.isOpenChange.emit($event);  
+        if(this.isOpen) {
+            this.onShown.emit();
+        }  
     }
-    
 
     // detect a click outside the control, and hide the dropdown
     @HostListener('document:click', ['$event.target'])
     public onClick(targetElement: any) {
-        if (this.dropdown.isOpen) {
+        if (this.isOpen && this.autoClose) {
             const clickedInside = this.dropdownElement.nativeElement.contains(targetElement);
             if (!clickedInside) {
-                this.dropdown.hide();
+                this.isOpen = false;
             }
         }
     }

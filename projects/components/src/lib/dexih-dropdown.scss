@@ -1,0 +1,34 @@
+/*
+This is workaround due to he dropdown-menu-right not working due to issue: 
+https://github.com/valor-software/ngx-bootstrap/issues/4226
+*/
+
+.dropdown-menu {
+  line-height: 1.5rem;
+}
+
+.dropdown-menu-right {
+  right: 0 !important;
+  left: auto !important; 
+}
+
+.dropdown-menu li:hover {
+  cursor: pointer;
+}
+
+.dropdown-menu {
+  opacity: 0;
+}
+
+.dropdown-menu.show {
+  top: 100%;
+  transform: translateY(0px);
+  bottom: auto;
+  opacity: 1;
+  animation: fadein 0.2s linear;
+}
+
+@keyframes fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}

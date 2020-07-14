@@ -1,24 +1,32 @@
-<ng-template #template>
-  <div class="modal-header">
-    <h4 class="modal-title">{{title}}</h4>
-    <button type="button" class="close pull-right" aria-label="Close" (click)="cancel()">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <div [innerHTML]="content"></div>
-    <button *ngIf="details" type="button" class="btn btn-primary" (click)="showDetails = !showDetails" >{{showDetails ? 'Hide' : 'Details'}}</button>  
-    <div *ngIf="type === 'prompt'" class="form-group">
-      <label for="input-value" class="col-form-label">{{inputPrompt}}</label>
-      <input type="text" class="form-control" id="input-value" [(ngModel)]="inputValue">
-    </div>  
-  </div>
-  <div *ngIf="showDetails" class="modal-body">
-    <div [innerHTML]="details"></div>
-  </div>
+<div *ngIf="isOpen" class="modal-backdrop fade in " [ngClass]="{'show': isOpen}"></div>
 
-  <div class="modal-footer">
-    <button *ngIf="type === 'confirm' || type === 'prompt'" type="button" class="btn btn-danger" (click)="cancel()" data-dismiss="modal" >{{cancelButton}}</button>
-    <button type="button" class="btn btn-primary" (click)="ok()" >{{okButton}}</button>
+<div *ngIf="isOpen" class="modal fade" [ngClass]="{'show': isOpen}">
+  <div role="document" class="modal-dialog">
+    <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title">{{title}}</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="cancel()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div [innerHTML]="content"></div>
+      <button *ngIf="details" type="button" class="btn btn-primary"
+        (click)="showDetails = !showDetails">{{showDetails ? 'Hide' : 'Details'}}</button>
+      <div *ngIf="type === 'prompt'" class="form-group">
+        <label for="input-value" class="col-form-label">{{inputPrompt}}</label>
+        <input type="text" class="form-control" id="input-value" [(ngModel)]="inputValue">
+      </div>
+    </div>
+    <div *ngIf="showDetails" class="modal-body">
+      <div [innerHTML]="details"></div>
+    </div>
+
+    <div class="modal-footer">
+      <button *ngIf="type === 'confirm' || type === 'prompt'" type="button" class="btn btn-danger" (click)="cancel()"
+        data-dismiss="modal">{{cancelButton}}</button>
+      <button type="button" class="btn btn-primary" (click)="ok()">{{okButton}}</button>
+    </div>
   </div>
-</ng-template>
+  </div>
+</div>

@@ -113,6 +113,8 @@ export class DexihTableComponent implements OnInit, OnDestroy, OnChanges, AfterV
     public inputPageNumber = 1;
     public rowCount = 0;
 
+    public tagDropdownOpen = false;
+
     constructor(public el: ElementRef, public differs: KeyValueDiffers) {
         this.dataDiffer = differs.find({}).create();
     }

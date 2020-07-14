@@ -1,14 +1,13 @@
 import { Component, OnInit, OnChanges, OnDestroy, forwardRef, Input, Output,
     ViewChild, HostListener, EventEmitter, SimpleChanges, ContentChild, TemplateRef } from '@angular/core';
 import { FormControl, ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { BsDropdownDirective } from 'ngx-bootstrap/dropdown';
 import { Subscription } from 'rxjs';
 import { SharedFunctions } from './shared-functions';
 
 @Component({
     selector: 'form-select',
     templateUrl: './dexih-form-select.component.html',
-    styleUrls: ['./dexih-form.component.scss'],
+    styleUrls: ['../dexih-dropdown.scss', './dexih-form.component.scss'],
     providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => DexihFormSelectComponent), multi: true }]
 })
 export class DexihFormSelectComponent implements ControlValueAccessor, OnInit, OnDestroy, OnChanges {
@@ -51,13 +50,14 @@ export class DexihFormSelectComponent implements ControlValueAccessor, OnInit, O
     @Input() enableAddAll = false;
     @Input() setTextEntryToValue = true;
     @Input() floatingLabel: string;
+    @Input() isOpen = false;
 
     @Input() showRefresh = false;
     @Input() isRefreshing = false;
     @Output() onRefresh = new EventEmitter();
+    @Output() isOpenChange = new EventEmitter<any>();
     
-    @ViewChild(BsDropdownDirective, { static: true }) dropdown: BsDropdownDirective;
-    @ViewChild('dropdown', { static: true }) dropdownElement: any;
+    @ViewChild('dropdownButton', { static: true }) dropdownElement: any;
 
     @ContentChild('startItems', {static: true }) public startItemsTemplate: TemplateRef<any>;
     @ContentChild('endItems', {static: true }) public endItemsTemplate: TemplateRef<any>;
@@ -180,7 +180,7 @@ export class DexihFormSelectComponent implements ControlValueAccessor, OnInit, O
                 this.doManualControlUpdate = true;
             });
 
-        this.dropdown.onHidden
+        // this.dropdown.onHidden;
      }
 
     ngOnChanges(changes: SimpleChanges) {
@@ -420,7 +420,7 @@ export class DexihFormSelectComponent implements ControlValueAccessor, OnInit, O
         if (this.multiSelect) {
             this.pushTextItem(item);
         } else {
-            this.dropdown.toggle();
+            this.dropdownToggle();
 
             this.value = this.setTextEntryToValue ? item : null;
             this.textValue = item;
@@ -480,7 +480,7 @@ export class DexihFormSelectComponent implements ControlValueAccessor, OnInit, O
         this.manualControl.setValue(this.selectedName);
 
         if (hideDropdown && !this.multiSelect) { 
-            this.dropdown.hide(); 
+            this.dropdownHide(); 
         }
         // this.updateTextEntry(hideDropdown);
     }
@@ -556,10 +556,10 @@ export class DexihFormSelectComponent implements ControlValueAccessor, OnInit, O
                 this.updateTextEntry();
             }
        }
-       if (this.dropdown.isOpen) {
+       if (this.isOpen) {
             const clickedInside = this.dropdownElement.nativeElement.contains(targetElement);
             if (!clickedInside) {
-                this.dropdown.hide();
+                this.dropdownHide();
         }
        }
     }
@@ -624,14 +624,17 @@ export class DexihFormSelectComponent implements ControlValueAccessor, OnInit, O
     }
 
     dropdownShow() {
-        this.dropdown.show();
+        this.isOpen = true;
+        this.isOpenChange.emit();  
+        this.onShown.emit();
     }
 
     // the timeout is to allow the menu click to occur before closing the dropdown.
     dropdownHide(delay = 500) {
         setTimeout(() => {
             if (!this.blockMenuClose) {
-                this.dropdown.hide();
+                this.isOpen = false;
+                this.isOpenChange.emit();
             }
             this.blockMenuClose = false;
         },
@@ -640,9 +643,14 @@ export class DexihFormSelectComponent implements ControlValueAccessor, OnInit, O
 
     dropdownToggle() {
         if (this.showDropDown) {
-            this.dropdown.toggle(true);
+            this.isOpen = !this.isOpen;    
+            this.isOpenChange.emit();  
+            if(this.isOpen) {
+                this.onShown.emit();
+            }  
         }
     }
+
 
     remove(index: number) {
         if (index >= 0 && this.selectedKeys) {
@@ -663,17 +671,13 @@ export class DexihFormSelectComponent implements ControlValueAccessor, OnInit, O
         
         this.value = [...this.sortedItems];
         this.hasChanged();
-        this.dropdown.hide();
+        this.dropdownHide();
     }
 
     clearAll() {
         this.selectedKeys = [];
         this.value = [];
         this.hasChanged();
-    }
-
-    shown() {
-        this.onShown.emit();
     }
 
     private updateTextEntry() {

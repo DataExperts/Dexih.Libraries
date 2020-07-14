@@ -1,5 +1,5 @@
-<div dropdown class="btn-group">
-  <button type="button" (click)="onClick($event)" [ngClass]="['btn', 'auto-compact', 'btn-primary', buttonClass]" [class.disabled]="disabled ? true : null" [title]="title">
+<div #dropdownButton class="btn-group" >
+  <button type="button" (click)="onButtonClick($event)" [ngClass]="['btn', 'auto-compact', 'btn-primary', buttonClass]" [class.disabled]="disabled ? true : null" [title]="title">
     <i *ngIf="busy" class="fa fa-spin fa-cog"></i>
     <i [class]="iconClass"></i>
     <span *ngIf="!compact && text" [ngClass]="[autoCompact && iconClass ? 'auto-compact-item' : '']">
@@ -7,10 +7,10 @@
     </span>
     <span *ngIf="badge" class="badge" [ngClass]="[badgeClass]">{{badge}}</span>
   </button>  
-  <button type="button" dropdownToggle [ngClass]="['btn', 'btn-primary', 'dropdown-toggle', buttonClass]" title="Options">
+  <button type="button" (click)="dropdownToggle()" [ngClass]="['btn', 'btn-primary', 'dropdown-toggle', buttonClass]" title="Options">
     <i *ngIf="busy" class="fa fa-spin fa-cog"></i>
   </button>
-  <ul *dropdownMenu class="dropdown-menu" [class.dropdown-menu-right]="pullRight" >
+  <ul class="dropdown-menu" [class.dropdown-menu-right]="pullRight" [ngClass]="{'show': isOpen}" >
     <ng-content></ng-content>
   </ul>
 </div>

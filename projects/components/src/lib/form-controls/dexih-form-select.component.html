@@ -9,7 +9,7 @@
         <ng-content></ng-content>
     </ng-template>
 
-<div #dropdown dropdown [autoClose]="false" class="input-group w-100" (onShown)="shown()">
+<div #dropdownButton class="input-group w-100">
     <div class="input-group w-100" [id]="id" (click)="dropdownToggle()">
 
         <base-input class="w-100"
@@ -36,7 +36,7 @@
 
     </div>
 
-    <ul *dropdownMenu  class="dropdown-menu scrollable-menu w-100" role="menu">
+    <ul class="dropdown-menu scrollable-menu w-100" role="menu" [ngClass]="{'show': isOpen}">
         <ng-template [ngIf]="showDropDown">
             <ng-template *ngIf="startItemsTemplate" [ngTemplateOutlet]="startItemsTemplate">
             </ng-template>
@@ -109,137 +109,3 @@
 
 </div>    
 </base-template> 
-
-
-<!-- 
-<div>
-    <label *ngIf="label" [for]="id" class="mt-1">{{label}}
-        <ng-content></ng-content>
-    </label>
-    
-    <div #dropdown dropdown [autoClose]="false" class="input-group w-100" (onShown)="shown()">
-        <div class="input-group w-100" [id]="id" (click)="dropdownToggle()">
-            <div *ngIf="labelLeft" class="input-group-prepend">
-                <span class="input-group-text" [ngClass]="{'border-0 rounded-0 bg-transparent': !border}"> {{labelLeft}}</span>
-            </div>
-
-            <div class="form-control d-flex"
-            [ngClass]="{'form-label-group': floatingLabel, 'p-0 m-0': !floatingLabel, 'border-0 rounded-0  bg-transparent': !border, 'is-invalid': errors, 'is-valid': !errors && isDirty}">
-                <ng-template [ngIf]="multiSelect" >
-                    <span *ngFor="let item of value; let i = index" class="border rounded m-1 d-flex justify-content-center"
-                    [ngStyle]="{'background-color': item.color ? item.color : '#e5e7e9'}">
-                        <span class="blend-text pl-1">
-                            {{itemName && item ? item[itemName] : item}}
-                        </span>
-                        <button (click)="remove(i)" type="button" class="close" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </span>
-                </ng-template>
-                
-                <input 
-                    [attr.readonly]="((enableFilter && showDropDown) || enableTextEntry) ? null : ''" 
-                    [formControl]="manualControl" 
-                    [placeholder]="floatingLabel ? floatingLabel : (placeholder ? placeholder : '')"
-                    (keydown.arrowdown)="down()"
-                    (keydown.arrowup)="up()"
-                    (focusout)="dropdownHide()"
-                    class="border-0 disabled-input bg-transparent w-100" 
-                    [ngClass]="{'form-control-custom-input': !floatingLabel, 'font-italic': !selectedItem && textValue}" 
-                    [id]="id"
-                    [attr.autocapitalize]="autocapitalize"
-                    [title]="errors"
-                />
-
-                <label *ngIf="floatingLabel" [for]="id">{{floatingLabel}}</label>
-            </div>
-
-            <div class="input-group-append">
-                <span class="input-group-text" [ngClass]="{'border-0 rounded-0 bg-transparent': !border}">
-                    <i *ngIf="showDropDown" class="icon-append fa fa-caret-down"></i>
-                    <i *ngIf="iconClass && !showDropDown" class="icon-append {{iconClass}}"></i>
-                </span>
-            </div>
-
-        </div>
-
-        <ul *dropdownMenu  class="dropdown-menu scrollable-menu w-100" role="menu">
-            <ng-template [ngIf]="showDropDown">
-                <ng-template *ngIf="startItemsTemplate" [ngTemplateOutlet]="startItemsTemplate">
-                </ng-template>
-
-                <li *ngIf="multiSelect && enableAddAll" class="scrollable-item">
-                    <a class="dropdown-item" (click)="addAll()" title="Add all items to the list">Add all</a>
-                </li>
-                <li *ngIf="multiSelect" class="scrollable-item">
-                    <a class="dropdown-item" (click)="clearAll()" title="Clear all items">Clear all</a>
-                </li>
-
-                <li *ngIf="showRefresh" >
-                    <a class="dropdown-item" (click)="refresh()">
-                        <ng-template [ngIf]="isRefreshing"><div class="d-flex d-flex-row"><div class="loader mr-1"></div>Refreshing...</div></ng-template>
-                        <ng-template [ngIf]="!isRefreshing">Refresh ...</ng-template>
-                    </a>
-                </li>
-
-                <li *ngIf="allowNullSelect" >
-                    <a class="dropdown-item" [ngClass]="{'active': !selectedItem }" (click)="selectItem(null)">{{selectNullMessage}}</a>
-                </li>
-
-                <ng-template [ngIf]="!childItems && !grandChildItems">
-                    <li *ngFor="let item of sortedItems | filter: itemName: filterString"  class="scrollable-item" >
-                        <a class="dropdown-item" [ngClass]="{'active': selectedItem == item}"  (click)="selectItem(item)" [title]="itemTitle && item ? item[itemTitle] : ''"> {{itemName && item ? item[itemName] : item}}</a>
-                    </li>
-                </ng-template>
-
-                <ng-template [ngIf]="childItems && !grandChildItems">
-                    <ng-template ngFor let-item [ngForOf]="sortedItems">
-                            <ng-template ngFor let-childItem [ngForOf]="item[childItems] | filter: itemName: filterString" let-i="index">
-                                <li  *ngIf="i == 0" class="list-group-item list-group-item-heading list-group-item-info" >{{item[parentName]}}</li>
-
-                                <li  class="scrollable-item" >
-                                    <a  class="dropdown-item" [ngClass]="{'active': selectedItem == childItem}" (click)="selectItem(childItem)" [title]="itemTitle && childItem ? childItem[itemTitle] : ''"> &nbsp;{{itemName && childItem ? childItem[itemName] : childItem}}</a>
-                                </li>
-                            </ng-template>
-                    </ng-template>
-                </ng-template>
-
-                <ng-template [ngIf]="grandChildItems && sortedItems">
-                    <ng-template ngFor let-item [ngForOf]="sortedItems">
-                            <ng-template [ngIf]="item[childItems].length > 0">
-                            <li class="list-group-item list-group-item-heading list-group-item-info" ><b>{{item[grandParentName]}}</b></li>
-                            <ng-template ngFor let-childItem [ngForOf]="item[childItems]">
-                                <ng-template ngFor let-grandChildItem of [ngForOf]="childItem[grandChildItems] | filter: itemName: filterString" let-i="index">
-                                    <li *ngIf="i == 0" class="list-group-item list-group-item-heading list-group-item-info" >{{childItem[parentName]}}</li>
-
-                                    <li  class="scrollable-item">
-                                        <a  class="dropdown-item" [ngClass]="{'active': selectedItem == grandChildItem}" (click)="selectItem(grandChildItem)" [title]="itemTitle && grandChildItem ? grandChildItem[itemTitle] : ''"> &nbsp;{{itemName && grandChildItem ? grandChildItem[itemName] : grandChildItem}}</a>
-                                    </li>
-                                </ng-template>
-                            </ng-template>
-                        </ng-template>
-                    </ng-template>
-                </ng-template>
-
-                <ng-template [ngIf]="textEntryItems && textEntryItems.length > 0">
-                    <li *ngIf="textEntryItemsTitle" class="list-group-item list-group-item-heading list-group-item-info" ><b>{{textEntryItemsTitle}}</b></li>
-                    <li *ngFor="let item of textEntryItems"  class="scrollable-item" >
-                        <a class="dropdown-item" [ngClass]="{'active': selectedItem == item}"  (click)="selectText(item)"> {{item}}</a>
-                    </li>
-                </ng-template>
-
-                <ng-template *ngIf="endItemsTemplate" [ngTemplateOutlet]="endItemsTemplate">
-                </ng-template>
-    
-            </ng-template>
-        </ul>
-
-    </div>        
-    <div *ngIf="errors && border" class="invalid-feedback d-block order-1">
-        {{ errors }}
-    </div>
-    <small *ngIf="note" class="form-text text-muted">
-        <markdown (click)="sharedFunctions.getRoute($event)" [data]="note"></markdown>
-    </small>     
-
-</div> -->

@@ -12,7 +12,6 @@ import { DexihFormTagsComponent } from './dexih-form-tags.component';
 import { DexihFormTagsDropdownComponent } from './dexih-form-tagsDropdown.component';
 
 import { DexihSelectFilterPipe } from './dexih-select-filter.pipe';
-import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { NgxMdModule } from 'ngx-md';
 import { BaseInputComponent } from './base-input.component';
 import { BaseTemplateComponent } from './base-template.component';
@@ -22,7 +21,6 @@ import { BaseTemplateComponent } from './base-template.component';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    BsDropdownModule,
     NgxMdModule,
   ],
   declarations: [
