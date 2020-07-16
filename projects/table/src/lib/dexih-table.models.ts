@@ -23,8 +23,10 @@ export class Column {
     public footer: string;
     public header: string;
     public childColumns: Column[];
+    public image: string;
     public enum: Type;
     public tags: Tag[];
+    public tagNames: string[];
 }
 
 export class Tag {

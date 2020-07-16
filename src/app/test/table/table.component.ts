@@ -142,7 +142,7 @@ export class TableComponent implements OnInit, AfterViewInit {
     for (let i = 0; i < 10000; i++) {
       this.largeData[i] = new DataModel(i, `row ${i}`, 'row 1 footer', 'row 1 header', new Date(date.getTime() + 30000), date,
       true, '<b>bold 1</b>', simpleObject, 'tip 1', 'fa fa-spin fa-cog', 'markdown **bold**', 'footer **bold**', ['a', 'b', 'c'],
-      childNodes, eEnum.enum1, [this.tags[0], this.tags[1]])
+      childNodes, eEnum.enum1, [this.tags[0], this.tags[1]]);
     }
 
     setTimeout(() => {

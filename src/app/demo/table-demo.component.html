@@ -1,0 +1,69 @@
+<section>
+    <div class="container">
+        <div class="row m-3">
+            <div class="col">
+                <h2>Table with Search & Card Toggle</h2>
+                <p>A simple data table containing formatting and a header. The table includes built in search and toggle
+                    between table/cards view.
+                </p>
+                
+                
+                <div class="border rounded p-3">
+                    <dexih-table [data]="characters" [columns]="formatTable ? characterFormat : null"
+                        heading="Simpsons Characters" [tags]="tags">
+                        <ng-template #actions let-items="items">
+                            <form-checkbox label="Format Columns" [(ngModel)]="formatTable"
+                                [ngModelOptions]="{standalone: true}"></form-checkbox>
+                        </ng-template>
+                    </dexih-table>
+                </div>
+
+                <div class="border rounded p-3">
+                    <a href="https://gist.github.com/gary-holland/6e07f7fffd29f6ecfe33cd00d8ad6d7d">Open the gist</a>
+                    <ngx-gist [gistId]="'gary-holland/6e07f7fffd29f6ecfe33cd00d8ad6d7d'" style="height: 500px;"></ngx-gist>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row m-3">
+            <div class="col">
+                <h2>Table with Selection</h2>
+                <p>The following table demonstrates the different types of automatic column formatting, includes custom cells, a sticky header, and various selection functions.</p>
+
+                <div class="border rounded p-3">
+                    <dexih-table [enableMultiSelect]="true" [enableStickyToolbar]="true"
+                    [enableSort]="true" [enableManualSort]="true" [enableSaveCsv]="true" (rowClick)="singleItem($event)" heading="Table with export, sort, row action enabled."
+                    [columns]="columns" [data]="data" rowStatusHeading="Status"  actionHeading="Action">
+                        <ng-template #selectedItemAction select="selectedItemAction" let-item="item">
+                            <button class="btn btn-primary mr-1" (click)="singleItem(item)">Open</button>
+                        </ng-template>
+
+                        <ng-template #selectedItemsAction select="selectedItemsAction" let-items="items">
+                            <button class="btn btn-danger mr-1" (click)="multipleItems(items)">Delete</button>
+                        </ng-template>
+
+                        <ng-template #actions let-items="items">
+                            <button class="btn btn-primary mr-1">New</button>
+                        </ng-template>
+
+                        <ng-template #rowStatus select="rowStatus" let-item="item">
+                            Running... {{item.stringValue}}
+                        </ng-template>
+
+                        <ng-template #rowAction select="rowAction" let-item="item">
+                            <button class="btn btn-danger mr-1" (click)="singleItem(item)">Cancel</button>
+                        </ng-template>
+                    </dexih-table>
+                </div>
+
+                <div class="border rounded p-3">
+                    <a href="https://gist.github.com/gary-holland/ee20b5699c49f46bf97a9a22a96a0d29">Open the gist</a>
+                    <ngx-gist [gistId]="'gary-holland/ee20b5699c49f46bf97a9a22a96a0d29'" style="height: 500px;"></ngx-gist>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>

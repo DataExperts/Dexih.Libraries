@@ -7,7 +7,7 @@
     </span>
     <span *ngIf="badge" class="badge" [ngClass]="[badgeClass]">{{badge}}</span>
   </button>  
-  <button type="button" (click)="dropdownToggle()" [ngClass]="['btn', 'btn-primary', 'dropdown-toggle', buttonClass]" title="Options">
+  <button type="button" (click)="dropdownToggle($event)" [ngClass]="['btn', 'btn-primary', 'dropdown-toggle', buttonClass]" title="Options">
     <i *ngIf="busy" class="fa fa-spin fa-cog"></i>
   </button>
   <ul class="dropdown-menu" [class.dropdown-menu-right]="pullRight" [ngClass]="{'show': isOpen}" >

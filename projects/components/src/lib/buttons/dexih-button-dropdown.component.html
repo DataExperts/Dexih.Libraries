@@ -1,4 +1,4 @@
-<div #dropdownButton class="btn-group" (click)="dropdownToggle()"  placement="bottom right">
+<div #dropdownButton class="btn-group" (click)="dropdownToggle($event)"  placement="bottom right">
   <button type="button" 
     [disabled]="disabled" class="btn {{buttonClass}} auto-compact" [ngClass]="{'dropdown-toggle': !hideCarrot}" [title]="title">
     <i *ngIf="busy" class="fa fa-spin fa-cog"></i>

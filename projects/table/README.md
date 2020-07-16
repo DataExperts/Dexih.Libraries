@@ -1,6 +1,6 @@
 # dexih-ngx-table
 
-dexih-ngx-table is an Angular (2+) component for building data driven tables.
+dexih-ngx-table is an Angular (8+) component for building data driven tables.
 
 [![][dex-img]][dex]
 

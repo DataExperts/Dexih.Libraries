@@ -26,7 +26,7 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 @Component({
     selector: 'dexih-table',
     templateUrl: './dexih-table.component.html',
-    styleUrls: [ './dexih-table.component.scss' ]
+    styleUrls: [ './dexih-table.component.scss' ],
 })
 export class DexihTableComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit {
     @Input() public dataObservable: Observable<Array<any>>;
@@ -49,7 +49,7 @@ export class DexihTableComponent implements OnInit, OnDestroy, OnChanges, AfterV
     @Input() public enableSaveCsv = false;
     @Input() public csvFileName = 'data.csv';
     @Input() public enableResponsive = true;
-    @Input() public tableClass = 'table table-striped table-bordered table-hover m-0';
+    @Input() public tableClass = 'table table-striped table-bordered table-hover table-light m-0';
     @Input() public error: string;
     @Input() public heading: string;
     // @Input() public dropListEnterPredicate;
@@ -145,10 +145,10 @@ export class DexihTableComponent implements OnInit, OnDestroy, OnChanges, AfterV
         if (this.enableManualSort) { this.columnCount++; }
 
         if (!this.dataObservable && this.data) {
-            const changes = this.dataDiffer.diff(this.data); // check for changes
+            const dataChanges = this.dataDiffer.diff(this.data); // check for changes
 
             // the data.length === 0 is checked also as dataDiffer doesn't detect from null to empty
-            if (changes || (this.data && this.data.length === 0)) {
+            if (changes.columns || dataChanges || (this.data && this.data.length === 0)) {
                 this.doLoadData(this.data);
             }
         }
@@ -324,11 +324,23 @@ export class DexihTableComponent implements OnInit, OnDestroy, OnChanges, AfterV
 
                     let tagColumn = this.currentColumns.find(c => c.tags);
                     // check if the tags are filtered.
-                    if (this.tagStates && selectedTags.length > 0 && tagColumn.tags && tagColumn.tags.length > 0) {
+                    if (this.tagStates && selectedTags.length > 0 && tagColumn && tagColumn.tags && tagColumn.tags.length > 0) {
                         let columnTags = this.columnOperations.fetchFromObject(dataRow, tagColumn.tags);
                         if(columnTags) {
                             for(let tag of columnTags) {
                                 if (selectedTags.findIndex(c => c.tag.name === tag.name) >= 0) {
+                                    isTagMatch = true;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    tagColumn = this.currentColumns.find(c => c.tagNames);
+                    if (this.tagStates && selectedTags.length > 0 &&  tagColumn && tagColumn.tagNames && tagColumn.tagNames.length > 0) {
+                        let columnTagNames = this.columnOperations.fetchFromObject(dataRow, tagColumn.tagNames);
+                        if(columnTagNames) {
+                            for(let tag of columnTagNames) {
+                                if (selectedTags.findIndex(c => c.tag.name === tag) >= 0) {
                                     isTagMatch = true;
                                     break;
                                 }

@@ -10,11 +10,12 @@
             <div *ngSwitchCase="'Md'" (click)="getRoute($event)">
                 <div><small *ngIf="header"><markdown [data]="header"></markdown></small></div>
                 <markdown *ngIf="value" [data]="value" ></markdown>
-                <div *ngIf="tags">
-                    <h5><a *ngFor="let tag of tags" href="javascript:void(0)" (click)="tagClick(tag)" [ngStyle]="{'background-color': tag.color}" class="badge mr-1"><span class="blend-text">{{tag.name}}</span></a></h5>
+                <div *ngIf="columnTags">
+                    <h5><a *ngFor="let tag of columnTags" href="javascript:void(0)" (click)="tagClick(tag)" [ngStyle]="{'background-color': tag.color}" class="badge mr-1"><span class="blend-text">{{tag.name}}</span></a></h5>
                 </div>
                 <div><small *ngIf="footer"><markdown [data]="footer"></markdown></small></div>
             </div>
+            <img *ngSwitchCase="'Image'" [src]="image">
             <pre *ngSwitchCase="'Code'"><code>{{value}}</code></pre>
             <pre *ngSwitchCase="'Json'" [innerHtml]="jsonValue"></pre>
             <div *ngSwitchCase="'Node'">
@@ -34,8 +35,8 @@
             <span *ngSwitchDefault>
                 <div *ngIf="header"><small>{{header}}</small></div>
                     {{formattedValue}}
-                <div *ngIf="tags">
-                    <h5><a *ngFor="let tag of tags" href="javascript:void(0)" (click)="tagClick(tag)" [ngStyle]="{'background-color': tag.color}" class="badge mr-1"><span class="blend-text">{{tag.name}}</span></a></h5>
+                <div *ngIf="columnTags">
+                    <h5><a *ngFor="let tag of columnTags" href="javascript:void(0)" (click)="tagClick(tag)" [ngStyle]="{'background-color': tag.color}" class="badge mr-1"><span class="blend-text">{{tag.name}}</span></a></h5>
                 </div>
                 <div *ngIf="footer"><small>{{footer}}</small></div>
             </span>

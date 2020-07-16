@@ -1,6 +1,6 @@
 {
   "name": "dexih-ngx-components",
-  "version": "0.3.109",
+  "version": "0.3.112",
   "repository": {
     "type": "git",
     "url": "https://github.com/DataExperts/Dexih.Libaries/tree/master/projects/components"
@@ -22,7 +22,6 @@
     "@angular/forms": ">= 8.0.0",
     "@angular/router": ">= 8.0.0",
     "@angular/animations": ">= 8.0.0",
-    "ngx-md": ">= 8.0.0",
-    "ngx-bootstrap": ">= 5.0.0"
+    "ngx-md": ">= 8.0.0"
   }
 }

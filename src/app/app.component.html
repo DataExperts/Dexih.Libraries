@@ -6,12 +6,13 @@
                 <strong>Angular 8+ Components</strong>
             </a>
             <dexih-button-dropdown text="Testing" iconClass="fa fa-chain-broken" [pullRight]="true">
-                <dexih-dropdown-item iconClass="fa fa-table" [routerLink]="['test', 'table']">Table Tests</dexih-dropdown-item>
+                <dexih-dropdown-item iconClass="fa fa-table" [routerLink]="['test', 'table']">Table Tests
+                </dexih-dropdown-item>
                 <dexih-dropdown-item [routerLink]="['test', 'components']">Component Tests</dexih-dropdown-item>
             </dexih-button-dropdown>
         </div>
     </div>
-    
+
 </header>
 
 <main role="main">
@@ -20,13 +21,33 @@
         <div class="container">
             <h1>Angular 8+ Bootstrap Components</h1>
             <p class="lead text-muted">Browse the demo's below and feel free to use our Angular 8+ components</p>
-            <p>
-                <dexih-button class="my-2" [routerLink]="['table']">Data Driven Tables</dexih-button>
-                <dexih-button class="my-2" buttonClass="btn btn-secondary" [routerLink]="['components']">Widgets / Form Controls</dexih-button>
-            </p>
-            <p>
-                <dexih-button href="https://github.com/DataExperts/Dexih.Libaries" iconClass="fa fa-github" buttonClass="btn btn-danger" [autoCompact]="false">GitHub</dexih-button>
-            </p>
+            <div class="row m-3">
+                <div class="col border rounded m-1 p-3">
+                    <p>
+                        Data Driven Tables
+                    </p>
+                    <p>
+                        <dexih-button class="my-2" [routerLink]="['demo','table']">Demo</dexih-button>
+                        <dexih-button class="my-2"
+                            href="https://github.com/DataExperts/Dexih.Libraries/tree/master/projects/table">
+                            Documentation
+                        </dexih-button>
+                    </p>
+                </div>
+                <div class="col border rounded m-1 p-3">
+                    <p>
+                        Bootstrap Widgets and Controls
+                    </p>
+                    <p>
+                        <dexih-button class="my-2" buttonClass="btn btn-secondary" [routerLink]="['demo','components']">Demo
+                        </dexih-button>
+                        <dexih-button class="my-2" buttonClass="btn btn-secondary"
+                            href="https://github.com/DataExperts/Dexih.Libraries/tree/master/projects/components">
+                            Documentation
+                        </dexih-button>
+                    </p>
+                </div>
+            </div>
         </div>
     </section>
 

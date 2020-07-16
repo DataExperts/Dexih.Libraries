@@ -218,7 +218,7 @@ export class DexihFormTagsDropdownComponent implements ControlValueAccessor, OnC
         this.onRefresh.emit();
     }
 
-    private dropdownToggle($event) {
+    dropdownToggle($event) {
         this.isOpen = !this.isOpen;    
         this.isOpenChange.emit($event);  
         if(this.isOpen) {

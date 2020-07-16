@@ -13,19 +13,21 @@ export class DexihTableCellComponent implements OnInit, OnDestroy {
     @Input() public column: Column;
     @Input() public row: any;
     @Input() public nodeExpanded = -1;
+    @Input() public tags: Tag[];
     @Output() onNodeClick: EventEmitter<any> = new EventEmitter<any>();
     @Output() onTagClick: EventEmitter<Tag> = new EventEmitter<Tag>();
 
     private _interval: any;
 
     public value: any;
+    public image: string;
     public jsonValue: any;
     public formattedValue: string;
     public alignment: string;
     public footer: string;
     public header: string;
     public format: string;
-    public tags: Tag[];
+    public columnTags: Tag[];
 
     private columnOperations = new ColumnOperations();
 
@@ -35,41 +37,44 @@ export class DexihTableCellComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.format = this.column.format;
-        if (this.column.name || this.column.name === 0) {
-            this.value = this.columnOperations.fetchFromObject(this.row, this.column.name);
-            this.footer = this.columnOperations.fetchFromObject(this.row, this.column.footer);
-            this.header = this.columnOperations.fetchFromObject(this.row, this.column.header);
-            this.tags = this.columnOperations.fetchFromObject(this.row, this.column.tags);
-            this.formattedValue = this.columnOperations.formatValue(this.column, this.value);
-            this.alignment = this.setAlignment(this.value)
 
-            // if (typeof this.value === 'object' || this.value instanceof Array) {
-            //     this.value
-            //     const json = JSON.stringify(this.value, null, 2);
-            //     this.jsonValue = this.syntaxHighlight(json);
-            //     this.format = 'Json';
-            // }
+        this.value = this.columnOperations.fetchFromObject(this.row, this.column.name);
+        this.image = this.columnOperations.fetchFromObject(this.row, this.column.image);
+        this.footer = this.columnOperations.fetchFromObject(this.row, this.column.footer);
+        this.header = this.columnOperations.fetchFromObject(this.row, this.column.header);
+        this.columnTags = this.columnOperations.fetchFromObject(this.row, this.column.tags);
+        this.formattedValue = this.columnOperations.formatValue(this.column, this.value);
+        this.alignment = this.setAlignment(this.value)
 
-            if (this.column.format === 'Json') {
-                let json: string;
-                if(typeof this.value === 'string') {
-                    if (this.value) {
-                        json = JSON.stringify(JSON.parse(this.value), null, 2);
-                    } else {
-                        json = '';
-                    }
+        let tagNames = this.columnOperations.fetchFromObject(this.row, this.column.tagNames);
+
+        if (tagNames && tagNames.length > 0 && this.tags && this.tags.length > 0) {
+            this.columnTags = tagNames.map(c => this.tags.find(t => t.name === c));
+        }
+
+        // if (typeof this.value === 'object' || this.value instanceof Array) {
+        //     this.value
+        //     const json = JSON.stringify(this.value, null, 2);
+        //     this.jsonValue = this.syntaxHighlight(json);
+        //     this.format = 'Json';
+        // }
+
+        if (this.column.format === 'Json') {
+            let json: string;
+            if(typeof this.value === 'string') {
+                if (this.value) {
+                    json = JSON.stringify(JSON.parse(this.value), null, 2);
                 } else {
-                    json = JSON.stringify(this.value, null, 2);
+                    json = '';
                 }
-                this.jsonValue = this.syntaxHighlight(json);   
+            } else {
+                json = JSON.stringify(this.value, null, 2);
             }
+            this.jsonValue = this.syntaxHighlight(json);   
+        }
 
-            if (this.column.format === 'Countdown') {
-                this._startTimer();
-            }
-
-        } else {
-            this.value = '';
+        if (this.column.format === 'Countdown') {
+            this._startTimer();
         }
     }
 

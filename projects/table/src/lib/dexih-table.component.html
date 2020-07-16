@@ -40,20 +40,20 @@
                         </div>
                     </div>
             
-                    <div  *ngIf="actionsTemplate">
+                    <div class="align-self-center" *ngIf="actionsTemplate">
                         <ng-template [ngTemplateOutlet]="actionsTemplate"
                             [ngTemplateOutletContext]="{items: currentSelectedItems}">
                         </ng-template>
                     </div>
             
-                    <div *ngIf="selectedItemActionsTemplate && selectedItemsCount == 1">
+                    <div class="align-self-center" *ngIf="selectedItemActionsTemplate && selectedItemsCount == 1">
                         <ng-template 
                             [ngTemplateOutlet]="selectedItemActionsTemplate"
                             [ngTemplateOutletContext]="{item: currentSelectedItems[0]}">
                         </ng-template>
                     </div>
             
-                    <div *ngIf="selectedItemsActionsTemplate && selectedItemsCount > 0">
+                    <div class="align-self-center" *ngIf="selectedItemsActionsTemplate && selectedItemsCount > 0">
                         <ng-template 
                             [ngTemplateOutlet]="selectedItemsActionsTemplate"
                             [ngTemplateOutletContext]="{items: currentSelectedItems}">
@@ -63,7 +63,7 @@
             </div>
             
             <div *ngIf="tableItems?.length >= 0 && !hideTable" class="btn-toolbar ml-auto">
-                <div  *ngIf="filterTemplate">
+                <div class="align-self-center"  *ngIf="filterTemplate">
                     <ng-template [ngTemplateOutlet]="filterTemplate"
                         [ngTemplateOutletContext]="{items: currentSelectedItems}">
                     </ng-template>
@@ -166,7 +166,7 @@
                             <ng-template *ngIf="cellTemplate" [ngTemplateOutlet]="cellTemplate" [ngTemplateOutletContext]="{item: data[tableItem.index], column: column, value: data[tableItem.index][column.name]}">
                             </ng-template>
                             
-                            <dexih-table-cell *ngIf="enableCellValue" [column]="column" [row]="data[tableItem.index]" [nodeExpanded]="expandedNodes[tableItem.index] == columnIndex" (onNodeClick)="nodeClick(tableItem.index, columnIndex)" (onTagClick)="tagClick($event)">
+                            <dexih-table-cell *ngIf="enableCellValue" [column]="column" [row]="data[tableItem.index]" [tags]="tags" [nodeExpanded]="expandedNodes[tableItem.index] == columnIndex" (onNodeClick)="nodeClick(tableItem.index, columnIndex)" (onTagClick)="tagClick($event)">
                             </dexih-table-cell>
                         </td>
                         <td *ngIf="rowActionTemplate">
@@ -190,14 +190,14 @@
                 </ng-template>
             </tbody>
         </table>
-        <div *ngIf="view === 'cards'" class="card-columns m-3">
+        <div *ngIf="view === 'cards'" class="d-flex flex-wrap">
             <div *ngIf="tableItems.length == 0 || !currentColumns" class="card">
                 <div class="card-body">
                     There are no rows available.
                 </div>
             </div>
             <ng-template ngFor let-tableItem [ngForOf]="tableItems | tableFilter:enablePages:rowsPerPage:pageNumber" let-i="index">
-                <div class="card" >
+                <div class="card flex-fill m-1" >
                     <div class="card-body p-0">
                           <table class="table" [class.table-primary]="tableItem?.isSelected">
                             <tr *ngFor="let column of currentColumns; let columnIndex=index;">
@@ -211,7 +211,7 @@
                                     <ng-template *ngIf="cellTemplate" [ngTemplateOutlet]="cellTemplate"
                                         [ngTemplateOutletContext]="{item: data[tableItem.index], column: column, value: data[tableItem.index][column.name]}">
                                     </ng-template>
-                                    <dexih-table-cell *ngIf="enableCellValue" [column]="column" [row]="data[tableItem.index]"
+                                    <dexih-table-cell *ngIf="enableCellValue" [tags]="tags" [column]="column" [row]="data[tableItem.index]"
                                         [nodeExpanded]="expandedNodes[tableItem.index] == columnIndex"
                                         (onNodeClick)="nodeClick(tableItem.index, columnIndex)" (onTagClick)="tagClick($event)">
                                     </dexih-table-cell>

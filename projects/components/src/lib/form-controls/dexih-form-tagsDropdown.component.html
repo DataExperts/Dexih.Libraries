@@ -10,7 +10,7 @@
     </ng-template>
 
 <div #dropdownButton class="input-group w-100">
-    <div (click)="dropdownToggle()" class="input-group w-100" [id]="id" >
+    <div (click)="dropdownToggle($event)" class="input-group w-100" [id]="id" >
 
         <base-input class="w-100"
         [labelLeft]="labelLeft" 

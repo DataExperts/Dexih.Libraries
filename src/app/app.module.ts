@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, ModuleWithProviders } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -16,13 +16,18 @@ import { ChildComponent } from './test/components/child.component';
 import { TableComponent } from './test/table/table.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { CommonModule } from '@angular/common';
+import { TableDemoComponent } from './demo/table-demo.component';
+import { ComponentsDemoComponent } from './demo/components-demo.component';
+import { NgxGistModule } from 'ngx-gist/dist/ngx-gist.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     ComponentsComponent,
     ChildComponent,
-    TableComponent
+    TableComponent,
+    TableDemoComponent,
+    ComponentsDemoComponent
   ],
   imports: [
     CommonModule,
@@ -31,10 +36,11 @@ import { CommonModule } from '@angular/common';
     HttpClientModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    NgxMdModule.forRoot(),
+    NgxMdModule,
     DexihComponentsModule,
     DexihTableModule,
-    DragDropModule
+    DragDropModule,
+    NgxGistModule
   ],
   bootstrap: [AppComponent]
 })
