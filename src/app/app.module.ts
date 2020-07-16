@@ -18,7 +18,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { CommonModule } from '@angular/common';
 import { TableDemoComponent } from './demo/table-demo.component';
 import { ComponentsDemoComponent } from './demo/components-demo.component';
-import { NgxGistModule } from 'ngx-gist/dist/ngx-gist.module';
+import { NgxGist } from './gist/ngx-gist.component'
 
 @NgModule({
   declarations: [
@@ -27,7 +27,8 @@ import { NgxGistModule } from 'ngx-gist/dist/ngx-gist.module';
     ChildComponent,
     TableComponent,
     TableDemoComponent,
-    ComponentsDemoComponent
+    ComponentsDemoComponent,
+    NgxGist
   ],
   imports: [
     CommonModule,
@@ -40,7 +41,6 @@ import { NgxGistModule } from 'ngx-gist/dist/ngx-gist.module';
     DexihComponentsModule,
     DexihTableModule,
     DragDropModule,
-    NgxGistModule
   ],
   bootstrap: [AppComponent]
 })

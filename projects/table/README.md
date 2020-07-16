@@ -43,12 +43,15 @@ There are also a dependencies (for drag/drop) on the ng2-dnd library, and the ng
 $ npm install ng2-dnd ngx-md --save
 ```
 
-You will need also need bootstrap styles included (version 3/4).  For example add this to your index.html header:
+You will need also need bootstrap styles included (4.x).  For example add this to your index.html header:
 
 ```xml
 <!-- index.html -->
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 ```
+
+Note: jQuery, popper and the bootstrap.js files are not required for these controls to function.
+
 
 ## Example
 
@@ -224,10 +227,10 @@ Saving as Csv file properties:
 - `csvFileName` (default `data.csv`) - Default name of the csv file.
 
 Table styling:
+- `tableClass` (default `table table-striped table-bordered table-hover`) - Css class to apply to the table;
 - `enableStickyToolbar` (`true`, `false` default) - Enables the toolbar to stick to the top of the page when scrolling.
 - `toolBarZIndex` - Sets the z-Index for the toolbar for when the toolbar gets hidden (or hides) other items on the page.
 - `enableResponsive` (`true` default, `false`) - Enable bootstrap responsive table (suitable for mobile devices).
-- `tableClass` (default `table table-striped table-bordered table-hover`) - Css class to apply to the table;
 
 Customizing Cells
 - `error` (null default) - If set, displays the specified error message at the top of the table.
@@ -333,8 +336,9 @@ Drag and drop can be used as follows:
 
 Thanks to the following projects:
 
-* [jvandemo/generator-angular2-library](https://github.com/jvandemo/generator-angular2-library) - used as the baseline to package and distribute this library.
-* [ngx-md](https://github.com/dimpu/ngx-md) - used for rendering markdown text.
+* [https://getbootstrap.com/docs/4.5/getting-started/introduction/](Bootstrap) - Obviously the Bootstrap team.
+* [jvandemo/generator-angular2-library](https://github.com/jvandemo/generator-angular2-library) - Used as the baseline to package and distribute this library.
+* [ngx-md](https://github.com/dimpu/ngx-md) - Used for rendering markdown text.
 
 ## License
 

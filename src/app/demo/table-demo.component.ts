@@ -57,15 +57,15 @@ export class TableDemoComponent implements OnInit {
 
     characters: Characters[] = [
         {character: 'Homer Simpson', role: 'Husband of Marge; father of Bart, Lisa, and Maggie.',
-            actors: ['Dan Castellaneta'], startDate: new Date('1987-01-01 '), tags: ['male', 'adult'], image: '/assets/img/homer-simpson.png'},
+            actors: ['Dan Castellaneta'], startDate: new Date(1987, 0, 1), tags: ['male', 'adult'], image: 'assets/img/homer-simpson.png'},
         {character: 'Marge Simpson', role: 'Wife of Homer; mother of Bart, Lisa, and Maggie.',
-            actors: ['Julie Kavner'], startDate: new Date('1987-01-01 '), tags: ['female', 'adult'], image: '/assets/img/marge-simpson.png'},
+            actors: ['Julie Kavner'], startDate: new Date(1987, 0, 1), tags: ['female', 'adult'], image: 'assets/img/marge-simpson.png'},
         {character: 'Bart Simpson', role: '	Oldest child and only son of Homer and Marge; brother of Lisa and Maggie.',
-            actors: ['Nancy Cartwright'], startDate: new Date('1987-01-01 '), tags: ['male', 'child'], image: '/assets/img/bart-simpson.png'},
+            actors: ['Nancy Cartwright'], startDate: new Date(1987, 0, 1), tags: ['male', 'child'], image: 'assets/img/bart-simpson.png'},
         {character: 'Lisa Simpson', role: 'Middle child and eldest daughter of Homer and Marge; sister of Bart and Maggie.',
-            actors: ['Yeardley Smith'], startDate: new Date('1987-01-01 '), tags: ['female', 'child'], image: '/assets/img/lisa-simpson.png'},
+            actors: ['Yeardley Smith'], startDate: new Date(1987, 0, 1), tags: ['female', 'child'], image: 'assets/img/lisa-simpson.png'},
         {character: 'Maggie Simpson', role: 'Husband of Marge; father of Bart, Lisa, and Maggie.',
-            actors: ['Liz Georges', 'Gábor Csupó', 'Harry Shearer', 'Yeardley Smith', 'Nancy Cartwright', 'Elizabeth Taylor', 'James Earl Jones', 'Jodie Foster'], startDate: new Date('1987-01-01 '), tags: ['female', 'child'], image: '/assets/img/maggie-simpson.png'},
+            actors: ['Liz Georges', 'Gábor Csupó', 'Harry Shearer', 'Yeardley Smith', 'Nancy Cartwright', 'Elizabeth Taylor', 'James Earl Jones', 'Jodie Foster'], startDate: new Date(1987, 0, 1), tags: ['female', 'child'], image: 'assets/img/maggie-simpson.png'},
     ];
 
     characterFormat = [
