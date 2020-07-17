@@ -1,0 +1,106 @@
+<section>
+    <div class="container">
+        <div class="row m-3">
+            <div class="col">
+                <h2>Form Controls</h2>
+
+                <h3>Input</h3>
+                <p>An input control which can be decorated with various labels and icons.
+                </p>
+                
+                <div class="border rounded p-3">
+                    <form-input label="A regular label" note="a note to describe the input and [link](http://dataexpertsgroup.com)"></form-input>
+                    <form-input label="input with sub label" subLabel="the sub label" placeholder="input something"></form-input>
+                    <form-input label="input with floating label" floatingLabel="uses a floating label"></form-input>
+                    <form-input label="Input with an icon" note="a note to describe the input" placeholder="input with icon" iconClass="fa fa-pie-chart"></form-input>
+                    <form-input label="input with error" errors="this is invalid" placeholder="input something" iconClass="fa fa-pie-chart"></form-input>
+                    <form-input label="input disabled" [disabled]="true" placeholder="input something" iconClass="fa fa-pie-chart" value="can't change this text"></form-input>
+                    <form-input type="number" label="a number only input" placeholder="input number"></form-input>
+                </div>
+
+                <div class="border rounded p-3">
+                    <ngx-gist [gistId]="'gary-holland/cc56f38f5b609b127f72abeaeeb2cdca'"></ngx-gist>
+                </div>
+
+                <br>
+                <h3>Input (tags)</h3>
+                <p>An input control which generates an array of tags.
+                </p>
+                
+                <div class="border rounded p-3">
+                    <form-tags label="input tag (type values and press enter)" placeholder="input tags"></form-tags>
+                    <form-tags label="input tag with floating label" floatingLabel="with floating label"></form-tags>
+                    <form-tags label="pre-filled input tags" [value]="['item1', 'item2']" placeholder="input tags"></form-tags>
+                    <form-tags label="input tag with errors" [value]="['bad item']" errors="the error message" placeholder="input tags"></form-tags>
+                </div>
+
+                <div class="border rounded p-3">
+                    <ngx-gist [gistId]="'gary-holland/c83ae4455845048d202eb205edca1956'" ></ngx-gist>
+                </div>
+
+                <br>
+                <h3>Select (dropdown)</h3>
+                <p>A data driven dropdown controls which allow hierarchial datasets, key/name pairs, and text entry.
+                </p>
+                
+                <div class="border rounded p-3">
+                    <form-select label="Simple Select (also allows text entry)" [value]="'item1'" [items]="['item1', 'item2','item3']" [enableTextEntry]="true"></form-select>
+                    <form-select label="Floating label" floatingLabel="With Floating Label" [items]="['item1', 'item2','item3']" ></form-select>
+                    <form-select label="Multi-select" [multiSelect]="true" [value]="['item1', 'item2']" [items]="['item1', 'item2','item3']" [enableTextEntry]="true"></form-select>
+                    <form-select label="Select with hierarchy" parentName='category' childItems='items'
+                    [items]="[
+                        {category: 'Fruit', items: ['apple', 'orange', 'banana']}, 
+                        {category: 'Vegetable', items: ['carrot', 'lettuce', 'celery']},
+                        {category: 'Meat', items: ['beef', 'chicken', 'fish']}
+                        ]" 
+                    >
+                    </form-select>
+                    <form-select [label]="'Select with key/value.  You selected key: ' + selectedKey" itemName='name' itemKey='key' [(ngModel)]="selectedKey" [ngModelOptions]="{standalone: true}"
+                        [items]="[{key:1, name:'item1'}, {key:2, name:'item2'}, {key:3, name:'item3'}]"></form-select>
+
+                    <form-select label="With custom items before and after" [items]="['item1', 'item2','item3']" [enableTextEntry]="true" [(ngModel)]="textValue" [ngModelOptions]="{standalone: true}" [enableFilter]="false">
+                        <ng-template #startItems>
+                            <li class="scrollable-item" >
+                                <a class="dropdown-item bg-primary">This is a custom item</a>
+                            </li>
+                        </ng-template>
+                        <ng-template #endItems>
+                            <li class="scrollable-item" >
+                                <a class="dropdown-item bg-primary">This is a custom item</a>
+                            </li>
+                        </ng-template>
+                    </form-select>                        
+                </div>
+
+                <div class="border rounded p-3">
+                    <ngx-gist [gistId]="'gary-holland/d237af5e9fa0b0418933e88f6f252b93'"></ngx-gist>
+                </div>
+
+                <br>
+                <h3>Tags (dropdown)</h3>
+                <p>A data driven dropdown for colored tags
+                </p>
+                
+                <div class="border rounded p-3">
+                    <form-tags-dropdown label="Simple Tags Dropdown" [value]="['item1']" [items]="['item1', 'item2','item3']" [enableAddAll]="true"></form-tags-dropdown>
+                    <form-tags-dropdown label="With Floating Label" floatingLabel="Floating Label" [items]="['item1', 'item2','item3']" [enableAddAll]="true"></form-tags-dropdown>
+                    <form-tags-dropdown label="With Colors" [enableAddAll]="true" itemKey="column.key" itemName="column.name" itemColor="column.color"
+                        [value]="[1]"
+                        [items]="[
+                        {column: {key: 1, name: 'good', color: 'green'}},
+                        {column: {key: 2, name: 'average', color: 'orange'}},
+                        {column: {key: 2, name: 'poor', color: 'red'}}
+                        ]">
+                    </form-tags-dropdown>
+                </div>
+
+                <div class="border rounded p-3">
+                    <ngx-gist [gistId]="'gary-holland/d237af5e9fa0b0418933e88f6f252b93'"></ngx-gist>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+</section>

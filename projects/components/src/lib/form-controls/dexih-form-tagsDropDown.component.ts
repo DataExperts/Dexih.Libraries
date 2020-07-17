@@ -1,4 +1,4 @@
-import { Component, forwardRef, Input, EventEmitter, Output, HostListener, ViewChild, OnChanges } from '@angular/core';
+import { Component, forwardRef, Input, EventEmitter, Output, HostListener, ViewChild, OnChanges, OnInit } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { SharedFunctions, ListItem } from './shared-functions';
 
@@ -11,7 +11,7 @@ import { SharedFunctions, ListItem } from './shared-functions';
         { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => DexihFormTagsDropdownComponent), multi: true },
     ]
 })
-export class DexihFormTagsDropdownComponent implements ControlValueAccessor, OnChanges {
+export class DexihFormTagsDropdownComponent implements ControlValueAccessor, OnInit, OnChanges {
     @Input() label: string;
     @Input() labelLeft: string;
     @Input() note: string;
@@ -63,6 +63,10 @@ export class DexihFormTagsDropdownComponent implements ControlValueAccessor, OnC
     onTouched: any = () => { };
 
     constructor() { }
+
+    ngOnInit() {
+        this.writeValue(this.value);
+    }
 
     ngOnChanges() {
        // this.updateLabels();

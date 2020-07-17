@@ -41,11 +41,9 @@
             <ng-template *ngIf="startItemsTemplate" [ngTemplateOutlet]="startItemsTemplate">
             </ng-template>
 
-            <li *ngIf="multiSelect && enableAddAll" class="scrollable-item">
-                <a class="dropdown-item" (click)="addAll()" title="Add all items to the list">Add all</a>
-            </li>
-            <li *ngIf="multiSelect" class="scrollable-item">
-                <a class="dropdown-item" (click)="clearAll()" title="Clear all items">Clear all</a>
+            <li *ngIf="multiSelect && (enableAddAll || enableRemoveAll)" class="scrollable-item d-inline-flex">
+                <a *ngIf="enableAddAll" class="dropdown-item" (click)="addAll()" title="Add All items">Add all</a>
+                <a *ngIf="enableRemoveAll" class="dropdown-item" (click)="clearAll()" title="Clear all items">Remove all</a>
             </li>
 
             <li *ngIf="showRefresh" >

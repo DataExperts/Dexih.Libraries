@@ -27,8 +27,6 @@ dexih-ngx-table is an Angular (8+) component for building data driven tables.
 
 [Older release information](releases.md)
 
-![][dexih-table-demo]
-
 ## Installation
 
 To install this library, run:
@@ -37,10 +35,10 @@ To install this library, run:
 $ npm install dexih-ngx-table --save
 ```
 
-There are also a dependencies (for drag/drop) on the ng2-dnd library, and the ngx-md (for markdown formatting) library.  To install these run:
+There is also a dependency on the ngx-md (for markdown formatting) library.  To install this run:
 
 ```bash
-$ npm install ng2-dnd ngx-md --save
+$ npm install ngx-md --save
 ```
 
 You will need also need bootstrap styles included (4.x).  For example add this to your index.html header:
@@ -50,8 +48,7 @@ You will need also need bootstrap styles included (4.x).  For example add this t
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 ```
 
-Note: jQuery, popper and the bootstrap.js files are not required for these controls to function.
-
+> Note: jQuery, popper and the bootstrap.js files (which are usually required for Bootstrap 4.x) are not required for these controls to function.
 
 ## Example
 

@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ComponentsDemoComponent implements OnInit {
 
+    selectedKey = 1;
+
     constructor() { }
 
     ngOnInit() { }

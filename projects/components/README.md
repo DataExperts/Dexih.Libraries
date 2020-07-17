@@ -1,24 +1,110 @@
-# Components
+# dexih-ngx-components
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.1.
+dexih-ngx-components are a set of Angular (8+) Boostrap 4.x based components.  These include form controls, modals, toasts, widgets and more.
 
-## Code scaffolding
+[![][dex-img]][dex]
 
-Run `ng generate component component-name --project Components` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project Components`.
-> Note: Don't forget to add `--project Components` or else it will be added to the default project in your `angular.json` file. 
+[dex-img]: https://dataexpertsgroup.com/img/dex_web_logo.png
+[dex]: https://dataexpertsgroup.com
 
-## Build
+[![npm version](https://badge.fury.io/js/dexih-ngx-components.svg)](https://www.npmjs.com/package/dexih-ngx-components)
+[![Build Status](https://travis-ci.org/DataExperts/dexih-ngx-components.svg?branch=master)](https://travis-ci.org/DataExperts/dexih-ngx-components)
 
-Run `ng build Components` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Features
 
-## Publishing
+* Decorated form controls including input, dropdown, tag input/dropdown, checkbox, textarea, etc.
+* Auto expanding button controls.
+* Animated Progress
+* Dialogs for information, confirmation, input.
+* Animated toasts.
+* Customizable Widgets (based on the Bootstrap cards.).
 
-After building your library with `ng build Components`, go to the dist folder `cd dist/components` and run `npm publish`.
+## Releases Summary
 
-## Running unit tests
+[Older release information](releases.md)
 
-Run `ng test Components` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Installation
 
-## Further help
+To install this library, run:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+```bash
+$ npm install dexih-ngx-components --save
+```
+
+There is also dependency on ngx-md (for markdown formatting) library.  To install this run:
+
+```bash
+$ npm install ngx-md --save
+```
+
+You will need also need bootstrap styles included (4.x).  For example add this to your index.html header:
+
+```xml
+<!-- index.html -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+```
+
+> Note: jQuery, popper and the bootstrap.js files (which are usually required for Bootstrap 4.x) are not required for these controls to function.
+
+## Example
+
+> This documentation is still being complete.
+
+## Form Controls
+
+### Input
+
+### Input Tags
+
+### TextArea
+
+### Dropdown (select)
+
+### Dropdown tags
+
+### Checkbox
+
+### Date
+
+### Time
+
+### Days Of Week
+
+## Buttons 
+
+### Regular Button
+
+### Dropdown Button
+
+### Split/Dropdown Button
+
+### Collapsible Button
+
+## Modal / Dialogs
+
+## Animated Progress 
+
+## Animated Toasts
+
+## Widgets / Cards
+
+### Widget Controls
+
+### Widget Columns
+
+### Widget Deck
+
+### Widget Vertical
+
+
+## Credits
+
+Thanks to the following projects:
+
+* [https://getbootstrap.com/docs/4.5/getting-started/introduction/](Bootstrap) - Obviously the Bootstrap team.
+* [jvandemo/generator-angular2-library](https://github.com/jvandemo/generator-angular2-library) - Used as the baseline to package and distribute this library.
+* [ngx-md](https://github.com/dimpu/ngx-md) - Used for rendering markdown text.
+
+## License
+
+MIT © [Data Experts Group](mailto:gholland@dataexpertsgroup.com)

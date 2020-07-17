@@ -48,6 +48,7 @@ export class DexihFormSelectComponent implements ControlValueAccessor, OnInit, O
     @Output() textValueChange = new EventEmitter();
     @Output() onShown = new EventEmitter();
     @Input() enableAddAll = false;
+    @Input() enableRemoveAll = true;
     @Input() setTextEntryToValue = true;
     @Input() floatingLabel: string;
     @Input() isOpen = false;
@@ -110,7 +111,9 @@ export class DexihFormSelectComponent implements ControlValueAccessor, OnInit, O
      }
 
      ngOnInit() {
-         this.isTextEntry = ! this.hasValue(this.selectedItem) && this.hasValue(this.textValue);
+        this.writeValue(this.value);
+
+        this.isTextEntry = !this.hasValue(this.selectedItem) && this.hasValue(this.textValue);
 
         // monitor changes to the filter control
         this.manualSubscription = this.manualControl.valueChanges
@@ -186,7 +189,9 @@ export class DexihFormSelectComponent implements ControlValueAccessor, OnInit, O
     ngOnChanges(changes: SimpleChanges) {
         if (changes.multiSelect) {
             if (changes.multiSelect.currentValue) {
-                this.clearAll();
+                if (!(this.value instanceof Array)) {
+                    this.clearAll();
+                }
             } else {
                 this.value = null;
             }
@@ -199,7 +204,6 @@ export class DexihFormSelectComponent implements ControlValueAccessor, OnInit, O
         if (this.manualSubscription) { this.manualSubscription.unsubscribe(); }
     }
 
-    
     hasChanged() {
         if (JSON.stringify(this.value) !== JSON.stringify(this.oldValue)) {
             if (this.multiSelect) {
@@ -679,6 +683,7 @@ export class DexihFormSelectComponent implements ControlValueAccessor, OnInit, O
         this.value = [];
         this.hasChanged();
     }
+    
 
     private updateTextEntry() {
         // this.dropdown.toggle();
