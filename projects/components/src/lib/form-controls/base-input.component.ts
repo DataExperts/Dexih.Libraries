@@ -5,7 +5,7 @@ import { ListItem } from './shared-functions';
 @Component({
     selector: 'base-input',
     templateUrl: 'base-input.component.html',
-    styleUrls: ['./dexih-form.component.scss', './base-input.component.scss'],
+    styleUrls: ['./form.component.scss', './base-input.component.scss'],
     providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => BaseInputComponent), multi: true }]
 })
 
@@ -21,10 +21,13 @@ export class BaseInputComponent implements ControlValueAccessor, OnInit {
     @Input() readonly = false;
     @Input() disabled = false;
     @Input() type = 'text';
+    @Input() pattern;
     @Input() maxlength: number;
     @Input() fontItalic = false;
     @Input() tags: ListItem[];
     @Input() tagItemName: string;
+    @Input() autoValidate = true;
+    @Input() enableFloatingAnimation = true;
 
     @Output() keyDown: EventEmitter<any> = new EventEmitter<any>();
     @Output() arrowDown: EventEmitter<any> = new EventEmitter<any>();

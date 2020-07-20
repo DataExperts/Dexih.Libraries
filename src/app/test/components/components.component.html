@@ -1,11 +1,11 @@
-<dexih-toast #toasts></dexih-toast>
-<dexih-modal #modal></dexih-modal>
+<d-toast #toasts></d-toast>
+<d-modal #modal></d-modal>
 
 <h3>Widget Vertically</h3>
 
 <div class="p-3 b-3">
-    <dexih-widget-vertical>
-        <dexih-widget title="widget" [padding]="true">
+    <d-widget-vertical>
+        <d-widget title="widget" [padding]="true">
             The widget content.
 
             <div class="form-label-group" style="position: relative; margin-bottom: 1rem;">
@@ -16,19 +16,19 @@
             <ng-template #footer>
                 footer template
             </ng-template>
-        </dexih-widget>
-        <dexih-widget title="widget"></dexih-widget>
-        <dexih-widget title="widget"></dexih-widget>
-        <dexih-widget title="widget"></dexih-widget>
-        <dexih-widget title="widget"></dexih-widget>
-        <dexih-widget title="widget"></dexih-widget>
-    </dexih-widget-vertical>
+        </d-widget>
+        <d-widget title="widget"></d-widget>
+        <d-widget title="widget"></d-widget>
+        <d-widget title="widget"></d-widget>
+        <d-widget title="widget"></d-widget>
+        <d-widget title="widget"></d-widget>
+    </d-widget-vertical>
 </div>
 
 <h3>Widget Deck</h3>
 
 <div class="p-3 b-3">
-    <dexih-widget-deck >
+    <d-widget-deck >
         <div dexihWidget title="widget" [padding]="true" height="300px">
                 The widget content.
     
@@ -82,43 +82,43 @@
         </div>
         <div dexihWidget title="widget" height="300px"></div>
         <div dexihWidget title="widget" height="300px"></div>
-    </dexih-widget-deck>
+    </d-widget-deck>
 </div>
     
 <h3>Widget Columns</h3>
 
 <div class="p-3 b-3">
-    <dexih-widget-columns>
-        <dexih-widget title="widget" [padding]="true">
+    <d-widget-columns>
+        <d-widget title="widget" [padding]="true">
             The widget content.
 
             <ng-template #footer>
                 footer template
             </ng-template>
-        </dexih-widget>        
-        <dexih-widget title="widget"></dexih-widget>
-        <dexih-widget title="widget"></dexih-widget>
-        <dexih-widget title="widget"></dexih-widget>
-        <dexih-widget title="widget"></dexih-widget>
-        <dexih-widget title="widget"></dexih-widget>
-    </dexih-widget-columns>
+        </d-widget>        
+        <d-widget title="widget"></d-widget>
+        <d-widget title="widget"></d-widget>
+        <d-widget title="widget"></d-widget>
+        <d-widget title="widget"></d-widget>
+        <d-widget title="widget"></d-widget>
+    </d-widget-columns>
 </div>
 
 <h3>Widget Group</h3>
 
 <div class="p-3 b-3">
-    <dexih-widget-group >
-        <dexih-widget title="widget" [padding]="true"  height="300px">
+    <d-widget-group >
+        <d-widget title="widget" [padding]="true"  height="300px">
             The widget content.
 
             <ng-template #footer>
                 footer template
             </ng-template>
-        </dexih-widget>        
-        <dexih-widget title="widget" height="300px"></dexih-widget>
-        <dexih-widget title="widget" height="300px"></dexih-widget>
-        <dexih-widget title="widget" height="300px"></dexih-widget>
-        <dexih-widget title="widget" height="300px" [scrollable]="true">
+        </d-widget>        
+        <d-widget title="widget" height="300px"></d-widget>
+        <d-widget title="widget" height="300px"></d-widget>
+        <d-widget title="widget" height="300px"></d-widget>
+        <d-widget title="widget" height="300px" [scrollable]="true">
                 <p>this should scroll</p>            
                 <p>this should scroll</p>            
                 <p>this should scroll</p>            
@@ -140,18 +140,18 @@
                 <p>this should scroll</p>            
                 <p>this should scroll</p>            
                 <p>this should scroll</p>   
-        </dexih-widget>
-        <dexih-widget title="will truncate. should not see this text"  height="300px" style="width: 200px">
-            <dexih-widget-section title="will truncate. should not see this text"></dexih-widget-section>
-        </dexih-widget>
-    </dexih-widget-group>
+        </d-widget>
+        <d-widget title="will truncate. should not see this text"  height="300px" style="width: 200px">
+            <d-widget-section title="will truncate. should not see this text"></d-widget-section>
+        </d-widget>
+    </d-widget-group>
 </div>
 
 
 
 
-<dexih-widget-vertical>
-    <dexih-widget title="Show all elements" [padding]="false" [showFilter]="true" [showCloseButton]="true" iconClass="fa fa-lg fa-fw fa-database" [showExpandButton]="true">
+<d-widget-vertical>
+    <d-widget title="Show all elements" [padding]="false" [showFilter]="true" [showCloseButton]="true" iconClass="fa fa-lg fa-fw fa-database" [showExpandButton]="true">
 
         <ng-template #header>
             header template
@@ -173,25 +173,25 @@
             footer template
         </ng-template>
 
-        <dexih-widget-section title='section 1' [padding]="false">
+        <d-widget-section title='section 1' [padding]="false">
             no padding section
-        </dexih-widget-section>
+        </d-widget-section>
 
-        <dexih-widget-section title='section 2' [showExpandButton]="true" iconClass="fa fa-bar-chart" sectionClass="text-white bg-secondary" subTitle="the section subtitle">
+        <d-widget-section title='section 2' [showExpandButton]="true" iconClass="fa fa-bar-chart" sectionClass="text-white bg-secondary" subTitle="the section subtitle">
             section 2 content
-        </dexih-widget-section>
+        </d-widget-section>
 
-        <dexih-widget-section title='section 3' [showExpandButton]="true" iconClass="fa fa-bar-chart" sectionClass="text-white bg-danger">
+        <d-widget-section title='section 3' [showExpandButton]="true" iconClass="fa fa-bar-chart" sectionClass="text-white bg-danger">
             section 3 content
 
             <ng-template #subTitle>
                 section subtitle template
             </ng-template>
-        </dexih-widget-section>
+        </d-widget-section>
 
-    </dexih-widget>
+    </d-widget>
 
-    <dexih-widget title="Show all with different classes" 
+    <d-widget title="Show all with different classes" 
         headerClass="text-white bg-success" 
         subTitleClass="text-white bg-primary"
         subHeaderClass="text-white bg-warning"
@@ -221,100 +221,100 @@
     
             the body of the widget
     
-        </dexih-widget>
+        </d-widget>
 
-    <dexih-widget title="just a footer" bodyClass="text-white bg-secondary">
+    <d-widget title="just a footer" bodyClass="text-white bg-secondary">
 
         <ng-template #footer>
             footer template
         </ng-template>
 
         something in the body
-    </dexih-widget>
+    </d-widget>
 
-    <dexih-widget title="waiting" loadingMessage="Loading the widget..." [showIf]="false">
+    <d-widget title="waiting" loadingMessage="Loading the widget..." [showIf]="false">
 
-    </dexih-widget>
+    </d-widget>
 
-    <dexih-widget title="body with no padding" [padding]="false" bodyClass="text-white bg-secondary">
+    <d-widget title="body with no padding" [padding]="false" bodyClass="text-white bg-secondary">
 this should have no padding.
-    </dexih-widget>
+    </d-widget>
     
-</dexih-widget-vertical>
+</d-widget-vertical>
 
-<dexih-widget-columns class="p-3">
-        <dexih-widget title="Toasts" [padding]="true" >
-            <dexih-button (click)="addToasts()" text="Add Toasts"></dexih-button>
-            <dexih-button (click)="addToast('success')" text="Add Success"></dexih-button>
-            <dexih-button (click)="addToast('error')" text="Add Error"></dexih-button>
-        </dexih-widget>
+<d-widget-columns class="p-3">
+        <d-widget title="Toasts" [padding]="true" >
+            <d-button (click)="addToasts()" text="Add Toasts"></d-button>
+            <d-button (click)="addToast('success')" text="Add Success"></d-button>
+            <d-button (click)="addToast('error')" text="Add Error"></d-button>
+        </d-widget>
 
-        <dexih-widget title="Modals" [padding]="true" >
+        <d-widget title="Modals" [padding]="true" >
             <div class="row">
-                <dexih-button (click)="modalInformation()" text="Information"></dexih-button>
+                <d-button (click)="modalInformation()" text="Information"></d-button>
                 Result: {{modalInformationValue}}
             </div>
             <div class="row">
-                <dexih-button (click)="modalConfirm()" text="Confirm"></dexih-button>
+                <d-button (click)="modalConfirm()" text="Confirm"></d-button>
                 Result: {{modalConfirmValue}}
             </div>
             <div class="row">
-                <dexih-button (click)="modalConfirmTwice()" text="Confirm twice"></dexih-button>
+                <d-button (click)="modalConfirmTwice()" text="Confirm twice"></d-button>
                 Result: {{modalConfirmValue}}
             </div>
 
             <div class="row">
-                <dexih-button (click)="modalPrompt()" text="Prompt"></dexih-button>
+                <d-button (click)="modalPrompt()" text="Prompt"></d-button>
                 Result: {{modalPromptValue}}
             </div>
-            </dexih-widget>
+            </d-widget>
 
-        <dexih-widget title="Progress" [padding]="true" iconClass="fa fa-lg fa-fw fa-database">
-            <dexih-button (click)="startAnimateProgress()">start</dexih-button>
-            <dexih-button (click)="stopAnimateProgress()">stop</dexih-button>
-            <dexih-progressbar width="100px" class="m-3" [showCancel]="true" (cancelled)="cancelled()" (progressClick)="progress()"
+        <d-widget title="Progress" [padding]="true" iconClass="fa fa-lg fa-fw fa-database">
+            <d-button (click)="startAnimateProgress()">start</d-button>
+            <d-button (click)="stopAnimateProgress()">stop</d-button>
+            <d-progressbar width="100px" class="m-3" [showCancel]="true" (cancelled)="cancelled()" (progressClick)="progress()"
                 [value]="percent" type="success">
                 animated {{percent}}
-            </dexih-progressbar>
+            </d-progressbar>
 
-            <dexih-progressbar class="m-3" [showCancel]="true" (cancelled)="cancelled()" (progressClick)="progress()"
+            <d-progressbar class="m-3" [showCancel]="true" (cancelled)="cancelled()" (progressClick)="progress()"
                 value="0" type="success">
                 With a very long text that should be truncated with an ellipsis. With a very long text that should be truncated with an ellipsis.
-            </dexih-progressbar>
+            </d-progressbar>
 
-            <dexih-progressbar class="m-3" [showCancel]="true" (cancelled)="cancelled()" (progressClick)="progress()"
+            <d-progressbar class="m-3" [showCancel]="true" (cancelled)="cancelled()" (progressClick)="progress()"
                 value="0" type="success">
                 Not started
-            </dexih-progressbar>
+            </d-progressbar>
         
-            <dexih-progressbar class="m-3" [showCancel]="true" (cancelled)="cancelled()" (progressClick)="progress()"
+            <d-progressbar class="m-3" [showCancel]="true" (cancelled)="cancelled()" (progressClick)="progress()"
                 value="25" type="warning">
                 25% complete
-            </dexih-progressbar>
+            </d-progressbar>
         
-            <dexih-progressbar class="m-3" [showCancel]="true" (cancelled)="cancelled()" (progressClick)="progress()"
+            <d-progressbar class="m-3" [showCancel]="true" (cancelled)="cancelled()" (progressClick)="progress()"
                 value="50" type="info">
                 50% complete
-            </dexih-progressbar>
+            </d-progressbar>
         
-            <dexih-progressbar class="m-3"  [showCancel]="true" (cancelled)="cancelled()" (progressClick)="progress()"
+            <d-progressbar class="m-3"  [showCancel]="true" (cancelled)="cancelled()" (progressClick)="progress()"
                 value="75" type="danger">
                 75% complete
-            </dexih-progressbar>
+            </d-progressbar>
         
-            <dexih-progressbar class="m-3" [showCancel]="true" (cancelled)="cancelled()" (progressClick)="progress()"
+            <d-progressbar class="m-3" [showCancel]="true" (cancelled)="cancelled()" (progressClick)="progress()"
                 value="100" type="primary">
                 100% complete
-            </dexih-progressbar>
+            </d-progressbar>
 
-            <dexih-progressbar class="m-3" [showCancel]="false" (progressClick)="progress()"
+            <d-progressbar class="m-3" [showCancel]="false" (progressClick)="progress()"
                 value="100" type="success">
                 100% complete no cancel
-            </dexih-progressbar>
+            </d-progressbar>
 
-        </dexih-widget>
+        </d-widget>
 
-        <dexih-widget title="Inputs" [padding]="true" iconClass="fa fa-lg fa-fw fa-database">
+        <d-widget title="Inputs" [padding]="true" iconClass="fa fa-lg fa-fw fa-database">
 
                 the value is {{inputString}}
                 <form-input placeholder="No labels" [(ngModel)]="inputString" [ngModelOptions]="{standalone: true}"></form-input>
@@ -348,17 +348,17 @@ this should have no padding.
                         <form-input labelLeft="side by side" placeholder="input something" iconClass="fa fa-pie-chart"></form-input>
                     </div>
                 </div>
-        </dexih-widget>
+        </d-widget>
 
-        <dexih-widget title="Text Areas" [padding]="true" iconClass="fa fa-lg fa-fw fa-database">
+        <d-widget title="Text Areas" [padding]="true" iconClass="fa fa-lg fa-fw fa-database">
                 <form-textarea label="edit shown" [showCopy]="true" [isHidden]="false" value="a **bold** item, [a link](http://www.microsoft.com)"></form-textarea>
                 <form-textarea label="copy a key" [showCopy]="true" [isHidden]="true" [showPreview]="false" [disabled]="true" [rows]="1" value="abdefghijklmnopqrtruvwxyz"></form-textarea>
                 <form-textarea label="edit hidden" [isHidden]="true" value="a **bold** item"></form-textarea>
                 <form-textarea label="with errors" [isHidden]="true" value="a **bold** item" errors="the error"></form-textarea>
                 <form-textarea label="with note" [isHidden]="true" value="a **bold** item" note="a note describing the textarea"></form-textarea>
-        </dexih-widget>
+        </d-widget>
 
-        <dexih-widget title="Dropdowns" [padding]="true" iconClass="fa fa-lg fa-fw fa-database">
+        <d-widget title="Dropdowns" [padding]="true" iconClass="fa fa-lg fa-fw fa-database">
                 <div>enableTextEntry=true</div>
                 <div>selected item: {{selectedItem}}</div>
                 <div>text value: {{textValue}}</div>
@@ -388,7 +388,7 @@ this should have no padding.
 
                 <form-select label="Text entry only" [enableTextEntry]="true" [textEntryItems]="['value1', 'value2', 'value3']" iconClass="fa fa-pie-chart"></form-select>
 
-                <form-select label="Items added dynamically" [items]="dynamicItems" [enableTextEntry]="true" iconClass="fa fa-pie-chart"><dexih-button-refresh (click)="AddItems()"></dexih-button-refresh></form-select>
+                <form-select label="Items added dynamically" [items]="dynamicItems" [enableTextEntry]="true" iconClass="fa fa-pie-chart"><d-button-refresh (click)="AddItems()"></d-button-refresh></form-select>
 
                 <form-select label="No Items no text entry" [enableTextEntry]="false" [items]="[]"></form-select>
 
@@ -523,10 +523,10 @@ this should have no padding.
                 itemKey='key' note='this describes the selection'></form-select>
             <form-select label="Select with error" [items]="[{key:1, name:'item1'}, {key:2, name:'item2'}, {key:3, name:'item3'}]" itemName='name'
                 itemKey='key' errors='this has errors'></form-select>
-        </dexih-widget>
+        </d-widget>
 
 
-        <dexih-widget title="Checkboxes" [padding]="true" iconClass="fa fa-lg fa-fw fa-database">
+        <d-widget title="Checkboxes" [padding]="true" iconClass="fa fa-lg fa-fw fa-database">
                 <form-checkbox></form-checkbox>
                 <form-checkbox label="Simple Checkbox"></form-checkbox>
                 <form-checkbox>Check box with text content</form-checkbox>
@@ -536,24 +536,24 @@ this should have no padding.
                 <form-checkbox label="Checkbox with error" errors="this checkbox has errors"></form-checkbox>
                 <form-checkbox label="Checkbox with error" [border]="true" errors="this checkbox has errors"></form-checkbox>
                 <form-checkbox label="Checkbox with custom values" [border]="true" [(ngModel)]="customCheckValue"  [ngModelOptions]="{standalone: true}" checkedValue="checked" unCheckedValue="unchecked"></form-checkbox> value is {{customCheckValue}}
-        </dexih-widget>
+        </d-widget>
 
-        <dexih-widget title="Date" [padding]="true" iconClass="fa fa-lg fa-fw fa-database">
+        <d-widget title="Date" [padding]="true" iconClass="fa fa-lg fa-fw fa-database">
                 <form-date placeholder="input date"></form-date>
                 <form-date labelLeft="label left"></form-date>
                 <form-date floatingLabel="floating label"></form-date>
                 <form-date label="input label" note="a note to describe the date" placeholder="input date"></form-date>
-        </dexih-widget>
+        </d-widget>
 
-        <dexih-widget title="Day of week" [padding]="true" iconClass="fa fa-lg fa-fw fa-database">
+        <d-widget title="Day of week" [padding]="true" iconClass="fa fa-lg fa-fw fa-database">
                 <form-daysofweek></form-daysofweek>
                 <form-daysofweek label="Select the days"></form-daysofweek>
                 <form-daysofweek labelLeft="label left"></form-daysofweek>
                 <form-daysofweek label="With note" note="this is the note"></form-daysofweek>
                 <form-daysofweek label="Has errors" errors="this is the error"></form-daysofweek>
-        </dexih-widget>
+        </d-widget>
 
-        <dexih-widget title="Tags" [padding]="true" iconClass="fa fa-lg fa-fw fa-database">
+        <d-widget title="Tags" [padding]="true" iconClass="fa fa-lg fa-fw fa-database">
                 <form-tags placeholder="input tags"></form-tags>
                 <form-tags floatingLabel="with floating label"></form-tags>
                 <form-tags label="input tags" [value]="['item1', 'item2']" placeholder="input tags"></form-tags>
@@ -561,9 +561,9 @@ this should have no padding.
                 <form-tags labelLeft="label left" [value]="['item1', 'item2']" placeholder="input tags"></form-tags>
                 <form-tags label="input tags" [value]="null" note="a note to describe the tags" placeholder="input tags"></form-tags>
                 <form-tags label="input errors" errors="the error message" placeholder="input tags"></form-tags>
-        </dexih-widget>
+        </d-widget>
 
-        <dexih-widget title="Tags DropDown" [padding]="true" iconClass="fa fa-lg fa-fw fa-database">
+        <d-widget title="Tags DropDown" [padding]="true" iconClass="fa fa-lg fa-fw fa-database">
                 <form-tags-dropdown placeholder="input tags" [items]="['item1', 'item2','item3']" [enableAddAll]="true" (onShown)="opened()"></form-tags-dropdown>
                 <form-tags-dropdown floatingLabel="with floating label" [items]="['item1', 'item2','item3']" [enableAddAll]="true" (onShown)="opened()"></form-tags-dropdown>
                 <form-tags-dropdown labelLeft="label left" placeholder="input tags" [items]="['item1', 'item2','item3']" ></form-tags-dropdown>
@@ -580,9 +580,9 @@ this should have no padding.
 
                 <form-tags-dropdown label="With refresh" [items]="refreshItems" [showRefresh]="true" [isRefreshing]="isRefreshing"  (onRefresh)="onRefresh()">
                 </form-tags-dropdown>
-        </dexih-widget>
+        </d-widget>
 
-        <dexih-widget title="Time" [padding]="true" iconClass="fa fa-lg fa-fw fa-database">
+        <d-widget title="Time" [padding]="true" iconClass="fa fa-lg fa-fw fa-database">
                 Value: {{timeString}}
                 <div style="width: 120px">
                 <form-time [(ngModel)]="timeString" [ngModelOptions]="{standalone: true}" ></form-time>
@@ -591,97 +591,97 @@ this should have no padding.
                 <form-time labelLeft="label left"></form-time>
                 <form-time label="time with note" note="this time description"></form-time>
                 <form-time label="time with error" errors="the time error"></form-time>
-        </dexih-widget>
+        </d-widget>
 
-        <dexih-widget title="Buttons" [padding]="true" iconClass="fa fa-lg fa-fw fa-database">
-                <dexih-button>Default</dexih-button>
-                <dexih-button iconClass="fa fa-bar-chart">With Icon</dexih-button>
-                <dexih-button iconClass="fa fa-bar-chart" tooltip='no text'></dexih-button>
-                <dexih-button iconClass="fa fa-bar-chart" badge="12">With Badge</dexih-button>
-                <dexih-button iconClass="fa fa-bar-chart" badge="12" badgeClass="badge-danger">Danger Badge
-                </dexih-button>
-                <dexih-button iconClass="fa fa-bar-chart" title="the tool tip">With Tooltip</dexih-button>
-                <dexih-button iconClass="fa fa-bar-chart" [compact]="true">Compact</dexih-button>
-                <dexih-button iconClass="fa fa-bar-chart" [busy]="true">Busy</dexih-button>
-                <dexih-button-apply></dexih-button-apply>
-                <dexih-button-cancel></dexih-button-cancel>
-                <dexih-button-close></dexih-button-close>
-                <dexih-button-delete></dexih-button-delete>
-                <dexih-button-download></dexih-button-download>
-                <dexih-button-edit></dexih-button-edit>
-                <dexih-button-export></dexih-button-export>
-                <dexih-button-history></dexih-button-history>
-                <dexih-button-new></dexih-button-new>
-                <dexih-button-open></dexih-button-open>
-                <dexih-button-preview></dexih-button-preview>
-                <dexih-button-private></dexih-button-private>
-                <dexih-button-refresh></dexih-button-refresh>
-                <dexih-button-save-local></dexih-button-save-local>
-                <dexih-button-validate></dexih-button-validate>
-                <dexih-button-view></dexih-button-view>
-                <dexih-button-chart></dexih-button-chart>
-                <dexih-button-link>this is a link button</dexih-button-link>
+        <d-widget title="Buttons" [padding]="true" iconClass="fa fa-lg fa-fw fa-database">
+                <d-button>Default</d-button>
+                <d-button iconClass="fa fa-bar-chart">With Icon</d-button>
+                <d-button iconClass="fa fa-bar-chart" tooltip='no text'></d-button>
+                <d-button iconClass="fa fa-bar-chart" badge="12">With Badge</d-button>
+                <d-button iconClass="fa fa-bar-chart" badge="12" badgeClass="badge-danger">Danger Badge
+                </d-button>
+                <d-button iconClass="fa fa-bar-chart" title="the tool tip">With Tooltip</d-button>
+                <d-button iconClass="fa fa-bar-chart" [compact]="true">Compact</d-button>
+                <d-button iconClass="fa fa-bar-chart" [busy]="true">Busy</d-button>
+                <d-button-apply></d-button-apply>
+                <d-button-cancel></d-button-cancel>
+                <d-button-close></d-button-close>
+                <d-button-delete></d-button-delete>
+                <d-button-download></d-button-download>
+                <d-button-edit></d-button-edit>
+                <d-button-export></d-button-export>
+                <d-button-history></d-button-history>
+                <d-button-new></d-button-new>
+                <d-button-open></d-button-open>
+                <d-button-preview></d-button-preview>
+                <d-button-private></d-button-private>
+                <d-button-refresh></d-button-refresh>
+                <d-button-save-local></d-button-save-local>
+                <d-button-validate></d-button-validate>
+                <d-button-view></d-button-view>
+                <d-button-chart></d-button-chart>
+                <d-button-link>this is a link button</d-button-link>
 
-                <dexih-button-dropdown text="drop down" [autoCompact]="false">
+                <d-button-dropdown text="drop down" [autoCompact]="false">
                     <a class="dropdown-item" (click)="this. show('hi there')">item 1</a>
                     <a class="dropdown-item active">active item</a>
                     <a class="dropdown-item">item 3</a>
-                </dexih-button-dropdown>
+                </d-button-dropdown>
 
-                <dexih-button-dropdown text="drop compact" iconClass="fa fa-bar-chart">
+                <d-button-dropdown text="drop compact" iconClass="fa fa-bar-chart">
                     <a class="dropdown-item" (click)="this. show('hi there')">item 1</a>
                     <a class="dropdown-item">item 2</a>
                     <a class="dropdown-item">item 3</a>
-                </dexih-button-dropdown>
+                </d-button-dropdown>
 
-                <dexih-button-dropdown text="drop down manual" buttonClass="btn btn-outline-secondary"
+                <d-button-dropdown text="drop down manual" buttonClass="btn btn-outline-secondary"
                     #manualDropDown [autoClose]="false" (onOpenChange)="openChange()">
                     <a class="dropdown-item" (click)="manualDropDown.hideDropdown()">closes dropdown</a>
                     <a class="dropdown-item">doesn't close dropdown</a>
-                </dexih-button-dropdown>
+                </d-button-dropdown>
 
-                <dexih-button (click)="manualDropDown.hideDropdown()">Hide Dropdown</dexih-button>
-                <dexih-button (click)="manualDropDown.showDropdown()">Show Dropdown</dexih-button>
+                <d-button (click)="manualDropDown.hideDropdown()">Hide Dropdown</d-button>
+                <d-button (click)="manualDropDown.showDropdown()">Show Dropdown</d-button>
 
-                <dexih-button-dropdown text="drop down class" buttonClass="btn btn-outline-secondary">
+                <d-button-dropdown text="drop down class" buttonClass="btn btn-outline-secondary">
                     <a class="dropdown-item">item 1</a>
                     <a class="dropdown-item">item 2</a>
                     <a class="dropdown-item">item 3</a>
-                </dexih-button-dropdown>
+                </d-button-dropdown>
 
-                <dexih-button-dropdown text="drop down no carrot" iconClass="fa fa-bar-chart" badge="1"
+                <d-button-dropdown text="drop down no carrot" iconClass="fa fa-bar-chart" badge="1"
                     [pullRight]="true" [hideCarrot]="true">
                     <a class="dropdown-item">item 1</a>
                     <a class="dropdown-item">item 2</a>
                     <a class="dropdown-item">item 3</a>
-                </dexih-button-dropdown>
+                </d-button-dropdown>
 
-                <dexih-button-dropdown text="drop down badge" badge="12" badgeClass="badge-info"
+                <d-button-dropdown text="drop down badge" badge="12" badgeClass="badge-info"
                     [hideCarrot]="true">
                     <a class="dropdown-item">item 1</a>
                     <a class="dropdown-item">item 2</a>
                     <a class="dropdown-item">item 3</a>
-                </dexih-button-dropdown>
+                </d-button-dropdown>
 
-                <dexih-button-dropdown text="align right" [pullRight]="true">
+                <d-button-dropdown text="align right" [pullRight]="true">
                     <a class="dropdown-item">item 1</a>
                     <a class="dropdown-item">item 2</a>
                     <a class="dropdown-item">item 3</a>
-                </dexih-button-dropdown>
+                </d-button-dropdown>
 
-                <dexih-button-splitdropdown iconClass="fa fa-bar-chart" text="split">
+                <d-button-splitdropdown iconClass="fa fa-bar-chart" text="split">
                     <a class="dropdown-item">item 1</a>
                     <a class="dropdown-item">item 2</a>
                     <a class="dropdown-item">item 3</a>
-                </dexih-button-splitdropdown>
+                </d-button-splitdropdown>
 
-                <dexih-button-more>
+                <d-button-more>
                     <a class="dropdown-item">item 1</a>
                     <a class="dropdown-item">item 2</a>
                     <a class="dropdown-item">item 3</a>
-                </dexih-button-more>
+                </d-button-more>
 
-                <dexih-button-dropdown text="notification" [pullRight]="true">
+                <d-button-dropdown text="notification" [pullRight]="true">
                     <div class="list-group" style="width: 400px;">
                         <a href="#"
                             class="list-group-item list-group-item-action flex-column align-items-start active">
@@ -712,13 +712,13 @@ this should have no padding.
                             <small class="text-muted">Donec id elit non mi porta.</small>
                         </a>
                     </div>
-                </dexih-button-dropdown>
+                </d-button-dropdown>
 
-                <dexih-button-collapsible text="collapsible">
+                <d-button-collapsible text="collapsible">
                     here is the content.
-                </dexih-button-collapsible>
-        </dexih-widget>
-        <dexih-widget title="Groups" [padding]="true" iconClass="fa fa-lg fa-fw fa-database">
+                </d-button-collapsible>
+        </d-widget>
+        <d-widget title="Groups" [padding]="true" iconClass="fa fa-lg fa-fw fa-database">
                 <div class="m-1">
                     <form-select labelLeft="select" [items]="['item1', 'item2','item3']" [enableTextEntry]="true">
                     </form-select>
@@ -786,18 +786,18 @@ this should have no padding.
 
                 <div class="input-group m-1">
                     <form-input class="form-control p-0" [border]="false" placeholder="input 1"></form-input>
-                    <dexih-button-view class="input-group-append"></dexih-button-view>
+                    <d-button-view class="input-group-append"></d-button-view>
                 </div>
-        </dexih-widget>
+        </d-widget>
 
-        <dexih-widget 
+        <d-widget 
             title="header" 
             [padding]="true" 
             [showCloseButton]="true"
             iconClass="fa fa-lg fa-fw fa-database">
 
-            </dexih-widget>
-            <dexih-widget title="Tabs" [padding]="true" iconClass="fa fa-lg fa-fw fa-database">
+            </d-widget>
+            <d-widget title="Tabs" [padding]="true" iconClass="fa fa-lg fa-fw fa-database">
                 <ng-template #header>
                     <ul class="nav nav-tabs card-header-tabs">
                             <li class="nav-item">
@@ -811,9 +811,9 @@ this should have no padding.
                             </li>
                             </ul>
                 </ng-template>
-            </dexih-widget>
+            </d-widget>
 
-            <dexih-widget 
+            <d-widget 
                 title="pills" 
                 [padding]="true" 
                 [showCloseButton]="true"
@@ -831,5 +831,5 @@ this should have no padding.
                             </li>
                             </ul>
                 </ng-template>
-                </dexih-widget>
-</dexih-widget-columns>
+                </d-widget>
+</d-widget-columns>

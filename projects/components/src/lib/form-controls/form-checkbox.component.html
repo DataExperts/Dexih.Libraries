@@ -1,0 +1,38 @@
+<div *ngIf="!border" class="d-flex h-100 align-items-center">
+    <div class="custom-control" [ngClass]="{'custom-switch': isSwitch, 'custom-checkbox': !isSwitch }">
+        <div [ngClass]="{'is-invalid': errors, 'is-valid': !errors && isDirty && autoValidate}" [title]="errors">
+            <input class="custom-control-input" [id]="id" type="checkbox" [disabled]="disabled" [(ngModel)]="isChecked" (ngModelChange)="hasChanged($event)"
+                [ngClass]="{'is-invalid': errors, 'is-valid': !errors && isDirty && autoValidate}" />
+            <label class="custom-control-label" [for]="id">{{label}}
+                <ng-container *ngTemplateOutlet="tempOutlet" ></ng-container>
+            </label>
+        </div>
+    </div>
+
+    <small *ngIf="note" class="form-text text-muted">
+        {{note}}
+    </small>
+</div>
+<div *ngIf="border">
+    <div class="input-group">
+        <div class="input-group-text text-left w-100 custom-control" [ngClass]="{'is-invalid': errors, 'is-valid': !errors && isDirty && autoValidate, 'custom-switch': isSwitch, 'custom-checkbox': !isSwitch}">
+            <input [id]="id" type="checkbox" class="custom-control-input" [disabled]="disabled" [(ngModel)]="isChecked" (ngModelChange)="hasChanged($event)"
+                [ngClass]="{'is-invalid': errors, 'is-valid': !errors && isDirty && autoValidate}" />
+            <label class="custom-control-label ml-1" [for]="id">{{label}}
+                <ng-container *ngTemplateOutlet="tempOutlet" ></ng-container>
+            </label>
+        </div>
+
+        <div *ngIf="errors" class="invalid-feedback d-block">
+            {{ errors }}
+        </div>
+    </div>
+
+    <small *ngIf="note" class="form-text text-muted">
+        <markdown (click)="sharedFunctions.getRoute($event)" [data]="note"></markdown>
+    </small>
+</div>
+
+<ng-template #tempOutlet>
+    <ng-content></ng-content>
+</ng-template>

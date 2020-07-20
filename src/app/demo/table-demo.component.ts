@@ -135,5 +135,8 @@ export class TableDemoComponent implements OnInit {
       public multipleItems(items: DataModel[]) {
         window.alert('selected items: ' + items.map(c => c.intValue).join(', '));
       }
-
+      scrollToElement($element): void {
+        console.log($element);
+        $element.scrollIntoView({behavior: 'smooth', block: 'start', inline: 'nearest'});
+      }
 }

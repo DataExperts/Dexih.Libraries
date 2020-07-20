@@ -1,6 +1,6 @@
 {
-  "name": "dexih-ngx-table",
-  "version": "0.5.58",
+  "name": "ngx-d-table",
+  "version": "0.6.00",
   "repository": {
     "type": "git",
     "url": "https://github.com/DataExperts/Dexih.Libaries/tree/master/projects/table"

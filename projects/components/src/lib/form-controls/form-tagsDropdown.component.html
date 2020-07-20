@@ -1,0 +1,62 @@
+<base-template     
+    [id]="id"
+    [label]="label" 
+    [subLabel]="subLabel" 
+    [note]="note"
+    [border]="true"
+    [errors]="errors" >
+    <ng-template #labelContent>
+        <ng-content></ng-content>
+    </ng-template>
+
+<div #dropdownButton class="input-group w-100">
+    <div (click)="dropdownToggle($event)" class="input-group w-100" [id]="id" >
+
+        <base-input class="w-100"
+        [labelLeft]="labelLeft" 
+        [floatingLabel]="floatingLabel"
+        [placeholder]="placeholder" 
+        [errors]="errors"
+        [autoValidate]="autoValidate"
+        [border]="border"
+        [readonly]="true"
+        [iconClass]="iconClass ? iconClass : 'fa fa-caret-down'"
+        [disabled]="disabled"
+        [autocapitalize]="false"
+        [fontItalic]="false"
+        [tags]="tags"
+        tagItemName="label"
+        (removeTag)="remove($event)"
+        >
+        
+    </base-input>
+
+    </div>
+
+    <ul class="w-100 dropdown-menu scrollable-menu" [ngClass]="{'show': isOpen}" role="menu">
+        <li *ngIf="enableAddAll" class="scrollable-item">
+            <a class="dropdown-item" (click)="addAll()" title="Add all items to the list">Add all</a>
+        </li>
+        <li class="scrollable-item">
+            <a class="dropdown-item" (click)="clearAll()" title="Clear all items">Clear all</a>
+        </li>
+
+        <li *ngIf="showRefresh" >
+            <a class="dropdown-item" (click)="refresh()">
+                <ng-template [ngIf]="isRefreshing"><div class="d-flex d-flex-row"><div class="loader mr-1"></div>Refreshing...</div></ng-template>
+                <ng-template [ngIf]="!isRefreshing">Refresh ...</ng-template>
+            </a>
+        </li>
+
+        <div class="dropdown-divider"></div>
+
+        <li *ngFor="let item of sortedItems" class="scrollable-item">
+            <div *ngIf="item.color" class="dropdown-item bg-light" (click)="selectItem(item)" [title]="item.title">
+                <h5><span class="badge" [ngStyle]="{'background-color': item.color}" ><span class="blend-text">{{item.label}}</span></span></h5>
+            </div>
+            <a *ngIf="!item.color"  class="dropdown-item" (click)="selectItem(item)" [title]="item.title" >{{item.label}}</a>
+        </li>
+    </ul>
+
+</div>    
+</base-template> 

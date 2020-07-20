@@ -1,14 +1,14 @@
-# dexih-ngx-components
+# ngx-d-components
 
-dexih-ngx-components are a set of Angular (8+) Boostrap 4.x based components.  These include form controls, modals, toasts, widgets and more.
+ngx-d-components are a set of Angular (8+) Boostrap 4.x based components.  These include form controls, modals, toasts, widgets and more.
 
 [![][dex-img]][dex]
 
 [dex-img]: https://dataexpertsgroup.com/img/dex_web_logo.png
 [dex]: https://dataexpertsgroup.com
 
-[![npm version](https://badge.fury.io/js/dexih-ngx-components.svg)](https://www.npmjs.com/package/dexih-ngx-components)
-[![Build Status](https://travis-ci.org/DataExperts/dexih-ngx-components.svg?branch=master)](https://travis-ci.org/DataExperts/dexih-ngx-components)
+[![npm version](https://badge.fury.io/js/ngx-d-components.svg)](https://www.npmjs.com/package/ngx-d-components)
+[![Build Status](https://travis-ci.org/DataExperts/ngx-d-components.svg?branch=master)](https://travis-ci.org/DataExperts/ngx-d-components)
 
 ## Features
 
@@ -28,7 +28,7 @@ dexih-ngx-components are a set of Angular (8+) Boostrap 4.x based components.  T
 To install this library, run:
 
 ```bash
-$ npm install dexih-ngx-components --save
+$ npm install ngx-d-components --save
 ```
 
 There is also dependency on ngx-md (for markdown formatting) library.  To install this run:

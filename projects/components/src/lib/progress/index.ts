@@ -1,3 +1,3 @@
-export {DexihProgressbarComponent} from './dexih-progress.component';
-export {DexihProgressModule} from './dexih-progress.module';
+export {DProgressbarComponent} from './d-progress.component';
+export {DProgressModule} from './d-progress.module';
 

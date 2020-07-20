@@ -1,2 +1,2 @@
-export { DexihUtilsModule } from './dexih-utils.module';
-export { DexihRemoveWrapperDirective } from './dexih-remove-wrapper.directive'
+export { DUtilsModule } from './dexih-utils.module';
+export { DRemoveWrapperDirective } from './dexih-remove-wrapper.directive'

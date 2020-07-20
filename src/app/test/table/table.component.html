@@ -2,53 +2,53 @@
     <h1>Different Tables</h1>
 </div>
 
-<dexih-table [data]="null" heading="Table still loading" >
+<d-table [data]="null" heading="Table still loading" >
     <ng-template #actions let-items="items">
         <button class="btn btn-lg btn-danger">Cancel</button> 
         <input class="form-control" style="width:100px" />
     </ng-template>
-</dexih-table>
+</d-table>
 <hr/>
 
-<dexih-table [data]="delayedData" heading="Table loading, then empty in 5 seconds, then populated in another 5 seconds.">
-</dexih-table>
+<d-table [data]="delayedData" heading="Table loading, then empty in 5 seconds, then populated in another 5 seconds.">
+</d-table>
 <hr/>
 
-<dexih-table [dataObservable]="arrayData" [columns]="arrayColumns" error="I messed up...." heading="Table with error">
-</dexih-table>
+<d-table [dataObservable]="arrayData" [columns]="arrayColumns" error="I messed up...." heading="Table with error">
+</d-table>
 <hr/>
 
-<dexih-table [data]="[]" [columns]="arrayColumns" heading="Table no data and sticky toolbar" [enableStickyToolbar]="true" [toolbarZIndex]="10000">
+<d-table [data]="[]" [columns]="arrayColumns" heading="Table no data and sticky toolbar" [enableStickyToolbar]="true" [toolbarZIndex]="10000">
     <ng-template #actions let-items="items">
         <button class="btn btn-success">Ok</button>
         <button class="btn btn-danger">Cancel</button>
     </ng-template>
-</dexih-table>
+</d-table>
 <hr/>
 
-<dexih-table [dataObservable]="tableData" [columns]="mdColumns" heading="Table with an markdown column" (onTagClick)="tagClick($event)" (rowClick)="selectedItem($event)" [tags]="tags"></dexih-table>
+<d-table [dataObservable]="tableData" [columns]="mdColumns" heading="Table with an markdown column" (onTagClick)="tagClick($event)" (rowClick)="selectedItem($event)" [tags]="tags"></d-table>
 <hr/>
 
-<dexih-table [dataObservable]="tableData" heading="Table with auto generated column names">
+<d-table [dataObservable]="tableData" heading="Table with auto generated column names">
     <ng-template #filter let-items="filter">
         <button class="btn btn-success">Filter Button</button>
     </ng-template>
-</dexih-table>
+</d-table>
 <hr/>
 
-<dexih-table [dataObservable]="tableData" [columns]="columns" heading="Table with formatted column names"></dexih-table>
+<d-table [dataObservable]="tableData" [columns]="columns" heading="Table with formatted column names"></d-table>
 <hr/>
 
-<dexih-table [dataObservable]="tableData" [columns]="columns" heading="Table hidden" [hideTable]="true"></dexih-table>
+<d-table [dataObservable]="tableData" [columns]="columns" heading="Table hidden" [hideTable]="true"></d-table>
 <hr/>
 
-<dexih-table [dataObservable]="arrayData" heading="Table with populated from array"></dexih-table>
+<d-table [dataObservable]="arrayData" heading="Table with populated from array"></d-table>
 
-<dexih-table [dataObservable]="tableData" heading="Table fixed height" tableHeight="200px"></dexih-table>
+<d-table [dataObservable]="tableData" heading="Table fixed height" tableHeight="200px"></d-table>
 
 
 <div style="width: 320px">
-    <dexih-table [dataObservable]="arrayData" [columns]="columns"  heading="Responsive table (horizontal across bar)">
+    <d-table [dataObservable]="arrayData" [columns]="columns"  heading="Responsive table (horizontal across bar)">
         <ng-template #actions let-items="items">
             <button class="btn btn-primary" (click)="selectedItems(items)">Button</button>
             <button class="btn btn-primary" (click)="selectedItems(items)">Button</button>
@@ -56,22 +56,22 @@
             <button class="btn btn-primary" (click)="selectedItems(items)">Button</button>
             <button class="btn btn-primary" (click)="selectedItems(items)">Button</button>
         </ng-template>
-    </dexih-table>
+    </d-table>
 </div>
 
 <hr/>
         
 
-<dexih-table [dataObservable]="arrayData" [columns]="arrayColumns" heading="Table with populated from array with column formatting"></dexih-table>
+<d-table [dataObservable]="arrayData" [columns]="arrayColumns" heading="Table with populated from array with column formatting"></d-table>
 <hr/>
 
-<dexih-table [data]="oneRow" [enableSort]="true" [enableManualSort]="true" heading="Sortable table with one row"></dexih-table>
+<d-table [data]="oneRow" [enableSort]="true" [enableManualSort]="true" heading="Sortable table with one row"></d-table>
 <hr/>
 
-<dexih-table [data]="dataEmpty" heading="Table with auto generated column names (no rows)"></dexih-table>
+<d-table [data]="dataEmpty" heading="Table with auto generated column names (no rows)"></d-table>
 <hr/>
 
-<dexih-table [enableMultiSelect]="true" [enableStickyToolbar]="true"
+<d-table [enableMultiSelect]="true" [enableStickyToolbar]="true"
     [enableSort]="true" [enableManualSort]="true" [enableSaveCsv]="true" (rowClick)="selectedItem($event)" heading="Table with export, sort, row action enabled."
     [columns]="columns" [dataObservable]="tableData" rowStatusHeading="Row Status Heading"  actionHeading="Action Heading"
 >
@@ -101,15 +101,15 @@
     </ng-template>
 
 
-</dexih-table>
+</d-table>
 <hr/>
 
 
-<dexih-table [enableCellValue]="false" [columns]="columns" [dataObservable]="tableData" heading="Table with custom cells">
+<d-table [enableCellValue]="false" [columns]="columns" [dataObservable]="tableData" heading="Table with custom cells">
     <ng-template #cell select="cell" let-value="value">
         <button class="btn btn-success">{{value}}</button>
     </ng-template>
-</dexih-table>
+</d-table>
 
 <hr/>
 
@@ -121,9 +121,9 @@
     </div>
 </div>
 
-<dexih-table [dataObservable]="tableData" (onDrop)="dropped($event)" [enableSort]="true" [enableManualSort]="true" dropName="tableDrop"
- heading="droppable table"></dexih-table>
+<d-table [dataObservable]="tableData" (onDrop)="dropped($event)" [enableSort]="true" [enableManualSort]="true" dropName="tableDrop"
+ heading="droppable table"></d-table>
 <hr/>
 
-<dexih-table [data]="largeData"  [enableSort]="true" [columns]="columns" ></dexih-table>
+<d-table [data]="largeData"  [enableSort]="true" [columns]="columns" ></d-table>
 <hr/>

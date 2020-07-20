@@ -1,0 +1,32 @@
+<base-template 
+    [label]="label" 
+    [subLabel]="subLabel" 
+    [note]="note"
+    [border]="true"
+    [errors]="errors"
+    >
+    
+<ng-template #labelContent>
+    <ng-content></ng-content>
+</ng-template>
+
+<base-input 
+    [type]="type"
+    [pattern]="pattern"
+    [labelLeft]="labelLeft" 
+    [floatingLabel]="floatingLabel"
+    [placeholder]="placeholder" 
+    [iconClass]="iconClass"
+    [errors]="errors"
+    [autoValidate]="autoValidate"
+    [border]="border"
+    [(ngModel)]="value" 
+    [ngModelOptions]="{standalone: true}" 
+    (ngModelChange)="hasChanged($event)"
+    [disabled]="disabled"
+    [maxlength]="maxlength"
+    [autocapitalize]="autocapitalize"
+    (keydown)="keydownEvent($event)">
+</base-input>
+
+</base-template>

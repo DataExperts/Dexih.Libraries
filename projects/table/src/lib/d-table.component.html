@@ -1,0 +1,296 @@
+    <div *ngIf="heading" class="d-table-heading">
+        <h3>{{heading}}</h3>
+    </div>
+
+    <div class="d-table-error" *ngIf="error">
+        <div class="alert alert-danger">
+            {{error}}
+        </div>
+    </div>
+
+    <div *ngIf="actionsTemplate || selectedItemActionsTemplate || selectedItemsActionsTemplate || ( enableFilter && tableItems?.length > 0 && !hideTable) || tableHeaderTemplate" class="d-table-toolbar" [ngClass]="{'d-table-toolbar-sticky': enableStickyToolbar}" [ngStyle]="{'z-index': toolbarZIndex}" >
+        <div class="d-flex d-flex-row">
+            <div>
+                <div class="btn-toolbar">
+                    <div *ngIf="enableSaveCsv && tableItems?.length > 0 && !hideTable">
+                        <button (click)="saveCsv()" class="btn btn-primary mr-1" title="Export the current data to a csv file.">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 8 8">
+                                <path fill="white"
+                                    d="M0 0v8h8v-2h-1v1h-6v-6h1v-1h-2zm4 0l1.5 1.5-2.5 2.5 1 1 2.5-2.5 1.5 1.5v-4h-4z" />
+                            </svg>
+                        </button>
+                    </div>
+            
+                    <div *ngIf="enableViewToggle && !hideTable">
+                        <div class="btn-group btn-group-toggle mr-1" data-toggle="buttons" title="Display table view">
+                            <label class="btn btn-primary" [ngClass]="{'active': view==='table'}">
+                                <input type="radio" [(ngModel)]="view" value="table">
+                                <svg fill="white" width="15" height="15" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M576 1376v-192q0-14-9-23t-23-9h-320q-14 0-23 9t-9 23v192q0 14 9 23t23 9h320q14 0 23-9t9-23zm0-384v-192q0-14-9-23t-23-9h-320q-14 0-23 9t-9 23v192q0 14 9 23t23 9h320q14 0 23-9t9-23zm512 384v-192q0-14-9-23t-23-9h-320q-14 0-23 9t-9 23v192q0 14 9 23t23 9h320q14 0 23-9t9-23zm-512-768v-192q0-14-9-23t-23-9h-320q-14 0-23 9t-9 23v192q0 14 9 23t23 9h320q14 0 23-9t9-23zm512 384v-192q0-14-9-23t-23-9h-320q-14 0-23 9t-9 23v192q0 14 9 23t23 9h320q14 0 23-9t9-23zm512 384v-192q0-14-9-23t-23-9h-320q-14 0-23 9t-9 23v192q0 14 9 23t23 9h320q14 0 23-9t9-23zm-512-768v-192q0-14-9-23t-23-9h-320q-14 0-23 9t-9 23v192q0 14 9 23t23 9h320q14 0 23-9t9-23zm512 384v-192q0-14-9-23t-23-9h-320q-14 0-23 9t-9 23v192q0 14 9 23t23 9h320q14 0 23-9t9-23zm0-384v-192q0-14-9-23t-23-9h-320q-14 0-23 9t-9 23v192q0 14 9 23t23 9h320q14 0 23-9t9-23zm128-320v1088q0 66-47 113t-113 47h-1344q-66 0-113-47t-47-113v-1088q0-66 47-113t113-47h1344q66 0 113 47t47 113z" />
+                                </svg>
+                            </label>
+                            <label class="btn btn-primary" [ngClass]="{'active': view==='cards'}" title="Display cards view">
+                                <input type="radio" [(ngModel)]="view" value="cards">
+                                <svg fill="white" width="18" height="15" viewBox="0 0 2048 1792" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M1024 1131q0-64-9-117.5t-29.5-103-60.5-78-97-28.5q-6 4-30 18t-37.5 21.5-35.5 17.5-43 14.5-42 4.5-42-4.5-43-14.5-35.5-17.5-37.5-21.5-30-18q-57 0-97 28.5t-60.5 78-29.5 103-9 117.5 37 106.5 91 42.5h512q54 0 91-42.5t37-106.5zm-157-520q0-94-66.5-160.5t-160.5-66.5-160.5 66.5-66.5 160.5 66.5 160.5 160.5 66.5 160.5-66.5 66.5-160.5zm925 509v-64q0-14-9-23t-23-9h-576q-14 0-23 9t-9 23v64q0 14 9 23t23 9h576q14 0 23-9t9-23zm0-260v-56q0-15-10.5-25.5t-25.5-10.5h-568q-15 0-25.5 10.5t-10.5 25.5v56q0 15 10.5 25.5t25.5 10.5h568q15 0 25.5-10.5t10.5-25.5zm0-252v-64q0-14-9-23t-23-9h-576q-14 0-23 9t-9 23v64q0 14 9 23t23 9h576q14 0 23-9t9-23zm256-320v1216q0 66-47 113t-113 47h-352v-96q0-14-9-23t-23-9h-64q-14 0-23 9t-9 23v96h-768v-96q0-14-9-23t-23-9h-64q-14 0-23 9t-9 23v96h-352q-66 0-113-47t-47-113v-1216q0-66 47-113t113-47h1728q66 0 113 47t47 113z" />
+                                </svg>
+                            </label>
+                        </div>
+                    </div>
+            
+                    <div class="align-self-center" *ngIf="actionsTemplate">
+                        <ng-template [ngTemplateOutlet]="actionsTemplate"
+                            [ngTemplateOutletContext]="{items: currentSelectedItems}">
+                        </ng-template>
+                    </div>
+            
+                    <div class="align-self-center" *ngIf="selectedItemActionsTemplate && selectedItemsCount == 1">
+                        <ng-template 
+                            [ngTemplateOutlet]="selectedItemActionsTemplate"
+                            [ngTemplateOutletContext]="{item: currentSelectedItems[0]}">
+                        </ng-template>
+                    </div>
+            
+                    <div class="align-self-center" *ngIf="selectedItemsActionsTemplate && selectedItemsCount > 0">
+                        <ng-template 
+                            [ngTemplateOutlet]="selectedItemsActionsTemplate"
+                            [ngTemplateOutletContext]="{items: currentSelectedItems}">
+                        </ng-template>
+                    </div>
+                </div>
+            </div>
+            
+            <div *ngIf="tableItems?.length >= 0 && !hideTable" class="btn-toolbar ml-auto">
+                <div class="align-self-center"  *ngIf="filterTemplate">
+                    <ng-template [ngTemplateOutlet]="filterTemplate"
+                        [ngTemplateOutletContext]="{items: currentSelectedItems}">
+                    </ng-template>
+                </div>
+
+                <d-button-tag-dropdown *ngIf="tagStates" class="ml-1">
+                    <a class="dropdown-item pl-1" (click)="clearTags()" title="Clear tag filters">
+                        <span class="text-danger"><i class="fa fa-trash-o text-danger"></i> Clear Filter(s)</span>
+                    </a>
+                    <a *ngFor="let tagState of tagStates" class="dropdown-item">
+                        <div class="input-group">
+                            <input type="checkbox" class="form-check-input" [(ngModel)]="tagState.isChecked" (change)="changeTags()">
+                            <h5>
+                                <span class="badge" [ngStyle]="{'background-color': tagState.tag.color}">
+                                    <span class="blend-text">{{tagState.tag.name}}</span>
+                                </span>
+                            </h5>
+                        </div>
+                    </a>
+                </d-button-tag-dropdown>
+                
+            
+                <div *ngIf="enableFilter" [ngClass]="{disabled : manualSort}" class="input-group w-auto search-icon input-expand ml-1">
+                    <input [formControl]="filterControl" class="form-control input-md" placeholder="Search..." type="search"
+                        name="filterString" />
+                </div>
+
+                <div *ngIf="enablePages && rowCount > rowsPerPage" class="ml-1">
+                    <ng-template [ngTemplateOutlet]="paginator"></ng-template>
+                </div>
+            </div>
+
+        </div>
+
+        <ng-template *ngIf="tableHeaderTemplate" [ngTemplateOutlet]="tableHeaderTemplate" [ngTemplateOutletContext]="{items: currentSelectedItems}">
+        </ng-template>
+    </div>
+
+    <div *ngIf="tableItems && !hideTable" [ngClass]="{'table-responsive': enableResponsive}">
+        <table *ngIf="view === 'table'" [class]="tableClass" width="100%">
+            <thead>
+                <tr *ngIf="currentColumns && enableHeaderRow">
+                    <th *ngIf="enableMultiSelect" width="1%">
+                        <input type="checkbox" [(ngModel)]="selectAllState" (ngModelChange)="selectAll($event)">
+                    </th>
+                    <th class="text-center" *ngIf="enableManualSort" width="1%">
+                            <span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 8 8">
+                                    <path d="M2 0v6h-2l2.5 2 2.5-2h-2v-6h-1zm2 0v1h2v-1h-2zm0 2v1h3v-1h-3zm0 2v1h4v-1h-4z" />
+                                </svg>
+                            </span>
+                        </th>
+                    <th class="text-center" *ngFor="let column of currentColumns">
+                        <span name="dexih-column-heading" class="d-flex d-flex-row" (click)="enableSort && ( column.name || column.name == 0 ) && sort(column.name)">
+                            <span *ngIf="(sortColumn || sortColumn == '0') && sortColumn == column.name && sortDirection == 1" title="Sorted ascending">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 8 8">
+                                    <path d="M2 0v6h-2l2.5 2 2.5-2h-2v-6h-1zm2 0v1h2v-1h-2zm0 2v1h3v-1h-3zm0 2v1h4v-1h-4z" />
+                                </svg>
+                            </span>
+
+                            <span *ngIf="(sortColumn || sortColumn == '0') && sortColumn == column.name && sortDirection==-1" title="Sorted descending">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 8 8">
+                                    <path d="M2 0v6h-2l2.5 2 2.5-2h-2v-6h-1zm2 0v1h4v-1h-4zm0 2v1h3v-1h-3zm0 2v1h2v-1h-2z" />
+                                </svg>
+                            </span>
+                            {{column.title}}
+                        </span>
+                    </th>
+                    <th class="text-center" *ngIf="rowActionTemplate">{{actionHeading}}</th>
+                    <th class="text-center" *ngIf="rowStatusTemplate">{{rowStatusHeading}}</th>
+                </tr>
+            </thead>
+            <tbody id="{{dropName}}" cdkDropList (cdkDropListDropped)="manualSortChange($event)">
+                <tr *ngIf="rowCount == 0 || !currentColumns">
+                    <td [attr.colspan]="columnCount">There are no rows available.</td>
+                </tr>
+                <ng-template ngFor let-tableItem [ngForOf]="tableItems | tableFilter:enablePages:rowsPerPage:pageNumber" let-i="index">
+                    <tr name="d-table-row" [class.table-primary]="tableItem?.isSelected" cdkDrag>
+                        <div *cdkDragPreview class="container">
+                            <div class="row">
+                                <div class="col-sm list-group-item list-group-item-secondary" *ngFor="let column of currentColumns | slice:0:5; let columnIndex = index;">
+                                        <b>{{column.title}}</b>:{{data[tableItem.index][column.name]}}
+                                </div>
+                            </div>
+                        </div>
+                        <td *ngIf="enableMultiSelect">
+                            <input type="checkbox" [(ngModel)]="tableItem.isSelected" (ngModelChange)="itemSelected(true)">
+                        </td>
+                        <td [hidden]="!enableManualSort" >
+                            <button class="btn btn-sm btn-primary" title="Drag button to move row to another position" cdkDragHandle>
+                                <svg width="12px" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M10 9h4V6h3l-5-5-5 5h3v3zm-1 1H6V7l-5 5 5 5v-3h3v-4zm14 2l-5-5v3h-3v4h3v3l5-5zm-9 3h-4v3H7l5 5 5-5h-3v-3z"></path>
+                                    <path d="M0 0h24v24H0z" fill="none"></path>
+                                </svg>
+                            </button>
+                        </td>
+                        <td name="d-table-cell" *ngFor="let column of currentColumns; let columnIndex = index;" [ngStyle]="{'text-align': column.align, 'width': column.width, 'background-color': column.backgroundColor, 'text-color': column.textColor}"
+                             (click)="selectRowClick(data[tableItem.index])" [title]="data[tableItem.index][column.tooltip] ? data[tableItem.index][column.tooltip] : ''">
+
+                            <ng-template *ngIf="cellTemplate" [ngTemplateOutlet]="cellTemplate" [ngTemplateOutletContext]="{item: data[tableItem.index], column: column, value: data[tableItem.index][column.name]}">
+                            </ng-template>
+                            
+                            <d-table-cell *ngIf="enableCellValue" [column]="column" [row]="data[tableItem.index]" [tags]="tags" [nodeExpanded]="expandedNodes[tableItem.index] == columnIndex" (onNodeClick)="nodeClick(tableItem.index, columnIndex)" (onTagClick)="tagClick($event)">
+                            </d-table-cell>
+                        </td>
+                        <td *ngIf="rowActionTemplate">
+                            <ng-template [ngTemplateOutlet]="rowActionTemplate" [ngTemplateOutletContext]="{item: data[tableItem.index]}">
+                            </ng-template>
+                        </td>
+                        <td *ngIf="rowStatusTemplate">
+                            <ng-template [ngTemplateOutlet]="rowStatusTemplate" [ngTemplateOutletContext]="{item: data[tableItem.index]}">
+                            </ng-template>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td *ngIf="!tableItem.isFiltered && expandedNodes[tableItem.index] >= 0" [attr.colspan]="columnCount">
+                            <d-table [enableSaveCsv]="enableSaveCsv" [enableFilter]="enableFilter" [heading]="currentColumns[expandedNodes[tableItem.index]].title ? currentColumns[expandedNodes[tableItem.index]].title : currentColumns[expandedNodes[tableItem.index]].name" [data]="data[tableItem.index][currentColumns[expandedNodes[tableItem.index]].name]" [columns]="currentColumns[expandedNodes[tableItem.index]].childColumns" [enableViewToggle]="false" view="table">
+                                    <ng-template #actions let-items="items">
+                                        <button class="btn btn-danger" (click)="nodeClose(tableItem.index)">Close</button>
+                                    </ng-template>
+                            </d-table>
+                        </td>
+                    </tr>
+                </ng-template>
+            </tbody>
+        </table>
+        <div *ngIf="view === 'cards'" class="d-flex flex-wrap">
+            <div *ngIf="tableItems.length == 0 || !currentColumns" class="card">
+                <div class="card-body">
+                    There are no rows available.
+                </div>
+            </div>
+            <ng-template ngFor let-tableItem [ngForOf]="tableItems | tableFilter:enablePages:rowsPerPage:pageNumber" let-i="index">
+                <div class="card flex-fill m-1" >
+                    <div class="card-body p-0">
+                          <table class="table" [class.table-primary]="tableItem?.isSelected">
+                            <tr *ngFor="let column of currentColumns; let columnIndex=index;">
+                                <td *ngIf="enableMultiSelect" style="width: 1%;">
+                                    <input *ngIf="columnIndex == 0" type="checkbox" [(ngModel)]="tableItem.isSelected" (ngModelChange)="itemSelected(true)">
+                                </td>
+                                <td (click)="selectRowClick(data[tableItem.index])">
+                                    <b>{{column.title}}</b>
+                                </td>
+                                <td (click)="selectRowClick(data[tableItem.index])">
+                                    <ng-template *ngIf="cellTemplate" [ngTemplateOutlet]="cellTemplate"
+                                        [ngTemplateOutletContext]="{item: data[tableItem.index], column: column, value: data[tableItem.index][column.name]}">
+                                    </ng-template>
+                                    <d-table-cell *ngIf="enableCellValue" [tags]="tags" [column]="column" [row]="data[tableItem.index]"
+                                        [nodeExpanded]="expandedNodes[tableItem.index] == columnIndex"
+                                        (onNodeClick)="nodeClick(tableItem.index, columnIndex)" (onTagClick)="tagClick($event)">
+                                    </d-table-cell>
+
+                                    <div *ngIf="!tableItem.isFiltered && expandedNodes[tableItem.index] === columnIndex" >
+                                        <d-table [enableSaveCsv]="false" [enableFilter]="false" [data]="data[tableItem.index][currentColumns[expandedNodes[tableItem.index]].name]" [columns]="currentColumns[expandedNodes[tableItem.index]].childColumns" [enableViewToggle]="false" view="table">
+                                        </d-table>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr *ngIf="rowActionTemplate">
+                                <td *ngIf="enableMultiSelect" style="width: 1%;">
+                                </td>
+                                <td>
+                                    <b>{{actionHeading}}</b>
+                                </td>
+                                <td>
+                                    <ng-template [ngTemplateOutlet]="rowActionTemplate"
+                                        [ngTemplateOutletContext]="{item: data[tableItem.index]}">
+                                    </ng-template>
+                                </td>
+                            </tr>
+                            <tr *ngIf="rowStatusTemplate">
+                                <td *ngIf="enableMultiSelect" style="width: 1%;">
+                                </td>
+                                <td>
+                                    <b>{{rowStatusHeading}}</b>
+                                </td>
+                                <td>
+                                    <ng-template [ngTemplateOutlet]="rowStatusTemplate"
+                                        [ngTemplateOutletContext]="{item: data[tableItem.index]}">
+                                    </ng-template>
+                                </td>
+                            </tr>
+                        </table>
+                </div>
+                </div>
+            </ng-template>
+            
+        </div>
+
+        <div *ngIf="enablePages && rowCount > rowsPerPage" class="m-1">
+            <ng-template [ngTemplateOutlet]="paginator"></ng-template>
+        </div>
+        
+</div>
+
+<div *ngIf="!tableItems && !error && !hideTable">
+    <div class="row">
+        <div class="col-lg-9 col-md-7 col-sm-12 col-xs-12">
+            <div class="table-loader-container">
+            <div class="table-loader"></div>
+            <div name="dexih-data-loading" class="table-loader-text">{{loadingMessage}}</div>
+        </div>
+        </div>
+    </div>
+</div>
+
+
+<ng-template #paginator>
+    <nav >
+        <ul class="pagination justify-content-end">
+            <li class="page-item" [class.disabled]="pageNumber === 1 ? true : null">
+                <a class="page-link" [class.disabled]="pageNumber === 1 ? true : null" href="javascript:void(0);"
+                    (click)="goToPage(1)" tabindex="-1">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <ng-template ngFor let-page [ngForOf]="pages">
+                <li *ngIf="page !== pageNumber && (page === 1 || page === pages.length || (page > pageNumber -3 && page < pageNumber + 3))" class="page-item"><a
+                        class="page-link" href="javascript:void(0);" (click)="goToPage(page)">{{page}}</a></li>
+                <input *ngIf="page === pageNumber" type="number" [(ngModel)]="inputPageNumber" (change)="inputPageChange($event)" style="width: 80px;">
+    
+            </ng-template>
+            <li class="page-item" [class.disabled]="pageNumber === pages.length ? true : null">
+                <a class="page-link" [class.disabled]="pageNumber === pages.length ? true : null" href="javascript:void(0);" (click)="goToPage(pageNumber + 1)">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</ng-template>

@@ -8,8 +8,15 @@ import { Component, OnInit } from '@angular/core';
 export class ComponentsDemoComponent implements OnInit {
 
     selectedKey = 1;
+    customCheckValue = 'checked';
+    selectedTime = '10:15:30';
 
     constructor() { }
 
     ngOnInit() { }
+
+    scrollToElement($element): void {
+        console.log($element);
+        $element.scrollIntoView({behavior: 'smooth', block: 'start', inline: 'nearest'});
+      }
 }

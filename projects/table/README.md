@@ -1,15 +1,15 @@
-# dexih-ngx-table
+# ngx-d-table
 
-dexih-ngx-table is an Angular (8+) component for building data driven tables.
+ngx-d-table is an Angular (8+) component for building data driven tables.
 
 [![][dex-img]][dex]
 
 [dex-img]: https://dataexpertsgroup.com/img/dex_web_logo.png
 [dex]: https://dataexpertsgroup.com
-[dexih-table-demo]: ./assets/dexih-table-demo-1.gif
+[d-table-demo]: ./assets/d-table-demo-1.gif
 
-[![npm version](https://badge.fury.io/js/dexih-ngx-table.svg)](https://www.npmjs.com/package/dexih-ngx-table)
-[![Build Status](https://travis-ci.org/DataExperts/dexih-ngx-table.svg?branch=master)](https://travis-ci.org/DataExperts/dexih-ngx-table)
+[![npm version](https://badge.fury.io/js/ngx-d-table.svg)](https://www.npmjs.com/package/ngx-d-table)
+[![Build Status](https://travis-ci.org/DataExperts/ngx-d-table.svg?branch=master)](https://travis-ci.org/DataExperts/ngx-d-table)
 
 ## Features
 
@@ -20,10 +20,13 @@ dexih-ngx-table is an Angular (8+) component for building data driven tables.
 * Multiple template sections for customization.
 * Drag and drop re-ordering.
 * Save to csv file.
+* Switch between card view/table view.
 
 ## Releases Summary
 
+version 1.0.0
 
+breaking: component name changed from dexih-table to d-table.
 
 [Older release information](releases.md)
 
@@ -32,13 +35,7 @@ dexih-ngx-table is an Angular (8+) component for building data driven tables.
 To install this library, run:
 
 ```bash
-$ npm install dexih-ngx-table --save
-```
-
-There is also a dependency on the ngx-md (for markdown formatting) library.  To install this run:
-
-```bash
-$ npm install ngx-md --save
+$ npm install ngx-d-table --save
 ```
 
 You will need also need bootstrap styles included (4.x).  For example add this to your index.html header:
@@ -65,8 +62,8 @@ public sampleTable = [
 Populate this data into the table as follows:
 
 ```html
-<dexih-table [data]="sampleTable">
-</dexih-table>
+<d-table [data]="sampleTable">
+</d-table>
 ```
 
 For a quick demo and sample code refer to the following [plnkr](http://plnkr.co/edit/G3RNCVGMXhodH7Ap).
@@ -81,7 +78,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 
 // ** Import the TableModule **
-import { DexihTableModule } from 'dexih-ngx-table';
+import { DTableModule } from 'ngx-d-table';
 
 @NgModule({
   declarations: [
@@ -91,7 +88,7 @@ import { DexihTableModule } from 'dexih-ngx-table';
     BrowserModule,
 
     // ** Import the TableModule **
-    DexihTableModule
+    DTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]
@@ -102,9 +99,9 @@ export class AppModule { }
 Once the library is imported, you can use it as follows:
 
 ```xml
-<!-- Use the dexih-table selector to add the table to a template -->
-<dexih-table [data]="sampleTable">
-</dexih-table>
+<!-- Use the d-table selector to add the table to a template -->
+<d-table [data]="sampleTable">
+</d-table>
 ```
 
 ## Populating the Table
@@ -122,8 +119,8 @@ public sampleTable = [
 ```
 
 ```html
-<dexih-table [data]="sampleTable">
-</dexih-table>
+<d-table [data]="sampleTable">
+</d-table>
 ```
 
 
@@ -146,8 +143,8 @@ ngOnInit() {
 ```
 
 ```html
-<dexih-table [tableData]="tableData">
-</dexih-table>
+<d-table [tableData]="tableData">
+</d-table>
 ```
 
 ## Formatting columns
@@ -157,7 +154,7 @@ Columns can be formatted in the table by passing an array of type `Column` to th
 The columns array can be constructed in your component as follows:
 
 ```typescript
-import { DexihTableModule, Column }  from 'dexih-ngx-table';
+import { DexihTableModule, Column }  from 'ngx-d-table';
 
 ...
 
@@ -174,8 +171,8 @@ columns = [
 
 Then add the columns property to the table definition:
 ```html
-<dexih-table [data]="sampleTable" [columns]="columns">
-</dexih-table>
+<d-table [data]="sampleTable" [columns]="columns">
+</d-table>
 ```
 
 The following properties can be hard coded in the column settings an apply to all rows:
@@ -245,10 +242,10 @@ Pagination
 Tags
 - `Tags` - An Array<Tag>.  Contains the possible tags for the table.  Example: [{color: 'blue', name: 'blue'}, {color:'ref', name: 'red'}].
 
-The templates objects can be populated using `ng-template` tags within the `dexih-table` selection, as in the following sample:
+The templates objects can be populated using `ng-template` tags within the `d-table` selection, as in the following sample:
 
 ```xml
-<dexih-table 
+<d-table 
     [enableMultiSelect]="true" 
     [columns]="columns" 
     [tableData]="tableData"
@@ -291,7 +288,7 @@ The templates objects can be populated using `ng-template` tags within the `dexi
         {{value}}
     </ng-template>
 
-</dexih-table>
+</d-table>
 ```
 
 ## Table Events
@@ -304,15 +301,15 @@ The following events can be used to response to table actions:
 - `onSortChanged` (array of sorted items) - called when a manual drag/drop sort is completed.
 - `onDrop` (drop data) - called when data is dropped on the table.  Passes the event data from the cdkDropList event.
 
-Events are used as follows in the `dexih-table` declaration:
+Events are used as follows in the `d-table` declaration:
 
 ```xml
-<dexih-table 
+<d-table 
     (rowClick)="selectedItem($event)"
     (onSelectedChange)="selectedItem($event)"
     (onSortChanged)="selectedItem($event)"
     >
-</dexih-table>
+</d-table>
 ```
 
 Drag and drop can be used as follows:
@@ -326,15 +323,16 @@ Drag and drop can be used as follows:
     </div>
 </div>
 
-<dexih-table [dataObservable]="tableData" (onDrop)="dropped($event)" [enableSort]="true" [enableManualSort]="true" dropName="tableDrop" heading="droppable table">
- </dexih-table>
+<d-table [dataObservable]="tableData" (onDrop)="dropped($event)" [enableSort]="true" [enableManualSort]="true" dropName="tableDrop" heading="droppable table">
+ </d-table>
  ```
 ## Credits
 
-Thanks to the following projects:
+**ngx-d-table** is open-source and maintained by the [Data Experts Group](https://dataexpertsgroup.com).  We feel that open-sourcing is the best way to engage with the community and provide great products moving forward.  Our company provides data management tools, so if you're looking to better manage your data, give us a look at [Data Experts Group](https://dataexpertsgroup.com).
 
-* [https://getbootstrap.com/docs/4.5/getting-started/introduction/](Bootstrap) - Obviously the Bootstrap team.
-* [jvandemo/generator-angular2-library](https://github.com/jvandemo/generator-angular2-library) - Used as the baseline to package and distribute this library.
+Thanks to the other following projects:
+
+* [Bootstrap](https://getbootstrap.com/docs/4.5/getting-started/introduction/) - Obviously the Bootstrap team.
 * [ngx-md](https://github.com/dimpu/ngx-md) - Used for rendering markdown text.
 
 ## License

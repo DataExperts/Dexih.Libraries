@@ -1,12 +1,12 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { DexihButtonComponent} from './dexih-button.component';
+import { DButtonComponent} from './d-button.component';
 @Component({
-    selector: 'dexih-button-apply',
-    templateUrl: './dexih-button.component.html',
-    styleUrls: ['./dexih-button.component.scss']
+    selector: 'd-button-apply',
+    templateUrl: './d-button.component.html',
+    styleUrls: ['./d-button.component.scss']
 })
 
-export class DexihButtonApplyComponent extends DexihButtonComponent {
+export class DButtonApplyComponent extends DButtonComponent {
     @Input() title = 'Apply the current changes';
     iconClass = 'fa fa-check-circle';
     buttonClass = 'btn-primary';

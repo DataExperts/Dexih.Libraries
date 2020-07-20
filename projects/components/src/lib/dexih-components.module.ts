@@ -1,35 +1,37 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { DexihWidgetModule } from './widget/dexih-widget.module';
-import { DexihButtonsModule } from './buttons/dexihButtons.module';
-import { DexihFormControlsModule } from './form-controls/dexih-form-controls.module';
-import { NgxMdModule } from 'ngx-md';
-import { DexihProgressModule } from './progress/dexih-progress.module';
-import { DexihToastModule } from './toast/dexih-toast.module';
-import { DexihModalModule } from './modal/dexih-modal.module';
+import { DWidgetModule } from './widget/d-widget.module';
+import { DButtonsModule } from './buttons/d-buttons.module';
+import { DFormControlsModule } from './form-controls/form-controls.module';
+import { DProgressModule } from './progress/d-progress.module';
+import { DToastModule } from './toast/d-toast.module';
+import { DModalModule } from './modal/d-modal.module';
+import { DMarkdownModule } from './markdown/d-markdown.module';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    NgxMdModule,
-    DexihWidgetModule,
-    DexihButtonsModule,
-    DexihFormControlsModule,
-    DexihProgressModule,
-    DexihToastModule,
-    DexihModalModule,
+    DWidgetModule,
+    DButtonsModule,
+    DFormControlsModule,
+    DProgressModule,
+    DToastModule,
+    DModalModule,
+    DMarkdownModule
   ],
   declarations: [
   ],
   exports: [
-    DexihWidgetModule,
-    DexihButtonsModule,
-    DexihFormControlsModule,
-    DexihProgressModule,
-    DexihToastModule,
-    DexihModalModule,
+    DWidgetModule,
+    DButtonsModule,
+    DFormControlsModule,
+    DProgressModule,
+    DToastModule,
+    DModalModule,
+    DMarkdownModule
   ]
 })
-export class DexihComponentsModule {
+export class DComponentsModule {
 }

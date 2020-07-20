@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { ToastMessage, DexihToastComponent, DexihModalComponent } from 'projects/components/src/public-api';
+import { ToastMessage, DToastComponent, DModalComponent } from 'projects/components/src/public-api';
 
 
 @Component({
@@ -8,8 +8,8 @@ import { ToastMessage, DexihToastComponent, DexihModalComponent } from 'projects
   styleUrls: ['./components.component.scss']
 })
 export class ComponentsComponent {
-  @ViewChild('toasts', { static: true }) toasts: DexihToastComponent;
-  @ViewChild('modal', { static: true }) modal: DexihModalComponent;
+  @ViewChild('toasts', { static: true }) toasts: DToastComponent;
+  @ViewChild('modal', { static: true }) modal: DModalComponent;
 
   public selectedItem0 = 0;
 

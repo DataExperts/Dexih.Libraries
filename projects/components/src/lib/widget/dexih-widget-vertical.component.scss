@@ -1,6 +1,0 @@
-// Add a margin to the bottom of each element, except last
-:host ::ng-deep dexih-widget:not(:last-of-type) {
-    .card {
-        margin-bottom: 10px;
-      }
-} 

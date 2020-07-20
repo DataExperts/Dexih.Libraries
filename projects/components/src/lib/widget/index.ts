@@ -1,6 +1,6 @@
-export { DexihWidgetModule } from './dexih-widget.module';
-export { DexihWidgetComponent } from './dexih-widget.component';
-export { DexihWidgetColumnsComponent } from './dexih-widget-columns.component';
-export { DexihWidgetDeckComponent } from './dexih-widget-deck.component';
-export { DexihWidgetVerticalComponent } from './dexih-widget-vertical.component';
-export { DexihWidgetGroupComponent } from './dexih-widget-group.component';
+export { DWidgetModule } from './d-widget.module';
+export { DWidgetComponent } from './d-widget.component';
+export { DWidgetColumnsComponent } from './d-widget-columns.component';
+export { DWidgetDeckComponent } from './d-widget-deck.component';
+export { DWidgetVerticalComponent } from './d-widget-vertical.component';
+export { DWidgetGroupComponent } from './d-widget-group.component';

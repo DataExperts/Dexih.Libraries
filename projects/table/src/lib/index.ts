@@ -1,4 +1,4 @@
-export { DexihTableCellComponent } from './dexih-table-cell.component';
-export { DexihTableComponent } from './dexih-table.component';
-export * from './dexih-table.models';
-export { DexihTableModule } from './dexih-table.module'
+export { DTableCellComponent } from './d-table-cell.component';
+export { DTableComponent } from './d-table.component';
+export * from './d-table.models';
+export { DTableModule } from './d-table.module'

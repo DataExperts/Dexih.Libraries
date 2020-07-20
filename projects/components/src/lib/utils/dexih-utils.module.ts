@@ -1,7 +1,7 @@
 import { NgModule} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { DexihRemoveWrapperDirective } from './dexih-remove-wrapper.directive';
+import { DRemoveWrapperDirective } from './dexih-remove-wrapper.directive';
 
 @NgModule({
   imports: [
@@ -10,11 +10,11 @@ import { DexihRemoveWrapperDirective } from './dexih-remove-wrapper.directive';
     ReactiveFormsModule,
   ],
   declarations: [
-    DexihRemoveWrapperDirective
+    DRemoveWrapperDirective
   ],
   exports: [
-    DexihRemoveWrapperDirective
+    DRemoveWrapperDirective
   ],
 })
-export class DexihUtilsModule {
+export class DUtilsModule {
 }

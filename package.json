@@ -20,9 +20,9 @@
     "@angular/platform-browser": "^10.0.4",
     "@angular/platform-browser-dynamic": "^10.0.4",
     "@angular/router": "^10.0.4",
+    "marked": "^1.1.1",
     "moment": "^2.27.0",
-    "natives": "^1.1.6",
-    "ngx-md": "^8.1.6",
+    "prismjs": "^1.20.0",
     "rxjs": "^6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "^0.10.3"

@@ -1,0 +1,110 @@
+<base-template     
+    [id]="id"
+    [label]="label" 
+    [subLabel]="subLabel" 
+    [note]="note"
+    [border]="true"
+    [errors]="errors" >
+    <ng-template #labelContent>
+        <ng-content></ng-content>
+    </ng-template>
+
+<div #dropdownButton class="input-group w-100">
+    <div class="input-group w-100" [id]="id" (click)="dropdownToggle()">
+
+        <base-input class="w-100"
+        [labelLeft]="labelLeft" 
+        [floatingLabel]="floatingLabel"
+        [placeholder]="placeholder" 
+        [errors]="errors"
+        [autoValidate]="autoValidate"
+        [border]="border"
+        [formControl]="manualControl" 
+        [readonly]="((enableFilter && showDropDown) || enableTextEntry) ? null : ''"
+        [iconClass]="iconClass ? iconClass : 'fa fa-caret-down'"
+        [disabled]="disabled"
+        [maxlength]="maxlength"
+        [autocapitalize]="autocapitalize"
+        (arrowDown)="down()"
+        (arrowUp)="up()"
+        [fontItalic]="isTextEntry"
+        [tags]="multiSelect ? value : null"
+        [tagItemName]="itemName"
+        (removeTag)="remove($event)"
+        >
+        
+    </base-input>
+
+    </div>
+
+    <ul class="dropdown-menu scrollable-menu w-100" role="menu" [ngClass]="{'show': isOpen}">
+        <ng-template [ngIf]="showDropDown">
+            <ng-template *ngIf="startItemsTemplate" [ngTemplateOutlet]="startItemsTemplate">
+            </ng-template>
+
+            <li *ngIf="multiSelect && (enableAddAll || enableRemoveAll)" class="scrollable-item d-inline-flex">
+                <a *ngIf="enableAddAll" class="dropdown-item" (click)="addAll()" title="Add All items">Add all</a>
+                <a *ngIf="enableRemoveAll" class="dropdown-item" (click)="clearAll()" title="Clear all items">Remove all</a>
+            </li>
+
+            <li *ngIf="showRefresh" >
+                <a class="dropdown-item" (click)="refresh()">
+                    <ng-template [ngIf]="isRefreshing"><div class="d-flex d-flex-row"><div class="loader mr-1"></div>Refreshing...</div></ng-template>
+                    <ng-template [ngIf]="!isRefreshing">Refresh ...</ng-template>
+                </a>
+            </li>
+
+            <li *ngIf="allowNullSelect" >
+                <a class="dropdown-item" [ngClass]="{'active': !selectedItem }" (click)="selectItem(null)">{{selectNullMessage}}</a>
+            </li>
+
+            <ng-template [ngIf]="!childItems && !grandChildItems">
+                <li *ngFor="let item of sortedItems | filter: itemName: filterString"  class="scrollable-item" >
+                    <a class="dropdown-item" [ngClass]="{'active': selectedItem == item}"  (click)="selectItem(item)" [title]="itemTitle && item ? item[itemTitle] : ''"> {{itemName && item ? item[itemName] : item}}</a>
+                </li>
+            </ng-template>
+
+            <ng-template [ngIf]="childItems && !grandChildItems">
+                <ng-template ngFor let-item [ngForOf]="sortedItems">
+                        <ng-template ngFor let-childItem [ngForOf]="item[childItems] | filter: itemName: filterString" let-i="index">
+                            <li  *ngIf="i == 0" class="list-group-item list-group-item-heading list-group-item-info" >{{item[parentName]}}</li>
+
+                            <li  class="scrollable-item" >
+                                <a  class="dropdown-item" [ngClass]="{'active': selectedItem == childItem}" (click)="selectItem(childItem)" [title]="itemTitle && childItem ? childItem[itemTitle] : ''"> &nbsp;{{itemName && childItem ? childItem[itemName] : childItem}}</a>
+                            </li>
+                        </ng-template>
+                </ng-template>
+            </ng-template>
+
+            <ng-template [ngIf]="grandChildItems && sortedItems">
+                <ng-template ngFor let-item [ngForOf]="sortedItems">
+                        <ng-template [ngIf]="item[childItems].length > 0">
+                        <li class="list-group-item list-group-item-heading list-group-item-info" ><b>{{item[grandParentName]}}</b></li>
+                        <ng-template ngFor let-childItem [ngForOf]="item[childItems]">
+                            <ng-template ngFor let-grandChildItem of [ngForOf]="childItem[grandChildItems] | filter: itemName: filterString" let-i="index">
+                                <li *ngIf="i == 0" class="list-group-item list-group-item-heading list-group-item-info" >{{childItem[parentName]}}</li>
+
+                                <li  class="scrollable-item">
+                                    <a  class="dropdown-item" [ngClass]="{'active': selectedItem == grandChildItem}" (click)="selectItem(grandChildItem)" [title]="itemTitle && grandChildItem ? grandChildItem[itemTitle] : ''"> &nbsp;{{itemName && grandChildItem ? grandChildItem[itemName] : grandChildItem}}</a>
+                                </li>
+                            </ng-template>
+                        </ng-template>
+                    </ng-template>
+                </ng-template>
+            </ng-template>
+
+            <ng-template [ngIf]="textEntryItems && textEntryItems.length > 0">
+                <li *ngIf="textEntryItemsTitle" class="list-group-item list-group-item-heading list-group-item-info" ><b>{{textEntryItemsTitle}}</b></li>
+                <li *ngFor="let item of textEntryItems"  class="scrollable-item" >
+                    <a class="dropdown-item" [ngClass]="{'active': selectedItem == item}"  (click)="selectText(item)"> {{item}}</a>
+                </li>
+            </ng-template>
+
+            <ng-template *ngIf="endItemsTemplate" [ngTemplateOutlet]="endItemsTemplate">
+            </ng-template>
+
+        </ng-template>
+    </ul>
+
+</div>    
+</base-template> 

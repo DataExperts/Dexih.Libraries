@@ -1,8 +1,8 @@
 import { Component, ViewChild, ChangeDetectorRef, OnInit, AfterViewInit } from '@angular/core';
-import { ToastMessage, DexihToastComponent, DexihModalComponent } from 'projects/components/src/public-api';
+import { ToastMessage, DToastComponent, DModalComponent } from 'projects/components/src/public-api';
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Tag } from 'projects/table/src/lib/dexih-table.models';
+import { Tag } from 'projects/table/src/lib/d-table.models';
 
 class DataModel {
   constructor(

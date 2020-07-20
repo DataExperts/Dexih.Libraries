@@ -1,0 +1,66 @@
+<base-template 
+    [id]="id"
+    [label]="label" 
+    [subLabel]="subLabel" 
+    [note]="note"
+    [border]="true"
+    [errors]="errors"
+    >
+    
+<ng-template #labelContent>
+    <ng-content></ng-content>
+</ng-template>
+
+<div #input>
+<base-input 
+            type="date"
+            [labelLeft]="labelLeft" 
+            [floatingLabel]="floatingLabel"
+            [placeholder]="placeholder" 
+            [iconClass]="iconClass"
+            [errors]="allErrors"
+            [border]="border"
+            [(ngModel)]="value" 
+            [ngModelOptions]="{standalone: true}" 
+            (ngModelChange)="hasChanged()"
+            [disabled]="disabled"
+            (keydown)="keydownEvent($event)"
+            (focusout)="updateError()"
+            [enableFloatingAnimation]="false">
+        </base-input>
+    </div>
+</base-template>
+
+
+<!-- 
+
+<div>
+    <label *ngIf="label" [for]="id" class="mt-1">{{label}}
+        <ng-content></ng-content>
+    </label>
+
+    <div class="input-group" >
+        <div *ngIf="labelLeft" class="input-group-prepend">
+            <span class="input-group-text" [ngClass]="{'border-0 rounded-0': !border}"> {{labelLeft}}</span>
+        </div>
+
+        <input class="form-control" [id]="id" [disabled]="disabled" [(ngModel)]="value" (ngModelChange)="hasChanged($event)"
+        type="date" [placeholder]="placeholder ? placeholder : ''"
+            [ngClass]="{'is-invalid': errors, 'is-valid': !errors && isDirty}" [title]="errors"/>
+
+        <div *ngIf="errors && border" class="invalid-feedback order-1">
+            {{ errors }}
+        </div>
+        
+        <div *ngIf="iconClass" class="input-group-append">
+            <span class="input-group-text">
+                <i *ngIf="iconClass" class="icon-append fa fa-calendar"></i>
+            </span>
+        </div>
+
+    </div>
+
+    <small *ngIf="note" class="form-text text-muted">
+        <markdown (click)="sharedFunctions.getRoute($event)" [data]="note"></markdown>
+    </small>
+</div> -->

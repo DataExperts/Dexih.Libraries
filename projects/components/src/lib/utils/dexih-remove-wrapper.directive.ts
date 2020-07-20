@@ -3,7 +3,7 @@ import { Directive, ElementRef } from '@angular/core';
 @Directive({
     selector: '[removeWrapper]'
  })
- export class DexihRemoveWrapperDirective {
+ export class DRemoveWrapperDirective {
     constructor(private el: ElementRef) {
         const parentElement = el.nativeElement.parentElement;
         const element = el.nativeElement;

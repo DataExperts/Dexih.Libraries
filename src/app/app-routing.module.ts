@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, ExtraOptions } from '@angular/router';
 import { ComponentsComponent } from './test/components/components.component';
 import { TableComponent } from './test/table/table.component';
 import { TableDemoComponent } from './demo/table-demo.component';
@@ -16,8 +16,13 @@ const routes: Routes = [
     ]},
 ];
 
+const routerOptions: ExtraOptions = {
+  useHash: false,
+  anchorScrolling: 'enabled',
+};
+
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, routerOptions)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

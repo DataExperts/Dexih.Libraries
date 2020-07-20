@@ -1,106 +1,265 @@
-<section>
-    <div class="container">
-        <div class="row m-3">
-            <div class="col">
-                <h2>Form Controls</h2>
+<div class="row">
+    <div class="d-none d-md-block col-md-3">
+       <div class="list-group toolbar-sticky p-3">
+           <div class="list-group-item list-group-item-primary">Section</div>
+            <a (click)="scrollToElement(formInput)" class="list-group-item list-group-item-action">Input</a>
+            <a (click)="scrollToElement(formInputTag)" class="list-group-item list-group-item-action">Input with Tags</a>
+            <a (click)="scrollToElement(formDropdown)" class="list-group-item list-group-item-action">Select (dropdown)</a>
+            <a (click)="scrollToElement(formTagDropdown)" class="list-group-item list-group-item-action">Select with Tags</a>
+            <a (click)="scrollToElement(formTextarea)" class="list-group-item list-group-item-action">TextArea</a>
+            <a (click)="scrollToElement(formCheckbox)" class="list-group-item list-group-item-action">Checkbox</a>
+            <a (click)="scrollToElement(formDate)" class="list-group-item list-group-item-action">Date</a>
+            <a (click)="scrollToElement(formDaysOfWeek)" class="list-group-item list-group-item-action">Days of Week</a>
+            <a (click)="scrollToElement(formTime)" class="list-group-item list-group-item-action">Time</a>
+            <a (click)="scrollToElement(formInputGroups)" class="list-group-item list-group-item-action">Grouping Controls</a>
+       </div>
+    </div>
+    <div class="col-xs-12 col-md-9">
+        <div class="container">
+            <div class="row m-3">
+                <div class="col">
+                    <h2>Form Controls</h2>
 
-                <h3>Input</h3>
-                <p>An input control which can be decorated with various labels and icons.
-                </p>
-                
-                <div class="border rounded p-3">
-                    <form-input label="A regular label" note="a note to describe the input and [link](http://dataexpertsgroup.com)"></form-input>
-                    <form-input label="input with sub label" subLabel="the sub label" placeholder="input something"></form-input>
-                    <form-input label="input with floating label" floatingLabel="uses a floating label"></form-input>
-                    <form-input label="Input with an icon" note="a note to describe the input" placeholder="input with icon" iconClass="fa fa-pie-chart"></form-input>
-                    <form-input label="input with error" errors="this is invalid" placeholder="input something" iconClass="fa fa-pie-chart"></form-input>
-                    <form-input label="input disabled" [disabled]="true" placeholder="input something" iconClass="fa fa-pie-chart" value="can't change this text"></form-input>
-                    <form-input type="number" label="a number only input" placeholder="input number"></form-input>
-                </div>
+                    <h3 #formInput>Input</h3>
+                    <p>An input control which can be decorated with various labels and icons.
+                    </p>
 
-                <div class="border rounded p-3">
-                    <ngx-gist [gistId]="'gary-holland/cc56f38f5b609b127f72abeaeeb2cdca'"></ngx-gist>
-                </div>
+                    <div class="border rounded p-3">
+                        <form-input label="A regular label"
+                            note="a note to describe the input and [link](http://dataexpertsgroup.com)"></form-input>
+                        <form-input label="input with sub label" subLabel="the sub label" placeholder="input something">
+                        </form-input>
+                        <form-input label="input with floating label" floatingLabel="uses a floating label">
+                        </form-input>
+                        <form-input label="Input with an icon" note="a note to describe the input"
+                            placeholder="input with icon" iconClass="fa fa-pie-chart"></form-input>
+                        <form-input label="Input with auto validate off (will not turn green)" [autoValidate]="false">
+                        </form-input>
+                        <form-input label="input with error" errors="this is invalid" placeholder="input something"
+                            iconClass="fa fa-pie-chart"></form-input>
+                        <form-input label="input disabled" [disabled]="true" placeholder="input something"
+                            iconClass="fa fa-pie-chart" value="can't change this text"></form-input>
+                        <form-input type="number" label="a number only input" placeholder="input number"></form-input>
+                    </div>
 
-                <br>
-                <h3>Input (tags)</h3>
-                <p>An input control which generates an array of tags.
-                </p>
-                
-                <div class="border rounded p-3">
-                    <form-tags label="input tag (type values and press enter)" placeholder="input tags"></form-tags>
-                    <form-tags label="input tag with floating label" floatingLabel="with floating label"></form-tags>
-                    <form-tags label="pre-filled input tags" [value]="['item1', 'item2']" placeholder="input tags"></form-tags>
-                    <form-tags label="input tag with errors" [value]="['bad item']" errors="the error message" placeholder="input tags"></form-tags>
-                </div>
+                    <div class="border rounded p-3">
+                        <ngx-gist [gistId]="'gary-holland/cc56f38f5b609b127f72abeaeeb2cdca'"></ngx-gist>
+                    </div>
 
-                <div class="border rounded p-3">
-                    <ngx-gist [gistId]="'gary-holland/c83ae4455845048d202eb205edca1956'" ></ngx-gist>
-                </div>
+                    <br>
+                    <h3 #formInputTag>Input (tags)</h3>
+                    <p>An input control which generates an array of tags.
+                    </p>
 
-                <br>
-                <h3>Select (dropdown)</h3>
-                <p>A data driven dropdown controls which allow hierarchial datasets, key/name pairs, and text entry.
-                </p>
-                
-                <div class="border rounded p-3">
-                    <form-select label="Simple Select (also allows text entry)" [value]="'item1'" [items]="['item1', 'item2','item3']" [enableTextEntry]="true"></form-select>
-                    <form-select label="Floating label" floatingLabel="With Floating Label" [items]="['item1', 'item2','item3']" ></form-select>
-                    <form-select label="Multi-select" [multiSelect]="true" [value]="['item1', 'item2']" [items]="['item1', 'item2','item3']" [enableTextEntry]="true"></form-select>
-                    <form-select label="Select with hierarchy" parentName='category' childItems='items'
-                    [items]="[
+                    <div class="border rounded p-3">
+                        <form-tags label="input tag (type values and press enter)" placeholder="input tags"></form-tags>
+                        <form-tags label="input tag with floating label" floatingLabel="with floating label">
+                        </form-tags>
+                        <form-tags label="pre-filled input tags" [value]="['item1', 'item2']" placeholder="input tags">
+                        </form-tags>
+                        <form-tags label="input tag with errors" [value]="['bad item']" errors="the error message"
+                            placeholder="input tags"></form-tags>
+                    </div>
+
+                    <div class="border rounded p-3">
+                        <ngx-gist [gistId]="'gary-holland/c83ae4455845048d202eb205edca1956'"></ngx-gist>
+                    </div>
+
+                    <br>
+                    <h3 #formDropdown>Select (dropdown)</h3>
+                    <p>A data driven dropdown controls which allow hierarchial datasets, key/name pairs, and text entry.
+                    </p>
+
+                    <div class="border rounded p-3">
+                        <form-select label="Simple Select (also allows text entry)" [value]="'item1'"
+                            [items]="['item1', 'item2','item3']" [enableTextEntry]="true"></form-select>
+                        <form-select label="Floating label" floatingLabel="With Floating Label"
+                            [items]="['item1', 'item2','item3']"></form-select>
+                        <form-select label="Multi-select" [multiSelect]="true" [value]="['item1', 'item2']"
+                            [items]="['item1', 'item2','item3']" [enableTextEntry]="true"></form-select>
+                        <form-select label="Select with hierarchy" parentName='category' childItems='items' [items]="[
                         {category: 'Fruit', items: ['apple', 'orange', 'banana']}, 
                         {category: 'Vegetable', items: ['carrot', 'lettuce', 'celery']},
                         {category: 'Meat', items: ['beef', 'chicken', 'fish']}
-                        ]" 
-                    >
-                    </form-select>
-                    <form-select [label]="'Select with key/value.  You selected key: ' + selectedKey" itemName='name' itemKey='key' [(ngModel)]="selectedKey" [ngModelOptions]="{standalone: true}"
-                        [items]="[{key:1, name:'item1'}, {key:2, name:'item2'}, {key:3, name:'item3'}]"></form-select>
+                        ]">
+                        </form-select>
+                        <form-select [label]="'Select with key/value.  You selected key: ' + selectedKey"
+                            itemName='name' itemKey='key' [(ngModel)]="selectedKey"
+                            [ngModelOptions]="{standalone: true}"
+                            [items]="[{key:1, name:'item1'}, {key:2, name:'item2'}, {key:3, name:'item3'}]">
+                        </form-select>
 
-                    <form-select label="With custom items before and after" [items]="['item1', 'item2','item3']" [enableTextEntry]="true" [(ngModel)]="textValue" [ngModelOptions]="{standalone: true}" [enableFilter]="false">
-                        <ng-template #startItems>
-                            <li class="scrollable-item" >
-                                <a class="dropdown-item bg-primary">This is a custom item</a>
-                            </li>
-                        </ng-template>
-                        <ng-template #endItems>
-                            <li class="scrollable-item" >
-                                <a class="dropdown-item bg-primary">This is a custom item</a>
-                            </li>
-                        </ng-template>
-                    </form-select>                        
-                </div>
+                        <form-select label="With custom items before and after" [items]="['item1', 'item2','item3']"
+                            [enableTextEntry]="true" [enableFilter]="false">
+                            <ng-template #startItems>
+                                <li class="scrollable-item">
+                                    <a class="dropdown-item bg-primary">This is a custom item</a>
+                                </li>
+                            </ng-template>
+                            <ng-template #endItems>
+                                <li class="scrollable-item">
+                                    <a class="dropdown-item bg-primary">This is a custom item</a>
+                                </li>
+                            </ng-template>
+                        </form-select>
+                    </div>
 
-                <div class="border rounded p-3">
-                    <ngx-gist [gistId]="'gary-holland/d237af5e9fa0b0418933e88f6f252b93'"></ngx-gist>
-                </div>
+                    <div class="border rounded p-3">
+                        <ngx-gist [gistId]="'gary-holland/d237af5e9fa0b0418933e88f6f252b93'"></ngx-gist>
+                    </div>
 
-                <br>
-                <h3>Tags (dropdown)</h3>
-                <p>A data driven dropdown for colored tags
-                </p>
-                
-                <div class="border rounded p-3">
-                    <form-tags-dropdown label="Simple Tags Dropdown" [value]="['item1']" [items]="['item1', 'item2','item3']" [enableAddAll]="true"></form-tags-dropdown>
-                    <form-tags-dropdown label="With Floating Label" floatingLabel="Floating Label" [items]="['item1', 'item2','item3']" [enableAddAll]="true"></form-tags-dropdown>
-                    <form-tags-dropdown label="With Colors" [enableAddAll]="true" itemKey="column.key" itemName="column.name" itemColor="column.color"
-                        [value]="[1]"
-                        [items]="[
+                    <br>
+                    <h3 #formTagDropdown>Tags (dropdown)</h3>
+                    <p>A data driven dropdown for colored tags
+                    </p>
+
+                    <div class="border rounded p-3">
+                        <form-tags-dropdown label="Simple Tags Dropdown" [value]="['item1']"
+                            [items]="['item1', 'item2','item3']" [enableAddAll]="true"></form-tags-dropdown>
+                        <form-tags-dropdown label="With Floating Label" floatingLabel="Floating Label"
+                            [items]="['item1', 'item2','item3']" [enableAddAll]="true"></form-tags-dropdown>
+                        <form-tags-dropdown label="With Colors" [enableAddAll]="true" itemKey="column.key"
+                            itemName="column.name" itemColor="column.color" [value]="[1]" [items]="[
                         {column: {key: 1, name: 'good', color: 'green'}},
                         {column: {key: 2, name: 'average', color: 'orange'}},
                         {column: {key: 2, name: 'poor', color: 'red'}}
                         ]">
-                    </form-tags-dropdown>
+                        </form-tags-dropdown>
+                    </div>
+
+                    <div class="border rounded p-3">
+                        <ngx-gist [gistId]="'gary-holland/c1f998b991161275e6c0d983a24ef90d'"></ngx-gist>
+                    </div>
+
+                    <br>
+                    <h3 #formTextarea>Text Areas</h3>
+                    <p>Text areas allow users to enter markdown text, which is formatted and displayed.
+                    </p>
+
+                    <div class="border rounded p-3">
+                        <form-textarea label="edit shown" [showCopy]="true" [isHidden]="false"
+                            value="a **bold** item, [a link](http://www.microsoft.com)"></form-textarea>
+                        <form-textarea label="copy a key" [showCopy]="true" [isHidden]="true" [showPreview]="false"
+                            [disabled]="true" [rows]="1" value="abdefghijklmnopqrtruvwxyz"></form-textarea>
+                        <form-textarea label="edit hidden" [isHidden]="true" value="a **bold** item"></form-textarea>
+                        <form-textarea label="with errors" [isHidden]="true" value="a **bold** item" errors="the error">
+                        </form-textarea>
+                        <form-textarea label="with note" [isHidden]="true" value="a **bold** item"
+                            note="a note describing the textarea"></form-textarea>
+                    </div>
+
+                    <div class="border rounded p-3">
+                        <ngx-gist [gistId]="'gary-holland/fef82c6c1d4da536684b5a7f820b3e62'"></ngx-gist>
+                    </div>
+
+                    <br>
+                    <h3 #formCheckbox>Checkbox</h3>
+                    <p>Checkboxes can be used for binary (yes/no) inputs.
+                    </p>
+
+                    <div class="border rounded p-3">
+                        <form-checkbox label="Simple Checkbox" [value]="true"></form-checkbox>
+                        <form-checkbox label="Simple Switch" [isSwitch]="true"></form-checkbox>
+                        <form-checkbox label="No auto-validate" [autoValidate]="false"></form-checkbox>
+                        <form-checkbox [border]="true">Check box border</form-checkbox>
+                        <form-checkbox label="Checkbox with note" note="this describes the checkbox"></form-checkbox>
+                        <form-checkbox label="Checkbox with error" errors="this checkbox has errors"></form-checkbox>
+                        <form-checkbox label="Checkbox with custom values return values" [(ngModel)]="customCheckValue"
+                            [ngModelOptions]="{standalone: true}" checkedValue="checked" unCheckedValue="unchecked">the
+                            value is {{customCheckValue}}</form-checkbox>
+                    </div>
+
+                    <div class="border rounded p-3">
+                        <ngx-gist [gistId]="'gary-holland/a26f0673c8d2d20ad5c70129e34bb5b5'"></ngx-gist>
+                    </div>
+
+                    <br>
+                    <h3 #formDate>Date</h3>
+                    <p>The date checkbox uses the browsers built in input date capability.
+                    </p>
+
+                    <div class="border rounded p-3">
+                        <form-date label="Simple date entry" value="2010-01-01" placeholder="input date"></form-date>
+                        <form-date label="With floating label" floatingLabel="floating label"></form-date>
+                    </div>
+
+                    <div class="border rounded p-3">
+                        <ngx-gist [gistId]="'gary-holland/c70f706563db1d2468bf78cec426ae45'"></ngx-gist>
+                    </div>
+
+                    <br>
+                    <h3 #formDaysOfWeek>Days of week</h3>
+                    <p>Select the date of the week
+                    </p>
+
+                    <div class="border rounded p-3">
+                        <form-daysofweek label="Select the days"></form-daysofweek>
+                        <form-daysofweek label="Without the helper" [showHelper]="false"></form-daysofweek>
+                        <form-daysofweek label="With note" note="this is the note"></form-daysofweek>
+                        <form-daysofweek label="With an error" errors="this is the error"></form-daysofweek>
+                    </div>
+
+                    <div class="border rounded p-3">
+                        <ngx-gist [gistId]="'gary-holland/9d1b079889128f1879ad61ae14954816'"></ngx-gist>
+                    </div>
+
+                    <br>
+                    <h3 #formTime>Time</h3>
+                    <p>Select a time based on hours:minutes:seconds
+                    </p>
+
+                    <div class="border rounded p-3">
+                        <form-time [label]="'time with label (' + selectedTime +')'" [(ngModel)]="selectedTime"
+                            [ngModelOptions]="{standalone: true}"></form-time>
+                        <form-time class="mt-2" labelLeft="label left"></form-time>
+                        <form-time label="time with note" note="this time description"></form-time>
+                        <form-time label="time with error" errors="the time error"></form-time>
+                    </div>
+
+                    <div class="border rounded p-3">
+                        <ngx-gist [gistId]="'gary-holland/bbe3342d983f0c7cbaf411ed89c4853f'"></ngx-gist>
+                    </div>
+
+                    <br>
+                    <h3 #formInputGroups>Input Groups</h3>
+                    <p>Setting the [border]="false" and leftLabel property can be used to create input groups as
+                        follows.
+                    </p>
+
+                    <div class="border rounded p-3">
+                        <div class="input-group m-1">
+                            <div class="form-control p-0 h-auto">
+                                <form-input labelLeft="User Name" [border]="false"></form-input>
+                            </div>
+                            <div class="form-control p-0 h-auto">
+                                <form-input type="password" labelLeft="Password" [border]="false"></form-input>
+                            </div>
+                            <div class="form-control h-auto ">
+                                <form-checkbox label="Remember login"></form-checkbox>
+                            </div>
+                        </div>
+                        <div class="input-group m-1">
+                            <div class="form-control p-0 h-auto">
+                                <form-input floatingLabel="User Name" [border]="false"></form-input>
+                            </div>
+                            <div class="form-control p-0 h-auto">
+                                <form-input type="password" floatingLabel="Password" [border]="false"></form-input>
+                            </div>
+                            <div class="form-control h-auto">
+                                <form-checkbox label="Remember login"></form-checkbox>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border rounded p-3">
+                        <ngx-gist [gistId]="'gary-holland/d68d8cab06079d0be5a8f4d336140132'"></ngx-gist>
+                    </div>
+
                 </div>
 
-                <div class="border rounded p-3">
-                    <ngx-gist [gistId]="'gary-holland/d237af5e9fa0b0418933e88f6f252b93'"></ngx-gist>
-                </div>
             </div>
 
+
         </div>
-
-
     </div>
-</section>
+</div>

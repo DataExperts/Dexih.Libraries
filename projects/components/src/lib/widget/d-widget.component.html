@@ -1,0 +1,91 @@
+<div class="card h-100" [@fadeInAnimation]='state'>
+  <div [ngClass]="['card-header', headerClass]"
+    *ngIf="showHeader && (title || iconClass || headerTemplate || showFilter)">
+    <div class="d-flex flex-row p-0">
+  
+      <span class="text-truncate align-self-center">
+        <i class="{{iconClass}}"></i>
+        <b>{{title}}</b>
+      </span>
+  
+      <div class="d-flex ml-auto ">
+  
+        <div class="d-none d-sm-flex">
+          <div *ngIf="headerTemplate" class="align-self-center">
+            <ng-template [ngTemplateOutlet]="headerTemplate">
+            </ng-template>
+          </div>
+  
+          <div *ngIf="showFilter" class="mr-1 ml-1">
+            <div [ngClass]="{disabled : showFilter}" class="input-group w-auto input-expand search-icon">
+              <input [formControl]="filterControl" class="form-control input-md" placeholder="Search..." type="search" />
+            </div>
+          </div>
+        </div>
+  
+        <button *ngIf="showExpandButton" type="button" class="close ml-2" (click)="isExpanded=!isExpanded"
+          aria-label="Expand" [ngClass]="[headerClass]">
+          <i *ngIf="!isExpanded" class="fa fa-angle-double-down" title="Expand"></i>
+          <i *ngIf="isExpanded" class="fa fa-angle-double-up" title="Collapse"></i>
+        </button>
+  
+        <button *ngIf="showCloseButton" type="button" class="close ml-2" (click)="doClose()" aria-label="Close"
+          [ngClass]="[headerClass]">
+          <span aria-hidden="true">&times;</span>
+        </button>
+  
+      </div>
+  
+    </div>
+  
+    <div class="p-0 d-sm-none">
+      <div *ngIf="headerTemplate" class="d-flex flex-row align-self-center pt-1">
+        <div class="ml-auto">
+        <ng-template [ngTemplateOutlet]="headerTemplate">
+        </ng-template>
+      </div>
+      </div>
+      <div *ngIf="showFilter" class="d-flex flex-row  pt-1">
+        <div [ngClass]="{disabled : showFilter}" class="input-group w-100 search-icon">
+          <input [formControl]="filterControl" class="form-control input-md" placeholder="Search..." type="search" />
+        </div>
+  
+      </div>
+    </div>
+  </div>
+
+  <div [ngClass]="['card-header', subTitleClass]" *ngIf="subTitleTemplate || subTitle || toolsTemplate">
+    <div class="d-flex flex-row">
+      <div class="card-subtitle">{{subTitle}}</div>
+      <ng-template [ngTemplateOutlet]="subTitleTemplate">
+      </ng-template>
+      <div class="d-flex ml-auto">
+        <ng-template [ngTemplateOutlet]="toolsTemplate">
+        </ng-template>
+      </div>
+    </div>
+  </div>
+
+  <div [ngClass]="['card-header', subHeaderClass]" *ngIf="subHeaderTemplate">
+    <ng-template [ngTemplateOutlet]="subHeaderTemplate">
+    </ng-template>
+  </div>
+
+  <div [@slideDown]="{value: isExpanded ? 'show' : 'hide', params: {height: height}}" class='card-body {{bodyClass}}' [ngClass]="{'p-0': !padding, 'overflow-auto': scrollable}">
+      <div *ngIf="!showIf">
+        <div class="table-loader-container">
+          <div class="table-loader"></div>
+          <div name="dexih-data-loading" class="table-loader-text">{{loadingMessage}}</div>
+        </div>
+      </div>
+      <div #body>
+      <ng-content *ngIf="showIf"></ng-content>
+    </div>
+  </div>
+
+  <div *ngIf="footerTemplate" [ngClass]="['card-footer', footerClass]">
+    <ng-template [ngTemplateOutlet]="footerTemplate">
+    </ng-template>
+  </div>
+
+</div>

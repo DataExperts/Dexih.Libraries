@@ -1,15 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, ModuleWithProviders } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-import { NgxMdModule } from 'ngx-md';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
-import { DexihComponentsModule } from '../../projects/components/src/public-api';
-import { DexihTableModule } from '../../projects/table/src/public-api';
+import { DComponentsModule } from '../../projects/components/src/public-api';
+import { DTableModule } from '../../projects/table/src/public-api';
 import { HttpClientModule } from '@angular/common/http';
 import { ComponentsComponent } from './test/components/components.component';
 import { ChildComponent } from './test/components/child.component';
@@ -37,9 +35,8 @@ import { NgxGist } from './gist/ngx-gist.component'
     HttpClientModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    NgxMdModule,
-    DexihComponentsModule,
-    DexihTableModule,
+    DComponentsModule,
+    DTableModule,
     DragDropModule,
   ],
   bootstrap: [AppComponent]

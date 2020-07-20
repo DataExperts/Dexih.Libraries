@@ -1,2 +1,2 @@
-export {DexihModalModule} from './dexih-modal.module';
-export {DexihModalComponent} from './dexih-modal.component';
+export {DModalModule} from './d-modal.module';
+export {DModalComponent} from './d-modal.component';

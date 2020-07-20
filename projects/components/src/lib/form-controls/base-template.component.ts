@@ -4,7 +4,7 @@ import { SharedFunctions } from './shared-functions';
 @Component({
     selector: 'base-template',
     templateUrl: 'base-template.component.html',
-    styleUrls: ['./dexih-form.component.scss'],
+    styleUrls: ['./form.component.scss'],
 })
 
 export class BaseTemplateComponent {
