@@ -22,6 +22,12 @@ ngx-d-table is an Angular (8+) component for building data driven tables.
 * Save to csv file.
 * Switch between card view/table view.
 
+## Demo
+
+A demo site for the table control is available here:
+
+https://dataexperts.github.io/Dexih.Libraries/demo/table
+
 ## Releases Summary
 
 version 1.0.0
@@ -35,7 +41,7 @@ breaking: component name changed from dexih-table to d-table.
 To install this library, run:
 
 ```bash
-$ npm install ngx-d-table --save
+$ npm install ngx-d-table ngx-d-markdown --save
 ```
 
 You will need also need bootstrap styles included (4.x).  For example add this to your index.html header:
@@ -65,8 +71,6 @@ Populate this data into the table as follows:
 <d-table [data]="sampleTable">
 </d-table>
 ```
-
-For a quick demo and sample code refer to the following [plnkr](http://plnkr.co/edit/G3RNCVGMXhodH7Ap).
 
 ## Using the Table Component
 

@@ -14,10 +14,17 @@ ngx-d-components are a set of Angular (8+) Boostrap 4.x based components.  These
 
 * Decorated form controls including input, dropdown, tag input/dropdown, checkbox, textarea, etc.
 * Auto expanding button controls.
-* Animated Progress
+* Animated Progress.
 * Dialogs for information, confirmation, input.
 * Animated toasts.
 * Customizable Widgets (based on the Bootstrap cards.).
+
+## Demo
+
+A demo site for the table control is available here:
+
+https://dataexperts.github.io/Dexih.Libraries/demo/components
+
 
 ## Releases Summary
 
@@ -28,13 +35,7 @@ ngx-d-components are a set of Angular (8+) Boostrap 4.x based components.  These
 To install this library, run:
 
 ```bash
-$ npm install ngx-d-components --save
-```
-
-There is also dependency on ngx-md (for markdown formatting) library.  To install this run:
-
-```bash
-$ npm install ngx-md --save
+$ npm install ngx-d-components ngx-d-markdown --save
 ```
 
 You will need also need bootstrap styles included (4.x).  For example add this to your index.html header:
@@ -48,7 +49,7 @@ You will need also need bootstrap styles included (4.x).  For example add this t
 
 ## Example
 
-> This documentation is still being complete.
+> This documentation is still being completed.
 
 ## Form Controls
 
@@ -71,6 +72,10 @@ You will need also need bootstrap styles included (4.x).  For example add this t
 ### Days Of Week
 
 ## Buttons 
+
+> Note: The built in buttons use Font Awesome 4.7 for the icons.  To use these you must include a referece to the Font Awsome css in your index.html file as follows:
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 ### Regular Button
 
@@ -102,8 +107,6 @@ You will need also need bootstrap styles included (4.x).  For example add this t
 Thanks to the following projects:
 
 * [https://getbootstrap.com/docs/4.5/getting-started/introduction/](Bootstrap) - Obviously the Bootstrap team.
-* [jvandemo/generator-angular2-library](https://github.com/jvandemo/generator-angular2-library) - Used as the baseline to package and distribute this library.
-* [ngx-md](https://github.com/dimpu/ngx-md) - Used for rendering markdown text.
 
 ## License
 
