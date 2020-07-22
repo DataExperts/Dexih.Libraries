@@ -10,7 +10,7 @@ export class DProgressbarComponent implements OnChanges  {
     @Input() public type: string;
     @Input() public value: number;
     @Input() public width = '200px';
-    @Input() public height = '31px';
+    @Input() public height = 'inherit';
     @Input() public showCancel = false;
 
     @Output() cancelled = new EventEmitter();

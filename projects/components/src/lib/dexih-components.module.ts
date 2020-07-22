@@ -7,7 +7,7 @@ import { DFormControlsModule } from './form-controls/form-controls.module';
 import { DProgressModule } from './progress/d-progress.module';
 import { DToastModule } from './toast/d-toast.module';
 import { DModalModule } from './modal/d-modal.module';
-import { DMarkdownModule } from './markdown/d-markdown.module';
+import { DMarkdownModule } from 'ngx-d-markdown';
 
 @NgModule({
   imports: [

@@ -1,9 +1,9 @@
 {
-  "name": "ngx-d-table",
-  "version": "0.6.23",
+  "name": "ngx-d-markdown",
+  "version": "0.0.7",
   "repository": {
     "type": "git",
-    "url": "https://github.com/DataExperts/Dexih.Libaries/tree/master/projects/table"
+    "url": "https://github.com/DataExperts/Dexih.Libaries/tree/master/projects/markdown"
   },
   "author": {
     "name": "Gary Holland",
@@ -17,12 +17,9 @@
     "url": "https://github.com/DataExperts/Dexih.Libaries/issues"
   },
   "peerDependencies": {
+    "marked": "^1.1.0",
+    "prismjs": "^1.20.0",
     "@angular/common": ">= 8.0.0",
-    "@angular/core": ">= 8.0.0",
-    "@angular/forms": ">= 8.0.0",
-    "@angular/cdk": ">= 8.0.0",
-    "rxjs": ">= ^6.1.0",
-    "ngx-d-markdown": ">= 0.0.5",
-    "moment": "^2.27.0"
+    "@angular/core": ">= 8.0.0"
   }
 }

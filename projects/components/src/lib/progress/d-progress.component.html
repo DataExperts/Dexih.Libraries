@@ -2,8 +2,8 @@
     <div class="progress position-relative w-100 d-flex bg-secondary" [ngClass]="{'progress-border': showCancel, 'rounded': !showCancel}" [ngStyle]="{'height': height}">
         <div class="progress-bar" [ngClass]="[type && 'bg-' + type]" role="progressbar"
             [ngStyle]="{'width': percent + '%'}"></div>
-        <div class="justify-content-center align-items-center d-flex position-absolute w-100 h-100 text-white">
-            <span class="text-truncate">
+        <div class="d-flex justify-content-center align-items-center position-absolute w-100 h-100 text-white">
+            <span class="text-nowrap">
             <ng-content></ng-content>
         </span>
         </div>

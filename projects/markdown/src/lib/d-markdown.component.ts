@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, 
+import { Component, Input, 
     ElementRef,
     Output,
     EventEmitter,
@@ -35,6 +35,11 @@ export class DMarkdownComponent implements AfterViewInit {
       }
     }
 
+    /**
+     * Boolean indicating if the markdown content should be sanitized to avoid script injections
+     */
+    @Input() public sanitizeHtml = true;
+
     @Output() error: EventEmitter<any> = new EventEmitter<any>();
     @Output() loaded: EventEmitter<any> = new EventEmitter<any>();
 
@@ -50,12 +55,15 @@ export class DMarkdownComponent implements AfterViewInit {
         public _el: ElementRef,
       @Inject(PLATFORM_ID) public platformId: string
     ) {}
-  
-  
-    /**
-     * Boolean indicating if the markdown content should be sanitized to avoid script injections
-     */
-    @Input() public sanitizeHtml = true;
+
+    
+    ngAfterViewInit() {
+      if (this._path) {
+        this.onPathChange();
+      } else if (!this._data) {
+        this.processRaw();
+      }
+    }
   
     // on input
     onDataChange(data: string) {
@@ -68,17 +76,6 @@ export class DMarkdownComponent implements AfterViewInit {
         this._el.nativeElement.innerHTML = '';
       }
       this.highlightContent(false);
-    }
-  
-    /**
-     *  After view init
-     */
-    ngAfterViewInit() {
-      if (this._path) {
-        this.onPathChange();
-      } else if (!this._data) {
-        this.processRaw();
-      }
     }
   
     processRaw() {
@@ -94,18 +91,14 @@ export class DMarkdownComponent implements AfterViewInit {
      * get remote content;
      */
     onPathChange() {
-      this._ext =
-        this._path &&
-        this._path
-          .split('.')
-          .splice(-1)
-          .join();
+      this._ext = this._path && this._path.split('.').splice(-1).join();
+
       this.getContent(this._path)
         .pipe(catchError(this.handleError))
         .subscribe(data => {
           this.loaded.emit(data);
-          this._md =
-            this._ext !== 'md' ? '```' + this._ext + '\n' + data + '\n```' : data;
+          this._md = this._ext !== 'md' ? '```' + this._ext + '\n' + data + '\n```' : data;
+          
           this._el.nativeElement.innerHTML = this.compile(
             this.prepare(this._md),
             this.sanitizeHtml
@@ -114,7 +107,7 @@ export class DMarkdownComponent implements AfterViewInit {
         });
     }
   
-      // get the content from remote resource
+    // get the content from remote resource
   getContent(path: string): Observable<any> {
     return this._http.get(path, { responseType: 'text' }).pipe(
       map(res => this.extractData(res)),
@@ -130,14 +123,15 @@ export class DMarkdownComponent implements AfterViewInit {
   public extractData(res: any): string {
     return res || '';
   }
-    /**
-     * catch http error
-     */
-    private handleError(error: any): Subscribable<any> {
-      this.error.emit(error);
-      console.error('An error occurred', error); // for demo purposes only
-      return error.message || error;
-    }
+
+  /**
+   * catch http error
+   */
+  private handleError(error: any): Subscribable<any> {
+    this.error.emit(error);
+    console.error('An error occurred', error); // for demo purposes only
+    return error.message || error;
+  }
   
     /**
      * Prepare string
@@ -178,7 +172,7 @@ export class DMarkdownComponent implements AfterViewInit {
       }
     }
 
-      // comple markdown to html
+      // compile markdown to html
     public compile(data: string, sanitize = true) {
         return this._domSanitizer.sanitize(
         sanitize ? SecurityContext.HTML : SecurityContext.NONE,

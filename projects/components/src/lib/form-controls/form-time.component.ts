@@ -16,6 +16,9 @@ export class DFormTimeComponent implements OnInit, AfterViewInit, ControlValueAc
     @Input() value: string;
     @Input() border = true;
     @Input() disabled = false;
+    @Input() subLabel: string;
+    @Input() floatingLabel: string;
+    @Input() placeholder: string;
 
     @Output() keydown: EventEmitter<any> = new EventEmitter<any>();
     

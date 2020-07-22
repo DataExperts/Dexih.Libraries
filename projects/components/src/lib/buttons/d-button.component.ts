@@ -20,6 +20,7 @@ export class DButtonComponent implements OnInit {
     @Input() autoCompact = true;
     @Input() badge: string;
     @Input() badgeClass = '';
+    @Input() fill = false;
 
     @Output() click = new EventEmitter();
 

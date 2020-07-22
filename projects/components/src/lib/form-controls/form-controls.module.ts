@@ -14,7 +14,7 @@ import { DFormTagsDropdownComponent } from './form-tagsDropDown.component';
 import { DSelectFilterPipe } from './select-filter.pipe';
 import { BaseInputComponent } from './base-input.component';
 import { BaseTemplateComponent } from './base-template.component';
-import { DMarkdownModule } from '../markdown/d-markdown.module';
+import { DMarkdownModule } from 'ngx-d-markdown';
 
 @NgModule({
   imports: [

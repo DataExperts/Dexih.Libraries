@@ -53,12 +53,13 @@ Used to add a scrollable menu to dropdown menus
   100% { transform: rotate(360deg); }
 }
 
+
 .blend-text {
-  // background: inherit;
-  background-clip: text;
-  -webkit-background-clip: text;
-  background-color: transparent;
-  filter: invert(1) grayscale(1) contrast(9);
   -webkit-filter: invert(1) grayscale(1) contrast(9);
+  background: inherit;
+  color: transparent;
+  filter: invert(1) grayscale(1) contrast(9);
+  -webkit-background-clip: text !important; //important needed as chrome ignores sometimes.
+  background-clip: text;
 }
 

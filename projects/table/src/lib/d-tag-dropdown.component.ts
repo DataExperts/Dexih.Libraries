@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, ViewChild, HostListener } from '@angular/core';
+import { Component, Input, ViewChild, HostListener } from '@angular/core';
 
 @Component({
     selector: 'd-button-tag-dropdown',
@@ -12,7 +12,7 @@ export class DTagDropDownComponent {
     
     constructor() { }
 
-    public dropdownToggle($event) {
+    public dropdownToggle() {
         this.isOpen = !this.isOpen;    
     }
 

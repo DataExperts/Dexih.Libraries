@@ -95,12 +95,13 @@
     height: calc(100%);
   }
 
+
 .blend-text {
   background: inherit;
   background-clip: text;
-  -webkit-background-clip: text;
+  -webkit-background-clip: text !important;
   color: transparent;
-  filter: invert(1) grayscale(1) contrast(9);
+  filter: invert(1) grayscale(1) contrast(9); //important needed as chrome ignores sometimes.
   -webkit-filter: invert(1) grayscale(1) contrast(9);
 }
 

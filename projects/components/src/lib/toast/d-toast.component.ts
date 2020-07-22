@@ -43,6 +43,10 @@ export class DToastComponent implements OnInit {
         this.messages.push(toastComponent);
     }
 
+    public addMessage(type: 'success' | 'info' | 'error' = 'success', title: string, content: string, delay = 6000) {
+        this.add(new ToastMessage(type, title, content, delay));
+    }
+
     public onDestroy(toastComponent: ToastComponent) {
         const index = this.messages.indexOf(toastComponent);
         this.messages.splice(index, 1);

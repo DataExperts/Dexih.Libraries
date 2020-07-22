@@ -2,16 +2,22 @@
     <div class="d-none d-md-block col-md-3">
        <div class="list-group toolbar-sticky p-3">
            <div class="list-group-item list-group-item-primary">Section</div>
-            <a (click)="scrollToElement(formInput)" class="list-group-item list-group-item-action">Input</a>
-            <a (click)="scrollToElement(formInputTag)" class="list-group-item list-group-item-action">Input with Tags</a>
-            <a (click)="scrollToElement(formDropdown)" class="list-group-item list-group-item-action">Select (dropdown)</a>
-            <a (click)="scrollToElement(formTagDropdown)" class="list-group-item list-group-item-action">Select with Tags</a>
-            <a (click)="scrollToElement(formTextarea)" class="list-group-item list-group-item-action">TextArea</a>
-            <a (click)="scrollToElement(formCheckbox)" class="list-group-item list-group-item-action">Checkbox</a>
-            <a (click)="scrollToElement(formDate)" class="list-group-item list-group-item-action">Date</a>
-            <a (click)="scrollToElement(formDaysOfWeek)" class="list-group-item list-group-item-action">Days of Week</a>
-            <a (click)="scrollToElement(formTime)" class="list-group-item list-group-item-action">Time</a>
-            <a (click)="scrollToElement(formInputGroups)" class="list-group-item list-group-item-action">Grouping Controls</a>
+            <a href="javascript:void(0)" (click)="scrollToElement(formInput)" class="list-group-item list-group-item-action">Input</a>
+            <a href="javascript:void(0)" (click)="scrollToElement(formInputTag)" class="list-group-item list-group-item-action">Input with Tags</a>
+            <a href="javascript:void(0)" (click)="scrollToElement(formDropdown)" class="list-group-item list-group-item-action">Select (dropdown)</a>
+            <a href="javascript:void(0)" (click)="scrollToElement(formTagDropdown)" class="list-group-item list-group-item-action">Select with Tags</a>
+            <a href="javascript:void(0)" (click)="scrollToElement(formTextarea)" class="list-group-item list-group-item-action">TextArea</a>
+            <a href="javascript:void(0)" (click)="scrollToElement(formCheckbox)" class="list-group-item list-group-item-action">Checkbox</a>
+            <a href="javascript:void(0)" (click)="scrollToElement(formDate)" class="list-group-item list-group-item-action">Date</a>
+            <a href="javascript:void(0)" (click)="scrollToElement(formDaysOfWeek)" class="list-group-item list-group-item-action">Days of Week</a>
+            <a href="javascript:void(0)" (click)="scrollToElement(formTime)" class="list-group-item list-group-item-action">Time</a>
+            <a href="javascript:void(0)" (click)="scrollToElement(formInputGroups)" class="list-group-item list-group-item-action">Grouping Controls</a>
+            <a href="javascript:void(0)" (click)="scrollToElement(progress)" class="list-group-item list-group-item-action">Progress</a>
+            <a href="javascript:void(0)" (click)="scrollToElement(buttons)" class="list-group-item list-group-item-action">Buttons</a>
+            <a href="javascript:void(0)" (click)="scrollToElement(toasts)" class="list-group-item list-group-item-action">Toasts</a>
+            <a href="javascript:void(0)" (click)="scrollToElement(modals)" class="list-group-item list-group-item-action">Modal Dialogs</a>
+            <a href="javascript:void(0)" (click)="scrollToElement(widgets)" class="list-group-item list-group-item-action">Widgets</a>
+            <a href="javascript:void(0)" (click)="scrollToElement(widgetSections)" class="list-group-item list-group-item-action">Widget Sections</a>
        </div>
     </div>
     <div class="col-xs-12 col-md-9">
@@ -37,7 +43,7 @@
                         </form-input>
                         <form-input label="input with error" errors="this is invalid" placeholder="input something"
                             iconClass="fa fa-pie-chart"></form-input>
-                        <form-input label="input disabled" [disabled]="true" placeholder="input something"
+                        <form-input label="input disabled" [attr.disabled]="true" placeholder="input something"
                             iconClass="fa fa-pie-chart" value="can't change this text"></form-input>
                         <form-input type="number" label="a number only input" placeholder="input number"></form-input>
                     </div>
@@ -140,7 +146,7 @@
                         <form-textarea label="edit shown" [showCopy]="true" [isHidden]="false"
                             value="a **bold** item, [a link](http://www.microsoft.com)"></form-textarea>
                         <form-textarea label="copy a key" [showCopy]="true" [isHidden]="true" [showPreview]="false"
-                            [disabled]="true" [rows]="1" value="abdefghijklmnopqrtruvwxyz"></form-textarea>
+                            [attr.disabled]="true" [rows]="1" value="abdefghijklmnopqrtruvwxyz"></form-textarea>
                         <form-textarea label="edit hidden" [isHidden]="true" value="a **bold** item"></form-textarea>
                         <form-textarea label="with errors" [isHidden]="true" value="a **bold** item" errors="the error">
                         </form-textarea>
@@ -254,6 +260,267 @@
                     <div class="border rounded p-3">
                         <ngx-gist [gistId]="'gary-holland/d68d8cab06079d0be5a8f4d336140132'"></ngx-gist>
                     </div>
+
+                    <br>
+                    <h3 #progress>Progress Bars</h3>
+                    <p>Display progress
+                    </p>
+
+                    <div class="border rounded p-3">
+                        <div class="d-flex">
+                            <d-button buttonClass="btn btn-sm btn-primary" class="mr-1" (click)="startProgress()">start</d-button>
+                            <d-button buttonClass="btn btn-sm btn-primary" class="mr-1" (click)="stopProgress()">stop</d-button>
+                            <d-button buttonClass="btn btn-sm btn-primary" class="mr-1" (click)="resetProgress()">reset</d-button>
+                            <d-progressbar [showCancel]="true" (cancelled)="stopProgress()" [value]="percent" type="success">
+                                animated {{percent}}
+                            </d-progressbar>
+                        </div>
+
+                        <d-progressbar class="m-3" [showCancel]="true" value="0" type="success">
+                            Not started
+                        </d-progressbar>
+                    
+                        <d-progressbar class="m-3" [showCancel]="true" value="25" type="warning">
+                            25% complete
+                        </d-progressbar>
+                    
+                        <d-progressbar class="m-3" [showCancel]="true" value="50" type="info">
+                            50% complete
+                        </d-progressbar>
+                    
+                        <d-progressbar class="m-3"  [showCancel]="true" value="75" type="danger">
+                            75% complete
+                        </d-progressbar>
+                    
+                        <d-progressbar class="m-3" [showCancel]="true" value="100" type="primary">
+                            100% complete
+                        </d-progressbar>
+            
+                        <d-progressbar class="m-3" [showCancel]="false" (progressClick)="progress()" value="100" type="success">
+                            100% complete no cancel
+                        </d-progressbar>
+                    </div>
+
+                    <div class="border rounded p-3">
+                        <ngx-gist [gistId]="'gary-holland/4fd884b5551f708f93c6f4261b6794a4'"></ngx-gist>
+                    </div>
+
+                    <br>
+                    <h3 #buttons>Buttons</h3>
+                    <p>Various types of buttons
+                    </p>
+
+                    <div class="border rounded p-3">
+                        <div class="row">
+                            <div class="col-2">
+                                Simple Buttons
+                            </div>
+                            <div class="col">
+                                <d-button class="m-1">Default Button</d-button>
+                                <d-button class="m-1" iconClass="fa fa-bar-chart" [autoCompact]="false">With Icon</d-button>
+                                <d-button class="m-1" iconClass="fa fa-bar-chart" [autoCompact]="true">With Auto Compact</d-button>
+                                <d-button class="m-1" buttonClass="btn btn-danger">Different Class</d-button>
+                                <d-button class="m-1" badge="12" badgeClass="badge-danger">With Badge</d-button>
+                                <d-button class="m-1" [busy]="true">With Busy</d-button>
+                            </div>
+                        </div>
+                    
+                        <div class="row mt-1">
+                            <div class="col-2">
+                                Built in buttons (requires Awesome Fonts 4.8)
+                            </div>
+                            <div class="col">
+                               
+                                <d-button-apply class="m-1" ></d-button-apply>
+                                <d-button-cancel class="m-1"></d-button-cancel>
+                                <d-button-close class="m-1"></d-button-close>
+                                <d-button-delete class="m-1"></d-button-delete>
+                                <d-button-download class="m-1"></d-button-download>
+                                <d-button-edit class="m-1"></d-button-edit>
+                                <d-button-export class="m-1"></d-button-export>
+                                <d-button-history class="m-1"></d-button-history>
+                                <d-button-new class="m-1"></d-button-new>
+                                <d-button-open class="m-1"></d-button-open>
+                                <d-button-preview class="m-1"></d-button-preview>
+                                <d-button-private class="m-1"></d-button-private>
+                                <d-button-refresh class="m-1"></d-button-refresh>
+                                <d-button-save-local class="m-1"></d-button-save-local>
+                                <d-button-validate class="m-1"></d-button-validate>
+                                <d-button-view class="m-1"></d-button-view>
+                                <d-button-chart class="m-1"></d-button-chart>
+                                <d-button-link class="m-1">hyperlink format</d-button-link>
+                            </div>
+                        </div>
+                    
+                        <div class="row mt-1">
+                            <div class="col-2">
+                                Dropdown Buttons
+                            </div>
+                            <div class="col">
+                                <d-button-dropdown class="m-1" text="drop down" [autoCompact]="false">
+                                    <a class="dropdown-item">item 1</a>
+                                    <a class="dropdown-item active">active item</a>
+                                    <a class="dropdown-item">item 3</a>
+                                </d-button-dropdown>
+                    
+                                <d-button-splitdropdown class="m-1" iconClass="fa fa-bar-chart" text="split" [autoCompact]="false">
+                                    <a class="dropdown-item">item 1</a>
+                                    <a class="dropdown-item">item 2</a>
+                                    <a class="dropdown-item">item 3</a>
+                                </d-button-splitdropdown>
+                    
+                                <d-button-more class="m-1">
+                                    <a class="dropdown-item">item 1</a>
+                                    <a class="dropdown-item">item 2</a>
+                                    <a class="dropdown-item">item 3</a>
+                                </d-button-more>
+                    
+                                <d-button-dropdown class="m-1" text="notification" [pullRight]="true">
+                                    <div class="list-group" style="width: 400px;">
+                                        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
+                                            <div class="d-flex w-100 justify-content-between">
+                                                <h5 class="mb-1">List group item heading</h5>
+                                                <small>3 days ago</small>
+                                            </div>
+                                            <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget
+                                                risus varius blandit.</p>
+                                            <small>Donec id elit non mi porta.</small>
+                                        </a>
+                                        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                                            <div class="d-flex w-100 justify-content-between">
+                                                <h5 class="mb-1">List group item heading</h5>
+                                                <small class="text-muted">3 days ago</small>
+                                            </div>
+                                            <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget
+                                                risus varius blandit.</p>
+                                            <small class="text-muted">Donec id elit non mi porta.</small>
+                                        </a>
+                                        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                                            <div class="d-flex w-100 justify-content-between">
+                                                <h5 class="mb-1">List group item heading</h5>
+                                                <small class="text-muted">3 days ago</small>
+                                            </div>
+                                            <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget
+                                                risus varius blandit.</p>
+                                            <small class="text-muted">Donec id elit non mi porta.</small>
+                                        </a>
+                                    </div>
+                                </d-button-dropdown>
+                    
+                                <d-button-collapsible class="m-1" text="collapsible" [isExpanded]="false">
+                                    this button opens to show some content
+                                </d-button-collapsible>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border rounded p-3">
+                        <ngx-gist [gistId]="'gary-holland/4e0b1f01e4bfe8f9b6ff72bd93ca5195'"></ngx-gist>
+                    </div>
+
+                    <br>
+                    <h3 #toasts>Toasts</h3>
+                    <p>Display a toast.
+                    </p>
+
+                    <div class="border rounded p-3">
+                        <!-- this is hidden place this anywhere on page -->
+                        <d-toast #toast></d-toast>
+                        
+                        <d-button class="mr-1" buttonClass="btn-success" text="Show a success message" (click)="toast.addMessage('success', 'Success', 'You just won $1m!', 7000)"></d-button> 
+                        <d-button class="mr-1" buttonClass="btn-info" text="Show an info message" (click)="toast.addMessage('info', 'Some Info', 'Today is just another day.', 7000)"></d-button> 
+                        <d-button class="mr-1" buttonClass="btn-danger" text="Show a danger message" (click)="toast.addMessage('error', 'Watch Out!', 'Danger Will Robinson!', 7000)"></d-button> 
+                    </div>
+
+                    <div class="border rounded p-3">
+                        <ngx-gist [gistId]="'gary-holland/ab975c68066f2d783c6334b254a25d48'"></ngx-gist>
+                    </div>
+
+                    <br>
+                    <h3 #modals>Modals</h3>
+                    <p>Display a modal dialog.
+                    </p>
+
+                    <div class="border rounded p-3" >
+                        <!-- this is hidden place this anywhere on page -->
+                        <d-modal #modal></d-modal>
+
+                        <div class="row p-1">
+                            <div class="col">
+                                <d-button [fill]="true" (click)="modalInformation()" text="Information"></d-button>
+                            </div>
+                            <div class="col">
+                                Result: {{modalInformationValue}}
+                            </div>
+                        </div>
+                        <div class="row p-1">
+                            <div class="col">
+                                <d-button [fill]="true" (click)="modalConfirm()" text="Confirm"></d-button>
+                            </div>
+                            <div class="col">
+                                Result: {{modalConfirmValue}}
+                            </div>
+                        </div>
+                        <div class="row p-1">
+                            <div class="col">
+                                <d-button [fill]="true" (click)="modalPrompt()" text="Prompt"></d-button>
+                            </div>
+                            <div class="col">
+                                Result: {{modalPromptValue}}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border rounded p-3">
+                        <ngx-gist [gistId]="'gary-holland/cf6423c4c4890ffa5f00771d2f02a87f'"></ngx-gist>
+                    </div>
+
+                    <br>
+
+                    <h3 #widgets>Widgets</h3>
+                    <p>Display a collapsible widget
+                    </p>
+
+                    <div class="border rounded p-3" >
+                        <d-widget title="Login Widget" [padding]="true" [showCloseButton]="true" iconClass="fa fa-user">
+                            <form>
+                                <form-input label="User Name"></form-input>
+                                <form-input label="Password" type="password"></form-input>
+                                <br>
+                                <d-button text="Login"></d-button>
+                            </form>
+                        </d-widget>
+                    </div>
+
+                    <div class="border rounded p-3">
+                        <ngx-gist [gistId]="'gary-holland/b5eb94a16d106e06a5d1ad4371bf4e4a'"></ngx-gist>
+                    </div>
+
+                    <h3 #widgetSections>Widget with Sections</h3>
+                    <p>Collapsible widget sections
+                    </p>
+
+                    <div class="border rounded p-3" >
+                        <d-widget title="Show the data" [showFilter]="true" [showCloseButton]="true" iconClass="fa fa-lg fa-fw fa-database" [showExpandButton]="true">
+                            <d-widget-section title='Chart' [showExpandButton]="true" iconClass="fa fa-table">
+                                this section might contain a chart
+                            </d-widget-section>
+                    
+                            <d-widget-section title='Data' [showExpandButton]="true" [isExpanded]="false" iconClass="fa fa-bar-chart" sectionClass="text-white bg-success" subTitle="Here is the detailed data...">
+                                this section might contain data
+                            </d-widget-section>
+                    
+                            <d-widget-section title='Comments' [showExpandButton]="true"  [isExpanded]="false" iconClass="fa fa-comment" sectionClass="text-white bg-danger">
+                                this section might contain comments
+                            </d-widget-section>
+                    
+                        </d-widget>
+                    </div>
+
+                    <div class="border rounded p-3">
+                        <ngx-gist [gistId]="'gary-holland/a1f4717fdd027543ed1120b7310507a6'"></ngx-gist>
+                    </div>
+                    <br>
 
                 </div>
 
