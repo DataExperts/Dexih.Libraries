@@ -113,12 +113,6 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
-dexih-ngx-components
-MIT
-
-dexih-ngx-table
-MIT
-
 marked
 MIT
 # License information
@@ -192,7 +186,13 @@ FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
 
 
-ngx-md
+ngx-d-components
+MIT
+
+ngx-d-markdown
+MIT
+
+ngx-d-table
 MIT
 
 prismjs
