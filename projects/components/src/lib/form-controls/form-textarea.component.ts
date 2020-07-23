@@ -27,7 +27,6 @@ export class DFormTextAreaComponent implements OnInit, ControlValueAccessor {
     @Input() hideToggle = false;
     @Input() isHidden = true;
     @Input() rows = 5;
-    @Input() showMarkdown = false;
     @Input() disabled = false;
     @Input() showPreview = true;
     @Input() showCopy = false;

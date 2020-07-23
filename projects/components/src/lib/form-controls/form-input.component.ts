@@ -21,7 +21,7 @@ export class DFormInputComponent implements ControlValueAccessor {
     @Input() iconClass: string;
     @Input() errors: string;
     @Input() value: any;
-    @Input() type = 'text';
+    @Input() type : 'text' | 'number' | 'password' | 'phone' = 'text'
     @Input() pattern: string;
     @Input() subLabel: string;
     @Input() maxlength: number;

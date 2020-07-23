@@ -7,7 +7,7 @@ import {Component, Input, Output, EventEmitter, OnChanges, SimpleChanges} from '
 })
 export class DProgressbarComponent implements OnChanges  {
     @Input() public max = 100;
-    @Input() public type: string;
+    @Input() public type: 'success' | 'info' | 'primary' | 'danger';
     @Input() public value: number;
     @Input() public width = '200px';
     @Input() public height = 'inherit';

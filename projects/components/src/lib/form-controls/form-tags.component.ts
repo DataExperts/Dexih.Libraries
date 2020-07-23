@@ -18,7 +18,7 @@ export class DFormTagsComponent implements ControlValueAccessor {
     @Input() iconClass: string;
     @Input() errors: string;
     @Input() value: string[] = [];
-    @Input() type = 'text';
+    @Input() type : 'text' | 'number' = 'text';
     @Input() subLabel: string;
     @Input() maxlength: number;
     @Input() border = true;
