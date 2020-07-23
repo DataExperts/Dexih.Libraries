@@ -16,8 +16,6 @@ We use these libraries within our own products and are proud to share them with 
 
 [Click here for demo](https://dataexperts.github.io/Dexih.Libraries/)
 
-Need some data management tools?  [Visit our website to get started](https://dataexpertsgroup.com)
-
 # Libraries
 
 [Data Driven Tables](./projects/tables/README.md) - Build data driven tables using arrays.  Tables include formatting, row selection, headers and many other functions.
