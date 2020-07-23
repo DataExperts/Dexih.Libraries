@@ -10,10 +10,10 @@
             [ngClass]="{'form-label-group': floatingLabel, 'form-label-group-tags': floatingLabel && tags?.length > 0}">
             <div *ngFor="let item of tags; let i = index" class="border rounded m-1 tag overflow-none"
                 [ngStyle]="{'background-color': item.color}">
-                <div class="d-flex blend-text pl-1">
-                    <div>
+                <div class="blend-text pl-1">
+                    <span>
                         {{tagItemName && item ? item[tagItemName] : item}}
-                    </div>
+                    </span>
                     <button (click)="removeTag.emit(i)" class="close-button" type="button" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>

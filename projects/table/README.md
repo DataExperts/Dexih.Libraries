@@ -42,12 +42,17 @@ breaking: component name changed from dexih-table to d-table.
 To install this library, run:
 
 ```bash
-$ npm install ngx-d-table ngx-d-markdown marked prismjs --save
+$ npm install ngx-d-table --save
 ```
 
-Also ensure the `BrowserAnimationsModule` and `HttpClientModule` have been included in your app.module.ts
+Ensure that the angular component dev kit (used for drag/drop functions) is installed:
+```bash
+npm install @angular/cdk --save
+```
 
-Here is a sample version:
+> Note: ngx-d-table also installs ngx-d-markdown, marked.js & prismjs
+
+Ensure the `BrowserAnimationsModule` and `HttpClientModule` have been included in your app.module.ts.  Here is a sample version:
 ```typescript
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
