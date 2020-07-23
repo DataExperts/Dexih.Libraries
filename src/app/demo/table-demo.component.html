@@ -8,7 +8,7 @@
     </div>
     <div class="col-xs-12 col-md-9">
     <div class="container">
-        <div class="row m-3">
+        <div class="row">
             <div #formattedTable class="col">
                 <h2>Table with Search & Card Toggle</h2>
                 <p>A simple data table containing formatting and a header. The table includes built in search and toggle
@@ -16,7 +16,7 @@
                 </p>
                 
                 
-                <div class="border rounded p-3">
+                <div class="border rounded">
                     <d-table [data]="characters" [columns]="formatTable ? characterFormat : null"
                         heading="Simpsons Characters" [tags]="tags">
                         <ng-template #actions let-items="items">
@@ -33,12 +33,12 @@
 
         </div>
 
-        <div class="row m-3">
+        <div class="row">
             <div #selectTable class="col">
                 <h2>Table with Selection</h2>
                 <p>The following table demonstrates the different types of automatic column formatting, includes custom cells, a sticky header, and various selection functions.</p>
 
-                <div class="border rounded p-3">
+                <div class="border rounded">
                     <d-table [enableMultiSelect]="true" [enableStickyToolbar]="true"
                     [enableSort]="true" [enableManualSort]="true" [enableSaveCsv]="true" (rowClick)="singleItem($event)" heading="Table with export, sort, row action enabled."
                     [columns]="columns" [data]="data" rowStatusHeading="Status"  actionHeading="Action">

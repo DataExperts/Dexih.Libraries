@@ -41,6 +41,8 @@ export class BaseInputComponent implements ControlValueAccessor, OnInit {
     onChange: any = () => { };
     onTouched: any = () => { };
 
+    ngOnInit() { }
+
 
     writeValue(value: any): void {
         this.value = value;
@@ -77,5 +79,4 @@ export class BaseInputComponent implements ControlValueAccessor, OnInit {
 
 
 
-    ngOnInit() { }
 }
