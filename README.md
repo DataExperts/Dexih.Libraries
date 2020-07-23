@@ -18,8 +18,8 @@ We use these libraries within our own products and are proud to share them with 
 
 # Libraries
 
-[Data Driven Tables](./projects/tables/README.md) - Build data driven tables using arrays.  Tables include formatting, row selection, headers and many other functions.
+[Data Driven Tables](projects/tables/README.md) - Build data driven tables using arrays.  Tables include formatting, row selection, headers and many other functions.
 
-[Bootstrap Components](./projects/components/README.md) - Widgets, dialogs, toasts, progress bars, form controls, and buttons all leveraging bootstrap 4.x.
+[Bootstrap Components](projects/components/README.md) - Widgets, dialogs, toasts, progress bars, form controls, and buttons all leveraging bootstrap 4.x.
 
 These libraries open-source and maintained by the [Data Experts Group](https://dataexpertsgroup.com).  We feel that open-sourcing is the best way to engage with the community and provide great products moving forward.  Our company provides data management tools, so if you're looking to better manage your data, give us a look at [Data Experts Group](https://dataexpertsgroup.com).
