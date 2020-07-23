@@ -123,13 +123,15 @@ Displays the following
 
 ### Input
 
+The form-input provide a decorated input control.
+
 Usage:
 
 ```xml
 <form-input label="User Name" [(ngModel)]="userName" ></form-input>
 ```
 
-The input control provides the following attributes:
+The input control contains the following attributes:
 
 * `type` - The input type, `text`, `number` or `password`. 
 * `pattern` - Specifies a regular expression to check the input value against.
@@ -143,6 +145,8 @@ Returns: the text input as `string` or `number` if type = `number`.
 
 
 ### Input Tags
+
+![](assets/form-tags.gif)
 
 The tags control allows the user to add or remove tags.
 
@@ -158,6 +162,8 @@ The tags controls provides the following attributes:
 Returns: the tags as `string[]`.
 
 ### TextArea
+
+![](assets/form-textarea.gif)
 
 A TextArea that can used to view and edit multiline text values.  Includes a preview which formats the data as markdown.
 
@@ -283,6 +289,8 @@ The controls provides the following events:
 
 ### Checkbox
 
+![](assets/form-checkbox.gif)
+
 The following properties are provided for this control:
 * `isSwitch` - display the checkbox as a switch.
 * `checkedValue` - the value to return when checked (default `true`);
@@ -309,6 +317,8 @@ Usage:
 ```
 
 ### Days Of Week
+
+![](assets/form-daysofweek.gif)
 
 A series of check boxes that can be used for days of week selection.
 
@@ -504,6 +514,8 @@ export class ComponentsDemoComponent implements OnInit {
 ```
 ## Animated Progress 
 
+![](assets/progress.gif)
+
 The progress controls display the percentage progress.
 
 
@@ -527,6 +539,8 @@ The following events are triggered:
 * `progressClick` - when the progress bar is clicked.
 
 ## Widgets / Cards
+
+![](assets/widget.gif)
 
 Widgets are containers with borders, headings, footers and other attributes which can be used to group forms and other content.
 
