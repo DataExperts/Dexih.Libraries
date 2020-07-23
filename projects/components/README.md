@@ -118,6 +118,9 @@ Displays the following
 
 ![](assets/form-input.gif)
 
+> Note: In general it is recommended to either use the `label`, `labelLeft` or `floatingLabel` not all three combined as in the demo above.
+
+
 ### Input
 
 Usage:
