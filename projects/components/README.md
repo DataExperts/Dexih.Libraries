@@ -2,6 +2,9 @@
 
 ngx-d-components are a set of Angular (8+) Boostrap 4.x based components.  These include form controls, modals, toasts, widgets and more.
 
+[dex-img]: https://dataexpertsgroup.com/assets/img/dex_web_logo.png
+[dex]: https://dataexpertsgroup.com
+
 [![][dex-img]][dex]
 
 [dex-img]: https://dataexpertsgroup.com/img/dex_web_logo.png

@@ -2,10 +2,11 @@
 
 ngx-d-table is an Angular (8+) component for building data driven tables.
 
+[dex-img]: https://dataexpertsgroup.com/assets/img/dex_web_logo.png
+[dex]: https://dataexpertsgroup.com
+
 [![][dex-img]][dex]
 
-[dex-img]: https://dataexpertsgroup.com/img/dex_web_logo.png
-[dex]: https://dataexpertsgroup.com
 [d-table-demo]: ./assets/d-table-demo-1.gif
 
 [![npm version](https://badge.fury.io/js/ngx-d-table.svg)](https://www.npmjs.com/package/ngx-d-table)
