@@ -37,7 +37,37 @@ https://dataexperts.github.io/Dexih.Libraries/demo/components
 To install this library, run:
 
 ```bash
-$ npm install ngx-d-components ngx-d-markdown --save
+$ npm install ngx-d-components ngx-d-markdown marked prismjs --save
+```
+
+Also ensure the `BrowserAnimationsModule` and `HttpClientModule` have been included in your app.module.ts
+
+Here is a sample version:
+```typescript
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
+import { NgModule } from '@angular/core';
+
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { DComponentsModule} from 'ngx-d-components';
+
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
+    AppRoutingModule,
+    DComponentsModule,
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
 ```
 
 You will need also need bootstrap styles included (4.x).  For example add this to your index.html header:

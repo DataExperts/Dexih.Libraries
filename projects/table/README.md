@@ -42,7 +42,37 @@ breaking: component name changed from dexih-table to d-table.
 To install this library, run:
 
 ```bash
-$ npm install ngx-d-table ngx-d-markdown --save
+$ npm install ngx-d-table ngx-d-markdown marked prismjs --save
+```
+
+Also ensure the `BrowserAnimationsModule` and `HttpClientModule` have been included in your app.module.ts
+
+Here is a sample version:
+```typescript
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
+import { NgModule } from '@angular/core';
+
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { DTableModule } from 'ngx-d-table';
+
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
+    AppRoutingModule,
+    DTableModule,
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
 ```
 
 You will need also need bootstrap styles included (4.x).  For example add this to your index.html header:
