@@ -18,7 +18,7 @@ We use these libraries within our own products and are proud to share them with 
 
 # Libraries
 
-[Data Driven Tables](projects/tables/README.md) - Build data driven tables using arrays.  Tables include formatting, row selection, headers and many other functions.
+[Data Driven Tables](projects/table/README.md) - Build data driven tables using arrays.  Tables include formatting, row selection, headers and many other functions.
 
 [Bootstrap Components](projects/components/README.md) - Widgets, dialogs, toasts, progress bars, form controls, and buttons all leveraging bootstrap 4.x.
 
