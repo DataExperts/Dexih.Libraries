@@ -539,18 +539,19 @@ this should have no padding.
         </d-widget>
 
         <d-widget title="Date" [padding]="true" iconClass="fa fa-lg fa-fw fa-database">
-                <form-date placeholder="input date"></form-date>
+                <form-date placeholder="input date" [(ngModel)]="dateValue" [ngModelOptions]="{standalone: true}" [label]="'The date is: ' + dateValue"></form-date>
                 <form-date labelLeft="label left"></form-date>
                 <form-date floatingLabel="floating label"></form-date>
                 <form-date label="input label" note="a note to describe the date" placeholder="input date"></form-date>
         </d-widget>
 
         <d-widget title="Day of week" [padding]="true" iconClass="fa fa-lg fa-fw fa-database">
-                <form-daysofweek></form-daysofweek>
+                <form-daysofweek [(ngModel)]="daysOfWeekValue" [label]="'selected: ' + daysOfWeekValue" ></form-daysofweek>
                 <form-daysofweek label="Select the days"></form-daysofweek>
                 <form-daysofweek labelLeft="label left"></form-daysofweek>
                 <form-daysofweek label="With note" note="this is the note"></form-daysofweek>
                 <form-daysofweek label="Has errors" errors="this is the error"></form-daysofweek>
+                <form-daysofweek label="Is Disabled" [disabled]="true"></form-daysofweek>
         </d-widget>
 
         <d-widget title="Tags" [padding]="true" iconClass="fa fa-lg fa-fw fa-database">

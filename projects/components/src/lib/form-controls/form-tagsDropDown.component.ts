@@ -1,5 +1,5 @@
 import { Component, forwardRef, Input, EventEmitter, Output, HostListener, ViewChild, OnChanges, OnInit } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormControl } from '@angular/forms';
 import { SharedFunctions, ListItem } from './shared-functions';
 
 
@@ -63,6 +63,9 @@ export class DFormTagsDropdownComponent implements ControlValueAccessor, OnInit,
     onChange: any = () => { };
     onTouched: any = () => { };
 
+    // control is only used to control disabled
+    control = new FormControl({value: '', disabled: this.disabled});
+
     constructor() { }
 
     ngOnInit() {
@@ -104,6 +107,15 @@ export class DFormTagsDropdownComponent implements ControlValueAccessor, OnInit,
         }
 
         this.updateLabels();
+    }
+
+    setDisabledState(isDisabled: boolean): void {
+        this.disabled = isDisabled;
+        if (isDisabled) {
+            this.control.disable();
+        } else {
+            this.control.enable();
+        }
     }
 
     getItems() {

@@ -2,12 +2,12 @@
     <label [for]="id" class="mt-1">{{label}}
         <div *ngIf="showHelper" class="input-group">
             <div class="input-group-prepend">
-                <a class="btn btn-outline-primary btn-sm" (click)="selectAllDays()">All</a>
-                <a class="btn btn-outline-primary btn-sm" (click)="selectNoDays()">None</a>
-                <a class="btn btn-outline-primary btn-sm" (click)="selectWeekend()">Weekend</a>
+                <button [disabled]="disabled" class="btn btn-outline-primary btn-sm" (click)="selectAllDays()">All</button>
+                <button [disabled]="disabled" class="btn btn-outline-primary btn-sm" (click)="selectNoDays()">None</button>
+                <button [disabled]="disabled" class="btn btn-outline-primary btn-sm" (click)="selectWeekend()">Weekend</button>
             </div>
             <div class="input-group-append">
-                <a class="btn btn-outline-primary btn-sm" (click)="selectWeekDays()">Weekdays</a>
+                <button [disabled]="disabled" class="btn btn-outline-primary btn-sm" (click)="selectWeekDays()">Weekdays</button>
             </div>
         </div>
         <ng-content></ng-content>
@@ -15,38 +15,31 @@
 
     <div class="input-group">
         <div class="custom-control custom-control-inline custom-checkbox">
-            <input class="custom-control-input" type="checkbox" [id]="id + '1'" [(ngModel)]="daysOfWeek[0]"
-                (ngModelChange)="hasChanged($event)">
+            <input class="custom-control-input" type="checkbox" [id]="id + '1'" [formControl]="control.controls[0]">
             <label class="custom-control-label" [for]="id + '1'">Sunday</label>
         </div>
         <div class="custom-control custom-control-inline custom-checkbox">
-            <input class="custom-control-input" type="checkbox" [id]="id + '2'" [(ngModel)]="daysOfWeek[1]"
-                (ngModelChange)="hasChanged($event)">
+            <input class="custom-control-input" type="checkbox" [id]="id + '2'" [formControl]="control.controls[1]">
             <label class="custom-control-label" [for]="id + '2'">Monday</label>
         </div>
         <div class="custom-control custom-control-inline custom-checkbox">
-            <input class="custom-control-input" type="checkbox" [id]="id + '3'" [(ngModel)]="daysOfWeek[2]"
-                (ngModelChange)="hasChanged($event)">
+            <input class="custom-control-input" type="checkbox" [id]="id + '3'" [formControl]="control.controls[2]">
             <label class="custom-control-label" [for]="id + '3'">Tuesday</label>
         </div>
         <div class="custom-control custom-control-inline custom-checkbox">
-            <input class="custom-control-input" type="checkbox" [id]="id + '4'" [(ngModel)]="daysOfWeek[3]"
-                (ngModelChange)="hasChanged($event)">
+            <input class="custom-control-input" type="checkbox" [id]="id + '4'" [formControl]="control.controls[3]">
             <label class="custom-control-label" [for]="id + '4'">Wednesday</label>
         </div>
         <div class="custom-control custom-control-inline custom-checkbox">
-            <input class="custom-control-input" type="checkbox" [id]="id + '5'" [(ngModel)]="daysOfWeek[4]"
-                (ngModelChange)="hasChanged($event)">
+            <input class="custom-control-input" type="checkbox" [id]="id + '5'" [formControl]="control.controls[4]">
             <label class="custom-control-label" [for]="id + '5'">Thursday</label>
         </div>
         <div class="custom-control custom-control-inline custom-checkbox">
-            <input class="custom-control-input" type="checkbox" [id]="id + '6'" [(ngModel)]="daysOfWeek[5]"
-                (ngModelChange)="hasChanged($event)">
+            <input class="custom-control-input" type="checkbox" [id]="id + '6'" [formControl]="control.controls[5]">
             <label class="custom-control-label" [for]="id + '6'">Friday</label>
         </div>
         <div class="custom-control custom-control-inline custom-checkbox">
-            <input class="custom-control-input" type="checkbox" [id]="id + '7'" [(ngModel)]="daysOfWeek[6]"
-                (ngModelChange)="hasChanged($event)">
+            <input class="custom-control-input" type="checkbox" [id]="id + '7'" [formControl]="control.controls[6]">
             <label class="custom-control-label" [for]="id + '7'">Saturday</label>
         </div>
 

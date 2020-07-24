@@ -1,15 +1,16 @@
-import { Component, forwardRef, Input, AfterViewInit, ChangeDetectorRef } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Component, forwardRef, Input, OnInit, OnDestroy } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormArray, FormControl } from '@angular/forms';
 import { SharedFunctions } from './shared-functions';
+import { Subscription } from 'rxjs';
 
 export enum eDayOfWeek {
-    Sunday = <any>'Sunday',
-    Monday = <any>'Monday',
-    Tuesday  = <any>'Tuesday',
-    Wednesday = <any>'Wednesday',
-    Thursday  = <any>'Thursday',
-    Friday = <any>'Friday',
-    Saturday  = <any>'Saturday'
+    Sunday = 1,
+    Monday = 2,
+    Tuesday = 3,
+    Wednesday = 4,
+    Thursday = 5,
+    Friday = 6,
+    Saturday = 7
 }
 
 @Component({
@@ -17,59 +18,59 @@ export enum eDayOfWeek {
     templateUrl: './form-daysofweek.component.html',
     providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => DFormDaysOfWeekComponent), multi: true }]
 })
-export class DFormDaysOfWeekComponent implements ControlValueAccessor, AfterViewInit {
+export class DFormDaysOfWeekComponent implements ControlValueAccessor, OnInit, OnDestroy {
     @Input() label: string;
     @Input() labelLeft: string;
     @Input() note: string;
     @Input() errors: string;
     @Input() value: eDayOfWeek[];
+    @Input() disabled = false;
     @Input() showHelper = true;
 
     eDayOfWeek = eDayOfWeek;
-    daysOfWeek = new Array<Boolean>(7);
+
     id = 'input_' + Math.random().toString(36).substr(2, 9);
     sharedFunctions = new SharedFunctions();
 
     onChange: any = () => { };
     onTouched: any = () => { };
 
-    constructor(private _changeDetectionRef: ChangeDetectorRef) {
+    subscription: Subscription;
+    control: FormArray;
 
-    }
+    constructor() {
+        this.control = new FormArray([]);
 
-    ngAfterViewInit()  {
-        if (this.value) {
-            this.value.forEach(value => {
-                switch (value) {
-                    case eDayOfWeek.Sunday: this.daysOfWeek[0] = true; break;
-                    case eDayOfWeek.Monday: this.daysOfWeek[1] = true; break;
-                    case eDayOfWeek.Tuesday: this.daysOfWeek[2] = true; break;
-                    case eDayOfWeek.Wednesday: this.daysOfWeek[3] = true; break;
-                    case eDayOfWeek.Thursday: this.daysOfWeek[4] = true; break;
-                    case eDayOfWeek.Friday: this.daysOfWeek[5] = true; break;
-                    case eDayOfWeek.Saturday: this.daysOfWeek[6] = true; break;
-                }
-            });
+        for (let i = 0; i < 7; i++) {
+            if (this.value && this.value.length > 0) {
+                this.control.push(new FormControl(this.value.indexOf(i + 1) >= 0));
+            } else {
+                this.control.push(new FormControl(false));
+            }
         }
 
-        // workaround for change detection required when using Afterview Init https://github.com/angular/angular/issues/6005
-        this._changeDetectionRef.detectChanges();
     }
 
-    hasChanged($event: any) {
-        let daysOfWeek = new Array<eDayOfWeek>();
-        if (this.daysOfWeek[0]) { daysOfWeek.push(eDayOfWeek.Sunday); }
-        if (this.daysOfWeek[1]) { daysOfWeek.push(eDayOfWeek.Monday); }
-        if (this.daysOfWeek[2]) { daysOfWeek.push(eDayOfWeek.Tuesday); }
-        if (this.daysOfWeek[3]) { daysOfWeek.push(eDayOfWeek.Wednesday); }
-        if (this.daysOfWeek[4]) { daysOfWeek.push(eDayOfWeek.Thursday); }
-        if (this.daysOfWeek[5]) { daysOfWeek.push(eDayOfWeek.Friday); }
-        if (this.daysOfWeek[6]) { daysOfWeek.push(eDayOfWeek.Saturday); }
+    ngOnInit() {
+        if (this.disabled) {
+            this.control.disable();
+        }
 
-        this.value = daysOfWeek;
+        this.subscription = this.control.valueChanges.subscribe((value: Array<boolean>) => {
+            let daysOfWeek: Array<eDayOfWeek> = [];
+            for (let i = 0; i < 7; i++) {
+                if (value[i]) {
+                    daysOfWeek.push(<eDayOfWeek>i + 1);
+                }
+            }
 
-        this.onChange(this.value);
-        this.onTouched();
+            this.onChange(daysOfWeek);
+            this.onTouched();
+        });
+    }
+
+    ngOnDestroy() {
+        this.subscription.unsubscribe();
     }
 
     registerOnChange(fn: any) {
@@ -80,53 +81,50 @@ export class DFormDaysOfWeekComponent implements ControlValueAccessor, AfterView
         this.onTouched = fn;
     }
 
-    writeValue(value: any) {
-        if (value) {
-            this.value = value;
+    writeValue(value: Array<eDayOfWeek>) {
+        this.setFormArray(value);
+    }
+
+    setDisabledState(isDisabled: boolean): void {
+        this.disabled = isDisabled;
+        if (isDisabled) {
+            this.control.disable();
+        } else {
+            this.control.enable();
+        }
+    }
+
+    setFormArray(value: Array<eDayOfWeek>) {
+        for (let i = 0; i < 7; i++) {
+            if (value && value.length > 0) {
+                this.control.controls[i].setValue(value.indexOf(i + 1) >= 0);
+            } else {
+                this.control.controls[i].setValue(false);
+            }
         }
     }
 
     selectWeekend() {
-      this.daysOfWeek[0] = true;
-      this.daysOfWeek[1] = false;
-      this.daysOfWeek[2] = false;
-      this.daysOfWeek[3] = false;
-      this.daysOfWeek[4] = false;
-      this.daysOfWeek[5] = false;
-      this.daysOfWeek[6] = true;
-      this.hasChanged(null);
-  }
+        for (let i = 0; i < 7; i++) {
+            this.control.controls[i].setValue(i == 0 || i == 6);
+        }
+    }
 
-  selectWeekDays() {
-      this.daysOfWeek[0] = false;
-      this.daysOfWeek[1] = true;
-      this.daysOfWeek[2] = true;
-      this.daysOfWeek[3] = true;
-      this.daysOfWeek[4] = true;
-      this.daysOfWeek[5] = true;
-      this.daysOfWeek[6] = false;
-      this.hasChanged(null);
-  }
+    selectWeekDays() {
+        for (let i = 0; i < 7; i++) {
+            this.control.controls[i].setValue(i != 0 && i != 6);
+        }
+    }
 
     selectAllDays() {
-      this.daysOfWeek[0] = true;
-      this.daysOfWeek[1] = true;
-      this.daysOfWeek[2] = true;
-      this.daysOfWeek[3] = true;
-      this.daysOfWeek[4] = true;
-      this.daysOfWeek[5] = true;
-      this.daysOfWeek[6] = true;
-      this.hasChanged(null);
-  }
+        for (let i = 0; i < 7; i++) {
+            this.control.controls[i].setValue(true);
+        }
+    }
 
     selectNoDays() {
-      this.daysOfWeek[0] = false;
-      this.daysOfWeek[1] = false;
-      this.daysOfWeek[2] = false;
-      this.daysOfWeek[3] = false;
-      this.daysOfWeek[4] = false;
-      this.daysOfWeek[5] = false;
-      this.daysOfWeek[6] = false;
-      this.hasChanged(null);
+        for (let i = 0; i < 7; i++) {
+            this.control.controls[i].setValue(false);
+        }
     }
 }

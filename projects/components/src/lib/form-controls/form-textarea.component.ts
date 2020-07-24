@@ -1,7 +1,8 @@
-import { OnInit, Component, forwardRef, Input } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { OnInit, Component, forwardRef, Input, OnDestroy, OnChanges, SimpleChanges } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormControl } from '@angular/forms';
 import { trigger, state, style, transition, animate, keyframes } from '@angular/animations';
 import { SharedFunctions } from './shared-functions';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'form-textarea',
@@ -16,7 +17,7 @@ import { SharedFunctions } from './shared-functions';
     ])
     ]
 })
-export class DFormTextAreaComponent implements OnInit, ControlValueAccessor {
+export class DFormTextAreaComponent implements ControlValueAccessor, OnInit, OnDestroy, OnChanges {
     @Input() label: string;
     @Input() labelLeft: string;
     @Input() note: string;
@@ -40,24 +41,41 @@ export class DFormTextAreaComponent implements OnInit, ControlValueAccessor {
     onChange: any = () => { };
     onTouched: any = () => { };
 
-    constructor() {
+    subscription: Subscription;
+    control = new FormControl({value: this.value, disabled: this.disabled});
 
-     }
+    constructor() {     }
 
      ngOnInit() {
          if ( this.hideToggle ) { this.isHidden = false; }
-       //  this.state = this.isHidden ? 'hide' : 'show';
-     }
+         this.subscription = this.control.valueChanges.subscribe(value => {
+            this.onChange(value);
+            this.onTouched();
+        });     
+    }
 
-     toggleState() {
+    ngOnDestroy() {
+        this.subscription.unsubscribe();
+    }
+
+    ngOnChanges(changes: SimpleChanges) {
+        if (changes.value) {
+            this.control.setValue(changes.value.currentValue);
+        }
+
+        if (changes.disabled) {
+            if (changes.disabled.currentValue) {
+                this.control.disable();
+            } else {
+                this.control.enable();
+            }
+        }
+    } 
+
+    toggleState() {
          this.isHidden = !this.isHidden;
         // this.state = this.isHidden ? 'hide' : 'show';
      }
-
-    hasChanged($event: any) {
-        this.onChange(this.value);
-        this.onTouched();
-    }
 
     registerOnChange(fn: any) {
         this.onChange = fn;
@@ -68,7 +86,16 @@ export class DFormTextAreaComponent implements OnInit, ControlValueAccessor {
     }
 
     writeValue(value: string) {
-        this.value = value;
+        this.control.setValue(value);
+    }
+
+    setDisabledState(isDisabled: boolean): void {
+        this.disabled = isDisabled;
+        if (isDisabled) {
+            this.control.disable();
+        } else {
+            this.control.enable();
+        }
     }
 
     getRoute(event: any) {
@@ -86,7 +113,7 @@ export class DFormTextAreaComponent implements OnInit, ControlValueAccessor {
         selBox.style.left = '0';
         selBox.style.top = '0';
         selBox.style.opacity = '0';
-        selBox.value = this.value;
+        selBox.value = this.control.value;
         document.body.appendChild(selBox);
         selBox.focus();
         selBox.select();

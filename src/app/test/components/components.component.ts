@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { ToastMessage, DToastComponent, DModalComponent } from 'projects/components/src/public-api';
+import { eDayOfWeek } from 'projects/components/src/lib/form-controls/form-daysofweek.component';
 
 
 @Component({
@@ -59,7 +60,10 @@ export class ComponentsComponent {
   public inputNumber = 0;
   public inputString = 'hi';
 
-  public timeString = '1:2:3';
+  public timeString = '10:20:30';
+
+  public dateValue = '2000-01-01';
+  public daysOfWeekValue = [eDayOfWeek.Monday, eDayOfWeek.Friday];
 
   public isRefreshing = false;
   public refreshItems = [];

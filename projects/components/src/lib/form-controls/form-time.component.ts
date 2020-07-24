@@ -1,13 +1,14 @@
-import { OnInit, Component, forwardRef, Input, AfterViewInit, ChangeDetectorRef, Output, EventEmitter, ViewChild, HostListener } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { OnInit, Component, forwardRef, Input, AfterViewInit, ChangeDetectorRef, Output, EventEmitter, ViewChild, HostListener, OnDestroy, OnChanges, SimpleChanges } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormControl } from '@angular/forms';
 import { SharedFunctions } from './shared-functions';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'form-time',
     templateUrl: './form-time.component.html',
     providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => DFormTimeComponent), multi: true }]
 })
-export class DFormTimeComponent implements OnInit, AfterViewInit, ControlValueAccessor {
+export class DFormTimeComponent implements ControlValueAccessor, OnInit, OnDestroy, OnChanges {
     @Input() label: string;
     @Input() labelLeft: string;
     @Input() note: string;
@@ -29,28 +30,41 @@ export class DFormTimeComponent implements OnInit, AfterViewInit, ControlValueAc
     id = 'input_' + Math.random().toString(36).substr(2, 9);
     sharedFunctions = new SharedFunctions();
 
-    isDirty = false;
-
     onChange: any = () => { };
     onTouched: any = () => { };
 
     timeSupported = this.isTimeSupported();
 
-    constructor(private _changeDetectionRef: ChangeDetectorRef) {
+    subscription: Subscription;
+    control = new FormControl({value: this.value, disabled: this.disabled});
 
-    }
+
+    constructor() { }
 
     ngOnInit(): void {
-        if (this.value) {
+        this.subscription = this.control.valueChanges.subscribe(value => {
             this.updateError();
-        }
-        this.writeValue(this.value);
+            this.onChange(this.timeToValue(value));
+            this.onTouched();
+        });
     }
     
+    ngOnDestroy() {
+        this.subscription.unsubscribe();
+    }
 
-    ngAfterViewInit() {
-        // workaround for change detection required when using Afterview Init https://github.com/angular/angular/issues/6005
-        // this._changeDetectionRef.detectChanges();
+    ngOnChanges(changes: SimpleChanges) {
+        if (changes.value) {
+            this.control.setValue(changes.value.currentValue);
+        }
+
+        if (changes.disabled) {
+            if (changes.disabled.currentValue) {
+                this.control.disable();
+            } else {
+                this.control.enable();
+            }
+        }
     }
 
     registerOnChange(fn: any) {
@@ -62,42 +76,37 @@ export class DFormTimeComponent implements OnInit, AfterViewInit, ControlValueAc
     }
 
     writeValue(value: string) {
-        if (value) {
-            this.value = value;
-            // this.updateTime();
+        this.control.setValue(value, { emitEvent: false});
+    }
+
+    setDisabledState(isDisabled: boolean): void {
+        this.disabled = isDisabled;
+        if (isDisabled) {
+            this.control.disable();
+        } else {
+            this.control.enable();
         }
     }
 
-    validate(): {[key: string]: any} {
-        if (this.value) {
-            if (!this.checkTime()) {
-                return { validateTime: false};
+    private timeToValue(timeValue) {
+        if(timeValue) {
+            let timeParts = timeValue.split(':');
+            if(timeParts.length > 3 || timeParts.length == 0) {
+                return undefined;            
+            }
+
+            let hours = +timeParts[0];
+            let minutes = timeParts.length > 1 ? +timeParts[1] : 0;
+            let seconds = timeParts.length > 2 ? +timeParts[2] : 0;
+
+            if(hours >= 0 && hours <= 23 && minutes >= 0 && minutes < 59 && seconds >=0 && seconds <= 59) {
+                return this.pad(hours, 2) + ':' + this.pad(minutes, 2) + ':' + this.pad(seconds, 2);
             }
         }
+
+        return undefined;  
     }
 
-    hasChanged() {
-        this.onChange(this.value);
-        this.onTouched();
-        this.isDirty = true;
-    }
-
-    checkTime(): string {
-        let timeParts = this.value.split(':');
-        if(timeParts.length > 3 || timeParts.length == 0) {
-            return undefined;            
-        }
-
-        let hours = +timeParts[0];
-        let minutes = timeParts.length > 1 ? +timeParts[1] : 0;
-        let seconds = timeParts.length > 2 ? +timeParts[2] : 0;
-
-        if(hours >= 0 && hours <= 23 && minutes >= 0 && minutes < 59 && seconds >=0 && seconds <= 59) {
-            return this.pad(hours, 2) + ':' + this.pad(minutes, 2) + ':' + this.pad(seconds, 2);
-        }
-
-        return undefined;            
-    }
 
     pad(num: number, size: number) {
         let s = '000000000' + num;
@@ -105,9 +114,9 @@ export class DFormTimeComponent implements OnInit, AfterViewInit, ControlValueAc
     }
 
     updateError() {
-        let dateError = this.checkTime() ? null : 'Invalid time, use 24 hour format HH-mm-ss';
+        let theDate = Date.parse('2000-01-01T' + this.control.value);
+        let dateError = theDate ? null : 'Invalid time, use 24 hour format HH-mm-ss';
         if (!dateError) {
-            this.updateTime();
             this.allErrors = this.errors;
             return;
         }
@@ -116,16 +125,6 @@ export class DFormTimeComponent implements OnInit, AfterViewInit, ControlValueAc
             return;
         }
         this.allErrors = dateError + ' ' + this.errors;
-    }
-
-    updateTime() {
-        if (!this.timeSupported) {
-            let theDate = this.checkTime();
-            if (theDate) {
-                this.value = theDate;
-                this.hasChanged()
-            }
-        }
     }
 
     keydownEvent($event: any) {

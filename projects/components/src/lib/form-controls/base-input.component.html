@@ -4,7 +4,7 @@
     </div>
 
     <div class="form-control h-100 p-0 m-0"
-    [ngClass]="{'border-0 rounded-0  bg-transparent': !border, 'is-invalid': errors, 'is-valid': !errors && isDirty && autoValidate, 'flex-wrap': tags && tags.length > 0}">
+    [ngClass]="{'border-0 rounded-0  bg-transparent': !border, 'is-invalid': errors, 'is-valid': !errors && control.dirty && autoValidate, 'flex-wrap': tags && tags.length > 0}">
 
         <div  class="d-flex flex-wrap"
             [ngClass]="{'form-label-group': floatingLabel, 'form-label-group-tags': floatingLabel && tags?.length > 0}">
@@ -20,30 +20,28 @@
                 </div>
             </div>
         
-        <input 
+        <input *ngIf="!hideInput || !tags || tags.length === 0"
             [placeholder]="enableFloatingAnimation && floatingLabel ? floatingLabel : (placeholder ? placeholder : '')"
             [readonly]="readonly"
             (keydown)="keyDown.emit($event);"
             (keydown.arrowdown)="arrowDown.emit($event);"
             (keydown.arrowup)="arrowUp.emit($event);"
             (focusout)="focusOut.emit($event)"
-            [ngModel]="value" 
-            (ngModelChange)="hasChanged($event)"
+            [formControl]="control"
             class="border-0 bg-transparent form-control-custom-input height-fix" 
             [ngClass]="{'form-label-group-tags': floatingLabel && tags && tags.length > 0, 
-                'form-label-no-placeholder': (floatingLabel && (!enableFloatingAnimation || (value?.length > 0 &&  (!tags || tags.length === 0)))), 
+                'form-label-no-placeholder': (floatingLabel && (!enableFloatingAnimation || (control.value?.length > 0 &&  (!tags || tags.length === 0)))), 
                 'font-italic': fontItalic, 'disabled-input': disabled}" 
-            [disabled]="disabled"
             [id]="id"
             [type]="type"
             [pattern]="pattern"
+            [step]="step"
             [attr.autocapitalize]="autocapitalize"
             [title]="errors ? errors : ''"
-            [attr.maxlength]="maxlength"
-            
+            [attr.maxlength]="maxlength"            
         />
 
-        <label *ngIf="floatingLabel" class="text-truncate"  [ngClass]="{'form-label-group-values': !enableFloatingAnimation || value || (tags && tags.length > 0)}" [for]="id">{{floatingLabel}}</label>
+        <label *ngIf="floatingLabel" class="text-truncate"  [ngClass]="{'form-label-group-values': !enableFloatingAnimation || control.value || (tags && tags.length > 0)}" [for]="id">{{floatingLabel}}</label>
     </div>
 </div>
 

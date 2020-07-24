@@ -20,10 +20,7 @@
     [errors]="errors"
     [autoValidate]="autoValidate"
     [border]="border"
-    [(ngModel)]="value" 
-    [ngModelOptions]="{standalone: true}" 
-    (ngModelChange)="hasChanged($event)"
-    [disabled]="disabled"
+    [formControl]="control"
     [maxlength]="maxlength"
     [autocapitalize]="autocapitalize"
     (keydown)="keydownEvent($event)">

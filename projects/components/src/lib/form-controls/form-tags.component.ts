@@ -1,5 +1,5 @@
 import { Component, forwardRef, Input, EventEmitter, Output, HostListener } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormControl } from '@angular/forms';
 import { SharedFunctions } from './shared-functions';
 
 @Component({
@@ -31,7 +31,7 @@ export class DFormTagsComponent implements ControlValueAccessor {
     id = 'input_' + Math.random().toString(36).substr(2, 9);
     sharedFunctions = new SharedFunctions();
 
-    tag: string;
+    control = new FormControl({value: '', disabled: this.disabled});
 
     onChange: any = () => { };
     onTouched: any = () => { };
@@ -59,17 +59,26 @@ export class DFormTagsComponent implements ControlValueAccessor {
     }
 
     addTag() {
-        if (this.tag) {
+        if (this.control.value) {
             if (!this.value) { this.value = []; }
-            const index = this.value.findIndex(c => c === this.tag);
+            const index = this.value.findIndex(c => c === this.control.value);
             if (index === -1) {
-                this.value.push(this.tag);
-                this.tag = '';
+                this.value.push(this.control.value);
+                this.control.setValue('');
                 this.hasChanged();
             }
         }
     }
 
+    setDisabledState(isDisabled: boolean): void {
+        this.disabled = isDisabled;
+        if (isDisabled) {
+            this.control.disable();
+        } else {
+            this.control.enable();
+        }
+    }
+    
     keydownEvent($event: any) {
         if ( $event.keyCode === 13) {
             this.addTag();

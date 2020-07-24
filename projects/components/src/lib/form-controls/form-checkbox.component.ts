@@ -1,13 +1,14 @@
-import { Component, forwardRef, Input, OnChanges, OnInit } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Component, forwardRef, Input, OnChanges, OnInit, OnDestroy, SimpleChanges } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormControl } from '@angular/forms';
 import { SharedFunctions } from './shared-functions';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'form-checkbox',
     templateUrl: './form-checkbox.component.html',
     providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => DFormCheckboxComponent), multi: true }]
 })
-export class DFormCheckboxComponent implements OnInit, ControlValueAccessor {
+export class DFormCheckboxComponent implements OnInit, OnDestroy, OnChanges, ControlValueAccessor {
     @Input() label: string;
     @Input() note: string;
     @Input() errors: string;
@@ -19,31 +20,40 @@ export class DFormCheckboxComponent implements OnInit, ControlValueAccessor {
     @Input() unCheckedValue: any = false;
     @Input() autoValidate = true;
 
-    isDirty = false;
     id = 'input_' + Math.random().toString(36).substr(2, 9);
     sharedFunctions = new SharedFunctions();
-
-    isChecked = false;
 
     onChange: any = () => { };
     onTouched: any = () => { };
 
+    subscription: Subscription;
+    control = new FormControl({value: this.isChecked(this.value), disabled: this.disabled});
+
     constructor() { }
     
     ngOnInit(): void {
-        this.writeValue(this.value);
+        this.subscription = this.control.valueChanges.subscribe(value => {
+            this.onChange(value ? this.checkedValue : this.unCheckedValue );
+            this.onTouched();
+        });
     }
     
-    hasChanged($event: any) {
-        if (this.isChecked) {
-            this.value = this.checkedValue;
-        } else {
-            this.value = this.unCheckedValue;
+    ngOnDestroy() {
+        this.subscription.unsubscribe();
+    }
+
+    ngOnChanges(changes: SimpleChanges) {
+        if (changes.value) {
+            this.control.setValue(this.isChecked(changes.value.currentValue));
         }
 
-        this.onChange(this.value);
-        this.onTouched();
-        this.isDirty = true;
+        if (changes.disabled) {
+            if (changes.disabled.currentValue) {
+                this.control.disable();
+            } else {
+                this.control.enable();
+            }
+        }
     }
 
     registerOnChange(fn: any) {
@@ -55,13 +65,26 @@ export class DFormCheckboxComponent implements OnInit, ControlValueAccessor {
     }
 
     writeValue(value: boolean) {
-        this.value = value;
+        this.control.setValue(this.isChecked(value), { emitEvent: false });
+    }
 
-        if (this.value === this.checkedValue) {
-            this.isChecked = true;
+    setDisabledState(isDisabled: boolean): void {
+        this.disabled = isDisabled;
+        if (isDisabled) {
+            this.control.disable();
+        } else {
+            this.control.enable();
         }
-        if (this.value === this.unCheckedValue) {
-            this.isChecked = false;
+    }
+
+    isChecked(value): boolean {
+        if (value === this.checkedValue) {
+            return true;
         }
+        if (value === this.unCheckedValue) {
+            return false;
+        }
+
+        return null;
     }
 }

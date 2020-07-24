@@ -1,6 +1,7 @@
-import { Component, forwardRef, Input, EventEmitter, Output } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Component, forwardRef, Input, EventEmitter, Output, OnInit, OnDestroy, OnChanges, SimpleChanges } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormControl } from '@angular/forms';
 import { SharedFunctions } from './shared-functions';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'form-input, [formInput]',
@@ -13,7 +14,7 @@ import { SharedFunctions } from './shared-functions';
         },
     ]
 })
-export class DFormInputComponent implements ControlValueAccessor {
+export class DFormInputComponent implements ControlValueAccessor, OnInit, OnDestroy, OnChanges {
     @Input() label: string;
     @Input() labelLeft: string;
     @Input() note: string;
@@ -33,26 +34,40 @@ export class DFormInputComponent implements ControlValueAccessor {
 
     @Output() keydown: EventEmitter<any> = new EventEmitter<any>();
 
-    isDirty = false;
-
     id = 'input_' + Math.random().toString(36).substr(2, 9);
     sharedFunctions = new SharedFunctions();
 
     onChange: any = () => { };
     onTouched: any = () => { };
 
+    subscription: Subscription;
+    control = new FormControl({value: this.value, disabled: this.disabled});
+
     constructor() { }
 
-    hasChanged($event: any) {
-        if(this.type.toLocaleLowerCase() == 'number') { 
-            this.value = +$event;
-        } else {
-            this.value = $event;
+    ngOnInit() {
+        this.subscription = this.control.valueChanges.subscribe(value => {
+            this.onChange(value);
+            this.onTouched();
+        });
+    }
+
+    ngOnDestroy() {
+        this.subscription.unsubscribe();
+    }
+
+    ngOnChanges(changes: SimpleChanges) {
+        if (changes.value) {
+            this.control.setValue(changes.value.currentValue);
         }
 
-        this.onChange(this.value);
-        this.onTouched();
-        this.isDirty = true;
+        if (changes.disabled) {
+            if (changes.disabled.currentValue) {
+                this.control.disable();
+            } else {
+                this.control.enable();
+            }
+        }
     }
 
     registerOnChange(fn: any) {
@@ -64,11 +79,16 @@ export class DFormInputComponent implements ControlValueAccessor {
     }
 
     writeValue(value: string) {
-        this.value = value;
+        this.control.setValue(value);
     }
 
     setDisabledState(isDisabled: boolean): void {
         this.disabled = isDisabled;
+        if (isDisabled) {
+            this.control.disable();
+        } else {
+            this.control.enable();
+        }
     }
 
     keydownEvent($event: any) {

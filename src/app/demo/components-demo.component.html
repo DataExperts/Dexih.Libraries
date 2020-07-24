@@ -54,7 +54,7 @@
                         </form-input>
                         <form-input label="input with error" errors="this is invalid" placeholder="input something"
                             iconClass="fa fa-pie-chart"></form-input>
-                        <form-input label="input disabled" [attr.disabled]="true" placeholder="input something"
+                        <form-input label="input disabled" [disabled]="true" placeholder="input something"
                             iconClass="fa fa-pie-chart" value="can't change this text"></form-input>
                         <form-input type="number" label="a number only input" placeholder="input number"></form-input>
                     </div>
@@ -158,7 +158,7 @@
                         <form-textarea label="edit shown" [showCopy]="true" [isHidden]="false"
                             value="a **bold** item, [a link](http://www.microsoft.com)"></form-textarea>
                         <form-textarea label="copy a key" [showCopy]="true" [isHidden]="true" [showPreview]="false"
-                            [attr.disabled]="true" [rows]="1" value="abdefghijklmnopqrtruvwxyz"></form-textarea>
+                            [disabled]="true" [rows]="1" value="abdefghijklmnopqrtruvwxyz"></form-textarea>
                         <form-textarea label="edit hidden" [isHidden]="true" value="a **bold** item"></form-textarea>
                         <form-textarea label="with errors" [isHidden]="true" value="a **bold** item" errors="the error">
                         </form-textarea>

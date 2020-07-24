@@ -183,6 +183,10 @@ export class DFormSelectComponent implements ControlValueAccessor, OnInit, OnDes
                 this.doManualControlUpdate = true;
             });
 
+            if (this.disabled) {
+                this.manualControl.disable();
+            }
+
         // this.dropdown.onHidden;
      }
 
@@ -284,6 +288,15 @@ export class DFormSelectComponent implements ControlValueAccessor, OnInit, OnDes
                     }
                 }
             }            
+        }
+    }
+
+    setDisabledState(isDisabled: boolean): void {
+        this.disabled = isDisabled;
+        if (isDisabled) {
+            this.manualControl.disable();
+        } else {
+            this.manualControl.enable();
         }
     }
 

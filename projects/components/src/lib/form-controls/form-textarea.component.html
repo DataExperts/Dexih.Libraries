@@ -15,9 +15,15 @@
                 <span class="input-group-text" [ngClass]="{'border-0 rounded-0 bg-transparent': !border}"> {{labelLeft}}</span>
             </div>
 
-            <textarea class="form-control" [id]="id" [disabled]="disabled" [rows]="rows" [(ngModel)]="value"
-                (ngModelChange)="hasChanged($event)" [placeholder]="placeholder"
-                [ngClass]="{'is-invalid': errors}" [title]="errors"></textarea>
+            <textarea 
+                class="form-control" 
+                [id]="id" 
+                [rows]="rows" 
+                [formControl]="control"
+                [placeholder]="placeholder"
+                [ngClass]="{'is-invalid': errors}" 
+                [title]="errors">
+            </textarea>
             
             <div *ngIf="errors && border" class="invalid-feedback order-1">
                 {{ errors }}
@@ -36,7 +42,7 @@
     <div *ngIf="showPreview && value">
         <label *ngIf="!isHidden">Preview</label>
         <div class="border rounded p-2" [ngClass]="{'border-danger': errors}">
-            <markdown *ngIf="value" (click)="getRoute($event)" [data]="value"></markdown>
+            <markdown *ngIf="value" (click)="getRoute($event)" [data]="control.value"></markdown>
         </div>
     </div>
 </div>
