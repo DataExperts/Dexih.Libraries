@@ -198,6 +198,7 @@
 
                     <div class="border rounded p-3">
                         <form-date label="Simple date entry" value="2010-01-01" placeholder="input date"></form-date>
+                        <form-date label="With native capability disabled" [disableNative]="true" value="2010-01-01" placeholder="input date"></form-date>
                         <form-date label="With floating label" floatingLabel="floating label"></form-date>
                     </div>
 
@@ -227,8 +228,8 @@
                     </p>
 
                     <div class="border rounded p-3">
-                        <form-time [label]="'time with label (' + selectedTime +')'" [(ngModel)]="selectedTime"
-                            [ngModelOptions]="{standalone: true}"></form-time>
+                        <form-time [label]="'time with label (' + selectedTime +')'" [(ngModel)]="selectedTime"></form-time>
+                        <form-time [label]="'time with native browser disabled (' + selectedTime +')'" [(ngModel)]="selectedTime" [disableNative]="true"></form-time>
                         <form-time class="mt-2" labelLeft="label left"></form-time>
                         <form-time label="time with note" note="this time description"></form-time>
                         <form-time label="time with error" errors="the time error"></form-time>
@@ -536,10 +537,7 @@
                     <br>
 
                 </div>
-
             </div>
-
-
         </div>
     </div>
 </div>

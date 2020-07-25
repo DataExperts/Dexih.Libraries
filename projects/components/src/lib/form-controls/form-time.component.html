@@ -13,7 +13,8 @@
 
     <div #input>
         <base-input
-            type="time" step="1"
+            [type]="disableNative ? 'text': 'time'"
+            step="1"
             [labelLeft]="labelLeft" 
             [floatingLabel]="floatingLabel"
             [placeholder]="placeholder" 

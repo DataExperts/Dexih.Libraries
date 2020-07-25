@@ -23,6 +23,7 @@ export class DFormDateComponent implements ControlValueAccessor, OnInit, OnDestr
     @Input() border = true;
     @Input() floatingLabel: string;
     @Input() autoValidate = true;
+    @Input() disableNative = false;
 
     @Output() keydown: EventEmitter<any> = new EventEmitter<any>();
 

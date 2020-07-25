@@ -342,12 +342,20 @@ Usage:
 ```xml
 <form-date label="Simple date entry" value="2010-01-01" placeholder="input date"></form-date>
 ```
+
+The following properties are provided for this control:
+* `disableNative` - disables built in browser time.
+
+
 ### Time
 
 ```xml
 <form-time [label]="'time with label (' + selectedTime +')'" [(ngModel)]="selectedTime"
                             [ngModelOptions]="{standalone: true}"></form-time>
 ```
+
+The following properties are provided for this control:
+* `disableNative` - disables built in browser time.
 
 ### Days Of Week
 

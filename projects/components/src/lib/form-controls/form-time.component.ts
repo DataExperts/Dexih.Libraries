@@ -20,6 +20,7 @@ export class DFormTimeComponent implements ControlValueAccessor, OnInit, OnDestr
     @Input() subLabel: string;
     @Input() floatingLabel: string;
     @Input() placeholder: string;
+    @Input() disableNative = false;
 
     @Output() keydown: EventEmitter<any> = new EventEmitter<any>();
     
