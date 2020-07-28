@@ -16,8 +16,8 @@ import { DMarkdownComponent } from './d-markdown.component';
     declarations: [
       DMarkdownComponent    
     ],
-    entryComponents: [
-      DMarkdownComponent    
-    ]
+    // entryComponents: [
+    //   DMarkdownComponent    
+    // ]
 })
 export class DMarkdownModule { }

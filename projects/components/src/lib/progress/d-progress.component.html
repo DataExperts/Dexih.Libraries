@@ -1,14 +1,12 @@
-<div class="d-flex" [ngStyle]="{'min-width': width, 'height': height, 'width': '100%' }">
+<div class="d-flex" [ngStyle]="{'height': height, 'width': '100%' }">
     <div class="progress position-relative w-100 d-flex bg-secondary" [ngClass]="{'progress-border': showCancel, 'rounded': !showCancel}" [ngStyle]="{'height': height}">
         <div class="progress-bar" [ngClass]="[type && 'bg-' + type]" role="progressbar"
             [ngStyle]="{'width': percent + '%'}"></div>
-        <div class="d-flex justify-content-center align-items-center position-absolute w-100 h-100 text-white">
-            <span class="text-nowrap">
+        <div class="d-flex justify-content-center position-absolute w-100 h-100 text-white truncate-text" [ngStyle]="{'line-height': height}">
             <ng-content></ng-content>
-        </span>
         </div>
     </div>
-    <a *ngIf="showCancel" class="btn btn-sm btn-danger text-white ml-auto cancel-border "
+    <a *ngIf="showCancel" class="btn btn-sm btn-danger text-white ml-auto cancel-border " [ngStyle]="{'height': height}"
         title="Cancel the task" (click)="cancelClick()">
         <i class="fa fa-ban"></i>
     </a>

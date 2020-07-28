@@ -284,7 +284,7 @@
                             <d-button buttonClass="btn btn-sm btn-primary" class="mr-1" (click)="startProgress()">start</d-button>
                             <d-button buttonClass="btn btn-sm btn-primary" class="mr-1" (click)="stopProgress()">stop</d-button>
                             <d-button buttonClass="btn btn-sm btn-primary" class="mr-1" (click)="resetProgress()">reset</d-button>
-                            <d-progressbar [showCancel]="true" (cancelled)="stopProgress()" [value]="percent" type="success">
+                            <d-progressbar [showCancel]="true" (cancelled)="stopProgress()" [value]="percent" type="success" class="w-100">
                                 animated {{percent}}
                             </d-progressbar>
                         </div>

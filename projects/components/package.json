@@ -1,6 +1,6 @@
 {
   "name": "ngx-d-components",
-  "version": "0.4.132",
+  "version": "0.4.135",
   "repository": {
     "type": "git",
     "url": "https://github.com/DataExperts/Dexih.Libaries/tree/master/projects/components"
@@ -16,15 +16,14 @@
   "bugs": {
     "url": "https://github.com/DataExperts/Dexih.Libaries/issues"
   },
-  "dependencies": {
-    "ngx-d-markdown": "^0.0.14"
-  },
+  "dependencies": {},
   "peerDependencies": {
     "@angular/common": ">= 8.0.0",
     "@angular/core": ">= 8.0.0",
     "@angular/forms": ">= 8.0.0",
     "@angular/router": ">= 8.0.0",
     "@angular/animations": ">= 8.0.0",
-    "@angular/platform-browser": ">= 8.0.0"
+    "@angular/platform-browser": ">= 8.0.0",
+    "ngx-d-markdown": "^0.0.14"
   }
 }

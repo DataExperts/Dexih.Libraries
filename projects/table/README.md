@@ -22,6 +22,7 @@ ngx-d-table is an Angular (8+) component for building data driven tables.
 * Drag and drop re-ordering.
 * Save to csv file.
 * Switch between card view/table view.
+* Automatic Paging.
 
 ## Demo
 
@@ -42,7 +43,7 @@ breaking: component name changed from dexih-table to d-table.
 To install this library, run:
 
 ```bash
-$ npm install ngx-d-table --save
+$ npm install ngx-d-table ngx-d-markdown --save
 ```
 
 Ensure that the angular component dev kit (used for drag/drop functions) is installed:
@@ -50,9 +51,9 @@ Ensure that the angular component dev kit (used for drag/drop functions) is inst
 npm install @angular/cdk --save
 ```
 
-> Note: ngx-d-table also installs ngx-d-markdown, marked.js & prismjs
+Ensure the `BrowserAnimationsModule` and `HttpClientModule` have been included in your app.module.ts.  
 
-Ensure the `BrowserAnimationsModule` and `HttpClientModule` have been included in your app.module.ts.  Here is a sample version:
+Here is a sample version:
 ```typescript
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';

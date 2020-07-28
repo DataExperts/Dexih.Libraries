@@ -279,7 +279,9 @@ this should have no padding.
 
             <d-progressbar class="m-3" [showCancel]="true" (cancelled)="cancelled()" (progressClick)="progress()"
                 value="0" type="success">
-                With a very long text that should be truncated with an ellipsis. With a very long text that should be truncated with an ellipsis.
+                <div class="w-100 text-truncate">
+                    With a very long text that should be truncated with an ellipsis. With a very long text that should be truncated with an ellipsis.
+                </div>
             </d-progressbar>
 
             <d-progressbar class="m-3" [showCancel]="true" (cancelled)="cancelled()" (progressClick)="progress()"

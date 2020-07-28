@@ -37,9 +37,8 @@ https://dataexperts.github.io/Dexih.Libraries/demo/components
 To install this library, run:
 
 ```bash
-$ npm install ngx-d-components --save
+$ npm install ngx-d-components ngx-d-markdown --save
 ```
-> Note: ngx-d-table also installs ngx-d-markdown, marked.js & prismjs
 
 Ensure the `BrowserAnimationsModule` and `HttpClientModule` have been included in your app.module.ts.  Here is a sample version:
 

@@ -1,6 +1,6 @@
 {
   "name": "ngx-d-table",
-  "version": "0.6.26",
+  "version": "0.6.27",
   "repository": {
     "type": "git",
     "url": "https://github.com/DataExperts/Dexih.Libaries/tree/master/projects/table"
@@ -17,7 +17,6 @@
     "url": "https://github.com/DataExperts/Dexih.Libaries/issues"
   },
   "dependencies": {
-    "ngx-d-markdown": "^0.0.14",
     "moment": "^2.27.0"
   },
   "peerDependencies": {
@@ -25,6 +24,7 @@
     "@angular/core": ">= 8.0.0",
     "@angular/forms": ">= 8.0.0",
     "@angular/cdk": ">= 8.0.0",
-    "rxjs": ">= ^6.1.0"
+    "rxjs": ">= ^6.1.0",
+    "ngx-d-markdown": "^0.0.14"
   }
 }

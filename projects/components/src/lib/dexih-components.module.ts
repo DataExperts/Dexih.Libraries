@@ -30,7 +30,7 @@ import { DMarkdownModule } from 'ngx-d-markdown';
     DProgressModule,
     DToastModule,
     DModalModule,
-    DMarkdownModule
+    // DMarkdownModule
   ]
 })
 export class DComponentsModule {
