@@ -86,7 +86,7 @@ export class DFormTextAreaComponent implements ControlValueAccessor, OnInit, OnD
     }
 
     writeValue(value: string) {
-        this.control.setValue(value);
+        this.control.setValue(value, {emitEvent: false});
     }
 
     setDisabledState(isDisabled: boolean): void {

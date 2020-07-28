@@ -82,7 +82,13 @@ export class DFormDaysOfWeekComponent implements ControlValueAccessor, OnInit, O
     }
 
     writeValue(value: Array<eDayOfWeek>) {
-        this.setFormArray(value);
+        for (let i = 0; i < 7; i++) {
+            if (value && value.length > 0) {
+                this.control.controls[i].setValue(value.indexOf(i + 1) >= 0, {emitEvent: false});
+            } else {
+                this.control.controls[i].setValue(false, {emitEvent: false});
+            }
+        }
     }
 
     setDisabledState(isDisabled: boolean): void {
@@ -91,16 +97,6 @@ export class DFormDaysOfWeekComponent implements ControlValueAccessor, OnInit, O
             this.control.disable();
         } else {
             this.control.enable();
-        }
-    }
-
-    setFormArray(value: Array<eDayOfWeek>) {
-        for (let i = 0; i < 7; i++) {
-            if (value && value.length > 0) {
-                this.control.controls[i].setValue(value.indexOf(i + 1) >= 0);
-            } else {
-                this.control.controls[i].setValue(false);
-            }
         }
     }
 

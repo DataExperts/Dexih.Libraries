@@ -79,7 +79,9 @@ export class DFormInputComponent implements ControlValueAccessor, OnInit, OnDest
     }
 
     writeValue(value: string) {
-        this.control.setValue(value);
+        this.control.setValue(value, {
+            emitEvent: false
+        });
     }
 
     setDisabledState(isDisabled: boolean): void {

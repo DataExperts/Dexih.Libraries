@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { ToastMessage, DToastComponent, DModalComponent } from 'projects/components/src/public-api';
 import { eDayOfWeek } from 'projects/components/src/lib/form-controls/form-daysofweek.component';
+import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 
 
 @Component({
@@ -12,6 +13,9 @@ export class ComponentsComponent {
   @ViewChild('toasts', { static: true }) toasts: DToastComponent;
   @ViewChild('modal', { static: true }) modal: DModalComponent;
 
+  constructor(private fb: FormBuilder) {
+  };
+  
   public selectedItem0 = 0;
 
   public selectedItem: string;
@@ -73,6 +77,8 @@ export class ComponentsComponent {
 
   public customCheckValue = 'checked';
 
+  public formGroup: FormGroup;
+
   public complexTags = [
     {column: {key: 1, name: 'col1', color: 'blue'}},
     {column: {key: 2, name: 'col2', color: 'red'}}
@@ -80,6 +86,12 @@ export class ComponentsComponent {
 
   public showMessage(message) {
     this.toasts.add(new ToastMessage('info', 'message', message, 5000));
+  }
+
+  public newFormGroup() {
+    this.formGroup= new FormGroup({
+      test: new FormControl('test'),
+    });
   }
 
   public complexTagsSelected = [{column: {key: 1, name: 'col1'}}];

@@ -350,6 +350,11 @@ this should have no padding.
                         <form-input labelLeft="side by side" placeholder="input something" iconClass="fa fa-pie-chart"></form-input>
                     </div>
                 </div>
+
+                <button (click)="newFormGroup()">New Form Group</button>
+                <form *ngIf="formGroup" [formGroup]="formGroup">
+                    <form-input label="changing form group" formControlName="test"></form-input>
+                </form>
         </d-widget>
 
         <d-widget title="Text Areas" [padding]="true" iconClass="fa fa-lg fa-fw fa-database">
