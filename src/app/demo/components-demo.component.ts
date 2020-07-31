@@ -35,6 +35,14 @@ export class ComponentsDemoComponent implements OnInit {
         }).catch(() => this.modalInformationValue = 'should never happen');
       }
 
+      public modalLarge() {
+        const lines = Array.from(Array(1000).keys()).map(c => 'Line number ' + c);
+        const info = lines.join('<br>');
+        this.modal.information('Information', info, 'Continue', info).then(result => {
+          this.modalInformationValue = 'ok';
+        }).catch(() => this.modalInformationValue = 'should never happen');
+      }
+
       public modalConfirm() {
         this.modal.confirm('Confirm', 'Do you want to do this <b>bold action<b>', 'Yes', 'Cancel').then(result => {
           this.modalConfirmValue = result ? 'confirmed' : 'cancelled';

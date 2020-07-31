@@ -30,6 +30,12 @@ https://dataexperts.github.io/Dexih.Libraries/demo/components
 
 ## Releases Summary
 
+v0.4.137
+* Fix bug with tag input height resize when adding tags
+* Placeholder now visible in floating inputs.
+* Floating animation now changes on focus, rather than when a value is entered.
+* Modal dialog now allows scroll for large amount of data.
+
 [Older release information](releases.md)
 
 ## Installation

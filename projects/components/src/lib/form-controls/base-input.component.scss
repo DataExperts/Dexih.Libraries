@@ -1,12 +1,12 @@
 .tag {
-    max-height: 28px;
+    max-height: 24px;
     background-color: var(--secondary);
   }
   
   button.close-button {
     line-height: 1.4rem;
     background-color: transparent;
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 400;
     opacity: 0.5;
     border: 0;
@@ -65,7 +65,7 @@
   }
   
   div.form-label-group-tags {
-    padding-top: 1.25rem !important;
+    padding-top: 1.0rem !important;
   }
 
   input.form-label-group-tags {
@@ -77,25 +77,25 @@
     padding-bottom: 0.25rem !important;
   }
 
-  .form-label-group input::-webkit-input-placeholder {
-    color: transparent;
-  }
+  // .form-label-group input::-webkit-input-placeholder {
+  //   color: transparent;
+  // }
   
-  .form-label-group input:-ms-input-placeholder {
-    color: transparent;
-  }
+  // .form-label-group input:-ms-input-placeholder {
+  //   color: transparent;
+  // }
   
-  .form-label-group input::-ms-input-placeholder {
-    color: transparent;
-  }
+  // .form-label-group input::-ms-input-placeholder {
+  //   color: transparent;
+  // }
   
-  .form-label-group input::-moz-placeholder {
-    color: transparent;
-  }
+  // .form-label-group input::-moz-placeholder {
+  //   color: transparent;
+  // }
   
-  .form-label-group input::placeholder {
-    color: transparent;
-  }
+  // .form-label-group input::placeholder {
+  //   color: transparent;
+  // }
   
   // input[type="text"].height-fix,
   // input[type="time"].height-fix,

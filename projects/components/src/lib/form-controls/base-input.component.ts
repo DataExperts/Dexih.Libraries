@@ -40,6 +40,7 @@ export class BaseInputComponent implements ControlValueAccessor, OnInit {
 
     id = 'input_' + Math.random().toString(36).substr(2, 9);
     isDirty = false;
+    focus = false;
 
     onChange: any = () => { };
     onTouched: any = () => { };

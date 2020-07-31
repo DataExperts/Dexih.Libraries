@@ -36,6 +36,7 @@
                             subLabel="subLabel text"
                             labelLeft="label on the left"
                             floatingLabel="A floating label"
+                            placeholder="The placeholder"
                             errors="The control has errors"
                             iconClass="fa fa-pie-chart"
                             note="a note detailing the control">
@@ -70,7 +71,7 @@
 
                     <div class="border rounded p-3">
                         <form-tags label="input tag (type values and press enter)" placeholder="input tags"></form-tags>
-                        <form-tags label="input tag with floating label" floatingLabel="with floating label">
+                        <form-tags label="input tag with floating label" floatingLabel="with floating label" placeholder="enter tag values">
                         </form-tags>
                         <form-tags label="pre-filled input tags" [value]="['item1', 'item2']" placeholder="input tags">
                         </form-tags>
@@ -461,6 +462,14 @@
                         <div class="row p-1">
                             <div class="col">
                                 <d-button [fill]="true" (click)="modalInformation()" text="Information"></d-button>
+                            </div>
+                            <div class="col">
+                                Result: {{modalInformationValue}}
+                            </div>
+                        </div>
+                        <div class="row p-1">
+                            <div class="col">
+                                <d-button [fill]="true" (click)="modalLarge()" text="Large Information"></d-button>
                             </div>
                             <div class="col">
                                 Result: {{modalInformationValue}}
