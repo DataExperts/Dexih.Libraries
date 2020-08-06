@@ -32,9 +32,11 @@ https://dataexperts.github.io/Dexih.Libraries/demo/table
 
 ## Releases Summary
 
-version 1.0.0
-
+version 0.6.27
 breaking: component name changed from dexih-table to d-table.
+
+version 0.6.28
+breaking: enableResponsive default changed to false.
 
 [Older release information](releases.md)
 
