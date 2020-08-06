@@ -35,8 +35,8 @@ https://dataexperts.github.io/Dexih.Libraries/demo/table
 version 0.6.27
 breaking: component name changed from dexih-table to d-table.
 
-version 0.6.28
-breaking: enableResponsive default changed to false.
+version 0.6.30
+- fixed vertical scroll bar on firefox when setting enableResponsive=true
 
 [Older release information](releases.md)
 

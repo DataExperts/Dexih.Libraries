@@ -48,7 +48,7 @@ export class DTableComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
     @Input() public selectedKeyColumn: string;
     @Input() public enableSaveCsv = false;
     @Input() public csvFileName = 'data.csv';
-    @Input() public enableResponsive = false;
+    @Input() public enableResponsive = true;
     @Input() public tableClass = 'table table-striped table-bordered table-hover table-light m-0';
     @Input() public error: string;
     @Input() public heading: string;

@@ -102,7 +102,7 @@
         </ng-template>
     </div>
 
-    <div *ngIf="tableItems && !hideTable" [ngClass]="{'table-responsive': enableResponsive}">
+    <div *ngIf="tableItems && !hideTable" [ngClass]="{'table-responsive': enableResponsive}" >
         <table *ngIf="view === 'table'" [class]="tableClass" width="100%">
             <thead>
                 <tr *ngIf="currentColumns && enableHeaderRow">
