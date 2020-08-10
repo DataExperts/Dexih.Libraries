@@ -3,7 +3,7 @@
         <span [attr.for]="id" class="input-group-text" [ngClass]="{'border-0 rounded-0 bg-transparent': !border}"> {{labelLeft}}</span>
     </div>
 
-    <div class="form-control h-100 p-0 m-0"
+    <div class="form-control p-0 m-0 h-100"
     [ngClass]="{'border-0 rounded-0  bg-transparent': !border, 'is-invalid': errors, 'is-valid': !errors && control.dirty && autoValidate, 'flex-wrap': tags && tags.length > 0}">
 
         <div  class="d-flex flex-wrap align-items-center"
@@ -20,7 +20,7 @@
                 </div>
             </div>
         
-            <input *ngIf="!hideInput || !tags || tags.length === 0"
+            <input 
                 [placeholder]="enableFloatingAnimation && floatingLabel && !focus ? '' : (placeholder ? placeholder : '')"
                 [readonly]="readonly"
                 (keydown)="keyDown.emit($event);"

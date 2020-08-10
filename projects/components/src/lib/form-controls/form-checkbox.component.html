@@ -1,4 +1,4 @@
-<div *ngIf="!border" class="d-flex h-100 align-items-center">
+<div *ngIf="!border" class="d-flex" [ngClass]="{'h-100 align-items-center': center}">
     <div class="custom-control" [ngClass]="{'custom-switch': isSwitch, 'custom-checkbox': !isSwitch }">
         <div [ngClass]="{'is-invalid': errors, 'is-valid': !errors && control.dirty && autoValidate}" [title]="errors">
             <input class="custom-control-input" [id]="id" type="checkbox" [formControl]="control"

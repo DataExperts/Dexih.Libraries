@@ -2,7 +2,7 @@
     <label *ngIf="label" [for]="id" class="mt-1">
         {{label}}
         <a class="btn btn-outline-primary btn-sm" *ngIf="!hideToggle"
-            (click)='toggleState()'>{{isHidden == true ? (disabled ? 'Show' : (value ? 'Edit' : 'Add')) : 'Hide'}}</a>
+            (click)='toggleState()'>{{isHidden == true ? (disabled ? 'Show' : (control.value ? 'Edit' : 'Add')) : 'Hide'}}</a>
         <a class="btn btn-outline-primary btn-sm ml-1" *ngIf="showCopy" (click)='copyMessage()'>
             <i class="fa fa-copy"></i>
             Copy
@@ -39,10 +39,10 @@
             <markdown (click)="sharedFunctions.getRoute($event)" [data]="note"></markdown>
         </small>
     </div>
-    <div *ngIf="showPreview && value">
+    <div *ngIf="showPreview && control.value">
         <label *ngIf="!isHidden">Preview</label>
         <div class="border rounded p-2" [ngClass]="{'border-danger': errors}">
-            <markdown *ngIf="value" (click)="getRoute($event)" [data]="control.value"></markdown>
+            <markdown *ngIf="control.value" (click)="getRoute($event)" [data]="control.value"></markdown>
         </div>
     </div>
 </div>

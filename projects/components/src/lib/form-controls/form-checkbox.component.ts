@@ -19,6 +19,7 @@ export class DFormCheckboxComponent implements OnInit, OnDestroy, OnChanges, Con
     @Input() checkedValue: any = true;
     @Input() unCheckedValue: any = false;
     @Input() autoValidate = true;
+    @Input() center = false;
 
     id = 'input_' + Math.random().toString(36).substr(2, 9);
     sharedFunctions = new SharedFunctions();
