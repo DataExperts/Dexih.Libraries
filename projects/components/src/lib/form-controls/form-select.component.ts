@@ -30,7 +30,9 @@ export class DFormSelectComponent implements ControlValueAccessor, OnInit, OnDes
     @Input() itemTitle: string;
     @Input() defaultItem: string; // item is added to the list when list is empty.
     @Input() allowNullSelect = false;
-    @Input() selectNullMessage = 'Select nothing';
+    @Input() selectNullMessage = 'Select null';
+    @Input() allowBlankSelect = false;
+    @Input() selectBlankMessage = 'Select blank';
     @Input() enableTextEntry = false; // allows text to be entered in addition to selected entries.
     @Input() enableTextEntryMatch = true; // keeps text entry in sync with the value variable.
     @Input() enableKeySelect = true; // the output value will be the key field (rather than the item value)
@@ -169,6 +171,8 @@ export class DFormSelectComponent implements ControlValueAccessor, OnInit, OnDes
                     } else {
                        if (this.allowNullSelect) {
                             this.selectedItem = null;
+                       } else if (this.allowBlankSelect) {
+                           this.selectedItem = '';
                        }
                     }
 
@@ -279,7 +283,7 @@ export class DFormSelectComponent implements ControlValueAccessor, OnInit, OnDes
                 this.selectedKeys = [];
             } else {
                 this.selectedItem = null;
-                this.selectedName = '';
+                this.selectedName = null;
                 if (this.enableTextEntry) {
                     if (this.textValue) {
                         this.selectedName = this.textValue;
@@ -359,7 +363,7 @@ export class DFormSelectComponent implements ControlValueAccessor, OnInit, OnDes
                 this.value = item;
             }
         } else {
-            item = null;
+            this.value = null;
         }
     }
 
@@ -368,7 +372,7 @@ export class DFormSelectComponent implements ControlValueAccessor, OnInit, OnDes
         (this.textEntryItems && this.textEntryItems.length > 0) ||
         typeof(this.startItemsTemplate) !== 'undefined' || 
         typeof(this.endItemsTemplate) !== 'undefined' || 
-        this.allowNullSelect || this.showRefresh;
+        this.allowNullSelect || this.allowBlankSelect || this.showRefresh;
 
         this.disableInput = !this.showDropDown && !this.enableTextEntry;
 
@@ -477,7 +481,11 @@ export class DFormSelectComponent implements ControlValueAccessor, OnInit, OnDes
             this.selectedItem = selectedItem;
             this.isTextEntry = false;
 
-            if (this.hasValue(selectedItem)) {
+            if(selectedItem === '') {
+                this.value = null;
+                this.selectedName = '';
+            }
+            else if (this.hasValue(selectedItem)) {
                 this.updateValueFromItem(selectedItem);
 
                 this.selectedName = this.getItemName(selectedItem);
@@ -485,7 +493,7 @@ export class DFormSelectComponent implements ControlValueAccessor, OnInit, OnDes
                 this.doManualControlUpdate = false;
             } else {
                 this.value = null;
-                this.selectedName = '';
+                this.selectedName = null;
             }
         }
 
@@ -560,7 +568,7 @@ export class DFormSelectComponent implements ControlValueAccessor, OnInit, OnDes
 
         this.selectedKeys.push(value);
         this.value.push(item);
-        this.manualControl.setValue('');
+        this.manualControl.setValue(null);
         this.hasChanged();
     }
 
@@ -704,7 +712,7 @@ export class DFormSelectComponent implements ControlValueAccessor, OnInit, OnDes
         if (this.multiSelect) { return; }
 
         if (this.enableTextEntry) {
-            this.value = this.setTextEntryToValue ? this.textValue : null;
+            this.value = this.setTextEntryToValue && !this.textValue ? this.textValue : null;
             this.hasChanged();
 
             // for text entry enabled, just set the current value and emit.

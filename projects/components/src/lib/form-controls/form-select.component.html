@@ -54,7 +54,11 @@
             </li>
 
             <li *ngIf="allowNullSelect" >
-                <a class="dropdown-item" [ngClass]="{'active': !selectedItem }" (click)="selectItem(null)">{{selectNullMessage}}</a>
+                <a class="dropdown-item" [ngClass]="{'active': selectedItem === null }" (click)="selectItem(null)">{{selectNullMessage}}</a>
+            </li>
+
+            <li *ngIf="allowBlankSelect" >
+                <a class="dropdown-item" [ngClass]="{'active': selectedItem === '' }" (click)="selectItem('')">{{selectBlankMessage}}</a>
             </li>
 
             <ng-template [ngIf]="!childItems && !grandChildItems">

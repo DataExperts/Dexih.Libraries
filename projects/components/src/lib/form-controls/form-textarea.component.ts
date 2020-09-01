@@ -26,7 +26,7 @@ export class DFormTextAreaComponent implements ControlValueAccessor, OnInit, OnD
     @Input() errors: string;
     @Input() value: string;
     @Input() hideToggle = false;
-    @Input() isHidden = true;
+    @Input() isHidden = false;
     @Input() rows = 5;
     @Input() disabled = false;
     @Input() showPreview = true;
@@ -47,7 +47,7 @@ export class DFormTextAreaComponent implements ControlValueAccessor, OnInit, OnD
     constructor() {     }
 
      ngOnInit() {
-         if ( this.hideToggle ) { this.isHidden = false; }
+         // if ( this.hideToggle && !this.showPreview ) { this.isHidden = false; }
          this.subscription = this.control.valueChanges.subscribe(value => {
             this.onChange(value);
             this.onTouched();
@@ -73,8 +73,10 @@ export class DFormTextAreaComponent implements ControlValueAccessor, OnInit, OnD
     } 
 
     toggleState() {
-         this.isHidden = !this.isHidden;
-        // this.state = this.isHidden ? 'hide' : 'show';
+        if (!this.hideToggle) {
+            this.isHidden = !this.isHidden;
+            // this.state = this.isHidden ? 'hide' : 'show';
+        }
      }
 
     registerOnChange(fn: any) {
@@ -102,7 +104,7 @@ export class DFormTextAreaComponent implements ControlValueAccessor, OnInit, OnD
         let isLink = this.sharedFunctions.getRoute(event);
 
         // if a link was not selected, then open the edit.
-        if (!isLink) {
+        if (!isLink && !this.hideToggle) {
             this.isHidden = false;
         }
     }

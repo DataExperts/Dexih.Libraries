@@ -389,7 +389,8 @@ this should have no padding.
 
                 <form-select labelLeft="Label Left" [items]="['item1', 'item2','item3']" [enableFilter]="false"></form-select>
                 
-                <form-select label="Default Value" [allowNullSelect]="true" selectNullMessage="Use null value" [items]="['item1', 'item2','item3']" [enableTextEntry]="true"></form-select>
+                <div>value = {{nullableItem}} is null {{nullableItem === null}}, is blank {{nullableItem === ''}}</div>
+                <form-select label="Default Value" [allowNullSelect]="true" selectNullMessage="Use null value" [allowBlankSelect]="true" selectBlankMessage="Use blank value" [items]="['item1', 'item2','item3']" [enableTextEntry]="true" [(textValue)]="nullableItem" ></form-select>
                 
                 <form-select label="No Items" [items]="[]" [enableTextEntry]="true" iconClass="fa fa-pie-chart"></form-select>
 
@@ -553,7 +554,7 @@ this should have no padding.
         </d-widget>
 
         <d-widget title="Day of week" [padding]="true" iconClass="fa fa-lg fa-fw fa-database">
-                <form-daysofweek [(ngModel)]="daysOfWeekValue" [label]="'selected: ' + daysOfWeekValue" ></form-daysofweek>
+                <form-daysofweek [(ngModel)]="daysOfWeekValue" [label]="'selected: ' + daysOfWeekValue.toString()" ></form-daysofweek>
                 <form-daysofweek label="Select the days"></form-daysofweek>
                 <form-daysofweek labelLeft="label left"></form-daysofweek>
                 <form-daysofweek label="With note" note="this is the note"></form-daysofweek>

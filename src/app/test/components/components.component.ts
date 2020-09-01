@@ -47,6 +47,8 @@ export class ComponentsComponent {
 
   public selectedItem8 =  {key: 3, name: 'cat1 item2'};
 
+  public nullableItem;
+  
   // public selectedTags = [{key: 1, name: 'item1'}, {key: 3, name: 'item3'}];
   public selectedTags = [1, 3];
 

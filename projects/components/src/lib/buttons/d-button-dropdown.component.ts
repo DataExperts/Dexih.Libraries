@@ -36,6 +36,16 @@ export class DButtonDropDownComponent {
         this.isOpenChange.emit($event);    
     }
 
+    public showDropdown($event) {
+        this.isOpen = true;    
+        this.isOpenChange.emit($event);    
+    }
+
+    public hideDropdown($event) {
+        this.isOpen = false;    
+        this.isOpenChange.emit($event);    
+    }
+
     // detect a click outside the control, and hide the dropdown
     @HostListener('document:click', ['$event.target'])
     public onClick(targetElement: any) {
