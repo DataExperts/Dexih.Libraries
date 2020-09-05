@@ -508,7 +508,7 @@ export class DTableComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
     }
 
     public updateTags() {
-        if(this.tags) {
+        if(this.tags && this.tags.length > 0) {
             this.tagStates = new Array(this.tags.length);
             for (let i = 0; i < this.tagStates.length; i++) {
                 let tag = this.tags[i];
@@ -516,6 +516,8 @@ export class DTableComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
                 this.tagStates[i].tag = tag;
                 this.tagStates[i].isChecked = false;
             }
+        } else {
+            this.tagStates = null;
         }
     }
 

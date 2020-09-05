@@ -9,6 +9,6 @@ import { DButtonComponent} from './d-button.component';
 export class DButtonCloseComponent extends DButtonComponent {
     @Input() title = 'Close this window';
     iconClass = 'fa fa-close';
-    buttonClass = 'btn-warning';
+    buttonClass = 'btn-danger';
     text = 'Close';
 }

@@ -27,6 +27,11 @@ export class Column {
     public enum: Type;
     public tags: Tag[];
     public tagNames: string[];
+    public tooltip: string;
+    public align: string;
+    public width: string;
+    public backgroundColor: string;
+    public textColor: string;
 }
 
 export class Tag {

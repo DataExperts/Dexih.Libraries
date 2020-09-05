@@ -59,7 +59,7 @@ export class DFormSelectComponent implements ControlValueAccessor, OnInit, OnDes
     @Output() onShown = new EventEmitter();
     @Output() onRefresh = new EventEmitter();
     @Output() isOpenChange = new EventEmitter<any>();
-    
+
     @ViewChild('dropdownButton', { static: true }) dropdownElement: any;
 
     @ContentChild('startItems', {static: true }) public startItemsTemplate: TemplateRef<any>;
@@ -99,14 +99,13 @@ export class DFormSelectComponent implements ControlValueAccessor, OnInit, OnDes
 
     private blockMenuClose = false;
 
+    selectedKeys: any[];  // list of selected keys
+    isChangingCounter = 0;
+    oldValue = this.value;
+
     onChange: any = () => { };
     onTouched: any = () => { };
 
-    selectedKeys: any[];  // list of selected keys
-
-    isChangingCounter = 0;
-
-    oldValue = this.value;
 
     constructor() {
 

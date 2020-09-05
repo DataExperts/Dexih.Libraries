@@ -17,10 +17,11 @@
         <label for="input-value" class="col-form-label">{{inputPrompt}}</label>
         <input type="text" class="form-control" id="input-value" [(ngModel)]="inputValue">
       </div>
+      <div *ngIf="showDetails">
+        <div [innerHTML]="details"></div>
+      </div>
     </div>
-    <div *ngIf="showDetails" class="modal-body">
-      <div [innerHTML]="details"></div>
-    </div>
+    
 
     <div class="modal-footer">
       <button *ngIf="type === 'confirm' || type === 'prompt'" type="button" class="btn btn-danger" (click)="cancel()"
