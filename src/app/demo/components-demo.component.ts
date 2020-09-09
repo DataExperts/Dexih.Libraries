@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DModalComponent, DToastComponent } from 'projects/components/src/lib';
+import { FormControl } from '@angular/forms';
 
 @Component({
     selector: 'app-compoents-demo',
@@ -17,12 +18,16 @@ export class ComponentsDemoComponent implements OnInit {
     modalInformationValue: string;
     modalPromptValue = 'initial value';
 
+    textControl = new FormControl();
+
     public timer;
     public percent = 0;
 
     constructor() { }
 
-    ngOnInit() { }
+    ngOnInit() {
+      this.textControl.setValue('the value');
+    }
 
     scrollToElement($element): void {
         console.log($element);

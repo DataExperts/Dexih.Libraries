@@ -1,4 +1,4 @@
-import { OnInit, Component, forwardRef, Input, AfterViewInit, ChangeDetectorRef, Output, EventEmitter, ViewChild, HostListener, OnDestroy, OnChanges, SimpleChanges } from '@angular/core';
+import { OnInit, Component, forwardRef, Input, Output, EventEmitter, ViewChild, OnDestroy, OnChanges, SimpleChanges } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormControl } from '@angular/forms';
 import { SharedFunctions } from './shared-functions';
 import { Subscription } from 'rxjs';
@@ -45,11 +45,13 @@ export class DFormTimeComponent implements ControlValueAccessor, OnInit, OnDestr
     ngOnInit(): void {
         this.subscription = this.control.valueChanges.subscribe(value => {
             this.updateError();
-            this.onChange(this.timeToValue(value));
-            this.onTouched();
+            if (!this.control.pristine) {
+                this.onChange(this.timeToValue(value));
+                this.onTouched();
+            }
         });
     }
-    
+
     ngOnDestroy() {
         this.subscription.unsubscribe();
     }

@@ -46,8 +46,10 @@ export class DFormDateComponent implements ControlValueAccessor, OnInit, OnDestr
     ngOnInit(): void {
         this.subscription = this.control.valueChanges.subscribe(value => {
             this.updateError();
-            this.onChange(this.dateToValue(value));
-            this.onTouched();
+            if (!this.control.pristine) {
+                this.onChange(this.dateToValue(value));
+                this.onTouched();
+            }
         });
     }
 

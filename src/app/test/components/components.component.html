@@ -329,6 +329,7 @@ this should have no padding.
                     iconClass="fa fa-pie-chart"></form-input>
                 <form-input label="input with sub label" subLabel="the label" placeholder="input something" iconClass="fa fa-pie-chart"></form-input>
                 <form-input label="input disabled" [disabled]="true" placeholder="input something" iconClass="fa fa-pie-chart" value="can't change this text"></form-input>
+                <form-input label="input disabled (form control)" placeholder="input something" iconClass="fa fa-pie-chart" [formControl]="disabledControl"></form-input>
 
                 the number is {{inputNumber}}
                 <form-input type="number" label="a number" placeholder="input number" [(ngModel)]="inputNumber" [ngModelOptions]="{standalone: true}"></form-input>

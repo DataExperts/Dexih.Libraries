@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, forwardRef, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, forwardRef, SimpleChanges, OnDestroy, OnChanges } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormControl } from '@angular/forms';
 import { ListItem } from './shared-functions';
 import { Subscription } from 'rxjs';
@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs';
     providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => BaseInputComponent), multi: true }]
 })
 
-export class BaseInputComponent implements ControlValueAccessor, OnInit {
+export class BaseInputComponent implements ControlValueAccessor, OnInit, OnDestroy, OnChanges {
     @Input() labelLeft: string;
     @Input() errors: string;
     @Input() value: any;
@@ -42,20 +42,22 @@ export class BaseInputComponent implements ControlValueAccessor, OnInit {
     isDirty = false;
     focus = false;
 
-    onChange: any = () => { };
-    onTouched: any = () => { };
-
     subscription: Subscription;
     control = new FormControl({value: this.value, disabled: this.disabled});
 
-    ngOnInit() { 
+    onChange: any = () => { };
+    onTouched: any = () => { };
+
+    ngOnInit() {
         this.subscription = this.control.valueChanges.subscribe(value => {
-            if(this.type.toLocaleLowerCase() == 'number') { 
-                this.onChange(+value);
-            } else {
-                this.onChange(value);
+            if (!this.control.pristine) {
+                if(this.type.toLocaleLowerCase() === 'number') {
+                    this.onChange(+value);
+                } else {
+                    this.onChange(value);
+                }
+                this.onTouched();
             }
-            this.onTouched();
         });
     }
 
@@ -76,19 +78,19 @@ export class BaseInputComponent implements ControlValueAccessor, OnInit {
             }
         }
     }
-    
+
     writeValue(value: any): void {
         this.control.setValue(value, { emitEvent: false });
     }
-    
+
     registerOnChange(fn: any): void {
         this.onChange = fn;
     }
-    
+
     registerOnTouched(fn: any): void {
         this.onTouched = fn;
     }
-    
+
     setDisabledState?(isDisabled: boolean): void {
         this.disabled = isDisabled;
         if (isDisabled) {

@@ -32,7 +32,7 @@
                 class="border-0 bg-transparent form-control-custom-input height-fix" 
                 [ngClass]="{'form-label-group-tags': floatingLabel && ((tags && tags.length > 0)), 
                     'form-label-no-placeholder': (floatingLabel && (!enableFloatingAnimation || ( (focus || control.value?.length > 0) &&  (!tags || tags.length === 0)))), 
-                    'font-italic': fontItalic, 'disabled-input': disabled}" 
+                    'font-italic': control.value && fontItalic, 'disabled-input': disabled}" 
                 [id]="id"
                 [type]="type"
                 [pattern]="pattern"

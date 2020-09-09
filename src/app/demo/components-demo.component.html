@@ -89,7 +89,7 @@
                     </p>
 
                     <div class="border rounded p-3">
-                        <form-select label="Simple Select (also allows text entry)" [value]="'item1'"
+                        <form-select [label]="'Simple Select (also allows text entry), you selected - ' + textControl.value" [formControl]="textControl"
                             [items]="['item1', 'item2','item3']" [enableTextEntry]="true"></form-select>
                         <form-select label="Floating label" floatingLabel="With Floating Label"
                             [items]="['item1', 'item2','item3']"></form-select>

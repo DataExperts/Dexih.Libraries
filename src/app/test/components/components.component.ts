@@ -10,11 +10,11 @@ import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
   styleUrls: ['./components.component.scss']
 })
 export class ComponentsComponent {
-  @ViewChild('toasts', { static: true }) toasts: DToastComponent;
-  @ViewChild('modal', { static: true }) modal: DModalComponent;
 
   constructor(private fb: FormBuilder) {
   };
+  @ViewChild('toasts', { static: true }) toasts: DToastComponent;
+  @ViewChild('modal', { static: true }) modal: DModalComponent;
   
   public selectedItem0 = 0;
 
@@ -27,7 +27,7 @@ export class ComponentsComponent {
 
   public multiSelect2 = 'item1';
 
-  public selectedItem2 = 1;
+  public selectedItem2 = 'text value';
   public textValue2: string = null;
 
   public selectedItem3: string = null;
@@ -81,10 +81,14 @@ export class ComponentsComponent {
 
   public formGroup: FormGroup;
 
+  disabledControl = new FormControl({value: 'can not edit', disabled: true});
+
   public complexTags = [
     {column: {key: 1, name: 'col1', color: 'blue'}},
     {column: {key: 2, name: 'col2', color: 'red'}}
   ];
+
+  public complexTagsSelected = [{column: {key: 1, name: 'col1'}}];
 
   public showMessage(message) {
     this.toasts.add(new ToastMessage('info', 'message', message, 5000));
@@ -92,11 +96,9 @@ export class ComponentsComponent {
 
   public newFormGroup() {
     this.formGroup= new FormGroup({
-      test: new FormControl('test'),
+      test: new FormControl({value: 'test', disabled: false}),
     });
   }
-
-  public complexTagsSelected = [{column: {key: 1, name: 'col1'}}];
 
   public AddItems() {
       this.dynamicItems = ['item1', 'item2', 'item3'];

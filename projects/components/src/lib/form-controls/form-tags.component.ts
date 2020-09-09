@@ -78,7 +78,7 @@ export class DFormTagsComponent implements ControlValueAccessor {
             this.control.enable();
         }
     }
-    
+
     keydownEvent($event: any) {
         if ( $event.keyCode === 13) {
             this.addTag();

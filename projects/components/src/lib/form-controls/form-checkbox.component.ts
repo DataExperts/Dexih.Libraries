@@ -9,6 +9,8 @@ import { Subscription } from 'rxjs';
     providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => DFormCheckboxComponent), multi: true }]
 })
 export class DFormCheckboxComponent implements OnInit, OnDestroy, OnChanges, ControlValueAccessor {
+
+    constructor() { }
     @Input() label: string;
     @Input() note: string;
     @Input() errors: string;
@@ -24,18 +26,18 @@ export class DFormCheckboxComponent implements OnInit, OnDestroy, OnChanges, Con
     id = 'input_' + Math.random().toString(36).substr(2, 9);
     sharedFunctions = new SharedFunctions();
 
-    onChange: any = () => { };
-    onTouched: any = () => { };
-
     subscription: Subscription;
     control = new FormControl({value: this.isChecked(this.value), disabled: this.disabled});
 
-    constructor() { }
+    onChange: any = () => { };
+    onTouched: any = () => { };
     
     ngOnInit(): void {
         this.subscription = this.control.valueChanges.subscribe(value => {
-            this.onChange(value ? this.checkedValue : this.unCheckedValue );
-            this.onTouched();
+            if (!this.control.pristine) {
+                this.onChange(value ? this.checkedValue : this.unCheckedValue );
+                this.onTouched();
+            }
         });
     }
     

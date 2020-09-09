@@ -112,21 +112,17 @@ export class DFormSelectComponent implements ControlValueAccessor, OnInit, OnDes
      }
 
      ngOnInit() {
-        this.writeValue(this.value);
-
-        this.isTextEntry = !this.hasValue(this.selectedItem) && this.hasValue(this.textValue);
-
         // monitor changes to the filter control
         this.manualSubscription = this.manualControl.valueChanges
             .subscribe(newValue => {
-                if (this.doManualControlUpdate) {
+                if (this.doManualControlUpdate && !this.manualControl.pristine) {
                     this.needsUpdate = true;
                     this.textValue = newValue;
                     this.selectedItem = null;
                     this.selectedName = this.textValue;
 
                     let foundItem;
-                    
+
                     if (this.hasValue(newValue) && this.enableTextEntryMatch) {
                         if (this.itemName) {
                             foundItem = this.flattenedItems
@@ -190,6 +186,11 @@ export class DFormSelectComponent implements ControlValueAccessor, OnInit, OnDes
                 this.manualControl.disable();
             }
 
+            this.writeValue(this.value);
+
+            this.isTextEntry = !this.hasValue(this.selectedItem); // && this.hasValue(this.textValue);
+
+
         // this.dropdown.onHidden;
      }
 
@@ -222,7 +223,6 @@ export class DFormSelectComponent implements ControlValueAccessor, OnInit, OnDes
             this.onChange(this.value);
             this.onTouched();
             this.isDirty = true;
-            
         }
     }
 
@@ -235,7 +235,7 @@ export class DFormSelectComponent implements ControlValueAccessor, OnInit, OnDes
     }
 
     hasValue(value: any): boolean {
-        let result = typeof(value) !== 'undefined' && value !== null;
+        const result = typeof(value) !== 'undefined' && value !== null;
         return result;
     }
 
@@ -290,7 +290,7 @@ export class DFormSelectComponent implements ControlValueAccessor, OnInit, OnDes
                         this.manualControl.setValue(this.textValue);
                     }
                 }
-            }            
+            }
         }
     }
 
@@ -305,15 +305,15 @@ export class DFormSelectComponent implements ControlValueAccessor, OnInit, OnDes
 
     lookupItem(value: any):any {
         for(let i = 0; i < this.items.length; i++) {
-            let item = this.items[i];
+            const item = this.items[i];
             if (this.childItems) {
-                let children = item[this.childItems]
+                const children = item[this.childItems]
                 for(let j = 0; j < children.length; j++) {
-                    let child = children[j];
+                    const child = children[j];
                     if (this.grandChildItems) {
-                        let grandChildren = child[this.grandChildItems];
+                        const grandChildren = child[this.grandChildItems];
                         for (let k = 0; k < grandChildren.length; k++) {
-                            let grandChild = grandChildren[k];
+                            const grandChild = grandChildren[k];
                             if (this.testItem(grandChild, value)) {
                                 return grandChild;
                             }
@@ -344,7 +344,7 @@ export class DFormSelectComponent implements ControlValueAccessor, OnInit, OnDes
                 if (this.enableKeySelect) {
                     return item[this.itemKey] === testValue;
                 } else {
-                    return item[this.itemKey] == testValue[this.itemKey];
+                    return item[this.itemKey] === testValue[this.itemKey];
                 }
             } else {
                 return item === testValue;
@@ -369,8 +369,8 @@ export class DFormSelectComponent implements ControlValueAccessor, OnInit, OnDes
     refreshItems() {
         this.showDropDown = (this.items && this.items.length > 0) ||
         (this.textEntryItems && this.textEntryItems.length > 0) ||
-        typeof(this.startItemsTemplate) !== 'undefined' || 
-        typeof(this.endItemsTemplate) !== 'undefined' || 
+        typeof(this.startItemsTemplate) !== 'undefined' ||
+        typeof(this.endItemsTemplate) !== 'undefined' ||
         this.allowNullSelect || this.allowBlankSelect || this.showRefresh;
 
         this.disableInput = !this.showDropDown && !this.enableTextEntry;
@@ -382,7 +382,7 @@ export class DFormSelectComponent implements ControlValueAccessor, OnInit, OnDes
         }
 
         if (this.sortItems) {
-            let hasItemName = this.hasValue(this.itemName);
+            const hasItemName = this.hasValue(this.itemName);
             this.sortedItems = this.items.sort((a, b) => {
                 if(hasItemName) {
                     if (a[this.itemName] > b[this.itemName]) {
@@ -407,13 +407,12 @@ export class DFormSelectComponent implements ControlValueAccessor, OnInit, OnDes
             } else {
                 this.sortedItems = [];
             }
-            
         }
 
         this.flattenedItems = [];
         if (this.childItems) {
             this.items.forEach(parentItem => {
-                let childItems = <Array<any>> parentItem[this.childItems];
+                const childItems = parentItem[this.childItems] as Array<any>;
                 if (this.grandChildItems) {
                     childItems.forEach(childItem => {
                         this.flattenedItems = this.flattenedItems.concat(childItem[this.grandChildItems]);
@@ -455,7 +454,7 @@ export class DFormSelectComponent implements ControlValueAccessor, OnInit, OnDes
         if (this.multiSelect) {
             if (selectedItem) {
                 if (!this.selectedKeys) { this.selectedKeys = []; }
-    
+
                 const selectedKey = this.getItemKey(selectedItem);
 
                 // if the item already selected, then do nothing
@@ -471,7 +470,7 @@ export class DFormSelectComponent implements ControlValueAccessor, OnInit, OnDes
                 } else {
                     item = selectedItem;
                 }
-    
+
                 this.selectedKeys.push(selectedKey);
                 this.value.push(item);
             }
@@ -503,8 +502,8 @@ export class DFormSelectComponent implements ControlValueAccessor, OnInit, OnDes
         this.textValueChange.emit(this.textValue);
         this.manualControl.setValue(this.selectedName);
 
-        if (hideDropdown && !this.multiSelect) { 
-            this.dropdownHide(); 
+        if (hideDropdown && !this.multiSelect) {
+            this.dropdownHide();
         }
         // this.updateTextEntry(hideDropdown);
     }
@@ -520,6 +519,11 @@ export class DFormSelectComponent implements ControlValueAccessor, OnInit, OnDes
             }
         } else {
             this.selectedItem = this.lookupItem(value);
+            this.selectedIndex = this.items.findIndex(c => c === this.selectedItem);
+
+            if(this.selectedIndex >= 0) {
+                this.isTextEntry = false;
+            }
 
             if (this.hasValue(this.itemName)) {
                 if (this.hasValue(value) && items) {
@@ -560,7 +564,7 @@ export class DFormSelectComponent implements ControlValueAccessor, OnInit, OnDes
             item = {};
             item[this.itemKey] = value;
             item[this.itemName] = value;
-            item['isKey'] = false;
+            item.isKey = false;
         } else {
             item = value;
         }
@@ -649,7 +653,7 @@ export class DFormSelectComponent implements ControlValueAccessor, OnInit, OnDes
 
     dropdownShow() {
         this.isOpen = true;
-        this.isOpenChange.emit();  
+        this.isOpenChange.emit();
         this.onShown.emit();
     }
 
@@ -667,11 +671,11 @@ export class DFormSelectComponent implements ControlValueAccessor, OnInit, OnDes
 
     dropdownToggle() {
         if (this.showDropDown) {
-            this.isOpen = !this.isOpen;    
-            this.isOpenChange.emit();  
+            this.isOpen = !this.isOpen;
+            this.isOpenChange.emit();
             if(this.isOpen) {
                 this.onShown.emit();
-            }  
+            }
         }
     }
 
@@ -686,13 +690,13 @@ export class DFormSelectComponent implements ControlValueAccessor, OnInit, OnDes
 
     addAll() {
         if (!this.sortedItems) { return; }
-        
+
         if (this.itemKey) {
             this.selectedKeys = this.sortedItems.map(c => c[this.itemKey]);
         } else {
             this.selectedKeys = [...this.sortedItems];;
         }
-        
+
         this.value = [...this.sortedItems];
         this.hasChanged();
         this.dropdownHide();
@@ -703,7 +707,6 @@ export class DFormSelectComponent implements ControlValueAccessor, OnInit, OnDes
         this.value = [];
         this.hasChanged();
     }
-    
 
     private updateTextEntry() {
         // this.dropdown.toggle();
@@ -711,7 +714,7 @@ export class DFormSelectComponent implements ControlValueAccessor, OnInit, OnDes
         if (this.multiSelect) { return; }
 
         if (this.enableTextEntry) {
-            this.value = this.setTextEntryToValue && !this.textValue ? this.textValue : null;
+            this.value = this.setTextEntryToValue && this.textValue ? this.textValue : null;
             this.hasChanged();
 
             // for text entry enabled, just set the current value and emit.
@@ -721,7 +724,7 @@ export class DFormSelectComponent implements ControlValueAccessor, OnInit, OnDes
             // no selected item, then revert to previous one.
             this.doManualControlUpdate = false;
             if (this.hasValue(this.itemName) && this.hasValue(this.value)) {
-                let item = this.flattenedItems.find(c => c && c[this.itemKey] === this.value);
+                const item = this.flattenedItems.find(c => c && c[this.itemKey] === this.value);
                 if (item) {
                     this.textValue = item[this.itemName];
                 } else {

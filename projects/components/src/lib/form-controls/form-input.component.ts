@@ -15,6 +15,8 @@ import { Subscription } from 'rxjs';
     ]
 })
 export class DFormInputComponent implements ControlValueAccessor, OnInit, OnDestroy, OnChanges {
+
+    constructor() { }
     @Input() label: string;
     @Input() labelLeft: string;
     @Input() note: string;
@@ -37,18 +39,19 @@ export class DFormInputComponent implements ControlValueAccessor, OnInit, OnDest
     id = 'input_' + Math.random().toString(36).substr(2, 9);
     sharedFunctions = new SharedFunctions();
 
-    onChange: any = () => { };
-    onTouched: any = () => { };
-
     subscription: Subscription;
     control = new FormControl({value: this.value, disabled: this.disabled});
 
-    constructor() { }
+    onChange: any = () => { };
+    onTouched: any = () => { };
 
     ngOnInit() {
         this.subscription = this.control.valueChanges.subscribe(value => {
-            this.onChange(value);
-            this.onTouched();
+            // only update if touched to stop disabled states toggling the touch state
+            if (!this.control.pristine) {
+                this.onChange(value);
+                this.onTouched();
+            }
         });
     }
 
