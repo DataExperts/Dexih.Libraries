@@ -33,7 +33,7 @@ export class ComponentsComponent {
   public selectedItem3: string = null;
   public textValue3 = 'static value';
 
-  public selectedItem4: string = null;
+  public selectedItem4: string = 'cat2 item1';
   public textValue4 = 'the text';
 
   public selectedItem5 = 'cat2 item2';
@@ -205,7 +205,7 @@ export class ComponentsComponent {
   }
 
   public textValueChange($event) {
-    this.toasts.add(new ToastMessage('success', 'text selected - ' + $event,  null));
+    this.toasts.add(new ToastMessage('success', 'text selected - ' + $event.textValue,  null));
   }
 }
 

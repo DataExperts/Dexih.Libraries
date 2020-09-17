@@ -26,7 +26,7 @@ export class ComponentsDemoComponent implements OnInit {
     constructor() { }
 
     ngOnInit() {
-      this.textControl.setValue('the value');
+      this.textControl.setValue('item1');
     }
 
     scrollToElement($element): void {

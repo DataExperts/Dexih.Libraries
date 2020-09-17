@@ -432,7 +432,8 @@ this should have no padding.
                     </ng-template>
                 </form-select>
 
-                <form-select label="With refresh" [items]="refreshItems"  [textEntryItems]="['value1', 'value2', 'value3']" [showRefresh]="true" textEntryItemsTitle="Text items" [isRefreshing]="isRefreshing" [enableTextEntryMatch]="false"  (onRefresh)="onRefresh()" [enableFilter]="false" (textValueChange)="textValueChange($event)">
+                <form-select label="With refresh" [items]="refreshItems"  [textEntryItems]="['value1', 'value2', 'value3']" [showRefresh]="true" textEntryItemsTitle="Text items" 
+                [isRefreshing]="isRefreshing" [enableTextEntryMatch]="false"  (refreshed)="onRefresh()" [enableFilter]="false" (valueChange)="textValueChange($event)">
                 </form-select>
 
                 <div>selected item key: {{selectedItem0}}</div>
@@ -493,7 +494,7 @@ this should have no padding.
                 <div>enableTextEntry=true</div>
                 <div>selected item key: {{selectedItem7}}</div>
                 <div>text value: {{textValue7}}</div>
-                <form-select label="Select with grand parent/child key" 
+                <form-select label="Select with grand parent/child key and show changes" 
                 [items]="
                 [{region: 'region1', categories: [
                 {category: 'category1', items: [{key: 2, name: 'cat1 item1'}, {key: 3, name: 'cat1 item2'}, {key: 4, name: 'cat1 item3'}]}, 

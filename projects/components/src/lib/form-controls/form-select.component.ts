@@ -18,7 +18,7 @@ export class DFormSelectComponent implements ControlValueAccessor, OnInit, OnDes
     @Input() errors: string;
     @Input() maxlength: number;
     @Input() disabled = false;
-    @Input() value: any;
+    @Input() value: any = null;
     @Input() iconClass: string; // only displays where there are no elements.
     @Input() items: Array<any>;
     @Input() parentName: string;
@@ -55,10 +55,11 @@ export class DFormSelectComponent implements ControlValueAccessor, OnInit, OnDes
     @Input() showRefresh = false;
     @Input() isRefreshing = false;
 
-    @Output() textValueChange = new EventEmitter();
-    @Output() onShown = new EventEmitter();
-    @Output() onRefresh = new EventEmitter();
-    @Output() isOpenChange = new EventEmitter<any>();
+    @Output() textValueChange = new EventEmitter<string>();
+    @Output() valueChange = new EventEmitter<{textValue: string, item: any}>();
+    @Output() shown = new EventEmitter();
+    @Output() refreshed = new EventEmitter();
+    @Output() openChange = new EventEmitter<any>();
 
     @ViewChild('dropdownButton', { static: true }) dropdownElement: any;
 
@@ -126,8 +127,10 @@ export class DFormSelectComponent implements ControlValueAccessor, OnInit, OnDes
                     if (this.hasValue(newValue) && this.enableTextEntryMatch) {
                         if (this.itemName) {
                             foundItem = this.flattenedItems
-                                .find(c => (c && c[this.itemName] && c[this.itemName].toString().toLocaleLowerCase() === newValue.toLocaleLowerCase()) ||
-                                    (c && c[this.itemKey] && c[this.itemKey].toString().toLocaleLowerCase() === newValue.toLocaleLowerCase())
+                                .find(c => (c && c[this.itemName] &&
+                                    c[this.itemName].toString().toLocaleLowerCase() === newValue.toLocaleLowerCase()) ||
+                                    (c && c[this.itemKey] &&
+                                        c[this.itemKey].toString().toLocaleLowerCase() === newValue.toLocaleLowerCase())
                                 );
                             if (this.hasValue(foundItem)) {
                                 this.selectedItem = foundItem;
@@ -137,8 +140,8 @@ export class DFormSelectComponent implements ControlValueAccessor, OnInit, OnDes
                                 this.isTextEntry = false;
                                 if (!this.enableTextEntry) {
                                     this.updateValueFromItem(this.selectedItem);
-
                                     this.textValueChange.emit(this.textValue);
+                                    this.valueChange.emit({textValue: this.textValue, item: this.selectedItem});
                                     this.hasChanged();
                                 }
                             } else if (this.enableTextEntry) {
@@ -146,7 +149,8 @@ export class DFormSelectComponent implements ControlValueAccessor, OnInit, OnDes
                                 this.selectedItem = newValue;
                             }
                         } else {
-                            foundItem = this.flattenedItems.find(c => c && c.toString().toLocaleLowerCase() === newValue.toLocaleLowerCase());
+                            foundItem = this.flattenedItems.find(c => c &&
+                                c.toString().toLocaleLowerCase() === newValue.toLocaleLowerCase());
                             if (this.hasValue(foundItem)) {
                                 this.selectedItem = foundItem;
                                 this.doManualControlUpdate = false;
@@ -156,6 +160,7 @@ export class DFormSelectComponent implements ControlValueAccessor, OnInit, OnDes
                                 if (!this.enableTextEntry) {
                                     this.updateValueFromItem(this.selectedItem);
                                     this.textValueChange.emit(this.textValue);
+                                    this.valueChange.emit({textValue: this.textValue, item: this.selectedItem});
                                     this.hasChanged();
                                 }
                             } else if (this.enableTextEntry) {
@@ -286,7 +291,7 @@ export class DFormSelectComponent implements ControlValueAccessor, OnInit, OnDes
                 if (this.enableTextEntry) {
                     if (this.textValue) {
                         this.selectedName = this.textValue;
-                        this.doManualControlUpdate = false;
+                        // this.doManualControlUpdate = false;
                         this.manualControl.setValue(this.textValue);
                     }
                 }
@@ -303,7 +308,7 @@ export class DFormSelectComponent implements ControlValueAccessor, OnInit, OnDes
         }
     }
 
-    lookupItem(value: any):any {
+    lookupItem(value: any): {item: any, found: boolean} {
         for(let i = 0; i < this.items.length; i++) {
             const item = this.items[i];
             if (this.childItems) {
@@ -315,27 +320,27 @@ export class DFormSelectComponent implements ControlValueAccessor, OnInit, OnDes
                         for (let k = 0; k < grandChildren.length; k++) {
                             const grandChild = grandChildren[k];
                             if (this.testItem(grandChild, value)) {
-                                return grandChild;
+                                return {item: grandChild, found: true};
                             }
                         }
                     } else {
                         if (this.testItem(child, value)) {
-                            return child;
+                            return {item: child, found: true};
                         }
                     }
                 }
             } else {
                 if (this.testItem (item, value)) {
-                    return item;
+                    return {item, found: true};
                 }
             }
         }
 
         if(this.enableTextEntry) {
-            return value;
+            return {item: value, found: false}; // (value, false);
         }
 
-        return null;
+        return {item: null, found: false};
     }
 
     testItem(item: any, testValue: any): boolean {
@@ -432,7 +437,7 @@ export class DFormSelectComponent implements ControlValueAccessor, OnInit, OnDes
 
     refresh() {
         this.blockMenuClose = true;
-        this.onRefresh.emit();
+        this.refreshed.emit();
     }
 
     selectText(item: any) {
@@ -443,7 +448,11 @@ export class DFormSelectComponent implements ControlValueAccessor, OnInit, OnDes
 
             this.value = this.setTextEntryToValue ? item : null;
             this.textValue = item;
-            this.textValueChange.emit(this.textValue);
+
+            // if (!this.enableTextEntry) {
+                this.textValueChange.emit(this.textValue);
+                this.valueChange.emit({textValue: this.textValue, item: null});
+            // }
             this.manualControl.setValue(item);
         }
     }
@@ -488,18 +497,18 @@ export class DFormSelectComponent implements ControlValueAccessor, OnInit, OnDes
 
                 this.selectedName = this.getItemName(selectedItem);
 
-                this.doManualControlUpdate = false;
+                // this.doManualControlUpdate = false;
             } else {
                 this.value = null;
                 this.selectedName = null;
             }
         }
 
-        // run hasChanged before textValue changed, so users can see if an item is selected when textvalue changes.
+        // run hasChanged before textValue changed, so users can see if an item is selected when textValue changes.
         this.hasChanged();
 
         this.textValue = this.selectedName;
-        this.textValueChange.emit(this.textValue);
+        // this.valueChange.emit(this.textValue);
         this.manualControl.setValue(this.selectedName);
 
         if (hideDropdown && !this.multiSelect) {
@@ -518,10 +527,10 @@ export class DFormSelectComponent implements ControlValueAccessor, OnInit, OnDes
                 }
             }
         } else {
-            this.selectedItem = this.lookupItem(value);
-            this.selectedIndex = this.items.findIndex(c => c === this.selectedItem);
+            const lookup = this.lookupItem(value);
+            this.selectedItem = lookup.item;
 
-            if(this.selectedIndex >= 0) {
+            if(lookup.found) {
                 this.isTextEntry = false;
             }
 
@@ -537,7 +546,7 @@ export class DFormSelectComponent implements ControlValueAccessor, OnInit, OnDes
                 this.selectedName = this.selectedItem;
             }
 
-            this.doManualControlUpdate = false;
+            // this.doManualControlUpdate = false;
             this.manualControl.setValue(this.selectedName);
         }
     }
@@ -653,8 +662,8 @@ export class DFormSelectComponent implements ControlValueAccessor, OnInit, OnDes
 
     dropdownShow() {
         this.isOpen = true;
-        this.isOpenChange.emit();
-        this.onShown.emit();
+        this.openChange.emit();
+        this.shown.emit();
     }
 
     // the timeout is to allow the menu click to occur before closing the dropdown.
@@ -662,7 +671,7 @@ export class DFormSelectComponent implements ControlValueAccessor, OnInit, OnDes
         setTimeout(() => {
             if (!this.blockMenuClose) {
                 this.isOpen = false;
-                this.isOpenChange.emit();
+                this.openChange.emit();
             }
             this.blockMenuClose = false;
         },
@@ -672,9 +681,9 @@ export class DFormSelectComponent implements ControlValueAccessor, OnInit, OnDes
     dropdownToggle() {
         if (this.showDropDown) {
             this.isOpen = !this.isOpen;
-            this.isOpenChange.emit();
+            this.openChange.emit();
             if(this.isOpen) {
-                this.onShown.emit();
+                this.shown.emit();
             }
         }
     }
@@ -719,6 +728,7 @@ export class DFormSelectComponent implements ControlValueAccessor, OnInit, OnDes
 
             // for text entry enabled, just set the current value and emit.
             this.textValueChange.emit(this.textValue);
+            this.valueChange.emit({textValue: this.textValue, item: null});
 
         } else if (!this.hasValue(this.selectedItem)) {
             // no selected item, then revert to previous one.
@@ -733,6 +743,7 @@ export class DFormSelectComponent implements ControlValueAccessor, OnInit, OnDes
                 this.selectedItem = item;
                 this.manualControl.setValue(this.textValue);
                 this.textValueChange.emit(this.textValue);
+                this.valueChange.emit({textValue: this.textValue, item: null});
             } else {
                 this.manualControl.setValue(this.value);
             }
@@ -744,6 +755,7 @@ export class DFormSelectComponent implements ControlValueAccessor, OnInit, OnDes
             //     this.textValue = this.value;
             // }
             this.textValueChange.emit(this.textValue);
+            this.valueChange.emit({textValue: this.textValue, item: null});
         }
 
         this.needsUpdate = false;

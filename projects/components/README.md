@@ -30,6 +30,11 @@ https://dataexperts.github.io/Dexih.Libraries/demo/components
 
 ## Releases Summary
 
+v0.5.000
+* Breaking on the d-select.  
+    * onRefresh changed to refresh, onShown changed to shown
+    * textValueChange - changed to valueChange and now returns the textValue and item, which can be used to distinguish between a text entry and a selection from a dropdown.
+
 v0.4.137
 * Fix bug with tag input height resize when adding tags
 * Placeholder now visible in floating inputs.
@@ -261,8 +266,9 @@ The following properties can be used to determine the items to be displayed.
 
 The controls provides the following events:
 
-* `onShown` - When the dropdown is opened.
-* `onRefresh` - When the refresh button is clicked (requires `showRefresh` to be true)
+* `shown` - When the dropdown is opened.
+* `refreshed` - When the refresh button is clicked (requires `showRefresh` to be true)
+* `valueChange` - When a value is changed,  Returns a structure containing the 'textValue' which is the text entry or display value, and 'item' which is the item selected from the dropdown (null if manually entered text).
 
 #### Displaying hierarchial data.
 
