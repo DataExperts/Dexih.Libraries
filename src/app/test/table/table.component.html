@@ -29,6 +29,9 @@
 <d-table [dataObservable]="tableData" [columns]="mdColumns" heading="Table with an markdown column" (onTagClick)="tagClick($event)" (rowClick)="selectedItem($event)" [tags]="tags"></d-table>
 <hr/>
 
+<d-table [dataObservable]="tableData" [columns]="singleColumn" heading="Single Column" (onTagClick)="tagClick($event)" (rowClick)="selectedItem($event)" [tags]="tags"></d-table>
+<hr/>
+
 <d-table [dataObservable]="tableData" heading="Table with auto generated column names">
     <ng-template #filter let-items="filter">
         <button class="btn btn-success">Filter Button</button>

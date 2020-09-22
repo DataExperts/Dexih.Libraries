@@ -37,13 +37,22 @@ export class DTableCellComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.format = this.column.format;
-
-        this.value = this.columnOperations.fetchFromObject(this.row, this.column.name);
         this.image = this.columnOperations.fetchFromObject(this.row, this.column.image);
         this.footer = this.columnOperations.fetchFromObject(this.row, this.column.footer);
         this.header = this.columnOperations.fetchFromObject(this.row, this.column.header);
         this.columnTags = this.columnOperations.fetchFromObject(this.row, this.column.tags);
-        this.formattedValue = this.columnOperations.formatValue(this.column, this.value);
+
+        let value = this.columnOperations.fetchFromObject(this.row, this.column.name);
+
+        // if the value is an array, then first value is formatted, and second is the unformatted sortable.
+        if(value && typeof value === 'object' && 'f' in value) {
+            this.formattedValue = value['f'];
+            this.value = value['r'];
+        } else {
+            this.value = value;
+            this.formattedValue = this.columnOperations.formatValue(this.column, this.value);
+        }
+        
         this.alignment = this.setAlignment(this.value)
 
         let tagNames = this.columnOperations.fetchFromObject(this.row, this.column.tagNames);

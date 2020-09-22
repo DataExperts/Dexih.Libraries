@@ -28,6 +28,7 @@ class DataModel {
         public markdown: string,
         public markdownFooter: string,
         public charArray: string[],
+        public percentValue: any,
         public childNodes: ChildModel[],
         public enumValue: eEnum,
         public tags: Tag[]
@@ -97,6 +98,7 @@ export class TableDemoComponent implements OnInit {
         { name: 'jsonValue', title: 'Json', format: 'Json' },
         { name: 'markdown', title: 'Markdown', format: 'Md', footer: 'markdownFooter' },
         { name: 'charArray', title: 'Char[]', format: 'CharArray'},
+        { name: 'percentValue', title: 'Sortable Percent' },
         { name: 'childNodes', title: 'Node', format: 'Node', childColumns: [
           { name: 'child1', title: 'child1', format: '' },
           { name: 'child2', title: 'child2', format: '' },
@@ -116,12 +118,12 @@ export class TableDemoComponent implements OnInit {
         headerValue: 'row 1 header', dateValue: new Date(this.date.getTime() + 30000), timeValue: this.date,
         boolValue: true, codeValue: '<b>this is html</b>', jsonValue: this.simpleObject, toolTip: 'a tool tip 1',
         icon: 'fa fa-spin fa-cog', markdown: 'markdown **bold**', markdownFooter: 'footer **bold**', charArray: ['a', 'b', 'c'],
-        childNodes: this.childNodes, enumValue: eEnum.enum1, tags: [this.tags[0], this.tags[1]]},
+        percentValue: {f: '54%', r: 0.54}, childNodes: this.childNodes, enumValue: eEnum.enum1, tags: [this.tags[0], this.tags[1]]},
         { intValue: 2, stringValue: 'row2', footerValue: 'row 2 footer',
         headerValue: 'row 2 header', dateValue: new Date(this.date.getTime() + 30000), timeValue: this.date,
         boolValue: true, codeValue: '<b>bold 2</b>', jsonValue: this.simpleObject, toolTip: 'tip 2',
         icon: 'fa fa-spin fa-cog', markdown: 'markdown **bold**', markdownFooter: 'footer **bold**', charArray: ['a', 'b', 'c'],
-        childNodes: this.childNodes, enumValue: eEnum.enum1, tags: [this.tags[0], this.tags[3]]},
+        percentValue: {f: '8%', r: 0.08}, childNodes: this.childNodes, enumValue: eEnum.enum1, tags: [this.tags[0], this.tags[3]]},
       ]
 
       constructor() { }

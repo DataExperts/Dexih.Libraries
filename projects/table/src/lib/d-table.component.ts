@@ -371,10 +371,16 @@ export class DTableComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
             }
 
 
-            if (this.sortColumn) {
+            if (this.sortColumn != null) {
                 // add the sorted value to each of the table items.
-                this.tableItems.forEach(item => item.sortValue =
-                        this.columnOperations.fetchFromObject(this.data[item.index], this.sortColumn));
+                this.tableItems.forEach(item => { 
+                    const value =this.columnOperations.fetchFromObject(this.data[item.index], this.sortColumn)
+                    if(value && typeof value === 'object' && ('f' in value || 'r' in value)) {
+                        item.sortValue = value['r'] ?? 0;
+                    } else {
+                        item.sortValue = value ?? 0;
+                    }
+                });
 
                 this.tableItems = this.tableItems.sort((a, b) => {
                     const result = (a.sortValue < b.sortValue) ? -1 : (a.sortValue > b.sortValue) ? 1 : 0;

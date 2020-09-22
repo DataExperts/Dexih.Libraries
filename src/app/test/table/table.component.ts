@@ -20,6 +20,7 @@ class DataModel {
     public markdown: string,
     public markdownFooter: string,
     public charArray: string[],
+    public percentValue: any,
     public childNodes: ChildModel[],
     public enumValue: eEnum,
     public tags: Tag[]
@@ -63,6 +64,7 @@ export class TableComponent implements OnInit, AfterViewInit {
     { name: 'jsonValue', title: 'Json', format: 'Json' },
     { name: 'markdown', title: 'Markdown', format: 'Md', footer: 'markdownFooter' },
     { name: 'charArray', title: 'Char Array', format: 'CharArray'},
+    { name: 'percentValue', title: 'Sortable Percent' },
     { name: 'childNodes', title: 'Node', format: 'Node', childColumns: [
       { name: 'child1', title: 'child1', format: '' },
       { name: 'child2', title: 'child2', format: '' },
@@ -76,6 +78,10 @@ export class TableComponent implements OnInit, AfterViewInit {
     { name: 'markdown', title: 'Markdown', format: 'Md', footer: 'markdownFooter', tags: 'tags' },
     { name: 'enumValue', title: 'Enum', format: 'Enum', enum: eEnum }
   ];
+
+  singleColumn = [
+    { name: 'intValue', title: 'Int', format: '' }
+  ]
 
   tags = [
     {color: 'blue', name: 'blue'},
@@ -128,13 +134,13 @@ export class TableComponent implements OnInit, AfterViewInit {
     const data = new Array<DataModel>();
     data.push(new DataModel(1, 'row3', 'row 1 footer', 'row 1 header', new Date(date.getTime() + 30000), date,
       true, '<b>bold 1</b>', simpleObject, 'tip 1', 'fa fa-spin fa-cog', 'markdown **bold**', 'footer **bold**', ['a', 'b', 'c'],
-      childNodes, eEnum.enum1, [this.tags[0], this.tags[1]]));
+      {f: '5%', r: '0.05'}, childNodes, eEnum.enum1, [this.tags[0], this.tags[1]]));
     data.push(new DataModel(2, 'row2', 'row 2 footer', 'row 2 header', new Date(date.getTime() + 300000), date,
       true, '<b>bold 1</b>', simpleObject, 'tip 2', 'fa fa-spin fa-cog',
-      null, null, ['a', 'b', 'c'], childNodes, eEnum.enum2, [this.tags[0]]));
+      null, null, ['a', 'b', 'c'], {f: '0%'}, childNodes, eEnum.enum2, [this.tags[0]]));
     data.push(new DataModel(3, 'row1', 'row 3 footer', 'row 3 header',  new Date(date.getTime() + 3000000), date,
       true, '<b>bold 1</b>', JSON.stringify(simpleObject), 'tip 3', 'fa fa-spin fa-cog', 'markdown **bold 2** [link](http://google.com)',
-        'footer2 **bold** [link](http://google.com)', ['a', 'b', 'c'], childNodes, eEnum.enum3, null));
+        'footer2 **bold** [link](http://google.com)', ['a', 'b', 'c'], {f: '15%', r: '0.15'}, childNodes, eEnum.enum3, null));
 
     this.tableData.next(data);
 
@@ -142,6 +148,7 @@ export class TableComponent implements OnInit, AfterViewInit {
     for (let i = 0; i < 10000; i++) {
       this.largeData[i] = new DataModel(i, `row ${i}`, 'row 1 footer', 'row 1 header', new Date(date.getTime() + 30000), date,
       true, '<b>bold 1</b>', simpleObject, 'tip 1', 'fa fa-spin fa-cog', 'markdown **bold**', 'footer **bold**', ['a', 'b', 'c'],
+      {f: i/100 + '%', r: i/10000},
       childNodes, eEnum.enum1, [this.tags[0], this.tags[1]]);
     }
 
