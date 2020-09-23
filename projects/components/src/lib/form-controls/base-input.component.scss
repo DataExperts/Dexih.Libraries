@@ -20,8 +20,13 @@
 .form-control-custom-input {
     padding: .375rem .75rem;
     width: 100%;
-    flex: 1 1 120px;
+    
     // min-width: 120px;
+  }
+
+  // for tabs, forces the text box on the same line with min width.
+  .form-control-flex {
+    flex: 1 1 120px;
   }
   
   .form-label-group {
