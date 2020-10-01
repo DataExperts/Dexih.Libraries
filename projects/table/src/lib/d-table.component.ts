@@ -460,13 +460,25 @@ export class DTableComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
 
         return this.currentColumns.map(column => {
             const value = this.columnOperations.fetchFromObject(row, column.name);
-            let formattedValue = this.columnOperations.formatValue(column, value);
 
-            if (typeof(formattedValue) === 'string') {
-                formattedValue = '"' + formattedValue + '"';
+            let formattedValue: any;
+
+            // if the value is an array, then first value is formatted, and second is the unformatted sortable.
+            if(value && typeof value === 'object' && 'f' in value) {
+                formattedValue = value['f'];
+            } else {
+                formattedValue = this.columnOperations.formatValue(column, value);
             }
 
-            if (formattedValue instanceof String) {
+            // if (typeof(formattedValue) === 'string') {
+            //     formattedValue = '"' + formattedValue + '"';
+            // }
+
+            if(typeof formattedValue == 'object') {
+                formattedValue = JSON.stringify(formattedValue);
+            }
+
+            if (typeof(formattedValue) === 'string') {
                 let result = formattedValue.replace(/"/g, '""');
                 if (result.search(/("|,|\n)/g) >= 0) {
                     result = '"' + result + '"';
