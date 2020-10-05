@@ -14,6 +14,7 @@ export class DFormCheckboxComponent implements OnInit, OnDestroy, OnChanges, Con
     @Input() label: string;
     @Input() note: string;
     @Input() errors: string;
+    @Input() showErrorMessage = true;
     @Input() value: any;
     @Input() disabled = false;
     @Input() border = false;
@@ -27,7 +28,7 @@ export class DFormCheckboxComponent implements OnInit, OnDestroy, OnChanges, Con
     sharedFunctions = new SharedFunctions();
 
     subscription: Subscription;
-    control = new FormControl({value: this.isChecked(this.value), disabled: this.disabled});
+    control: FormControl;
 
     onChange: any = () => { };
     onTouched: any = () => { };
@@ -46,6 +47,11 @@ export class DFormCheckboxComponent implements OnInit, OnDestroy, OnChanges, Con
     }
 
     ngOnChanges(changes: SimpleChanges) {
+        if (!this.control) {
+            this.control = new FormControl({value: this.isChecked(this.value), disabled: this.disabled});
+            return;
+        }
+
         if (changes.value) {
             this.control.setValue(this.isChecked(changes.value.currentValue));
         }

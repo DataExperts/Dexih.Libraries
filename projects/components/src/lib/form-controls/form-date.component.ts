@@ -18,6 +18,7 @@ export class DFormDateComponent implements ControlValueAccessor, OnInit, OnDestr
     @Input() placeholder = 'Use format (yyyy-mm-dd)';
     @Input() iconClass: string;
     @Input() errors: string;
+    @Input() showErrorMessage = true;
     @Input() value: string;
     @Input() disabled = false;
     @Input() border = true;
@@ -34,15 +35,13 @@ export class DFormDateComponent implements ControlValueAccessor, OnInit, OnDestr
     id = 'input_' + Math.random().toString(36).substr(2, 9);
     sharedFunctions = new SharedFunctions();
 
+
+    subscription: Subscription;
+    control: FormControl;
+
     onChange: any = () => { };
     onTouched: any = () => { };
 
-    subscription: Subscription;
-    control = new FormControl({value: this.value, disabled: this.disabled});
-
-    constructor() {
-     }
-    
     ngOnInit(): void {
         this.subscription = this.control.valueChanges.subscribe(value => {
             this.updateError();
@@ -56,8 +55,13 @@ export class DFormDateComponent implements ControlValueAccessor, OnInit, OnDestr
     ngOnDestroy() {
         this.subscription.unsubscribe();
     }
-    
+
     ngOnChanges(changes: SimpleChanges) {
+        if (!this.control) {
+            this.control = new FormControl({value: this.value, disabled: this.disabled});
+            return;
+        }
+
         if (changes.value) {
             this.control.setValue(changes.value.currentValue);
         }

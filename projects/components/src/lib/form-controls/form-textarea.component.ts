@@ -24,6 +24,7 @@ export class DFormTextAreaComponent implements ControlValueAccessor, OnInit, OnD
     @Input() placeholder: string = "";
     @Input() iconClass = 'fa fa-comment';
     @Input() errors: string;
+    @Input() showErrorMessage = true;
     @Input() value: string;
     @Input() hideToggle = false;
     @Input() isHidden = false;
@@ -38,11 +39,11 @@ export class DFormTextAreaComponent implements ControlValueAccessor, OnInit, OnD
 
     id = 'input_' + Math.random().toString(36).substr(2, 9);
 
+    subscription: Subscription;
+    control: FormControl;
+
     onChange: any = () => { };
     onTouched: any = () => { };
-
-    subscription: Subscription;
-    control = new FormControl({value: this.value, disabled: this.disabled});
 
     constructor() {     }
 
@@ -51,7 +52,7 @@ export class DFormTextAreaComponent implements ControlValueAccessor, OnInit, OnD
          this.subscription = this.control.valueChanges.subscribe(value => {
             this.onChange(value);
             this.onTouched();
-        });     
+        });
     }
 
     ngOnDestroy() {
@@ -59,6 +60,11 @@ export class DFormTextAreaComponent implements ControlValueAccessor, OnInit, OnD
     }
 
     ngOnChanges(changes: SimpleChanges) {
+        if (!this.control) {
+            this.control = new FormControl({value: this.value, disabled: this.disabled});
+            return;
+        }
+
         if (changes.value) {
             this.control.setValue(changes.value.currentValue);
         }

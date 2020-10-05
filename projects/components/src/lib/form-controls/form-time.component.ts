@@ -14,6 +14,7 @@ export class DFormTimeComponent implements ControlValueAccessor, OnInit, OnDestr
     @Input() note: string;
     @Input() iconClass: string;
     @Input() errors: string;
+    @Input() showErrorMessage = true;
     @Input() value: string;
     @Input() border = true;
     @Input() disabled = false;
@@ -23,22 +24,21 @@ export class DFormTimeComponent implements ControlValueAccessor, OnInit, OnDestr
     @Input() disableNative = false;
 
     @Output() keydown: EventEmitter<any> = new EventEmitter<any>();
-    
+
     @ViewChild('input', { static: true }) input: any;
-    
+
     allErrors = '';
 
     id = 'input_' + Math.random().toString(36).substr(2, 9);
     sharedFunctions = new SharedFunctions();
 
-    onChange: any = () => { };
-    onTouched: any = () => { };
-
     timeSupported = this.isTimeSupported();
 
     subscription: Subscription;
-    control = new FormControl({value: this.value, disabled: this.disabled});
+    control: FormControl;
 
+    onChange: any = () => { };
+    onTouched: any = () => { };
 
     constructor() { }
 
@@ -57,6 +57,11 @@ export class DFormTimeComponent implements ControlValueAccessor, OnInit, OnDestr
     }
 
     ngOnChanges(changes: SimpleChanges) {
+        if (!this.control) {
+            this.control = new FormControl({value: this.value, disabled: this.disabled});
+            return;
+        }
+
         if (changes.value) {
             this.control.setValue(changes.value.currentValue);
         }

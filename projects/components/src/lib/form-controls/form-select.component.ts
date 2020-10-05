@@ -16,6 +16,7 @@ export class DFormSelectComponent implements ControlValueAccessor, OnInit, OnDes
     @Input() labelLeft: string;
     @Input() note: string;
     @Input() errors: string;
+    @Input() showErrorMessage = true;
     @Input() maxlength: number;
     @Input() disabled = false;
     @Input() value: any = null;

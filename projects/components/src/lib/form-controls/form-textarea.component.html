@@ -25,7 +25,7 @@
                 [title]="errors">
             </textarea>
             
-            <div *ngIf="errors && border" class="invalid-feedback order-1">
+            <div *ngIf="showErrorMessage && errors && border" class="invalid-feedback order-1">
                 {{ errors }}
             </div>
 

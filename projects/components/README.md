@@ -30,6 +30,9 @@ https://dataexperts.github.io/Dexih.Libraries/demo/components
 
 ## Releases Summary
 
+v0.5.165
+* Added showErrorMessage which will display the toggle whether the error message is displayed or not.  Defaults to true, so won't cause breaking changes.
+
 v0.5.000
 * Breaking on the d-select.  
     * onRefresh changed to refresh, onShown changed to shown
@@ -139,6 +142,7 @@ The form controls all have the following basic attributes:
 * `border` (true/false) - Displays or hides the controls border.
 
 * `errors` - an error message displayed under the control in red.  If set the border will also be red, and an invalid icon will appear.
+* `showErrorMessage` - displays the error message set by errors.  If false, the control will still have the `danger` style and a tooltip will show the error.
 * `iconClass` - A class representing an icon to be displayed on the right side of the control
 * `autocapitalize` (boolean) - enable or disable auto capitalize on mobile devices.
 * `disabled` - (boolean) - disable the control

@@ -23,7 +23,7 @@
             </label>
         </div>
 
-        <div *ngIf="errors" class="invalid-feedback d-block">
+        <div *ngIf="errors && showErrorMessage" class="invalid-feedback d-block">
             {{ errors }}
         </div>
     </div>

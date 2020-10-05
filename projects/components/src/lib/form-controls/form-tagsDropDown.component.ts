@@ -18,6 +18,7 @@ export class DFormTagsDropdownComponent implements ControlValueAccessor, OnInit,
     @Input() placeholder: string;
     @Input() iconClass: string;
     @Input() errors: string;
+    @Input() showErrorMessage = true;
     @Input() value: Array<any> = [];
     @Input() type = 'text';
     @Input() subLabel: string;
@@ -60,15 +61,16 @@ export class DFormTagsDropdownComponent implements ControlValueAccessor, OnInit,
 
     private blockMenuClose = false;
 
+    // control is only used to control disabled
+    control: FormControl;
+
     onChange: any = () => { };
     onTouched: any = () => { };
-
-    // control is only used to control disabled
-    control = new FormControl({value: '', disabled: this.disabled});
 
     constructor() { }
 
     ngOnInit() {
+        this.control = new FormControl({value: '', disabled: this.disabled});
         this.writeValue(this.value);
     }
 

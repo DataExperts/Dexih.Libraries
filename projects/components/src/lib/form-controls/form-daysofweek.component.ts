@@ -23,6 +23,7 @@ export class DFormDaysOfWeekComponent implements ControlValueAccessor, OnInit, O
     @Input() labelLeft: string;
     @Input() note: string;
     @Input() errors: string;
+    @Input() showErrorMessage = true;
     @Input() value: eDayOfWeek[];
     @Input() disabled = false;
     @Input() showHelper = true;

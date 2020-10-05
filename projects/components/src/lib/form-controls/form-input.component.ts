@@ -23,6 +23,7 @@ export class DFormInputComponent implements ControlValueAccessor, OnInit, OnDest
     @Input() placeholder: string;
     @Input() iconClass: string;
     @Input() errors: string;
+    @Input() showErrorMessage = true;
     @Input() value: any;
     @Input() type : 'text' | 'number' | 'password' | 'phone' = 'text'
     @Input() pattern: string;
@@ -40,7 +41,7 @@ export class DFormInputComponent implements ControlValueAccessor, OnInit, OnDest
     sharedFunctions = new SharedFunctions();
 
     subscription: Subscription;
-    control = new FormControl({value: this.value, disabled: this.disabled});
+    control: FormControl;
 
     onChange: any = () => { };
     onTouched: any = () => { };
@@ -60,6 +61,11 @@ export class DFormInputComponent implements ControlValueAccessor, OnInit, OnDest
     }
 
     ngOnChanges(changes: SimpleChanges) {
+        if (!this.control) {
+            this.control = new FormControl({value: this.value, disabled: this.disabled});
+            return;
+        }
+
         if (changes.value) {
             this.control.setValue(changes.value.currentValue);
         }
