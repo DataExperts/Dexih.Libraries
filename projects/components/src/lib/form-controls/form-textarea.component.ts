@@ -11,8 +11,8 @@ import { Subscription } from 'rxjs';
     animations: [
     // trigger name for attaching this animation to an element using the [@triggerName] syntax
     trigger('slideDown', [
-        state('hide', style({ 'height': '0px', opacity: 0, overflow: 'hidden' })),
-        state('show', style({ 'height': '*', opacity: 1 })),
+        state('hide', style({ height: '0px', opacity: 0, overflow: 'hidden' })),
+        state('show', style({ height: '*', opacity: 1 })),
         transition('hide <=> show', animate('100ms ease-in')),
     ])
     ]
@@ -21,7 +21,7 @@ export class DFormTextAreaComponent implements ControlValueAccessor, OnInit, OnD
     @Input() label: string;
     @Input() labelLeft: string;
     @Input() note: string;
-    @Input() placeholder: string = "";
+    @Input() placeholder = '';
     @Input() iconClass = 'fa fa-comment';
     @Input() errors: string;
     @Input() showErrorMessage = true;
@@ -49,10 +49,7 @@ export class DFormTextAreaComponent implements ControlValueAccessor, OnInit, OnD
 
      ngOnInit() {
          // if ( this.hideToggle && !this.showPreview ) { this.isHidden = false; }
-         this.subscription = this.control.valueChanges.subscribe(value => {
-            this.onChange(value);
-            this.onTouched();
-        });
+         this.initControl();
     }
 
     ngOnDestroy() {
@@ -60,10 +57,7 @@ export class DFormTextAreaComponent implements ControlValueAccessor, OnInit, OnD
     }
 
     ngOnChanges(changes: SimpleChanges) {
-        if (!this.control) {
-            this.control = new FormControl({value: this.value, disabled: this.disabled});
-            return;
-        }
+        this.initControl();
 
         if (changes.value) {
             this.control.setValue(changes.value.currentValue);
@@ -76,14 +70,7 @@ export class DFormTextAreaComponent implements ControlValueAccessor, OnInit, OnD
                 this.control.enable();
             }
         }
-    } 
-
-    toggleState() {
-        if (!this.hideToggle) {
-            this.isHidden = !this.isHidden;
-            // this.state = this.isHidden ? 'hide' : 'show';
-        }
-     }
+    }
 
     registerOnChange(fn: any) {
         this.onChange = fn;
@@ -106,8 +93,27 @@ export class DFormTextAreaComponent implements ControlValueAccessor, OnInit, OnD
         }
     }
 
+    initControl() {
+        if (!this.control) {
+            this.control = new FormControl({value: this.value, disabled: this.disabled});
+
+            this.subscription = this.control.valueChanges.subscribe(value => {
+                this.onChange(value);
+                this.onTouched();
+            });
+            return;
+        }
+    }
+
+    toggleState() {
+        if (!this.hideToggle) {
+            this.isHidden = !this.isHidden;
+            // this.state = this.isHidden ? 'hide' : 'show';
+        }
+     }
+
     getRoute(event: any) {
-        let isLink = this.sharedFunctions.getRoute(event);
+        const isLink = this.sharedFunctions.getRoute(event);
 
         // if a link was not selected, then open the edit.
         if (!isLink && !this.hideToggle) {
@@ -116,7 +122,7 @@ export class DFormTextAreaComponent implements ControlValueAccessor, OnInit, OnD
     }
 
     copyMessage() {
-        let selBox = document.createElement('textarea');
+        const selBox = document.createElement('textarea');
         selBox.style.position = 'fixed';
         selBox.style.left = '0';
         selBox.style.top = '0';

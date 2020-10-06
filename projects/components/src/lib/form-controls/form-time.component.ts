@@ -43,13 +43,7 @@ export class DFormTimeComponent implements ControlValueAccessor, OnInit, OnDestr
     constructor() { }
 
     ngOnInit(): void {
-        this.subscription = this.control.valueChanges.subscribe(value => {
-            this.updateError();
-            if (!this.control.pristine) {
-                this.onChange(this.timeToValue(value));
-                this.onTouched();
-            }
-        });
+        this.initControl();
     }
 
     ngOnDestroy() {
@@ -57,10 +51,7 @@ export class DFormTimeComponent implements ControlValueAccessor, OnInit, OnDestr
     }
 
     ngOnChanges(changes: SimpleChanges) {
-        if (!this.control) {
-            this.control = new FormControl({value: this.value, disabled: this.disabled});
-            return;
-        }
+        this.initControl();
 
         if (changes.value) {
             this.control.setValue(changes.value.currentValue);
@@ -96,34 +87,49 @@ export class DFormTimeComponent implements ControlValueAccessor, OnInit, OnDestr
         }
     }
 
+    initControl() {
+        if (!this.control) {
+            this.control = new FormControl({value: this.value, disabled: this.disabled});
+
+            this.subscription = this.control.valueChanges.subscribe(value => {
+                this.updateError();
+                if (!this.control.pristine) {
+                    this.onChange(this.timeToValue(value));
+                    this.onTouched();
+                }
+            });
+            return;
+        }
+    }
+
     private timeToValue(timeValue) {
         if(timeValue) {
-            let timeParts = timeValue.split(':');
-            if(timeParts.length > 3 || timeParts.length == 0) {
-                return undefined;            
+            const timeParts = timeValue.split(':');
+            if(timeParts.length > 3 || timeParts.length === 0) {
+                return undefined;
             }
 
-            let hours = +timeParts[0];
-            let minutes = timeParts.length > 1 ? +timeParts[1] : 0;
-            let seconds = timeParts.length > 2 ? +timeParts[2] : 0;
+            const hours = +timeParts[0];
+            const minutes = timeParts.length > 1 ? +timeParts[1] : 0;
+            const seconds = timeParts.length > 2 ? +timeParts[2] : 0;
 
             if(hours >= 0 && hours <= 23 && minutes >= 0 && minutes < 59 && seconds >=0 && seconds <= 59) {
                 return this.pad(hours, 2) + ':' + this.pad(minutes, 2) + ':' + this.pad(seconds, 2);
             }
         }
 
-        return undefined;  
+        return undefined;
     }
 
 
     pad(num: number, size: number) {
-        let s = '000000000' + num;
+        const s = '000000000' + num;
         return s.substr(s.length - size);
     }
 
     updateError() {
-        let theDate = Date.parse('2000-01-01T' + this.control.value);
-        let dateError = theDate ? null : 'Invalid time, use 24 hour format HH-mm-ss';
+        const theDate = Date.parse('2000-01-01T' + this.control.value);
+        const dateError = theDate ? null : 'Invalid time, use 24 hour format HH-mm-ss';
         if (!dateError) {
             this.allErrors = this.errors;
             return;

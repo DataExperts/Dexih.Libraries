@@ -47,13 +47,7 @@ export class DFormInputComponent implements ControlValueAccessor, OnInit, OnDest
     onTouched: any = () => { };
 
     ngOnInit() {
-        this.subscription = this.control.valueChanges.subscribe(value => {
-            // only update if touched to stop disabled states toggling the touch state
-            if (!this.control.pristine) {
-                this.onChange(value);
-                this.onTouched();
-            }
-        });
+        this.initControl();
     }
 
     ngOnDestroy() {
@@ -61,10 +55,7 @@ export class DFormInputComponent implements ControlValueAccessor, OnInit, OnDest
     }
 
     ngOnChanges(changes: SimpleChanges) {
-        if (!this.control) {
-            this.control = new FormControl({value: this.value, disabled: this.disabled});
-            return;
-        }
+        this.initControl();
 
         if (changes.value) {
             this.control.setValue(changes.value.currentValue);
@@ -99,6 +90,22 @@ export class DFormInputComponent implements ControlValueAccessor, OnInit, OnDest
             this.control.disable();
         } else {
             this.control.enable();
+        }
+    }
+
+    initControl() {
+        if (!this.control) {
+            this.control = new FormControl({value: this.value, disabled: this.disabled});
+
+            this.subscription = this.control.valueChanges.subscribe(value => {
+                // only update if touched to stop disabled states toggling the touch state
+                if (!this.control.pristine) {
+                    this.onChange(value);
+                    this.onTouched();
+                }
+            });
+
+            return;
         }
     }
 

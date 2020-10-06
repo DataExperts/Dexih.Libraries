@@ -33,11 +33,11 @@ export class DFormDaysOfWeekComponent implements ControlValueAccessor, OnInit, O
     id = 'input_' + Math.random().toString(36).substr(2, 9);
     sharedFunctions = new SharedFunctions();
 
-    onChange: any = () => { };
-    onTouched: any = () => { };
-
     subscription: Subscription;
     control: FormArray;
+
+    onChange: any = () => { };
+    onTouched: any = () => { };
 
     constructor() {
         this.control = new FormArray([]);
@@ -58,10 +58,10 @@ export class DFormDaysOfWeekComponent implements ControlValueAccessor, OnInit, O
         }
 
         this.subscription = this.control.valueChanges.subscribe((value: Array<boolean>) => {
-            let daysOfWeek: Array<eDayOfWeek> = [];
+            const daysOfWeek: Array<eDayOfWeek> = [];
             for (let i = 0; i < 7; i++) {
                 if (value[i]) {
-                    daysOfWeek.push(<eDayOfWeek>i + 1);
+                    daysOfWeek.push((i as eDayOfWeek) + 1);
                 }
             }
 

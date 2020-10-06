@@ -439,6 +439,7 @@ export class DFormSelectComponent implements ControlValueAccessor, OnInit, OnDes
     refresh() {
         this.blockMenuClose = true;
         this.refreshed.emit();
+        this.blockMenuClose = false;
     }
 
     selectText(item: any) {
@@ -668,7 +669,7 @@ export class DFormSelectComponent implements ControlValueAccessor, OnInit, OnDes
     }
 
     // the timeout is to allow the menu click to occur before closing the dropdown.
-    dropdownHide(delay = 500) {
+    dropdownHide(delay = 200) {
         setTimeout(() => {
             if (!this.blockMenuClose) {
                 this.isOpen = false;

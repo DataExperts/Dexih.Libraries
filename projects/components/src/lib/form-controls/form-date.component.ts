@@ -43,13 +43,7 @@ export class DFormDateComponent implements ControlValueAccessor, OnInit, OnDestr
     onTouched: any = () => { };
 
     ngOnInit(): void {
-        this.subscription = this.control.valueChanges.subscribe(value => {
-            this.updateError();
-            if (!this.control.pristine) {
-                this.onChange(this.dateToValue(value));
-                this.onTouched();
-            }
-        });
+        this.initControl();
     }
 
     ngOnDestroy() {
@@ -57,10 +51,7 @@ export class DFormDateComponent implements ControlValueAccessor, OnInit, OnDestr
     }
 
     ngOnChanges(changes: SimpleChanges) {
-        if (!this.control) {
-            this.control = new FormControl({value: this.value, disabled: this.disabled});
-            return;
-        }
+        this.initControl()
 
         if (changes.value) {
             this.control.setValue(changes.value.currentValue);
@@ -96,9 +87,24 @@ export class DFormDateComponent implements ControlValueAccessor, OnInit, OnDestr
         }
     }
 
+    initControl() {
+        if (!this.control) {
+            this.control = new FormControl({value: this.value, disabled: this.disabled});
+
+            this.subscription = this.control.valueChanges.subscribe(value => {
+                this.updateError();
+                if (!this.control.pristine) {
+                    this.onChange(this.dateToValue(value));
+                    this.onTouched();
+                }
+            });
+            return;
+        }
+    }
+
     private dateToValue(dateValue) {
         if (dateValue) {
-            let theDate = dateValue ? new Date(dateValue) : null;
+            const theDate = dateValue ? new Date(dateValue) : null;
             if (theDate) {
                 return this.pad(theDate.getFullYear(), 4) + '-' + this.pad(theDate.getMonth() + 1, 2)
                 + '-' + this.pad(theDate.getDate(), 2);
@@ -111,13 +117,13 @@ export class DFormDateComponent implements ControlValueAccessor, OnInit, OnDestr
     }
 
     pad(num: number, size: number) {
-        let s = '000000000' + num;
+        const s = '000000000' + num;
         return s.substr(s.length - size);
     }
 
     updateError() {
-        let theDate = Date.parse(this.control.value);
-        let dateError = theDate ? null : 'Invalid date, use format yyyy-mm-dd';
+        const theDate = Date.parse(this.control.value);
+        const dateError = theDate ? null : 'Invalid date, use format yyyy-mm-dd';
         if (!dateError) {
             this.allErrors = this.errors;
             return;

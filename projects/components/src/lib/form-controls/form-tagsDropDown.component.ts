@@ -137,8 +137,8 @@ export class DFormTagsDropdownComponent implements ControlValueAccessor, OnInit,
         let items: Array<any>;
         if (this.sortItems) {
             items = this.items.sort((a, b) => {
-                let aLabel = this.sharedFunctions.fetchFromObject(a, this.itemName);
-                let bLabel = this.sharedFunctions.fetchFromObject(b, this.itemName);
+                const aLabel = this.sharedFunctions.fetchFromObject(a, this.itemName);
+                const bLabel = this.sharedFunctions.fetchFromObject(b, this.itemName);
                 if (aLabel > bLabel) {
                     return 1;
                 }
@@ -164,7 +164,7 @@ export class DFormTagsDropdownComponent implements ControlValueAccessor, OnInit,
         this.tags = [];
         if (this.selectedKeys && this.sortedItems) {
             this.selectedKeys.forEach(item => {
-                let itemLookup = this.sortedItems.find(c => c.key === item);
+                const itemLookup = this.sortedItems.find(c => c.key === item);
 
                 if (itemLookup) {
                     this.tags.push({label: itemLookup.label, color: itemLookup.color});

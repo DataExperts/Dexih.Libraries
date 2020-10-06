@@ -32,25 +32,17 @@ export class DFormCheckboxComponent implements OnInit, OnDestroy, OnChanges, Con
 
     onChange: any = () => { };
     onTouched: any = () => { };
-    
+
     ngOnInit(): void {
-        this.subscription = this.control.valueChanges.subscribe(value => {
-            if (!this.control.pristine) {
-                this.onChange(value ? this.checkedValue : this.unCheckedValue );
-                this.onTouched();
-            }
-        });
+        this.initControl();
     }
-    
+
     ngOnDestroy() {
         this.subscription.unsubscribe();
     }
 
     ngOnChanges(changes: SimpleChanges) {
-        if (!this.control) {
-            this.control = new FormControl({value: this.isChecked(this.value), disabled: this.disabled});
-            return;
-        }
+        this.initControl();
 
         if (changes.value) {
             this.control.setValue(this.isChecked(changes.value.currentValue));
@@ -83,6 +75,20 @@ export class DFormCheckboxComponent implements OnInit, OnDestroy, OnChanges, Con
             this.control.disable();
         } else {
             this.control.enable();
+        }
+    }
+
+    initControl() {
+        if (!this.control) {
+            this.control = new FormControl({value: this.isChecked(this.value), disabled: this.disabled});
+
+            this.subscription = this.control.valueChanges.subscribe(value => {
+                if (!this.control.pristine) {
+                    this.onChange(value ? this.checkedValue : this.unCheckedValue );
+                    this.onTouched();
+                }
+            });
+            return;
         }
     }
 
