@@ -219,7 +219,7 @@ export class DFormSelectComponent implements ControlValueAccessor, OnInit, OnDes
     }
 
     hasChanged() {
-        if (JSON.stringify(this.value) !== JSON.stringify(this.oldValue)) {
+        if (this.oldValue === null ||  JSON.stringify(this.value) !== JSON.stringify(this.oldValue)) {
             if (this.multiSelect) {
                 this.value = [...this.value];
                 this.oldValue = [...this.value];
