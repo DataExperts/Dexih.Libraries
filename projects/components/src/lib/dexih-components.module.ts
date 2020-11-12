@@ -8,6 +8,7 @@ import { DProgressModule } from './progress/d-progress.module';
 import { DToastModule } from './toast/d-toast.module';
 import { DModalModule } from './modal/d-modal.module';
 import { DMarkdownModule } from 'ngx-d-markdown';
+import { DTabsModule } from './tabs/d-tabs.module';
 
 @NgModule({
   imports: [
@@ -19,7 +20,8 @@ import { DMarkdownModule } from 'ngx-d-markdown';
     DProgressModule,
     DToastModule,
     DModalModule,
-    DMarkdownModule
+    DMarkdownModule,
+    DTabsModule,
   ],
   declarations: [
   ],
@@ -30,6 +32,7 @@ import { DMarkdownModule } from 'ngx-d-markdown';
     DProgressModule,
     DToastModule,
     DModalModule,
+    DTabsModule
     // DMarkdownModule
   ]
 })

@@ -1,0 +1,48 @@
+.slide-animated {
+    .slide-left {
+      animation-duration: 1s;
+      animation-fill-mode: both;
+      &.active {
+        width: 100%;
+        animation-name: carouselSlideLeftIn;
+      }
+      &:not(.active) {
+        // display: table-cell;
+        animation-name: carouselLeftSlideOut;
+      }
+    }
+    .slide-right {
+        animation-duration: 1s;
+        animation-fill-mode: both;
+        &.active {
+          width: 100%;
+          animation-name: carouselRightSlideIn;
+        }
+        &:not(.active) {
+         // display: table-cell;
+          animation-name: carouselRightSlideOut;
+        }
+      }
+  
+    }
+  
+  @keyframes carouselSlideLeftIn {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(0); }
+  }
+  @keyframes carouselLeftSlideOut {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
+  }
+  @keyframes carouselRightSlideIn {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(0); }
+  }
+  @keyframes carouselRightSlideOut {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(100%); }
+  }
+
+  .carousel-inner {
+    overflow: visible;
+  }

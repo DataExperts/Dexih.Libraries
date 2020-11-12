@@ -1,0 +1,68 @@
+<ng-template [ngIf]="!loading">
+<div *ngIf="iconClass || title || headerTemplate || showExpandButton" class="card-header rounded-0 p-0" [ngClass]="[sectionClass]">
+    <div class="d-flex flex-row">
+      <span class="text-truncate align-self-center p-3">
+        <i *ngIf="iconClass" class="{{iconClass}} mr-1"></i>
+        <b>{{title}}</b>
+      </span>
+  
+      <div class="d-flex ml-auto">
+        <div *ngIf="headerTemplate" class="align-self-center mr-3">
+          <ng-template [ngTemplateOutlet]="headerTemplate">
+          </ng-template>
+        </div>
+
+        <ul *ngIf="tabStyle !== 'none'" class="nav align-self-center mr-3" [ngClass]="{'card-header-tabs nav-tabs': tabStyle === 'tabs', 'card-header-pills nav-pills': tabStyle === 'pills'}">
+            <li *ngFor="let tab of tabs; let i = index;" class="nav-item">
+
+            <a href="javascript:void(0);" class="nav-link" [ngClass]="{'active': i == selectedIndex}" [class]="i === selectedIndex ? activeStyle : inActiveStyle" (click)="select(i)">
+                <i *ngIf="tab.iconClass" class="{{tab.iconClass}} mr-1"></i>
+                {{tab.title}}
+            </a>
+            </li>
+        </ul>
+
+        <div *ngIf="showPrevNext" class="align-self-center mr-3 btn-group">
+            <button type="button" class="btn btn-secondary" [ngClass]="{'disabled': selectedIndex <= 0}" (click)="select(0)" title="Move to first"><b>&lt;&lt;</b></button>
+            <button type="button" class="btn btn-secondary" [ngClass]="{'disabled': selectedIndex <= 0}" (click)="select(selectedIndex - 1)" title="Move to previous"><b>&lt;</b></button>
+            <button type="button" class="btn btn-secondary" [ngClass]="{'disabled': selectedIndex >= tabs.length -1}"(click)="select(selectedIndex + 1)" title="Move to next"><b>&gt;</b></button>
+            <button type="button" class="btn btn-secondary" [ngClass]="{'disabled': selectedIndex >= tabs.length -1}"(click)="select(tabs.length -1)" title="Move to last"><b>&gt;&gt;</b></button>
+        </div>
+
+        <button *ngIf="showExpandButton" type="button" class="close mr-3" (click)="isExpanded=!isExpanded" aria-label="Expand" [ngClass]="[sectionClass]">
+          <i *ngIf="!isExpanded" class="fa fa-angle-double-down" title="Expand"></i>
+          <i *ngIf="isExpanded" class="fa fa-angle-double-up" title="Collapse"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <div [@slideDown]="isExpanded ? 'show' : 'hide'">
+  
+    <div [ngClass]="['card-header', subTitleClass]" *ngIf="subTitleTemplate || subTitle || toolsTemplate">
+      <div class="d-flex flex-row">
+        <div class="card-subtitle">{{subTitle}}</div>
+        <ng-template [ngTemplateOutlet]="subTitleTemplate">
+        </ng-template>
+        <div class="d-flex ml-auto">
+          <ng-template [ngTemplateOutlet]="toolsTemplate">
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  
+    <ng-template [ngIf]="tabs && selectedIndex >= 0 && tabs.length > selectedIndex" >
+        <div class='card-body' [ngClass]="{'p-0': !padding}">
+            <div class="carousel slide carousel-fade">
+                <div class="carousel-inner slide-animated ">
+                    <div *ngFor="let tab of tabs; let i = index;" class="carousel-item " style="display: table-cell;"
+                        [ngClass]="{'p-3': tab.padding, 'active': i === selectedIndex, 'slide-left': moveDirection === 'left', 'slide-right': moveDirection === 'right'}">
+                        <ng-template [ngTemplateOutlet]="tab?.innerTemplate"></ng-template>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </ng-template>
+  </div>
+</ng-template>

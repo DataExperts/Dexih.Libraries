@@ -20,6 +20,9 @@ export class ComponentsDemoComponent implements OnInit {
 
     textControl = new FormControl();
 
+    dynamicTab = false;
+    tabIndex = 0;
+    
     public timer;
     public percent = 0;
 

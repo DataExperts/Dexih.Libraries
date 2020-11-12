@@ -18,6 +18,7 @@
             <a href="javascript:void(0)" (click)="scrollToElement(modals)" class="list-group-item list-group-item-action">Modal Dialogs</a>
             <a href="javascript:void(0)" (click)="scrollToElement(widgets)" class="list-group-item list-group-item-action">Widgets</a>
             <a href="javascript:void(0)" (click)="scrollToElement(widgetSections)" class="list-group-item list-group-item-action">Widget Sections</a>
+            <a href="javascript:void(0)" (click)="scrollToElement(tabs)" class="list-group-item list-group-item-action">Tabs</a>
        </div>
     </div>
     <div class="col-xs-12 col-md-9">
@@ -536,13 +537,86 @@
                             <d-widget-section title='Comments' [showExpandButton]="true"  [isExpanded]="false" iconClass="fa fa-comment" sectionClass="text-white bg-danger">
                                 this section might contain comments
                             </d-widget-section>
-                    
+                        </d-widget>
+                    </div>
+
+                    <div class="border rounded p-3">
+                        <ngx-gist [gistId]="'gary-holland/a1f4717fdd027543ed1120b7310507a6'"></ngx-gist>
+                    </div>
+                    <br>
+
+                    <h3 #tabs>Widget with Tabs</h3>
+                    <p>Tabs
+                    </p>
+
+                    <div class="border rounded p-3" >
+                        <d-widget title="Tabs" [showFilter]="true" [showCloseButton]="true" iconClass="fa fa-lg fa-fw fa-database" [showExpandButton]="true">
+                            <ng-template #header>
+                                <d-button class="mr-1" (click)="dynamicTab = !dynamicTab" text="Toggle Dynamic Tab"></d-button>
+                            </ng-template>
+                            <d-tabs title="Formatted as pills" tabStyle="pills" [showExpandButton]="true" [padding]="false">
+                                <d-tab title="Login" iconClass="fa fa-user" [padding]="true">
+                                    <form>
+                                        <form-input label="User Name"></form-input>
+                                        <form-input label="Password" type="password"></form-input>
+                                        <br>
+                                        <d-button text="Login"></d-button>
+                                    </form>
+                                </d-tab>
+                                <d-tab title="tab 2">this is tab 2</d-tab>
+                                <d-tab title="tab 3">this is tab 3</d-tab>
+                                <d-tab *ngIf="dynamicTab" title="dynamic tab">this tab is dynamic</d-tab>
+                            </d-tabs>
+                            <d-tabs title="Formatted as tabs" tabStyle="tabs" [padding]="false">
+                                <d-tab title="Login" iconClass="fa fa-user">
+                                    <form>
+                                        <form-input label="User Name"></form-input>
+                                        <form-input label="Password" type="password"></form-input>
+                                        <br>
+                                        <d-button text="Login"></d-button>
+                                    </form>
+                                </d-tab>
+                                <d-tab title="tab 2">this is tab 2</d-tab>
+                                <d-tab title="tab 3">this is tab 3</d-tab>
+                            </d-tabs>
+                            <d-tabs title="Using custom controls" tabStyle="tabs" [padding]="false" [(selectedIndex)]="tabIndex">
+
+                                <ng-template #header>
+                                    <d-button class="mr-1" (click)="tabIndex = tabIndex - 1" text="Prev"></d-button>
+                                    <d-button class="mr-1" (click)="tabIndex = tabIndex + 1" text="Next"></d-button>
+                                </ng-template>
+
+                                <d-tab title="Login" iconClass="fa fa-user">
+                                    <form>
+                                        <form-input label="User Name"></form-input>
+                                        <form-input label="Password" type="password"></form-input>
+                                        <br>
+                                        <d-button text="Login"></d-button>
+                                    </form>
+                                </d-tab>
+                                <d-tab title="tab 2">this is tab 2</d-tab>
+                                <d-tab title="tab 3">this is tab 3</d-tab>
+
+                            </d-tabs>
+                            <d-tabs title="With next/previous layout" tabStyle="none" [showExpandButton]="true" [showPrevNext]="true" [padding]="false">
+                                <d-tab title="Login" iconClass="fa fa-user" [padding]="true">
+                                    <form>
+                                        <form-input label="User Name"></form-input>
+                                        <form-input label="Password" type="password"></form-input>
+                                        <br>
+                                        <d-button text="Login"></d-button>
+                                    </form>
+                                </d-tab>
+                                <d-tab title="tab 2">this is tab 2</d-tab>
+                                <d-tab title="tab 3">this is tab 3</d-tab>
+                                <d-tab *ngIf="dynamicTab" title="dynamic tab">this tab is dynamic</d-tab>
+                            </d-tabs>
                         </d-widget>
 
                     </div>
 
                     <div class="border rounded p-3">
-                        <ngx-gist [gistId]="'gary-holland/a1f4717fdd027543ed1120b7310507a6'"></ngx-gist>
+                        <ngx-gist [gistId]="'gary-holland/63c0b49abb056517f0bb0676c855975d'"></ngx-gist>
                     </div>
                     <br>
 
