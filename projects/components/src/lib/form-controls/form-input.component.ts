@@ -31,7 +31,7 @@ export class DFormInputComponent implements ControlValueAccessor, OnInit, OnDest
     @Input() maxlength: number;
     @Input() disabled = false;
     @Input() border = true;
-    @Input() autocapitalize = 'none';
+    @Input() autocapitalize = false;
     @Input() floatingLabel: string;
     @Input() autoValidate = true;
 

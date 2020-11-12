@@ -16,7 +16,7 @@ export class BaseInputComponent implements ControlValueAccessor, OnInit, OnDestr
     @Input() value: any;
     @Input() iconClass: string = null; // only displays where there are no elements.
     @Input() border = true;
-    @Input() autocapitalize = 'none';
+    @Input() autocapitalize = false;
     @Input() floatingLabel: string;
     @Input() placeholder: string;
     @Input() readonly = false;

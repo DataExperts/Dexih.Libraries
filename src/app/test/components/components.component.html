@@ -320,7 +320,7 @@ this should have no padding.
 
                 the value is {{inputString}}
                 <form-input placeholder="No labels" [(ngModel)]="inputString" [ngModelOptions]="{standalone: true}"></form-input>
-                <form-input autocapitalize="on" label="auto capitalize"></form-input>
+                <form-input [autocapitalize]="true" label="auto capitalize"></form-input>
                 <form-input floatingLabel="this is a floating label"></form-input>
                 <form-input labelLeft="left label also" floatingLabel="this is a floating label"></form-input>
                 <form-input label="input label" labelLeft="label left" note="a note to describe the input" placeholder="input something"></form-input>

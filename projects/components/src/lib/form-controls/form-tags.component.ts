@@ -24,7 +24,7 @@ export class DFormTagsComponent implements ControlValueAccessor {
     @Input() maxlength: number;
     @Input() border = true;
     @Input() disabled = false;
-    @Input() autocapitalize = 'none';
+    @Input() autocapitalize = false;
     @Input() floatingLabel: string;
     @Input() autoValidate = true;
 

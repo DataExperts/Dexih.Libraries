@@ -45,7 +45,7 @@ export class DFormSelectComponent implements ControlValueAccessor, OnInit, OnDes
     @Input() border = true;
     @Input() sortItems = false;
     @Input() enableFilter = true;
-    @Input() autocapitalize = 'none';
+    @Input() autocapitalize = false;
     @Input() multiSelect = false;
     @Input() enableAddAll = false;
     @Input() enableRemoveAll = true;

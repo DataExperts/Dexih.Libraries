@@ -38,7 +38,7 @@
                 [type]="type"
                 [pattern]="pattern"
                 [step]="step"
-                [attr.autocapitalize]="autocapitalize"
+                [attr.autocapitalize]="autocapitalize ? 'on' : 'none'"
                 [title]="errors ? errors : ''"
                 [attr.maxlength]="maxlength"            
             />
