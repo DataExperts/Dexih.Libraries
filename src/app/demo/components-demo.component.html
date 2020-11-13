@@ -527,6 +527,9 @@
                     <div class="border rounded p-3" >
                         <d-widget title="Show the data" [showFilter]="true" [showCloseButton]="true" iconClass="fa fa-lg fa-fw fa-database" [showExpandButton]="true">
                             <d-widget-section title='Chart' [showExpandButton]="true" iconClass="fa fa-table">
+                                <ng-template #sectionHeader>
+                                    <d-button class="mr-1" text="Section Header Button"></d-button>
+                                </ng-template>
                                 this section might contain a chart
                             </d-widget-section>
                     
@@ -581,12 +584,16 @@
                             </d-tabs>
                             <d-tabs title="Using custom controls" tabStyle="tabs" [padding]="false" [(selectedIndex)]="tabIndex">
 
-                                <ng-template #header>
+                                <ng-template #tabsHeader>
                                     <d-button class="mr-1" (click)="tabIndex = tabIndex - 1" text="Prev"></d-button>
                                     <d-button class="mr-1" (click)="tabIndex = tabIndex + 1" text="Next"></d-button>
                                 </ng-template>
 
-                                <d-tab title="Login" iconClass="fa fa-user">
+                                <d-tab title="Login" iconClass="fa fa-user" [showHeader]="true">
+                                    <ng-template #tabHeader>
+                                        <d-button text="Login"></d-button>
+                                    </ng-template>
+    
                                     <form>
                                         <form-input label="User Name"></form-input>
                                         <form-input label="Password" type="password"></form-input>

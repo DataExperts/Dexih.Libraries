@@ -10,7 +10,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
             state('show', style({ 'height': '*', opacity: 1 })),
             transition('hide <=> show', animate('200ms ease-in')),
         ]),
-    ]    
+    ]
 })
 
 export class DWidgetSectionComponent implements OnInit {
@@ -23,9 +23,9 @@ export class DWidgetSectionComponent implements OnInit {
     @Input() public sectionClass = 'text-white bg-info';
     @Input() public padding = true;
 
-    @ContentChild('header', { static: true }) headerTemplate: TemplateRef<any>;
-    @ContentChild('tools', { static: true }) toolsTemplate: TemplateRef<any>;
-    @ContentChild('subTitle', { static: true }) subTitleTemplate: TemplateRef<any>;
+    @ContentChild('sectionHeader', { static: true }) headerTemplate: TemplateRef<any>;
+    @ContentChild('sectionTools', { static: true }) toolsTemplate: TemplateRef<any>;
+    @ContentChild('sectionSubTitle', { static: true }) subTitleTemplate: TemplateRef<any>;
 
     constructor() { }
 

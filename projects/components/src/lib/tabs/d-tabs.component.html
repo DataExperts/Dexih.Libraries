@@ -56,8 +56,26 @@
             <div class="carousel slide carousel-fade">
                 <div class="carousel-inner slide-animated ">
                     <div *ngFor="let tab of tabs; let i = index;" class="carousel-item " style="display: table-cell;"
-                        [ngClass]="{'p-3': tab.padding, 'active': i === selectedIndex, 'slide-left': moveDirection === 'left', 'slide-right': moveDirection === 'right'}">
-                        <ng-template [ngTemplateOutlet]="tab?.innerTemplate"></ng-template>
+                        [ngClass]="{'active': i === selectedIndex, 'slide-left': moveDirection === 'left', 'slide-right': moveDirection === 'right'}">
+
+                        <div *ngIf="tab.showHeader" class="card-header rounded-0 p-0" [ngClass]="[tab.sectionClass]">
+                          <div class="d-flex flex-row">
+                            <span class="text-truncate align-self-center p-3">
+                              <i *ngIf="tab.iconClass" class="{{tab.iconClass}} mr-1"></i>
+                              <b>{{title}}</b>
+                            </span>
+                            <div class="d-flex ml-auto">
+                              <div *ngIf="tab.headerTemplate" class="align-self-center mr-3">
+                                <ng-template [ngTemplateOutlet]="tab.headerTemplate">
+                                </ng-template>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div [ngClass]="{'p-3': tab.padding}">
+                          <ng-template [ngTemplateOutlet]="tab?.innerTemplate"></ng-template>
+                      </div>
                     </div>
                 </div>
 

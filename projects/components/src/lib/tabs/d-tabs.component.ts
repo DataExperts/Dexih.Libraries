@@ -34,9 +34,9 @@ export class DTabsComponent implements OnInit, OnChanges, AfterContentInit {
 
     @Output() public selectedIndexChange = new EventEmitter<number>();
 
-    @ContentChild('header', { static: true }) headerTemplate: TemplateRef<any>;
-    @ContentChild('tools', { static: true }) toolsTemplate: TemplateRef<any>;
-    @ContentChild('subTitle', { static: true }) subTitleTemplate: TemplateRef<any>;
+    @ContentChild('tabsHeader', { static: true }) headerTemplate: TemplateRef<any>;
+    @ContentChild('tabsTools', { static: true }) toolsTemplate: TemplateRef<any>;
+    @ContentChild('tabsSubTitle', { static: true }) subTitleTemplate: TemplateRef<any>;
     @ContentChildren(DTabComponent) tabs: QueryList<DTabComponent>;
 
     moveDirection = '';

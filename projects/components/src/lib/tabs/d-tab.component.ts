@@ -10,6 +10,11 @@ export class DTabComponent implements OnInit {
     @Input() public iconClass: string;
     @Input() public sectionClass = 'text-white bg-info';
     @Input() public padding = true;
+    @Input() public showHeader = false;
+
+    @ContentChild('tabHeader', { static: true }) headerTemplate: TemplateRef<any>;
+    @ContentChild('tabTools', { static: true }) toolsTemplate: TemplateRef<any>;
+    @ContentChild('tabSubTitle', { static: true }) subTitleTemplate: TemplateRef<any>;
 
     @ViewChild('innerTemplate') public innerTemplate: TemplateRef<any>;
 
