@@ -1,21 +1,21 @@
 <ng-template [ngIf]="!loading">
 <div *ngIf="iconClass || title || headerTemplate || showExpandButton" class="card-header rounded-0 p-0" [ngClass]="[sectionClass]">
     <div class="d-flex flex-row">
-      <span class="text-truncate align-self-center p-3">
+      <span class="text-truncate align-self-center p-3" style="min-width: 50%">
         <i *ngIf="iconClass" class="{{iconClass}} mr-1"></i>
         <b>{{title}}</b>
       </span>
   
-      <div class="d-flex ml-auto">
+      <div class="d-flex ml-auto overflow-auto">
         <div *ngIf="headerTemplate" class="align-self-center mr-3">
           <ng-template [ngTemplateOutlet]="headerTemplate">
           </ng-template>
         </div>
 
-        <ul *ngIf="tabStyle !== 'none'" class="nav align-self-center mr-3" [ngClass]="{'card-header-tabs nav-tabs': tabStyle === 'tabs', 'card-header-pills nav-pills': tabStyle === 'pills'}">
+        <ul *ngIf="tabStyle !== 'none'" class="nav align-self-center mr-3 ml-1 " [ngClass]="{'card-header-tabs nav-tabs': tabStyle === 'tabs', 'card-header-pills nav-pills': tabStyle === 'pills', 'scroll-horizontal': scrollHorizontal}">
             <li *ngFor="let tab of tabs; let i = index;" class="nav-item">
 
-            <a href="javascript:void(0);" class="nav-link" [ngClass]="{'active': i == selectedIndex}" [class]="i === selectedIndex ? activeStyle : inActiveStyle" (click)="select(i)">
+            <a href="javascript:void(0);" class="nav-link " [ngClass]="{'active': i == selectedIndex, 'scroll-horizontal-link': scrollHorizontal}" [class]="i === selectedIndex ? activeStyle : inActiveStyle" (click)="select(i)">
                 <i *ngIf="tab.iconClass" class="{{tab.iconClass}} mr-1"></i>
                 {{tab.title}}
             </a>

@@ -31,6 +31,7 @@ export class DTabsComponent implements OnInit, OnChanges, AfterContentInit {
     @Input() public showPrevNext = false;
     @Input() public activeStyle;
     @Input() public inActiveStyle = ''
+    @Input() public scrollHorizontal = true;
 
     @Output() public selectedIndexChange = new EventEmitter<number>();
 

@@ -46,3 +46,13 @@
   .carousel-inner {
     overflow: visible;
   }
+
+  .scroll-horizontal {
+    overflow-x: scroll;
+    overflow-y:hidden;
+    flex-wrap: nowrap;
+ }
+
+ .scroll-horizontal-link {
+  white-space: nowrap;
+}

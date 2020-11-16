@@ -23,7 +23,7 @@
             [border]="border"
             [formControl]="control"
             (keydown)="keydownEvent($event)"
-            (focusout)="updateError()"
+            (focusout)="formatValue()"
             [enableFloatingAnimation]="false"
             maxlength=8>
         </base-input>

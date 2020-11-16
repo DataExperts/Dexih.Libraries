@@ -92,9 +92,10 @@ export class DFormTimeComponent implements ControlValueAccessor, OnInit, OnDestr
             this.control = new FormControl({value: this.value, disabled: this.disabled});
 
             this.subscription = this.control.valueChanges.subscribe(value => {
-                this.updateError();
+                const timeValue = this.timeToValue(value);
+                this.updateError(timeValue);
                 if (!this.control.pristine) {
-                    this.onChange(this.timeToValue(value));
+                    this.onChange(timeValue);
                     this.onTouched();
                 }
             });
@@ -102,7 +103,7 @@ export class DFormTimeComponent implements ControlValueAccessor, OnInit, OnDestr
         }
     }
 
-    private timeToValue(timeValue) {
+    public timeToValue(timeValue) {
         if(timeValue) {
             const timeParts = timeValue.split(':');
             if(timeParts.length > 3 || timeParts.length === 0) {
@@ -127,9 +128,8 @@ export class DFormTimeComponent implements ControlValueAccessor, OnInit, OnDestr
         return s.substr(s.length - size);
     }
 
-    updateError() {
-        const theDate = Date.parse('2000-01-01T' + this.control.value);
-        const dateError = theDate ? null : 'Invalid time, use 24 hour format HH-mm-ss';
+    updateError(value) {
+        const dateError = value !== undefined ? null : 'Invalid time, use 24 hour format HH:mm:ss';
         if (!dateError) {
             this.allErrors = this.errors;
             return;
@@ -141,10 +141,20 @@ export class DFormTimeComponent implements ControlValueAccessor, OnInit, OnDestr
         this.allErrors = dateError + ' ' + this.errors;
     }
 
+    formatValue() {
+        const timeValue = this.timeToValue(this.control.value);
+        this.updateError(timeValue);
+
+        if(timeValue !== undefined) {
+            this.control.setValue(timeValue);
+        }
+    }
+
     keydownEvent($event: any) {
         this.keydown.emit($event);
         if ( $event.keyCode === 13) {
-            this.updateError();
+            const timeValue = this.timeToValue(this.control.value);
+            this.updateError(timeValue);
         }
     }
 

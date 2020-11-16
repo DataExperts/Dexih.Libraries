@@ -598,6 +598,7 @@ this should have no padding.
                 <div style="width: 120px">
                 <form-time [(ngModel)]="timeString" [ngModelOptions]="{standalone: true}" ></form-time>
             </div>
+            <form-time  label="time with no native help" [disableNative]="true"></form-time>
                 <form-time  label="time with label"></form-time>
                 <form-time labelLeft="label left"></form-time>
                 <form-time label="time with note" note="this time description"></form-time>
