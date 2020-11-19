@@ -84,8 +84,13 @@ export class DFormCheckboxComponent implements OnInit, OnDestroy, OnChanges, Con
 
             this.subscription = this.control.valueChanges.subscribe(value => {
                 if (!this.control.pristine) {
-                    this.onChange(value ? this.checkedValue : this.unCheckedValue );
-                    this.onTouched();
+                    // checking the onChange.length is a workaround for error:
+                    // "There is no FormControl instance attached to form control element with name:"
+                    // it appears the onChange is reset when the control is reinitialized.
+                    if(this.onChange.length > 0) {
+                        this.onChange(value ? this.checkedValue : this.unCheckedValue );
+                        this.onTouched();
+                    }
                 }
             });
             return;

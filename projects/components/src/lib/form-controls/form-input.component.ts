@@ -100,9 +100,14 @@ export class DFormInputComponent implements ControlValueAccessor, OnInit, OnDest
             this.subscription = this.control.valueChanges.subscribe(value => {
                 // only update if touched to stop disabled states toggling the touch state
                 if (!this.control.pristine) {
-                    this.onChange(value);
-                    this.onTouched();
+                    // checking the onChange.length is a workaround for error:
+                    // "There is no FormControl instance attached to form control element with name:"
+                    // it appears the onChange is reset when the control is reinitialized.
+                    if(this.onChange.length > 0) {
+                        this.onChange(value);
+                        this.onTouched();
                 }
+            }
             });
 
             return;

@@ -89,13 +89,18 @@ export class DFormDateComponent implements ControlValueAccessor, OnInit, OnDestr
 
     initControl() {
         if (!this.control) {
-            this.control = new FormControl({value: this.value, disabled: this.disabled});
+            this.control = new FormControl({ value: this.value, disabled: this.disabled });
 
             this.subscription = this.control.valueChanges.subscribe(value => {
                 this.updateError();
                 if (!this.control.pristine) {
-                    this.onChange(this.dateToValue(value));
-                    this.onTouched();
+                    // checking the onChange.length is a workaround for error:
+                    // "There is no FormControl instance attached to form control element with name:"
+                    // it appears the onChange is reset when the control is reinitialized.
+                    if (this.onChange.length > 0) {
+                        this.onChange(this.dateToValue(value));
+                        this.onTouched();
+                    }
                 }
             });
             return;

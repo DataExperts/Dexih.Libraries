@@ -81,6 +81,8 @@ export class ComponentsComponent {
 
   public formGroup: FormGroup;
 
+  public selectGroup: FormGroup;
+
   disabledControl = new FormControl({value: 'can not edit', disabled: true});
 
   public complexTags = [
@@ -207,5 +209,9 @@ export class ComponentsComponent {
   public textValueChange($event) {
     this.toasts.add(new ToastMessage('success', 'text selected - ' + $event.textValue,  null));
   }
+
+  // public resetControl() {
+  //   this.selectControl = new FormControl(null);
+  // }
 }
 

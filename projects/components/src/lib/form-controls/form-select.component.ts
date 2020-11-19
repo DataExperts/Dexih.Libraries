@@ -226,8 +226,14 @@ export class DFormSelectComponent implements ControlValueAccessor, OnInit, OnDes
             } else {
                 this.oldValue = this.value;
             }
-            this.onChange(this.value);
-            this.onTouched();
+
+            // checking the onChange.length is a workaround for error:
+            // "There is no FormControl instance attached to form control element with name:"
+            // it appears the onChange is reset when the control is reinitialized.
+            if(this.onChange.length > 0) {
+                this.onChange(this.value);
+                this.onTouched();
+            }
             this.isDirty = true;
         }
     }
@@ -263,6 +269,7 @@ export class DFormSelectComponent implements ControlValueAccessor, OnInit, OnDes
 
     writeValue(value: any) {
         this.selectedItem = null;
+
         if (this.hasValue(value)) {
             if (this.multiSelect) {
                 if (Array.isArray(value)) {
@@ -289,13 +296,9 @@ export class DFormSelectComponent implements ControlValueAccessor, OnInit, OnDes
             } else {
                 this.selectedItem = null;
                 this.selectedName = null;
-                if (this.enableTextEntry) {
-                    if (this.textValue) {
-                        this.selectedName = this.textValue;
-                        // this.doManualControlUpdate = false;
-                        this.manualControl.setValue(this.textValue);
-                    }
-                }
+                this.textValue = null;
+                this.value = null;
+                this.manualControl.setValue(null);
             }
         }
     }
@@ -549,6 +552,10 @@ export class DFormSelectComponent implements ControlValueAccessor, OnInit, OnDes
             }
 
             // this.doManualControlUpdate = false;
+            if (this.selectedName === undefined && this.enableTextEntry) {
+                this.selectedName = value;
+            }
+
             this.manualControl.setValue(this.selectedName);
         }
     }

@@ -95,8 +95,13 @@ export class DFormTimeComponent implements ControlValueAccessor, OnInit, OnDestr
                 const timeValue = this.timeToValue(value);
                 this.updateError(timeValue);
                 if (!this.control.pristine) {
-                    this.onChange(timeValue);
-                    this.onTouched();
+                    // checking the onChange.length is a workaround for error:
+                    // "There is no FormControl instance attached to form control element with name:"
+                    // it appears the onChange is reset when the control is reinitialized.
+                    if (this.onChange.length > 0) {
+                        this.onChange(timeValue);
+                        this.onTouched();
+                    }
                 }
             });
             return;

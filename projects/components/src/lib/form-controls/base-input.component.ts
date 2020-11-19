@@ -43,20 +43,27 @@ export class BaseInputComponent implements ControlValueAccessor, OnInit, OnDestr
     focus = false;
 
     subscription: Subscription;
-    control = new FormControl({value: this.value, disabled: this.disabled});
+    control = null;
 
     onChange: any = () => { };
     onTouched: any = () => { };
 
     ngOnInit() {
+        this.control = new FormControl({value: this.value, disabled: this.disabled});
+        
         this.subscription = this.control.valueChanges.subscribe(value => {
             if (!this.control.pristine) {
-                if(this.type.toLocaleLowerCase() === 'number') {
-                    this.onChange(+value);
-                } else {
-                    this.onChange(value);
+                // checking the onChange.length is a workaround for error:
+                // "There is no FormControl instance attached to form control element with name:"
+                // it appears the onChange is reset when the control is reinitialized.
+                if (this.onChange.length > 0) {
+                    if (this.type.toLocaleLowerCase() === 'number') {
+                        this.onChange(+value);
+                    } else {
+                        this.onChange(value);
+                    }
+                    this.onTouched();
                 }
-                this.onTouched();
             }
         });
     }

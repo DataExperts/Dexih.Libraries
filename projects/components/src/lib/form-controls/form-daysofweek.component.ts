@@ -65,8 +65,13 @@ export class DFormDaysOfWeekComponent implements ControlValueAccessor, OnInit, O
                 }
             }
 
-            this.onChange(daysOfWeek);
-            this.onTouched();
+            // checking the onChange.length is a workaround for error:
+            // "There is no FormControl instance attached to form control element with name:"
+            // it appears the onChange is reset when the control is reinitialized.
+            if(this.onChange.length > 0) {
+                this.onChange(daysOfWeek);
+                this.onTouched();
+            }
         });
     }
 

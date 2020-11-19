@@ -464,6 +464,13 @@ this should have no padding.
                     >
                 </form-select>
 
+                <div>with form control</div>
+                <button (click)="newFormGroup()">New Form Group</button>
+                <form *ngIf="formGroup" [formGroup]="formGroup">
+                    <div>selected item key: {{formGroup?.controls.test?.value}}</div>
+                    <form-select label="Select with key/value" [items]="[{key:1, name:'item1'}, {key:2, name:'item2'}, {key:3, name:'item3'}]"
+                    itemName='name' itemKey='key' formControlName="test" [enableTextEntry]="true"></form-select>
+                </form>
 
                 <div>enableTextEntry=true, enableTextEntryMatch=false</div>
                 <div>selected item: {{selectedItem5}}</div>

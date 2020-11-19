@@ -98,8 +98,14 @@ export class DFormTextAreaComponent implements ControlValueAccessor, OnInit, OnD
             this.control = new FormControl({value: this.value, disabled: this.disabled});
 
             this.subscription = this.control.valueChanges.subscribe(value => {
-                this.onChange(value);
-                this.onTouched();
+                // checking the onChange.length is a workaround for error:
+                // "There is no FormControl instance attached to form control element with name:"
+                // it appears the onChange is reset when the control is reinitialized.
+                if (this.onChange.length > 0) {
+
+                    this.onChange(value);
+                    this.onTouched();
+                }
             });
             return;
         }
