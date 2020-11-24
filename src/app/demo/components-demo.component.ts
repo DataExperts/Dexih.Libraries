@@ -22,6 +22,8 @@ export class ComponentsDemoComponent implements OnInit {
 
     dynamicTab = false;
     tabIndex = 0;
+
+    dateControl = new FormControl(new Date().valueOf());
     
     public timer;
     public percent = 0;

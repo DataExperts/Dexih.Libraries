@@ -200,7 +200,7 @@
                     </p>
 
                     <div class="border rounded p-3">
-                        <form-date label="Simple date entry" value="2010-01-01" placeholder="input date"></form-date>
+                        <form-date label="Simple date entry" [formControl]="dateControl" placeholder="input date"></form-date>
                         <form-date label="With native capability disabled" [disableNative]="true" value="2010-01-01" placeholder="input date"></form-date>
                         <form-date label="With floating label" floatingLabel="floating label"></form-date>
                     </div>

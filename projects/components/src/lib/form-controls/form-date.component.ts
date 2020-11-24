@@ -75,7 +75,7 @@ export class DFormDateComponent implements ControlValueAccessor, OnInit, OnDestr
     }
 
     writeValue(value: string) {
-        this.control.setValue(value, { emitEvent: false});
+        this.control.setValue(this.dateToValue(value), { emitEvent: false});
     }
 
     setDisabledState(isDisabled: boolean): void {
