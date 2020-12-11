@@ -370,9 +370,9 @@ this should have no padding.
                 <div>enableTextEntry=true</div>
                 <div>selected item: {{selectedItem}}</div>
                 <div>text value: {{textValue}}</div>
-                <form-select name="formSelect" label="Simple Select" [items]="['item1', 'item2','item3']" (ngModelChange)="selectChange($event)" [enableTextEntry]="true" [(ngModel)]="selectedItem" [ngModelOptions]="{standalone: true}" [(textValue)]="textValue" (onShown)="opened()"></form-select>
+                <form-select name="formSelect" label="Simple Select" [items]="['item1', 'item2','item3']" (ngModelChange)="selectChange($event)" [enableTextEntry]="true" [(ngModel)]="selectedItem" [ngModelOptions]="{standalone: true}" [(textValue)]="textValue" [setTextEntryToValue]="false" (onShown)="opened()"></form-select>
 
-                <form-select name="formSelect" label="Simple Select" [items]="['item1', 'item2','item3']" (ngModelChange)="selectChange($event)" [enableTextEntry]="true" floatingLabel="With Foating Label"></form-select>
+                <form-select name="formSelect" label="Simple Select" [items]="['item1', 'item2','item3']" (ngModelChange)="selectChange($event)" [enableTextEntry]="true" floatingLabel="With Floating Label"></form-select>
 
                 <div>selected items: {{multiSelectedItems}}</div>
                 <form-select name="formSelect" label="Multi Select" [multiSelect]="multiSelect" [items]="['item1', 'item2','item3']" [textEntryItems]="['value1', 'value2', 'value3']" [enableTextEntry]="true" [(ngModel)]="multiSelectedItems" [ngModelOptions]="{standalone: true}" [(textValue)]="textValue"></form-select>
@@ -382,9 +382,9 @@ this should have no padding.
                 <form-select name="formSelect" label="Multi Select (with key/value)" [multiSelect]="true" [items]="[{key:1, name:'item1'}, {key:2, name:'item2'}, {key:3, name:'item3'}]" [textEntryItems]="['value1', 'value2', 'value3']"
                     itemName='name' itemKey='key' [enableTextEntry]="true" [(ngModel)]="multiSelectedItems2" [ngModelOptions]="{standalone: true}"(ngModelChange)="selectChange($event)" ></form-select>
 
-                <form-select label="Multiselect given regular value" [items]="['item1', 'item2','item3']" [enableTextEntry]="true" [(ngModel)]="multiSelect2" [multiSelect]="true" [ngModelOptions]="{standalone: true}" [enableFilter]="false"></form-select>
+                <form-select label="Multiselect given regular value" [items]="['item1', 'item2','item3']" [enableTextEntry]="false" [(ngModel)]="multiSelect2" [multiSelect]="true" [ngModelOptions]="{standalone: true}" [enableFilter]="false"></form-select>
 
-                <form-select label="Selected item not in list" [items]="['item1', 'item2','item3']" [enableTextEntry]="true" [(ngModel)]="textValue" [ngModelOptions]="{standalone: true}" [enableFilter]="false"></form-select>
+                <form-select label="Selected item not in list" [items]="['item1', 'item2','item3']" [enableTextEntry]="false" [(ngModel)]="textValue" [ngModelOptions]="{standalone: true}" [enableFilter]="false"></form-select>
 
                 <form-select label="No Filter" [items]="['item1', 'item2','item3']" [enableFilter]="false"></form-select>
 
@@ -736,6 +736,13 @@ this should have no padding.
                 <d-button-collapsible text="collapsible">
                     here is the content.
                 </d-button-collapsible>
+
+                <div class="d-flex" style="width: 200px;">
+                    <span>
+                        This button is sequeezed into a limited space
+                    </span>
+                    <d-button-close></d-button-close>
+                </div>
         </d-widget>
         <d-widget title="Groups" [padding]="true" iconClass="fa fa-lg fa-fw fa-database">
                 <div class="m-1">

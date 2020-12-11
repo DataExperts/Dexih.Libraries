@@ -10,11 +10,13 @@
 </ng-template>
 
 <ng-template #internalBlock>
-  <i *ngIf="busy" class="fa fa-spin fa-spinner"></i>
-  <i *ngIf="iconClass" [class]="iconClass"></i>
-  <span *ngIf="!compact" [ngClass]="[autoCompact && iconClass ? 'auto-compact-item' : '']" >
-    <span *ngIf="text" class="ml-1">{{text}}</span>
-    <span [ngClass]="{'ml-1': iconClass}"><ng-content></ng-content></span>
-  </span>
-  <span *ngIf="badge" class="badge ml-1" [ngClass]="[badgeClass]">{{badge}}</span>
+  <div class="d-flex align-items-center">
+    <i *ngIf="busy" class="fa fa-spin fa-spinner"></i>
+    <i *ngIf="iconClass" [class]="iconClass"></i>
+    <span *ngIf="!compact" [ngClass]="[autoCompact && iconClass ? 'auto-compact-item' : '']" >
+      <span *ngIf="text" class="ml-1">{{text}}</span>
+      <span [ngClass]="{'ml-1': iconClass}"><ng-content></ng-content></span>
+    </span>
+    <span *ngIf="badge" class="badge ml-1" [ngClass]="[badgeClass]">{{badge}}</span>
+  </div>
 </ng-template>

@@ -30,6 +30,7 @@
             [tags]="multiSelect ? value : null"
             [tagItemName]="itemName"
             (removeTag)="remove($event)"
+            (keyDown)="keyDown($event)"
         >
         
     </base-input>
