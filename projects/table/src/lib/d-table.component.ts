@@ -23,6 +23,12 @@ import { debounceTime } from 'rxjs/operators';
 import { Column, ColumnOperations, TableItem, Tag, TagState } from './d-table.models';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
+declare global {
+    interface Navigator {
+        msSaveBlob?: (blob: any, defaultName?: string) => boolean
+    }
+}
+
 @Component({
     selector: 'd-table',
     templateUrl: './d-table.component.html',

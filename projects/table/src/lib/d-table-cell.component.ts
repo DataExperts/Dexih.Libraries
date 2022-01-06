@@ -1,6 +1,6 @@
 import { Component, Input, OnDestroy, OnInit, Output, EventEmitter } from '@angular/core';
 import { Column, ColumnOperations, Tag } from './d-table.models';
-import { strictEqual } from 'assert';
+//import { strictEqual } from 'assert';
 
 
 @Component({

@@ -7,7 +7,7 @@ import { Component, Input,
     SecurityContext,
     AfterViewInit} from '@angular/core';
 import { catchError, map } from 'rxjs/operators';
-import { Subscribable, Observable } from 'rxjs';
+import { Subscribable, Observable, ObservableInput } from 'rxjs';
 import { isPlatformBrowser } from '@angular/common';
 import { DomSanitizer } from '@angular/platform-browser';
 import { HttpClient } from '@angular/common/http';
@@ -127,7 +127,7 @@ export class DMarkdownComponent implements AfterViewInit {
   /**
    * catch http error
    */
-  private handleError(error: any): Subscribable<any> {
+  private handleError(error: any, caught: Observable<any>): ObservableInput<any> {
     this.error.emit(error);
     console.error('An error occurred', error); // for demo purposes only
     return error.message || error;
