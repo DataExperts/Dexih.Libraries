@@ -17,7 +17,7 @@
     "url": "https://github.com/DataExperts/Dexih.Libaries/issues"
   },
   "dependencies": {
-    "marked": "^1.1.1",
+    "marked": "^4.0.10",
     "prismjs": "^1.20.0"
   },
   "peerDependencies": {
